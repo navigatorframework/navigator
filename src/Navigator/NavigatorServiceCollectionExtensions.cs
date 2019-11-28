@@ -8,9 +8,7 @@ namespace Navigator
     {
         public static INavigatorBuilder AddNavigator(this IServiceCollection services)
         {
-            var builder = new NavigatorBuilder(services);
-    
-            return builder;
+            return services.AddNavigatorCore();
         }
     }
 }
