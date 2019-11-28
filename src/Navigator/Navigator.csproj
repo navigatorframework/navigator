@@ -18,7 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Navigator.Core" Version="0.7.1-beta" />
+        <PackageReference Include="Navigator.Core" Version="0.8.1-beta" />
         <PackageReference Include="Navigator.Extensions.Actions" Version="0.7.0-beta" />
         <PackageReference Include="Navigator.Extensions.Store" Version="0.6.5-alpha" />
     </ItemGroup>
