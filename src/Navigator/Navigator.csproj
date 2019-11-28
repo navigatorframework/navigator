@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.8.1-beta</PackageVersion>
+        <PackageVersion>0.8.2-beta</PackageVersion>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <Description>A highly opinionated telegram bot framework, mainly based on Telegram.Bot.</Description>
@@ -18,9 +18,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Navigator.Core" Version="0.8.1-beta" />
-        <PackageReference Include="Navigator.Extensions.Actions" Version="0.7.0-beta" />
-        <PackageReference Include="Navigator.Extensions.Store" Version="0.6.5-alpha" />
+        <PackageReference Include="Navigator.Core" Version="0.8.2-beta" />
+        <PackageReference Include="Navigator.Extensions.Actions" Version="0.8.0-beta" />
+        <PackageReference Include="Navigator.Extensions.Store" Version="0.8.0-beta" />
     </ItemGroup>
 
 </Project>
