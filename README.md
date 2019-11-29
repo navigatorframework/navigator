@@ -1,11 +1,15 @@
 # Navigator
-A highly opinionated telegram bot framework, mainly based on Telegram.Bot
+A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot).
 
 This is the repository of the metapackage for Navigator framework which includes:
 
 - [Navigator.Core](https://github.com/navigatorframework/navigator.core): actual core of Navigator.
-- [Navigator.Extensions.Store](https://github.com/navigatorframework/navigator.extensions.store): Support for storing and mananing chats and users with EF Core and Navigator.
-- [Navigator.Extensions.Actions](https://github.com/navigatorframework/navigator.extensions.actions): Default abstract actions to to make easy to develop new funcionalities for a bot.
+- [Navigator.Extensions.Store](https://github.com/navigatorframework/navigator.extensions.store): Support for storage and management of chats and users with EF Core and Navigator.
+- [Navigator.Extensions.Actions](https://github.com/navigatorframework/navigator.extensions.actions): Default abstract actions to to make easy to develop new funcionalities for your bot.
+
+# Requirements
+- ASP.NET Core 2.2 or higher
+- MediatR
 
 # Examples
 Some examples can be found in the [samples](https://github.com/navigatorframework/samples) repository.
@@ -15,6 +19,7 @@ Also checkout some bots made with `Navigator`:
 
 
 # Usage
+## Configuration
 Including Navigator in your project is simple:
 
 ```csharp
@@ -43,11 +48,11 @@ public class Startup
 
 `.AddBotToken(...)` sets the token for your bot.
 
-`.AddActionsFromAssemblyOf<T>()` registers all your bot actions.
+`.AddActionsFromAssemblyOf<T>()` registers all your bot actions for the given assembly.
 
 More options are available, check them out here. //TODO
 
-Implemen
+## Bot Actions
 
 # License
 Navigator Framework
