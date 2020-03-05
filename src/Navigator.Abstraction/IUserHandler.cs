@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public interface IUserHandler<TUser>
     {

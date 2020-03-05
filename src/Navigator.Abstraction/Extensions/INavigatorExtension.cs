@@ -1,4 +1,4 @@
-namespace Navigator.Core.Abstractions.Extensions
+namespace Navigator.Abstraction.Extensions
 {
     public interface INavigatorExtension
     {

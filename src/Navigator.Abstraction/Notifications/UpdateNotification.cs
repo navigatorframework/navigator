@@ -1,8 +1,8 @@
-﻿﻿using MediatR;
+﻿using MediatR;
 using Telegram.Bot.Types;
 using UpdateType = Telegram.Bot.Types.Enums.UpdateType;
 
-namespace Navigator.Core.Abstractions.Notifications
+namespace Navigator.Abstraction.Notifications
 {
     public class UpdateNotification : Update, INotification
     {

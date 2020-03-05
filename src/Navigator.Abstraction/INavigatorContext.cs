@@ -1,9 +1,9 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Navigator.Core.Abstractions.Extensions;
+using Navigator.Abstraction.Extensions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public interface INavigatorContext
     {

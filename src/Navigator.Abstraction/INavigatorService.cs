@@ -1,7 +1,7 @@
-﻿﻿using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public interface INavigatorService
     {

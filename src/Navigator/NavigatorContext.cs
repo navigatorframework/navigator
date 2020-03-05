@@ -1,13 +1,13 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Navigator.Core.Abstractions;
-using Navigator.Core.Abstractions.Extensions;
+using Navigator.Abstraction;
+using Navigator.Abstraction.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public class NavigatorContext<TCUser, TCChat> : INavigatorContext
     {

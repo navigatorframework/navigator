@@ -1,14 +1,14 @@
-﻿﻿using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Navigator.Core.Abstractions;
-using Navigator.Core.Abstractions.Error;
+using Navigator.Abstraction;
+using Navigator.Abstraction.Error;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public class NavigatorService : INavigatorService
     {

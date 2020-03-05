@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Navigator.Core.Abstractions.Actions
+namespace Navigator.Abstraction.Actions
 {
     public interface IActionHandler : IRequestHandler<IAction>
     {

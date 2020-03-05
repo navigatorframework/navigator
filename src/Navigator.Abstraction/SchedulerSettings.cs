@@ -1,4 +1,4 @@
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public class SchedulerSettings
     {

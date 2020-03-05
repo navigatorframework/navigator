@@ -1,17 +1,17 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Navigator.Core.Abstractions;
-using Navigator.Core.Abstractions.Actions;
-using Navigator.Core.Abstractions.Error;
-using Navigator.Core.Abstractions.Types;
+using Navigator.Abstraction;
+using Navigator.Abstraction.Actions;
+using Navigator.Abstraction.Error;
+using Navigator.Abstraction.Types;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public class NavigatorActionService : INavigatorActionService
     {

@@ -17,4 +17,16 @@
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator.core/master/assets/logo.png</PackageIconUrl>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.2" />
+        <PackageReference Include="Scrutor" Version="3.2.0" />
+        <PackageReference Include="TelegramBotClients" Version="2.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Navigator.Abstraction\Navigator.Abstraction.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,14 +1,14 @@
 using System.Net.Http;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Core.Abstractions;
-using Navigator.Core.Hosted;
-using Navigator.Core.Mapping;
+using Navigator.Abstraction;
+using Navigator.Hosted;
+using Navigator.Mapping;
 using Scrutor;
 using Telegram.Bot.Types;
-using SchedulerSettings = Navigator.Core.Abstractions.SchedulerSettings;
+using SchedulerSettings = Navigator.Abstraction.SchedulerSettings;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public class NavigatorBuilder : INavigatorBuilder
     {

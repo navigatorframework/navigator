@@ -1,8 +1,8 @@
-﻿﻿using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public interface INotificationParser
     {

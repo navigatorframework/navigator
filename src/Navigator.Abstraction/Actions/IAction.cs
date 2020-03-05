@@ -1,7 +1,7 @@
-﻿﻿using MediatR;
-using Navigator.Core.Abstractions.Types;
+﻿using MediatR;
+using Navigator.Abstraction.Types;
 
-namespace Navigator.Core.Abstractions.Actions
+namespace Navigator.Abstraction.Actions
 {
     public interface IAction : IRequest
     {

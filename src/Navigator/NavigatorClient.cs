@@ -1,13 +1,13 @@
-﻿﻿using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MihaZupan.TelegramBotClients;
-using Navigator.Core.Abstractions;
+using Navigator.Abstraction;
 using Telegram.Bot.Types.Enums;
 using SchedulerSettings = MihaZupan.TelegramBotClients.RateLimitedClient.SchedulerSettings;
 
-namespace Navigator.Core
+namespace Navigator
 {
     internal class NavigatorClient : RateLimitedTelegramBotClient, INavigatorClient
     {

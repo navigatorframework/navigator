@@ -1,7 +1,7 @@
-﻿﻿using System;
+﻿using System;
 using System.Runtime.Serialization;
 
-namespace Navigator.Core.Abstractions.Error
+namespace Navigator.Abstraction.Error
 {
     public class NavigatorException : Exception
     {

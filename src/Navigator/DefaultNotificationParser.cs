@@ -1,10 +1,10 @@
-﻿﻿using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
-using Navigator.Core.Abstractions;
-using Navigator.Core.Abstractions.Notifications;
+using Navigator.Abstraction;
+using Navigator.Abstraction.Notifications;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public class DefaultNotificationParser : INotificationParser
     {

@@ -1,7 +1,7 @@
-﻿﻿using System.Net.Http;
+﻿using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Navigator.Core.Abstractions
+namespace Navigator.Abstraction
 {
     public interface INavigatorBuilder
     {

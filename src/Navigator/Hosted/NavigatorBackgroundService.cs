@@ -1,10 +1,10 @@
-﻿﻿using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Navigator.Core.Abstractions;
+using Navigator.Abstraction;
 
-namespace Navigator.Core.Hosted
+namespace Navigator.Hosted
 {
     internal class NavigatorBackgroundService : BackgroundService
     {

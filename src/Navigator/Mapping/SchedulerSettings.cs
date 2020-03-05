@@ -1,6 +1,6 @@
-using Navigator.Core.Abstractions;
+using Navigator.Abstraction;
 
-namespace Navigator.Core.Mapping
+namespace Navigator.Mapping
 {
     public static class SchedulerSettingsExtension
     {

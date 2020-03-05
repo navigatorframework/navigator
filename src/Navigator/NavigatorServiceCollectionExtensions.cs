@@ -1,7 +1,7 @@
-﻿﻿using Microsoft.Extensions.DependencyInjection;
-using Navigator.Core.Abstractions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Navigator.Abstraction;
 
-namespace Navigator.Core
+namespace Navigator
 {
     public static class NavigatorServiceCollectionExtensions
     {

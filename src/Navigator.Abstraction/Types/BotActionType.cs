@@ -1,4 +1,4 @@
-﻿﻿namespace Navigator.Core.Abstractions.Types
+﻿﻿namespace Navigator.Abstraction.Types
 {
     public enum BotActionType
     {

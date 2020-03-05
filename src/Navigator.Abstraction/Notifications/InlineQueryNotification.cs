@@ -1,7 +1,7 @@
-﻿﻿using MediatR;
+﻿using MediatR;
 using Telegram.Bot.Types;
 
-namespace Navigator.Core.Abstractions.Notifications
+namespace Navigator.Abstraction.Notifications
 {
     public class InlineQueryNotification : InlineQuery, INotification
     {

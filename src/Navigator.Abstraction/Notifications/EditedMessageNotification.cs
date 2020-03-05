@@ -1,9 +1,9 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MediatR;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Core.Abstractions.Notifications
+namespace Navigator.Abstraction.Notifications
 {
     public class EditedMessageNotification : Message, INotification
     {
