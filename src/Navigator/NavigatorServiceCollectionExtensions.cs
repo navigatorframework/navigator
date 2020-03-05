@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Navigator.Core;
+﻿﻿using Microsoft.Extensions.DependencyInjection;
 using Navigator.Core.Abstractions;
 
-namespace Navigator
+namespace Navigator.Core
 {
     public static class NavigatorServiceCollectionExtensions
     {
-        public static INavigatorBuilder AddNavigator(this IServiceCollection services)
+        public static INavigatorBuilder AddNavigatorCore(this IServiceCollection services)
         {
-            return services.AddNavigatorCore();
+            var builder = new NavigatorBuilder(services);
+
+            return builder;
         }
     }
 }
