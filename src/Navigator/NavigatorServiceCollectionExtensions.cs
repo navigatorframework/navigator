@@ -6,9 +6,15 @@ namespace Navigator
 {
     public static class NavigatorServiceCollectionExtensions
     {
-        public static IServiceCollection AddNavigatorCore(this IServiceCollection services, Action<NavigatorOptions> navigatorOptions)
+        public static IServiceCollection AddNavigator(this IServiceCollection services, Action<NavigatorOptions> navigatorOptions)
         {
-            throw new NotImplementedException();
+            if (navigatorOptions == null)
+            {
+                throw new ArgumentNullException(nameof(navigatorOptions), "Navigator options are required for navigator framework to work.");
+            }
+            services.Configure(navigatorOptions);
+            
+            return services;
         }
     }
 }
