@@ -24,9 +24,4 @@
         <PackageReference Include="Scrutor" Version="3.2.0" />
         <PackageReference Include="TelegramBotClients" Version="2.0.0" />
     </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Navigator.Abstraction\Navigator.Abstraction.csproj" />
-    </ItemGroup>
-
 </Project>
