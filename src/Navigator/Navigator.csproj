@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageVersion>0.8.6-beta</PackageVersion>
@@ -16,6 +16,10 @@
         <Copyright>Lucas Maximiliano Marino</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator.core/master/assets/logo.png</PackageIconUrl>
     </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="MediatR" Version="8.0.1" />
