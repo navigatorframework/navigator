@@ -1,7 +1,10 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Navigator.Abstraction;
+using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Hosted;
+using Navigator.Middleware;
 
 namespace Navigator
 {
@@ -16,6 +19,9 @@ namespace Navigator
             services.Configure(navigatorOptions);
 
             services.AddHostedService<SetTelegramBotWebHookHostedService>();
+            services.AddScoped<IBotClient, BotClient>();
+            services.AddScoped<INotificationLauncher, NotificationLauncher>();
+            services.AddScoped<INavigatorMiddleware, NavigatorMiddleware>();
             
             return services;
         }
