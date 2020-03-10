@@ -15,7 +15,7 @@ namespace Navigator
         public static void MapNavigator(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             using var scope = endpointRouteBuilder.ServiceProvider.CreateScope();
-            
+
             var options = scope.ServiceProvider.GetRequiredService<IOptions<NavigatorOptions>>();
 
             endpointRouteBuilder.MapPost(options.Value.EndpointWebHook, ProcessTelegramUpdate);
@@ -23,14 +23,14 @@ namespace Navigator
 
         private static async Task ProcessTelegramUpdate(HttpContext context)
         {
-            if (context.Request.ContentType != "application/json")
+            context.Response.StatusCode = 200;
+
+            if (context.Request.ContentType == "application/json")
             {
-                return;
+                var navigatorMiddleware = context.RequestServices.GetRequiredService<INavigatorMiddleware>();
+
+                await navigatorMiddleware.Handle(context.Request);
             }
-
-            var navigatorMiddleware = context.RequestServices.GetRequiredService<INavigatorMiddleware>();
-
-            await navigatorMiddleware.Handle(context.Request);
         }
     }
 }
