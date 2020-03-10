@@ -8,5 +8,6 @@ namespace Navigator.Configuration
         public string BotToken { get; set; }
         public string BaseWebHookUrl { get; set; }
         public string EndpointWebHook { get; set; } = "bot/update";
+        public bool MultipleLaunchEnabled { get; set; } = false;
     }
 }
