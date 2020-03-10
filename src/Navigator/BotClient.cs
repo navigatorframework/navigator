@@ -8,7 +8,7 @@ using Telegram.Bot;
 
 namespace Navigator.Client
 {
-    public class BotClient : RateLimitedTelegramBotClient
+    public class BotClient : RateLimitedTelegramBotClient, IBotClient
     {
         public BotClient(IOptions<NavigatorOptions> options) : base(options.Value.BotToken, (HttpClient) null, options.Value.SchedulerSettings)
         {
