@@ -1,10 +1,8 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstraction;
-using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Hosted;
-using Navigator.Middleware;
 
 namespace Navigator
 {

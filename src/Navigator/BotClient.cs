@@ -1,12 +1,10 @@
-using System.Net;
 using System.Net.Http;
 using Microsoft.Extensions.Options;
 using MihaZupan.TelegramBotClients;
-using MihaZupan.TelegramBotClients.RateLimitedClient;
+using Navigator.Abstraction;
 using Navigator.Configuration;
-using Telegram.Bot;
 
-namespace Navigator.Client
+namespace Navigator
 {
     public class BotClient : RateLimitedTelegramBotClient, IBotClient
     {

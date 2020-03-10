@@ -1,7 +1,6 @@
-using MihaZupan.TelegramBotClients;
 using Telegram.Bot;
 
-namespace Navigator.Client
+namespace Navigator.Abstraction
 {
     public interface IBotClient : ITelegramBotClient
     {

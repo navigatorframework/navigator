@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Navigator.Client;
+using Navigator.Abstraction;
 using Navigator.Configuration;
 
 namespace Navigator.Hosted

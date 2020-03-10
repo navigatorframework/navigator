@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Navigator.Middleware
+namespace Navigator.Abstraction
 {
     public interface INavigatorMiddleware
     {
