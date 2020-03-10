@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Navigator.Configuration;
+using Navigator.Middleware;
 
 namespace Navigator
 {
@@ -22,7 +23,14 @@ namespace Navigator
 
         private static async Task ProcessTelegramUpdate(HttpContext context)
         {
-            throw new NotImplementedException();
+            if (context.Request.ContentType != "application/json")
+            {
+                return;
+            }
+
+            var navigatorMiddleware = context.RequestServices.GetRequiredService<INavigatorMiddleware>();
+
+            await navigatorMiddleware.Handle(context.Request);
         }
     }
 }
