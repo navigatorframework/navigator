@@ -1,14 +1,15 @@
 ﻿using System;
 using MediatR;
+using Navigator.Abstraction;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
 
 namespace Navigator.Notification
 {
-    public abstract class NavigatorNotification : INotification
+    public abstract class NavigatorNotification : INavigatorNotification
     {
-        public readonly DateTime Timestamp;
-        public readonly int UpdateId;
+        public DateTime Timestamp { get; }
+        public int UpdateId { get; }
 
         protected NavigatorNotification(Update update)
         {
