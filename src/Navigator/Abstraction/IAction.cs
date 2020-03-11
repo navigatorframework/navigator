@@ -8,6 +8,8 @@ namespace Navigator.Abstraction
         int Order { get; }
         string Type { get; }
         DateTime Timestamp { get; }
+        IAction Init(INavigatorContext ctx);
+        bool CanHandle(INavigatorContext ctx);
     }
 
     public static class ActionType
