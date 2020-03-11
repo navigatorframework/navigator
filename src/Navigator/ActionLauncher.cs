@@ -34,9 +34,9 @@ namespace Navigator
             Logger.LogTrace("Launching of multiple actions is {MultipleActionLaunchState}.", MultipleLaunchEnabled ? "active" : "inactive");
             Logger.LogTrace("Starting with action launching.");
 
-            var actions = GetActions(Ctx.Update);
-
-            Logger.LogTrace("Found a total of {NumberOfActionsFound} actions to launch.");
+            var actions = GetActions(Ctx.Update).ToList();
+            
+            Logger.LogTrace("Found a total of {NumberOfActionsFound} actions to launch.", actions.Count);
 
             foreach (var action in actions)
             {
@@ -75,10 +75,15 @@ namespace Navigator
             }
             else
             {
-                actions.Add(Actions
+                var action = Actions
                     .Where(a => a.Type == actionType)
                     .OrderBy(a => a.Order)
-                    .FirstOrDefault(a => a.Init(Ctx).CanHandle(Ctx)));
+                    .FirstOrDefault(a => a.Init(Ctx).CanHandle(Ctx));
+
+                if (action != null)
+                {
+                    actions.Add(action);
+                }
             }
 
             return actions;
@@ -114,7 +119,7 @@ namespace Navigator
                 UpdateType.PreCheckoutQuery => ActionType.PreCheckoutQuery,
                 UpdateType.Poll => ActionType.Poll,
                 UpdateType.Unknown => ActionType.Unknown,
-                _ => null
+                _ => default
             };
         }
     }
