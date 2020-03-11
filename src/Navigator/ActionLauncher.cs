@@ -18,21 +18,23 @@ namespace Navigator
         protected readonly IMediator Mediator;
         protected readonly bool MultipleLaunchEnabled;
         protected readonly IEnumerable<IAction> Actions;
+        protected readonly INavigatorContext Ctx;
 
-        public ActionLauncher(ILogger<ActionLauncher> logger, IOptions<NavigatorOptions> options, IMediator mediator, IEnumerable<IAction> actions)
+        public ActionLauncher(ILogger<ActionLauncher> logger, IOptions<NavigatorOptions> options, IMediator mediator, IEnumerable<IAction> actions, INavigatorContext navigatorContext)
         {
             Logger = logger;
             MultipleLaunchEnabled = options.Value.MultipleLaunchEnabled;
             Mediator = mediator;
             Actions = actions;
+            Ctx = navigatorContext;
         }
 
-        public async Task Launch(Update update)
+        public async Task Launch()
         {
             Logger.LogTrace("Launching of multiple actions is {MultipleActionLaunchState}.", MultipleLaunchEnabled ? "active" : "inactive");
             Logger.LogTrace("Starting with action launching.");
 
-            var actions = GetActions(update);
+            var actions = GetActions(Ctx.Update);
 
             Logger.LogTrace("Found a total of {NumberOfActionsFound} actions to launch.");
 
@@ -65,11 +67,18 @@ namespace Navigator
 
             if (MultipleLaunchEnabled)
             {
-                actions = Actions.Where(a => a.Type == actionType).ToList();
+                actions = Actions
+                    .Where(a => a.Type == actionType)
+                    .Where(a => a.Init(Ctx).CanHandle(Ctx))
+                    .OrderBy(a => a.Order)
+                    .ToList();
             }
             else
             {
-                actions.Add(Actions.Where(a => a.Type == actionType).OrderBy(a => a.Order).FirstOrDefault());
+                actions.Add(Actions
+                    .Where(a => a.Type == actionType)
+                    .OrderBy(a => a.Order)
+                    .FirstOrDefault(a => a.Init(Ctx).CanHandle(Ctx)));
             }
 
             return actions;
