@@ -32,8 +32,8 @@ namespace Navigator.Hosted
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogTrace("starting with setup of webhook.");
-            _logger.LogTrace("Using url {WebHookUrl}", _webHookUrl);
+            _logger.LogTrace("Starting with setup of webhook.");
+            _logger.LogTrace("Using webHook url {WebHookUrl}", _webHookUrl);
             
             using var scope = _serviceScopeFactory.CreateScope();
             
