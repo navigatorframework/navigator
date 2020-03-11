@@ -4,7 +4,7 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.8.6-beta</PackageVersion>
+        <PackageVersion>0.9-beta</PackageVersion>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <Description>A highly opinionated telegram bot framework, mainly based on Telegram.Bot.</Description>
@@ -14,7 +14,7 @@
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Copyright>Lucas Maximiliano Marino</Copyright>
-        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator.core/master/assets/logo.png</PackageIconUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
