@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Navigator.Abstraction;
 using Telegram.Bot.Types;
 
 namespace Navigator
 {
-    public class NavigatorContext
+    public class NavigatorContext : INavigatorContext
     {
-        protected readonly Dictionary<Type, object> Extensions;
-        public readonly IBotClient Client;
-        public readonly User BotProfile;
-        public readonly Update Update;
+        protected IDictionary<Type, object> Extensions { get; set; }
+        public IBotClient Client { get; }
+        public Dictionary<string, string> Items { get; }
+        public User BotProfile { get; protected set; }
+        public Update Update { get; protected set; }
 
-        public NavigatorContext(Dictionary<Type, object> extensions, IBotClient client, User botProfile, Update update)
+        public NavigatorContext(IBotClient client)
         {
-            Extensions = extensions;
             Client = client;
-            BotProfile = botProfile;
+            Items = new Dictionary<string, string>();
+        }
+
+        public async Task Init(Update update)
+        {
             Update = update;
+            BotProfile = await Client.GetMeAsync();
         }
         
         public TExtension Get<TExtension>(bool throwIfNotFound)
