@@ -1,5 +1,4 @@
 ﻿using System;
-using MediatR;
 using Navigator.Abstraction;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;

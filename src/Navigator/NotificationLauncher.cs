@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstraction;
 using Navigator.Notification;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator

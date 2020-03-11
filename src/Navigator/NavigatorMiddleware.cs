@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstraction;
