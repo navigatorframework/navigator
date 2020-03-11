@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator", "Navigator\Navigator.csproj", "{6DBAD041-6623-4903-9939-254FDC4EBD60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Sample", "Navigator.Sample\Navigator.Sample.csproj", "{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
