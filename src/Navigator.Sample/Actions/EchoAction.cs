@@ -1,5 +1,4 @@
-﻿using System;
-using Navigator.Abstraction;
+﻿using Navigator.Abstraction;
 using Action = Navigator.Actions.Action;
 
 namespace Navigator.Sample.Actions
