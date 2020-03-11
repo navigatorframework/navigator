@@ -6,7 +6,7 @@ namespace Navigator.Abstraction
 {
     public interface IActionLauncher
     {
-        Task Launch(Update update);
+        Task Launch();
         IEnumerable<IAction> GetActions(Update update);
         public string? GetActionType(Update update);
     }

@@ -5,6 +5,6 @@ namespace Navigator.Abstraction
 {
     public interface INotificationLauncher
     {
-        Task Launch(Update update);
+        Task Launch();
     }
 }
