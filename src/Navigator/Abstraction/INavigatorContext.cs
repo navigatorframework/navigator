@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
@@ -11,7 +12,7 @@ namespace Navigator.Abstraction
         public User BotProfile { get; }
         public Update Update { get; }
 
-        Task Init(Update update);
+        Task Init(Update update, Dictionary<Type, object> extensions);
         TExtension Get<TExtension>(bool throwIfNotFound);
     }
 }

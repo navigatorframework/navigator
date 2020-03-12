@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Navigator.Abstraction;
 using Telegram.Bot.Types;
@@ -20,10 +21,11 @@ namespace Navigator
             Items = new Dictionary<string, string>();
         }
 
-        public async Task Init(Update update)
+        public async Task Init(Update update, Dictionary<Type, object> extensions)
         {
             Update = update;
             BotProfile = await Client.GetMeAsync();
+            Extensions = new ReadOnlyDictionary<Type, object>(extensions);
         }
         
         public TExtension Get<TExtension>(bool throwIfNotFound)

@@ -13,24 +13,30 @@ namespace Navigator
         protected readonly ILogger<NavigatorMiddleware> Logger;
         protected readonly INotificationLauncher NotificationLauncher;
         protected readonly IActionLauncher ActionLauncher;
-        protected readonly INavigatorContext NavigatorContext;
+        protected readonly INavigatorContextBuilder NavigatorContextBuilder;
 
-        public NavigatorMiddleware(ILogger<NavigatorMiddleware> logger, INotificationLauncher notificationLauncher, IActionLauncher actionLauncher,
-            INavigatorContext navigatorContext)
+        public NavigatorMiddleware(ILogger<NavigatorMiddleware> logger, INotificationLauncher notificationLauncher, IActionLauncher actionLauncher, INavigatorContextBuilder navigatorContextBuilder)
         {
             Logger = logger;
             NotificationLauncher = notificationLauncher;
             ActionLauncher = actionLauncher;
-            NavigatorContext = navigatorContext;
+            NavigatorContextBuilder = navigatorContextBuilder;
         }
 
         public async Task Handle(HttpRequest httpRequest)
         {
+            Logger.LogTrace("Trying to get update from request.");
             var update = await TryGetTelegramUpdate(httpRequest.Body);
-            if (update == null) return;
+            
+            if (update == null)
+            {
+                Logger.LogTrace("Telegram update not found or corrupted.");
+                return;
+            }
 
-            await NavigatorContext.Init(update);
-
+            Logger.LogTrace("Found telegram update {UpdateId}", update.Id);
+            
+            await NavigatorContextBuilder.Build(update);
             await NotificationLauncher.Launch();
             await ActionLauncher.Launch();
         }
@@ -49,7 +55,6 @@ namespace Navigator
             }
             catch
             {
-                Logger.LogInformation("An unknown post body was received.");
                 return default;
             }
         }
