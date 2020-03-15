@@ -34,10 +34,17 @@ using Navigator.Extensions.Store.Entity;
             where TUser : User
             where TChat : Chat
         {
+            if (options == null)
+            {
+                options = navigatorStoreOptions => { };
+            }
+            
             services.Configure(options);
+            // services.AddDbContext<NavigatorDbContext<TUser, TChat>, TContext>(dbContextOptions);
             services.AddDbContext<TContext>(dbContextOptions);
 
             var storeOptions = new NavigatorStoreOptions();
+
             options(storeOptions);
             
             if (typeof(IChatMapper<TChat>).IsAssignableFrom(storeOptions.ChatMapper))
