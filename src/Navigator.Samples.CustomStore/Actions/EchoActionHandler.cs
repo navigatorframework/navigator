@@ -4,7 +4,7 @@ using MediatR;
 using Navigator.Abstraction;
 using Navigator.Actions;
 
-namespace Navigator.Sample.Actions
+namespace Navigator.Samples.CustomStore.Actions
 {
     public class EchoActionHandler : ActionHandler<EchoAction>
     {

@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Navigator.Extensions.Store;
 
-namespace Navigator.Sample
+namespace Navigator.Samples.CustomStore
 {
     public class Startup
     {
@@ -28,6 +29,13 @@ namespace Navigator.Sample
                 options.BotToken = Configuration["BOT_TOKEN"];
                 options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
             }, typeof(Startup).Assembly);
+
+            services.AddNavigatorStore(options =>
+            {
+            }, builder =>
+            {
+                
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +54,7 @@ namespace Navigator.Sample
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); 
+                endpoints.MapControllers();
                 endpoints.MapNavigator();
             });
         }

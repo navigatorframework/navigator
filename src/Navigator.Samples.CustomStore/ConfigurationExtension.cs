@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Exceptions;
 
-namespace Navigator.Sample
+namespace Navigator.Samples.CustomStore
 {
     public static class ConfigurationExtension
     {

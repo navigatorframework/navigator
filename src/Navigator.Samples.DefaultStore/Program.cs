@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Navigator.Sample
+namespace Navigator.Samples.DefaultStore
 {
     public class Program
     {
