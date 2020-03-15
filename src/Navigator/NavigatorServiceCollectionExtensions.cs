@@ -25,6 +25,7 @@ namespace Navigator
             services.AddScoped<INotificationLauncher, NotificationLauncher>();
             services.AddScoped<IActionLauncher, ActionLauncher>();
             services.AddScoped<INavigatorContext, NavigatorContext>();
+            services.AddScoped<INavigatorContextBuilder, NavigatorContextBuilder>();
             services.AddScoped<INavigatorMiddleware, NavigatorMiddleware>();
             
             services.Scan(scan => scan
