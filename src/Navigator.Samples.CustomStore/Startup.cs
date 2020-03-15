@@ -1,10 +1,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Configuration;
+using Navigator.Samples.CustomStore.Entity;
+using Navigator.Samples.CustomStore.Persistence;
 
 namespace Navigator.Samples.CustomStore
 {
@@ -30,12 +34,17 @@ namespace Navigator.Samples.CustomStore
                 options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
             }, typeof(Startup).Assembly);
 
-            services.AddNavigatorStore(options =>
-            {
-            }, builder =>
-            {
-                
-            });
+            services.AddNavigatorStore<NavigatorSampleDbContext, SampleUser>(
+                builder =>
+                {
+                    builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+                        b => b.MigrationsAssembly("Navigator.Samples.CustomStore"));                    
+                },
+                options =>
+                {
+                    options.SeUserMapper<SampleUserMapper>();
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +54,9 @@ namespace Navigator.Samples.CustomStore
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+            serviceScope.ServiceProvider.GetRequiredService<NavigatorSampleDbContext>().Database.Migrate();
 
             // app.UseHttpsRedirection();
 

@@ -7,10 +7,15 @@ namespace Navigator.Samples.CustomStore.Persistence
 {
     public class NavigatorSampleDbContext : NavigatorDbContext<SampleUser, Chat>
     {
+        public NavigatorSampleDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new SampleUserEntityTypeConfiguration());
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfiguration(new SampleUserEntityTypeConfiguration());
         }
     }
 }
