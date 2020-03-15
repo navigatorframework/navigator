@@ -22,7 +22,13 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Release'">
         <PackageReference Include="Navigator" Version="0.9.2-beta" />
     </ItemGroup>
-    
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug'">
+        <ProjectReference Include="..\Navigator\Navigator.csproj" />
+    </ItemGroup>
 </Project>
