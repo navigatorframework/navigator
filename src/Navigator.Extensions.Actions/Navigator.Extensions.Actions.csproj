@@ -8,9 +8,9 @@
         <Title>Navigator Extensions Actions</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <Description>Common actions for Navigator Framework</Description>
-        <PackageProjectUrl>https://github.com/navigatorframework/navigator.extensions.actions</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/navigatorframework/navigator.extensions.actions/blob/master/LICENSE</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/navigatorframework/navigator.extensions.actions</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/navigatorframework/navigator/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageTags>Telegram, Bot, Framework, Navigator, Actions, Extension</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Copyright>Lucas Maximiliano Marino</Copyright>
