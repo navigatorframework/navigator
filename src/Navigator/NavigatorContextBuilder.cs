@@ -16,7 +16,7 @@ namespace Navigator
         public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorContextExtensionProvider> extensionProviders, INavigatorContext ctx)
         {
             Logger = logger;
-            ExtensionProviders = extensionProviders.OrderBy(ep => INavigatorContextExtensionProvider.Order);
+            ExtensionProviders = extensionProviders.OrderBy(ep => ep.Order);
             Ctx = ctx;
         }
 
