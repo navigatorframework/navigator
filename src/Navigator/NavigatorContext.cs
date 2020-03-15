@@ -9,7 +9,7 @@ namespace Navigator
 {
     public class NavigatorContext : INavigatorContext
     {
-        protected IDictionary<Type, object> Extensions { get; set; }
+        protected IDictionary<string, object> Extensions { get; set; }
         public IBotClient Client { get; }
         public Dictionary<string, string> Items { get; }
         public User BotProfile { get; protected set; }
@@ -21,16 +21,16 @@ namespace Navigator
             Items = new Dictionary<string, string>();
         }
 
-        public async Task Init(Update update, Dictionary<Type, object> extensions)
+        public async Task Init(Update update, Dictionary<string, object> extensions)
         {
             Update = update;
             BotProfile = await Client.GetMeAsync();
-            Extensions = new ReadOnlyDictionary<Type, object>(extensions);
+            Extensions = new ReadOnlyDictionary<string, object>(extensions);
         }
         
-        public TExtension Get<TExtension>(bool throwIfNotFound)
+        public TExtension Get<TExtension>(string extensionKey, bool throwIfNotFound = false)
         {
-            if (Extensions.TryGetValue(typeof(TExtension), out var extension))
+            if (Extensions.TryGetValue(extensionKey, out var extension))
             {
                 if (extension is TExtension castedExtension)
                 {

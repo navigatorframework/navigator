@@ -7,6 +7,7 @@ namespace Navigator.Abstraction
 {
     public interface INavigatorContextExtensionProvider
     {
-        Task<(Type?, object?)> Process(Update update);
+        static int Order => 1000;
+        Task<(string?, object?)> Process(Update update);
     }
 }

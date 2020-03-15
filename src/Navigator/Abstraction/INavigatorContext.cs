@@ -12,7 +12,7 @@ namespace Navigator.Abstraction
         public User BotProfile { get; }
         public Update Update { get; }
 
-        Task Init(Update update, Dictionary<Type, object> extensions);
-        TExtension Get<TExtension>(bool throwIfNotFound);
+        Task Init(Update update, Dictionary<string, object> extensions);
+        TExtension Get<TExtension>(string extensionKey, bool throwIfNotFound = false);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstraction;
@@ -15,13 +16,13 @@ namespace Navigator
         public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorContextExtensionProvider> extensionProviders, INavigatorContext ctx)
         {
             Logger = logger;
-            ExtensionProviders = extensionProviders;
+            ExtensionProviders = extensionProviders.OrderBy(ep => INavigatorContextExtensionProvider.Order);
             Ctx = ctx;
         }
 
         public async Task Build(Update update)
         {
-            var extensions = new Dictionary<Type, object>();
+            var extensions = new Dictionary<string, object>();
 
             foreach (var extensionProvider in ExtensionProviders)
             {
