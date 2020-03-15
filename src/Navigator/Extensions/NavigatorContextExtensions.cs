@@ -62,9 +62,7 @@ namespace Navigator.Extensions
 
         public static Message GetMessage(this NavigatorContext ctx)
         {
-            var message = ctx.GetMessageOrDefault();
-
-            return message ?? throw new Exception("Message not found in update.");
+            return ctx.GetMessageOrDefault() ?? throw new Exception("Message not found in update.");
         }
 
         public static Message? GetMessageOrDefault(this NavigatorContext ctx, Message defaultValue = default)
@@ -78,9 +76,7 @@ namespace Navigator.Extensions
 
         public static InlineQuery GetInlineQuery(this NavigatorContext ctx)
         {
-            var inlineQuery = ctx.GetInlineQueryOrDefault();
-
-            return inlineQuery ?? throw new Exception("InlineQuery not found in update.");
+            return ctx.GetInlineQueryOrDefault() ?? throw new Exception("InlineQuery not found in update.");
         }
 
         public static InlineQuery? GetInlineQueryOrDefault(this NavigatorContext ctx, InlineQuery defaultValue = default)
@@ -94,9 +90,7 @@ namespace Navigator.Extensions
 
         public static ChosenInlineResult GetChosenInlineResult(this NavigatorContext ctx)
         {
-            var chosenInlineResult = ctx.GetChosenInlineResultOrDefault();
-
-            return chosenInlineResult ?? throw new Exception("ChosenInlineResult not found in update.");
+            return ctx.GetChosenInlineResultOrDefault() ?? throw new Exception("ChosenInlineResult not found in update.");
         }
 
         public static ChosenInlineResult? GetChosenInlineResultOrDefault(this NavigatorContext ctx, ChosenInlineResult defaultValue = default)
@@ -110,9 +104,7 @@ namespace Navigator.Extensions
 
         public static CallbackQuery GetCallbackQuery(this NavigatorContext ctx)
         {
-            var chosenInlineResult = ctx.GetCallbackQueryOrDefault();
-
-            return chosenInlineResult ?? throw new Exception("CallbackQuery not found in update.");
+            return ctx.GetCallbackQueryOrDefault() ?? throw new Exception("CallbackQuery not found in update.");
         }
 
         public static CallbackQuery? GetCallbackQueryOrDefault(this NavigatorContext ctx, CallbackQuery defaultValue = default)
@@ -126,9 +118,7 @@ namespace Navigator.Extensions
 
         public static Message GetEditedMessage(this NavigatorContext ctx)
         {
-            var editedMessage = ctx.GetEditedMessageOrDefault();
-
-            return editedMessage ?? throw new Exception("EditedMessage not found in update.");
+            return ctx.GetEditedMessageOrDefault() ?? throw new Exception("EditedMessage not found in update.");
         }
 
         public static Message? GetEditedMessageOrDefault(this NavigatorContext ctx, Message defaultValue = default)
@@ -142,9 +132,7 @@ namespace Navigator.Extensions
 
         public static Message GetChannelPost(this NavigatorContext ctx)
         {
-            var channelPost = ctx.GetChannelPostOrDefault();
-
-            return channelPost ?? throw new Exception("ChannelPost not found in update.");
+            return ctx.GetChannelPostOrDefault() ?? throw new Exception("ChannelPost not found in update.");
         }
 
         public static Message? GetChannelPostOrDefault(this NavigatorContext ctx, Message defaultValue = default)
@@ -158,9 +146,7 @@ namespace Navigator.Extensions
 
         public static Message GetEditedChannelPost(this NavigatorContext ctx)
         {
-            var editedChannelPost = ctx.GetEditedChannelPostOrDefault();
-
-            return editedChannelPost ?? throw new Exception("EditedChannelPost not found in update.");
+            return ctx.GetEditedChannelPostOrDefault() ?? throw new Exception("EditedChannelPost not found in update.");
         }
 
         public static Message? GetEditedChannelPostOrDefault(this NavigatorContext ctx, Message defaultValue = default)
@@ -174,9 +160,7 @@ namespace Navigator.Extensions
 
         public static ShippingQuery GetShippingQuery(this NavigatorContext ctx)
         {
-            var shippingQuery = ctx.GetShippingQueryOrDefault();
-
-            return shippingQuery ?? throw new Exception("ShippingQuery not found in update.");
+            return ctx.GetShippingQueryOrDefault() ?? throw new Exception("ShippingQuery not found in update.");
         }
 
         public static ShippingQuery? GetShippingQueryOrDefault(this NavigatorContext ctx, ShippingQuery defaultValue = default)
@@ -190,9 +174,7 @@ namespace Navigator.Extensions
 
         public static PreCheckoutQuery GetPreCheckoutQuery(this NavigatorContext ctx)
         {
-            var preCheckoutQuery = ctx.GetPreCheckoutQueryOrDefault();
-
-            return preCheckoutQuery ?? throw new Exception("PreCheckoutQuery not found in update.");
+            return ctx.GetPreCheckoutQueryOrDefault() ?? throw new Exception("PreCheckoutQuery not found in update.");
         }
 
         public static PreCheckoutQuery? GetPreCheckoutQueryOrDefault(this NavigatorContext ctx, PreCheckoutQuery defaultValue = default)
@@ -206,9 +188,7 @@ namespace Navigator.Extensions
 
         public static Poll GetPoll(this NavigatorContext ctx)
         {
-            var poll = ctx.GetPollOrDefault();
-
-            return poll ?? throw new Exception("Poll not found in update.");
+            return ctx.GetPollOrDefault() ?? throw new Exception("Poll not found in update.");
         }
 
         public static Poll? GetPollOrDefault(this NavigatorContext ctx, Poll defaultValue = default)
