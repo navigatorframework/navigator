@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Context;
 
 namespace Navigator.Samples.DefaultStore
 {
@@ -31,7 +32,11 @@ namespace Navigator.Samples.DefaultStore
                 options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
             }, typeof(Startup).Assembly);
 
-            services.AddNavigatorStore(builder => { builder.UseNpgsql(Configuration["CONNECTION_STRING"]); });
+            services.AddNavigatorStore(builder =>
+            {
+                builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("Navigator.Samples.DefaultStore"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +47,9 @@ namespace Navigator.Samples.DefaultStore
                 app.UseDeveloperExceptionPage();
             }
 
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+            serviceScope.ServiceProvider.GetRequiredService<NavigatorDbContext>().Database.Migrate();
+            
             // app.UseHttpsRedirection();
 
             app.UseRouting();
