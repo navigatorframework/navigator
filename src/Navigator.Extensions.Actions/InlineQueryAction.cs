@@ -7,9 +7,9 @@ namespace Navigator.Extensions.Actions
     public abstract class InlineQueryAction : Action
     {
         public override string Type => ActionType.InlineQuery;
-        public string InlineQueryId { get; protected set; }
-        public string Query { get; protected set; }
-        public string Offset { get; protected set; }
+        public string InlineQueryId { get; protected set; } = string.Empty;
+        public string Query { get; protected set; } = string.Empty;
+        public string Offset { get; protected set; } = string.Empty;
 
         public override IAction Init(INavigatorContext ctx)
         {
