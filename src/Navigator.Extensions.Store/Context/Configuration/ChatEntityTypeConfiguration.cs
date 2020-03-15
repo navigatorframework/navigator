@@ -6,7 +6,7 @@ namespace Navigator.Extensions.Store.Context.Configuration
 {
     public class ChatEntityTypeConfiguration<TChat> : IEntityTypeConfiguration<TChat> where TChat : Chat
     {
-        public void Configure(EntityTypeBuilder<TChat> builder)
+        public virtual void Configure(EntityTypeBuilder<TChat> builder)
         {
             builder.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")

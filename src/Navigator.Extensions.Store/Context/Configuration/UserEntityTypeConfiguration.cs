@@ -6,7 +6,7 @@ namespace Navigator.Extensions.Store.Context.Configuration
 {
     public class UserEntityTypeConfiguration<TUser> : IEntityTypeConfiguration<TUser> where TUser : User
     {
-        public void Configure(EntityTypeBuilder<TUser> builder)
+        public virtual void Configure(EntityTypeBuilder<TUser> builder)
         {
             builder.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
