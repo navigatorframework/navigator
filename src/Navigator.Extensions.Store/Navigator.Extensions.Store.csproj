@@ -31,4 +31,5 @@
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
         <ProjectReference Include="..\Navigator\Navigator.csproj" />
     </ItemGroup>
+    
 </Project>
