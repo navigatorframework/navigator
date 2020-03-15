@@ -5,6 +5,11 @@ namespace Navigator.Extensions.Store.Entity
 {
     public class User
     {
+        public User()
+        {
+            Conversations = new List<Conversation>();
+        }
+
         /// <summary>
         /// Id of the user.
         /// </summary>
@@ -16,11 +21,11 @@ namespace Navigator.Extensions.Store.Entity
         /// <summary>
         /// Language code of the user client.
         /// </summary>
-        public string LanguageCode { get; set; }
+        public string? LanguageCode { get; set; }
         /// <summary>
         /// Username of the user.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
         /// <summary>
         /// List of conversations that this user has.
         /// </summary>

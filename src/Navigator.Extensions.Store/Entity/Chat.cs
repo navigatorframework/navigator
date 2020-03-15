@@ -5,6 +5,11 @@ namespace Navigator.Extensions.Store.Entity
 {
     public class Chat
     {
+        public Chat()
+        {
+            Conversations = new List<Conversation>();
+        }
+
         /// <summary>
         /// Id of the chat.
         /// </summary>
@@ -12,11 +17,11 @@ namespace Navigator.Extensions.Store.Entity
         /// <summary>
         /// Optional, available when the type of the chat is private.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
         /// <summary>
         /// Optional, available when the type of the chat is a group, supergroup or channel.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
         /// <summary>
         /// Type of the chat.
         /// </summary>
