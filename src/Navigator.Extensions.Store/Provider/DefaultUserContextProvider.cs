@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +20,6 @@ namespace Navigator.Extensions.Store.Provider
         where TChat : Chat
     {
         public int Order => 500;
-        public static string DefaultUserKey => "navigator.extensions.store.user";
 
         private readonly ILogger<DefaultUserContextProvider<TContext, TUser, TChat>> _logger;
         private readonly TContext _navigatorDbContext;
@@ -82,7 +80,7 @@ namespace Navigator.Extensions.Store.Provider
                     return default;
             }
 
-            return (DefaultUserKey, user);
+            return (Extensions.NavigatorContextExtensions.DefaultUserKey, user);
         }
 
         private async Task Handle(Telegram.Bot.Types.User telegramUser, CancellationToken cancellationToken = default)
