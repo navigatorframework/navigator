@@ -72,7 +72,7 @@ namespace Navigator.Extensions.Store.Provider
                     return default;
             }
 
-            return (Extensions.NavigatorContextExtensions.DefaultUserKey, user);
+            return (NavigatorContextExtensions.DefaultUserKey, user);
         }
     }
 }

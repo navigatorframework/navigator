@@ -55,7 +55,7 @@ namespace Navigator.Extensions.Store.Provider
                     return default;
             }
 
-            return (Extensions.NavigatorContextExtensions.DefaultChatKey, chat);
+            return (NavigatorContextExtensions.DefaultChatKey, chat);
         }
     }
 }

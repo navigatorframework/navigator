@@ -1,8 +1,8 @@
-﻿﻿using System.Linq;
+﻿using System.Linq;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Extensions.Actions.Extensions
+namespace Navigator.Extensions.Actions
 {
     public static class MessageExtension
     {
