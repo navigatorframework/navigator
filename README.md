@@ -17,7 +17,7 @@ A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](http
 Some examples can be found in the [samples](https://github.com/navigatorframework/navigator/src/) repository.
 
 Also checkout some bots made with `Navigator`:
-- ThankiesBot | [Source](https://github.com/elementh.thankies) | Speak with it at [@ThankiesBot](https://t.me/thankiesbot).
+- ThankiesBot | [Source](https://github.com/elementh/thankies) | Speak with it at [@ThankiesBot](https://t.me/thankiesbot).
 
 # Usage
 ## Configuration
