@@ -4,7 +4,9 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.9.4-beta</PackageVersion>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageVersion>0.9.5-beta</PackageVersion>
+        <PackageId>Navigator.Extensions.Store</PackageId>
         <Title>Navigator Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <Description>Store extension for Navigator Framework.</Description>
@@ -13,7 +15,7 @@
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageTags>Telegram, Bot, Framework, Navigator, EF Core, Store, Database, Extension</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Copyright>Lucas Maximiliano Marino</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2020</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -25,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator" Version="0.9.4-beta" />
+        <PackageReference Include="Navigator" Version="0.9.5-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
