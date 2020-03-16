@@ -65,7 +65,10 @@ using Navigator.Extensions.Store.Entity;
                 throw new ArgumentException("TODO");
             }
             
-            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultUserContextProvider<TContext, TUser, TChat>>());
+            services.AddScoped<IEntityManager<TUser, TChat>, DefaultEntityManager<TContext, TUser, TChat>>();
+            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, UpdateDataContextProvider<TUser, TChat>>());
+            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultUserContextProvider<TUser, TChat>>());
+            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultChatContextProvider<TUser, TChat>>());
             
             return services;
         }
