@@ -1,16 +1,23 @@
 # Navigator
 A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot).
 
+## Packages
+
+| Package | Last Stable | Last Prerelease |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Navigator | [![package.nav](https://img.shields.io/nuget/v/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) | [![package.nav.pre](https://img.shields.io/nuget/vpre/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) |
+| Navigator.Extensions.Actions | [![package.nav.ext.act](https://img.shields.io/nuget/v/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Actions) | [![package.nav.ext.act.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Actions) |
+| Navigator.Extensions.Store | [![package.nav.ext.sto](https://img.shields.io/nuget/v/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) | [![package.nav.ext.sto.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) |
+
 # Requirements
 - ASP.NET Core 3 or higher
 - MediatR
 
 # Examples
-Some examples can be found in the [samples](https://github.com/navigatorframework/samples) repository.
+Some examples can be found in the [samples](https://github.com/navigatorframework/navigator/src/) repository.
 
 Also checkout some bots made with `Navigator`:
-- TODO
-
+- ThankiesBot | [Source](https://github.com/elementh.thankies) | Speak with it at [@ThankiesBot](https://t.me/thankiesbot).
 
 # Usage
 ## Configuration
