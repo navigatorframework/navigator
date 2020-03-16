@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>0.9.5-beta</PackageVersion>
+        <PackageVersion>0.9.6-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Store</PackageId>
         <Title>Navigator Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator" Version="0.9.5-beta" />
+        <PackageReference Include="Navigator" Version="0.9.6-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
