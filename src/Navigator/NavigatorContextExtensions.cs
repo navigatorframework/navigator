@@ -49,6 +49,7 @@ namespace Navigator
         {
             return ctx.Update.Type switch
             {
+                UpdateType.CallbackQuery => ctx.Update.CallbackQuery.Message.Chat,
                 UpdateType.Message => ctx.Update.Message.Chat,
                 UpdateType.EditedMessage => ctx.Update.EditedMessage.Chat,
                 UpdateType.ChannelPost => ctx.Update.ChannelPost.Chat,
