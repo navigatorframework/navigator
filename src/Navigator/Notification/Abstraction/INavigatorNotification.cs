@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Navigator.Abstraction
+namespace Navigator.Notification.Abstraction
 {
     public interface INavigatorNotification : INotification
     {

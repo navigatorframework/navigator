@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Navigator.Abstraction;
+using Navigator.Actions.Abstraction;
 
 namespace Navigator.Actions
 {

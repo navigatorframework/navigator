@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>0.9.7-beta</PackageVersion>
+        <PackageVersion>0.9.9-beta</PackageVersion>
         <PackageId>Navigator</PackageId>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -15,7 +15,7 @@
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2020</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -25,12 +25,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
-        <PackageReference Include="Scrutor" Version="3.2.0" />
-        <PackageReference Include="TelegramBotClients" Version="2.0.0" />
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+        <PackageReference Include="Scrutor" Version="3.3.0" />
+        <PackageReference Include="TelegramBotClients" Version="3.0.0" />
     </ItemGroup>
     
 </Project>

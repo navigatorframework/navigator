@@ -10,12 +10,22 @@ using Navigator.Configuration;
 
 namespace Navigator.Hosted
 {
+    /// <summary>
+    /// WebHook service for Navigator.
+    /// </summary>
     public class SetTelegramBotWebHookHostedService : BackgroundService
     {
         private readonly ILogger<SetTelegramBotWebHookHostedService> _logger;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly string _webHookUrl;
         
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="serviceScopeFactory"></param>
+        /// <param name="navigatorOptions"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SetTelegramBotWebHookHostedService(ILogger<SetTelegramBotWebHookHostedService> logger, IServiceScopeFactory serviceScopeFactory,
             IOptions<NavigatorOptions> navigatorOptions)
         {
@@ -30,6 +40,7 @@ namespace Navigator.Hosted
             _webHookUrl = $"{navigatorOptions.Value.BaseWebHookUrl}/{navigatorOptions.Value.EndpointWebHook}";
         }
 
+        /// <inheritdoc />
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogTrace("Starting with setup of webhook.");
