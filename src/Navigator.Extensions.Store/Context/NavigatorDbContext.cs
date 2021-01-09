@@ -10,6 +10,7 @@ namespace Navigator.Extensions.Store.Context
         {
         }
     }
+    
     public class NavigatorDbContext<TUser, TChat> : DbContext
         where TUser : User
         where TChat : Chat
@@ -31,8 +32,6 @@ namespace Navigator.Extensions.Store.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration<TChat>());
-            modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration<TUser>());
 
         }
     }

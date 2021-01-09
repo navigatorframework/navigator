@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Navigator.Extensions.Store.Entity
@@ -8,6 +8,7 @@ namespace Navigator.Extensions.Store.Entity
         public Chat()
         {
             Conversations = new List<Conversation>();
+            CreatedAt = DateTime.UtcNow;
         }
 
         /// <summary>

@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>0.9.8-beta</PackageVersion>
+        <PackageVersion>0.9.9-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Actions</PackageId>
         <Title>Navigator Extensions Actions</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -21,7 +21,7 @@
     </PropertyGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator" Version="0.9.6-beta" />
+        <PackageReference Include="Navigator" Version="0.9.9-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">

@@ -1,5 +1,5 @@
-﻿﻿using Navigator.Abstraction;
-using Navigator.Actions;
+﻿using Navigator.Actions;
+using Navigator.Actions.Abstraction;
 
 namespace Navigator.Extensions.Actions
 {

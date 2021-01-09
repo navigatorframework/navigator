@@ -1,7 +1,8 @@
-﻿﻿using Navigator.Abstraction;
+﻿using Navigator.Abstraction;
 using Navigator.Actions;
+ using Navigator.Actions.Abstraction;
 
-namespace Navigator.Extensions.Actions
+ namespace Navigator.Extensions.Actions
 {
     public abstract class MigratedToSupergroupAction : Action
     {

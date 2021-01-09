@@ -1,6 +1,7 @@
-﻿﻿using Navigator.Abstraction;
+﻿using Navigator.Abstraction;
+ using Navigator.Actions.Abstraction;
 
-namespace Navigator.Extensions.Actions
+ namespace Navigator.Extensions.Actions
 {
     public abstract class EditedChannelPostAction : ChannelPostAction
     {
