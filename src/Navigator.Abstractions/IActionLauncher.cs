@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Navigator.Actions.Abstraction;
 using Telegram.Bot.Types;
 
-namespace Navigator.Abstraction
+namespace Navigator.Abstractions
 {
     public interface IActionLauncher
     {

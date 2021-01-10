@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Navigator.Abstractions;
 
-namespace Navigator.Actions
+namespace Navigator.Extensions.Actions
 {
     public abstract class ActionHandler<TAction> : IRequestHandler<TAction> where TAction : IAction
     {

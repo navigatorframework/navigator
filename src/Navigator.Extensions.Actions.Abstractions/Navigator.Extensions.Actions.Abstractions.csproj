@@ -2,13 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
-    
     <ItemGroup>
         <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="TelegramBotClients" Version="3.0.0" />

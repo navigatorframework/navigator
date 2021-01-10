@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Navigator.Abstraction
+namespace Navigator.Abstractions
 {
     /// <summary>
     /// Middleware for handling telegram updates incoming as webhooks.

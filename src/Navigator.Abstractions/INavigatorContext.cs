@@ -12,6 +12,6 @@ namespace Navigator.Abstractions
         public Update Update { get; }
 
         Task Init(Update update, Dictionary<string, object> extensions);
-        TExtension Get<TExtension>(string extensionKey, bool throwIfNotFound = false);
+        TExtension? Get<TExtension>(string extensionKey, bool throwIfNotFound = false);
     }
 }

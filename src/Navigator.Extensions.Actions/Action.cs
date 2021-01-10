@@ -1,21 +1,25 @@
 ﻿using System;
-using Navigator.Abstraction;
-using Navigator.Actions.Abstraction;
+using Navigator.Abstractions;
 
-namespace Navigator.Actions
+namespace Navigator.Extensions.Actions
 {
+    /// <inheritdoc />
     public abstract class Action : IAction
     {
+        /// <inheritdoc />
         public int Order { get; } = 1000;
+
+        /// <inheritdoc />
         public abstract string Type { get; }
-        public DateTime Timestamp { get; }
+
+        /// <inheritdoc />
+        public DateTime Timestamp { get; } = DateTime.UtcNow;
         
+        /// <inheritdoc />
         public abstract IAction Init(INavigatorContext ctx);
+
+        /// <inheritdoc />
         public abstract bool CanHandle(INavigatorContext ctx);
 
-        protected Action()
-        {
-            Timestamp = DateTime.UtcNow;
-        }
     }
 }

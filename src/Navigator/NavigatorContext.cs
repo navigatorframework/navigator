@@ -7,28 +7,48 @@ using Telegram.Bot.Types;
 
 namespace Navigator
 {
+    /// <summary>
+    /// Default implementation of INavigatorContext.
+    /// </summary>
     public class NavigatorContext : INavigatorContext
     {
-        protected IDictionary<string, object> Extensions { get; set; }
-        public IBotClient Client { get; }
-        public Dictionary<string, string> Items { get; }
-        public User BotProfile { get; protected set; }
-        public Update Update { get; protected set; }
+        /// <summary>
+        /// Extensions.
+        /// </summary>
+        protected IDictionary<string, object> Extensions { get; set; } = null!;
 
+        /// <inheritdoc />
+        public IBotClient Client { get; }
+
+        /// <inheritdoc />
+        public Dictionary<string, string> Items { get; }
+
+        /// <inheritdoc />
+        public User BotProfile { get; protected set; } = null!;
+
+        /// <inheritdoc />
+        public Update Update { get; protected set; } = null!;
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="client"></param>
         public NavigatorContext(IBotClient client)
         {
             Client = client;
             Items = new Dictionary<string, string>();
         }
 
+        /// <inheritdoc />
         public async Task Init(Update update, Dictionary<string, object> extensions)
         {
             Update = update;
             BotProfile = await Client.GetMeAsync();
             Extensions = new ReadOnlyDictionary<string, object>(extensions);
         }
-        
-        public TExtension Get<TExtension>(string extensionKey, bool throwIfNotFound = false)
+
+        /// <inheritdoc />
+        public TExtension? Get<TExtension>(string extensionKey, bool throwIfNotFound = false)
         {
             if (Extensions.TryGetValue(extensionKey, out var extension))
             {

@@ -1,8 +1,7 @@
 ﻿using System;
 using MediatR;
-using Navigator.Abstraction;
 
-namespace Navigator.Actions.Abstraction
+namespace Navigator.Abstractions
 {
     public interface IAction : IRequest
     {

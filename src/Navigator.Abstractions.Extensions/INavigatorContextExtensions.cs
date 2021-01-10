@@ -1,15 +1,14 @@
 using System;
-using Navigator.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
 
-namespace Navigator
+namespace Navigator.Abstractions.Extensions
 {
     /// <summary>
     /// Useful extensions for Navigator Context.
     /// </summary>
-    public static class NavigatorContextExtensions
+    public static class INavigatorContextExtensions
     {
         #region User
 
