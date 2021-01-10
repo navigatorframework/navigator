@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup Condition="'$(Configuration)'=='Release'">
+        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.9-beta" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug'">
+        <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions\Navigator.Extensions.Store.Abstractions.csproj" />
+    </ItemGroup>
+    
+</Project>

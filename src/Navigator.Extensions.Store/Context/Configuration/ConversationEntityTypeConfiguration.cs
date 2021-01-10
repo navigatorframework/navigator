@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Navigator.Extensions.Store.Entity;
+using Navigator.Extensions.Store.Abstractions.Entity;
 
 namespace Navigator.Extensions.Store.Context.Configuration
 {

@@ -1,5 +1,3 @@
-using Navigator.Extensions.Store.Abstraction;
-
 namespace Navigator.Extensions.Store.Configuration
 {
     public static class NavigatorStoreOptionsExtensions

@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Navigator.Extensions.Store.Entity;
+using Navigator.Extensions.Store.Abstractions.Entity;
 
-namespace Navigator.Extensions.Store.Abstraction
+namespace Navigator.Extensions.Store.Abstractions
 {
     public interface IEntityManager<TUser, TChat>
         where TUser : User

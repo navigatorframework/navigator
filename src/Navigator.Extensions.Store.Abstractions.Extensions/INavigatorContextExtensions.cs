@@ -1,10 +1,10 @@
 using System;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Entity;
+using Navigator.Extensions.Store.Abstractions.Entity;
 
-namespace Navigator.Extensions.Store
+namespace Navigator.Extensions.Store.Abstractions.Extensions
 {
-    public static class NavigatorContextExtensions
+    public static class INavigatorContextExtensions
     {
         public static string DefaultUserKey => "navigator.extensions.store.user";
         public static string DefaultChatKey => "navigator.extensions.store.chat";

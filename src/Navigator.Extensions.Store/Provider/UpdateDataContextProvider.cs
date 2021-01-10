@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstraction;
-using Navigator.Extensions.Store.Context;
+using Navigator.Extensions.Store.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Chat = Navigator.Extensions.Store.Entity.Chat;
-using User = Navigator.Extensions.Store.Entity.User;
+using Chat = Navigator.Extensions.Store.Abstractions.Entity.Chat;
+using User = Navigator.Extensions.Store.Abstractions.Entity.User;
 
 namespace Navigator.Extensions.Store.Provider
 {

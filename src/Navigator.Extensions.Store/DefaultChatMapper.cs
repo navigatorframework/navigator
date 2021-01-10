@@ -1,6 +1,6 @@
 using System;
-using Navigator.Extensions.Store.Abstraction;
-using Navigator.Extensions.Store.Entity;
+using Navigator.Extensions.Store.Abstractions;
+using Navigator.Extensions.Store.Abstractions.Entity;
 
 namespace Navigator.Extensions.Store
 {

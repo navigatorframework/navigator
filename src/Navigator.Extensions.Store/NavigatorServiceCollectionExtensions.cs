@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
  using Microsoft.Extensions.DependencyInjection.Extensions;
- using Microsoft.Extensions.Options;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstraction;
- using Navigator.Extensions.Store.Configuration;
+using Navigator.Extensions.Store.Abstractions;
+using Navigator.Extensions.Store.Abstractions.Entity;
+using Navigator.Extensions.Store.Configuration;
  using Navigator.Extensions.Store.Context;
-using Navigator.Extensions.Store.Entity;
- using Navigator.Extensions.Store.Provider;
+using Navigator.Extensions.Store.Provider;
 
  namespace Navigator.Extensions.Store
 {

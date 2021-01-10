@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstraction;
+using Navigator.Extensions.Store.Abstractions;
+using Navigator.Extensions.Store.Abstractions.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Chat = Navigator.Extensions.Store.Entity.Chat;
-using User = Navigator.Extensions.Store.Entity.User;
+using Chat = Navigator.Extensions.Store.Abstractions.Entity.Chat;
+using User = Navigator.Extensions.Store.Abstractions.Entity.User;
 
 namespace Navigator.Extensions.Store.Provider
 {
@@ -55,7 +53,7 @@ namespace Navigator.Extensions.Store.Provider
                     return default;
             }
 
-            return (NavigatorContextExtensions.DefaultChatKey, chat);
+            return (INavigatorContextExtensions.DefaultChatKey, chat);
         }
     }
 }

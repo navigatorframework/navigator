@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Navigator.Extensions.Store.Abstraction;
+using Navigator.Extensions.Store.Abstractions;
+using Navigator.Extensions.Store.Abstractions.Entity;
 using Navigator.Extensions.Store.Context;
-using Navigator.Extensions.Store.Entity;
 using Telegram.Bot.Types;
-using Chat = Navigator.Extensions.Store.Entity.Chat;
-using User = Navigator.Extensions.Store.Entity.User;
+using Chat = Navigator.Extensions.Store.Abstractions.Entity.Chat;
+using User = Navigator.Extensions.Store.Abstractions.Entity.User;
 
 namespace Navigator.Extensions.Store
 {

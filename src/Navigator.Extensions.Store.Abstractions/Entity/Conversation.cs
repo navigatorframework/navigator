@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Navigator.Extensions.Store.Entity
+namespace Navigator.Extensions.Store.Abstractions.Entity
 {
     public class Conversation
     {
