@@ -28,14 +28,11 @@
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
         <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.9-beta" />
+        <PackageReference Include="Navigator.Extensions.Store.Abstractions.Extensions" Version="0.9.9-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
         <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions\Navigator.Extensions.Store.Abstractions.csproj" />
+        <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions.Extensions\Navigator.Extensions.Store.Abstractions.Extensions.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions.Extensions\Navigator.Extensions.Store.Abstractions.Extensions.csproj" />
-    </ItemGroup>
-    
 </Project>
