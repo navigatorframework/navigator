@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Navigator.Abstraction
+namespace Navigator.Abstractions
 {
     public interface INotificationLauncher
     {

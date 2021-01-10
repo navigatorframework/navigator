@@ -1,8 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Navigator.Abstraction;
-using Navigator.Actions.Abstraction;
+using Navigator.Abstractions;
 
 namespace Navigator.Actions
 {

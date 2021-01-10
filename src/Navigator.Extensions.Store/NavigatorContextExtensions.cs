@@ -1,5 +1,5 @@
 using System;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Navigator.Extensions.Store.Entity;
 
 namespace Navigator.Extensions.Store

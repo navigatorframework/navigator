@@ -1,8 +1,7 @@
 using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Abstraction;
-using Navigator.Actions.Abstraction;
+using Navigator.Abstractions;
 using Navigator.Configuration;
 using Navigator.Hosted;
 using Scrutor;

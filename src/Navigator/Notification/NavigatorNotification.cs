@@ -1,6 +1,5 @@
 ﻿using System;
-using Navigator.Abstraction;
-using Navigator.Notification.Abstraction;
+using Navigator.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
 

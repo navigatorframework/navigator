@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Navigator.Notification;
 using Telegram.Bot.Types.Enums;
 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Navigator.Extensions.Store.Abstraction;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;

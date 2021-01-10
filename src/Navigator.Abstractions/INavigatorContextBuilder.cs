@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace Navigator.Abstraction
+namespace Navigator.Abstractions
 {
     public interface INavigatorContextBuilder
     {

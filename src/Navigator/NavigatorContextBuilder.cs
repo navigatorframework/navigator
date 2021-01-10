@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Telegram.Bot.Types;
 
 namespace Navigator

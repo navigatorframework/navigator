@@ -1,7 +1,6 @@
-﻿using Navigator.Abstraction;
- using Navigator.Actions.Abstraction;
+﻿using Navigator.Abstractions;
 
- namespace Navigator.Extensions.Actions
+namespace Navigator.Extensions.Actions
 {
     public abstract class EditedMessageAction : MessageAction
     {

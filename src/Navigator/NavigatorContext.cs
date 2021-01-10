@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Telegram.Bot.Types;
 
 namespace Navigator

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Newtonsoft.Json;
 using Telegram.Bot.Types;
 

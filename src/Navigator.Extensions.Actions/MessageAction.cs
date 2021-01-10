@@ -1,7 +1,6 @@
 ﻿using System;
-using Navigator.Abstraction;
- using Navigator.Actions.Abstraction;
- using Action = Navigator.Actions.Action;
+using Navigator.Abstractions;
+using Action = Navigator.Actions.Action;
 
 namespace Navigator.Extensions.Actions
 {

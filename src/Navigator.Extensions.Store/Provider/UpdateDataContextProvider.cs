@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstraction;
+using Navigator.Abstractions;
 using Navigator.Extensions.Store.Abstraction;
 using Navigator.Extensions.Store.Context;
 using Telegram.Bot.Types;

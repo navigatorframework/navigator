@@ -1,6 +1,6 @@
 using Telegram.Bot;
 
-namespace Navigator.Abstraction
+namespace Navigator.Abstractions
 {
     public interface IBotClient : ITelegramBotClient
     {
