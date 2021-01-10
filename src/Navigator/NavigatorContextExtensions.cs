@@ -6,10 +6,19 @@ using Telegram.Bot.Types.Payments;
 
 namespace Navigator
 {
+    /// <summary>
+    /// Useful extensions for Navigator Context.
+    /// </summary>
     public static class NavigatorContextExtensions
     {
         #region User
 
+        /// <summary>
+        /// Get a Telegram user.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <exception cref="Exception">When user is not found.</exception>
+        /// <returns></returns>
         public static User GetTelegramUser(this INavigatorContext ctx)
         {
             var user = ctx.GetTelegramUserOrDefault();
@@ -17,6 +26,11 @@ namespace Navigator
             return user ?? throw new Exception("User not found in update.");
         }
 
+        /// <summary>
+        /// Get a Telegram user or default if not found.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         public static User? GetTelegramUserOrDefault(this INavigatorContext ctx)
         {
             return ctx.Update.Type switch
@@ -38,6 +52,12 @@ namespace Navigator
 
         #region Chat
 
+        /// <summary>
+        /// Get a Telegram chat.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <exception cref="Exception">When chat is not found.</exception>
+        /// <returns></returns>
         public static Chat GetTelegramChat(this INavigatorContext ctx)
         {
             var chat = ctx.GetTelegramChatOrDefault();
@@ -45,6 +65,11 @@ namespace Navigator
             return chat ?? throw new Exception("Chat not found in update.");
         }
 
+        /// <summary>
+        /// Get a Telegram chat or default if not found.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns>Telegram Chat</returns>
         public static Chat? GetTelegramChatOrDefault(this INavigatorContext ctx)
         {
             return ctx.Update.Type switch
@@ -62,28 +87,50 @@ namespace Navigator
 
         #region Message
 
+        /// <summary>
+        /// Get a Telegram message.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <exception cref="Exception">When message is not found.</exception>
+        /// <returns></returns>
         public static Message GetMessage(this INavigatorContext ctx)
         {
             return ctx.GetMessageOrDefault() ?? throw new Exception("Message not found in update.");
         }
 
-        public static Message? GetMessageOrDefault(this INavigatorContext ctx, Message defaultValue = default)
+        /// <summary>
+        /// Get a Telegram message or default if not found.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
+        public static Message? GetMessageOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.Message ? ctx.Update.Message : defaultValue;
+            return ctx.Update.Type == UpdateType.Message ? ctx.Update.Message : default;
         }
 
         #endregion
 
         #region InlineQuery
 
+        /// <summary>
+        /// Get a Telegram inline query
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <exception cref="Exception">When inline query is not found.</exception>
+        /// <returns></returns>
         public static InlineQuery GetInlineQuery(this INavigatorContext ctx)
         {
             return ctx.GetInlineQueryOrDefault() ?? throw new Exception("InlineQuery not found in update.");
         }
 
-        public static InlineQuery? GetInlineQueryOrDefault(this INavigatorContext ctx, InlineQuery defaultValue = default)
+        /// <summary>
+        /// Get a Telegram inline query or default if not found.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
+        public static InlineQuery? GetInlineQueryOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.InlineQuery ? ctx.Update.InlineQuery : defaultValue;
+            return ctx.Update.Type == UpdateType.InlineQuery ? ctx.Update.InlineQuery : default;
         }
 
         #endregion
@@ -95,9 +142,9 @@ namespace Navigator
             return ctx.GetChosenInlineResultOrDefault() ?? throw new Exception("ChosenInlineResult not found in update.");
         }
 
-        public static ChosenInlineResult? GetChosenInlineResultOrDefault(this INavigatorContext ctx, ChosenInlineResult defaultValue = default)
+        public static ChosenInlineResult? GetChosenInlineResultOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.ChosenInlineResult ? ctx.Update.ChosenInlineResult : defaultValue;
+            return ctx.Update.Type == UpdateType.ChosenInlineResult ? ctx.Update.ChosenInlineResult : default;
         }
 
         #endregion
@@ -109,9 +156,9 @@ namespace Navigator
             return ctx.GetCallbackQueryOrDefault() ?? throw new Exception("CallbackQuery not found in update.");
         }
 
-        public static CallbackQuery? GetCallbackQueryOrDefault(this INavigatorContext ctx, CallbackQuery defaultValue = default)
+        public static CallbackQuery? GetCallbackQueryOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.CallbackQuery ? ctx.Update.CallbackQuery : defaultValue;
+            return ctx.Update.Type == UpdateType.CallbackQuery ? ctx.Update.CallbackQuery : default;
         }
 
         #endregion
@@ -123,9 +170,9 @@ namespace Navigator
             return ctx.GetEditedMessageOrDefault() ?? throw new Exception("EditedMessage not found in update.");
         }
 
-        public static Message? GetEditedMessageOrDefault(this INavigatorContext ctx, Message defaultValue = default)
+        public static Message? GetEditedMessageOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.EditedMessage ? ctx.Update.EditedMessage : defaultValue;
+            return ctx.Update.Type == UpdateType.EditedMessage ? ctx.Update.EditedMessage : default;
         }
 
         #endregion
@@ -137,9 +184,9 @@ namespace Navigator
             return ctx.GetChannelPostOrDefault() ?? throw new Exception("ChannelPost not found in update.");
         }
 
-        public static Message? GetChannelPostOrDefault(this INavigatorContext ctx, Message defaultValue = default)
+        public static Message? GetChannelPostOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.ChannelPost ? ctx.Update.ChannelPost : defaultValue;
+            return ctx.Update.Type == UpdateType.ChannelPost ? ctx.Update.ChannelPost : default;
         }
 
         #endregion
@@ -151,9 +198,9 @@ namespace Navigator
             return ctx.GetEditedChannelPostOrDefault() ?? throw new Exception("EditedChannelPost not found in update.");
         }
 
-        public static Message? GetEditedChannelPostOrDefault(this INavigatorContext ctx, Message defaultValue = default)
+        public static Message? GetEditedChannelPostOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.EditedChannelPost ? ctx.Update.EditedChannelPost : defaultValue;
+            return ctx.Update.Type == UpdateType.EditedChannelPost ? ctx.Update.EditedChannelPost : default;
         }
 
         #endregion
@@ -165,9 +212,9 @@ namespace Navigator
             return ctx.GetShippingQueryOrDefault() ?? throw new Exception("ShippingQuery not found in update.");
         }
 
-        public static ShippingQuery? GetShippingQueryOrDefault(this INavigatorContext ctx, ShippingQuery defaultValue = default)
+        public static ShippingQuery? GetShippingQueryOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.ShippingQuery ? ctx.Update.ShippingQuery : defaultValue;
+            return ctx.Update.Type == UpdateType.ShippingQuery ? ctx.Update.ShippingQuery : default;
         }
 
         #endregion
@@ -179,9 +226,9 @@ namespace Navigator
             return ctx.GetPreCheckoutQueryOrDefault() ?? throw new Exception("PreCheckoutQuery not found in update.");
         }
 
-        public static PreCheckoutQuery? GetPreCheckoutQueryOrDefault(this INavigatorContext ctx, PreCheckoutQuery defaultValue = default)
+        public static PreCheckoutQuery? GetPreCheckoutQueryOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.PreCheckoutQuery ? ctx.Update.PreCheckoutQuery : defaultValue;
+            return ctx.Update.Type == UpdateType.PreCheckoutQuery ? ctx.Update.PreCheckoutQuery : default;
         }
 
         #endregion
@@ -193,9 +240,9 @@ namespace Navigator
             return ctx.GetPollOrDefault() ?? throw new Exception("Poll not found in update.");
         }
 
-        public static Poll? GetPollOrDefault(this INavigatorContext ctx, Poll defaultValue = default)
+        public static Poll? GetPollOrDefault(this INavigatorContext ctx)
         {
-            return ctx.Update.Type == UpdateType.Poll ? ctx.Update.Poll : defaultValue;
+            return ctx.Update.Type == UpdateType.Poll ? ctx.Update.Poll : default;
         }
 
         #endregion

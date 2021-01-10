@@ -8,13 +8,38 @@ using Telegram.Bot.Types;
 
 namespace Navigator
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NavigatorMiddleware : INavigatorMiddleware
     {
+        /// <summary>
+        /// Logger.
+        /// </summary>
         protected readonly ILogger<NavigatorMiddleware> Logger;
+        
+        /// <summary>
+        /// Notification Launcher.
+        /// </summary>
         protected readonly INotificationLauncher NotificationLauncher;
+        
+        /// <summary>
+        /// Action Launcher.
+        /// </summary>
         protected readonly IActionLauncher ActionLauncher;
+        
+        /// <summary>
+        /// Context Builder.
+        /// </summary>
         protected readonly INavigatorContextBuilder NavigatorContextBuilder;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="notificationLauncher"></param>
+        /// <param name="actionLauncher"></param>
+        /// <param name="navigatorContextBuilder"></param>
         public NavigatorMiddleware(ILogger<NavigatorMiddleware> logger, INotificationLauncher notificationLauncher, IActionLauncher actionLauncher, INavigatorContextBuilder navigatorContextBuilder)
         {
             Logger = logger;
@@ -23,25 +48,26 @@ namespace Navigator
             NavigatorContextBuilder = navigatorContextBuilder;
         }
 
+        /// <inheritdoc />
         public async Task Handle(HttpRequest httpRequest)
         {
-            Logger.LogTrace("Trying to get update from request.");
-            var update = await TryGetTelegramUpdate(httpRequest.Body);
+            Logger.LogTrace("Parsing telegram update.");
+            var update = await ParseTelegramUpdate(httpRequest.Body);
             
             if (update == null)
             {
-                Logger.LogTrace("Telegram update not found or corrupted.");
+                Logger.LogInformation("Telegram update was not parsed.");
                 return;
             }
 
-            Logger.LogTrace("Found telegram update {UpdateId}", update.Id);
+            Logger.LogTrace("Parsed telegram update with id: {UpdateId}", update.Id);
             
             await NavigatorContextBuilder.Build(update);
             await NotificationLauncher.Launch();
             await ActionLauncher.Launch();
         }
 
-        protected async Task<Update?> TryGetTelegramUpdate(Stream stream)
+        private static async Task<Update?> ParseTelegramUpdate(Stream stream)
         {
             try
             {
