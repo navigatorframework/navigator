@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Navigator.Extensions.Shipyard;
 
 namespace Navigator.Samples.Echo
 {
@@ -30,6 +31,8 @@ namespace Navigator.Samples.Echo
                 options.BotToken = Configuration["BOT_TOKEN"];
                 options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
             }, typeof(Startup).Assembly);
+
+            services.AddShipyard();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,11 +42,10 @@ namespace Navigator.Samples.Echo
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            // app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
