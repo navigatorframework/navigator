@@ -1,21 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
-        <PackageReference Include="Navigator" Version="0.9.5-beta" />
-        <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
-        <PackageReference Include="Serilog.Exceptions" Version="5.4.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(Configuration)'=='Debug'">
+    <ItemGroup>
         <ProjectReference Include="..\Navigator\Navigator.csproj" />
+        <ProjectReference Include="..\Navigator.Extensions.Actions\Navigator.Extensions.Actions.csproj" />
+        <ProjectReference Include="..\Navigator.Extensions.Shipyard\Navigator.Extensions.Shipyard.csproj" />
     </ItemGroup>
     
 </Project>

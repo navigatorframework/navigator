@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Navigator.Abstraction;
-using Navigator.Actions;
+using Navigator.Abstractions;
+using Navigator.Extensions.Actions;
+using Navigator.Extensions.Store.Abstractions.Extensions;
 
 namespace Navigator.Samples.DefaultStore.Actions
 {

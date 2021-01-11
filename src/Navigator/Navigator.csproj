@@ -26,19 +26,14 @@
 
     <ItemGroup>
         <PackageReference Include="MediatR" Version="9.0.0">
-            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0">
-            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0">
-            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0">
-            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Scrutor" Version="3.3.0">
-            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="TelegramBotClients" Version="3.0.0" />
     </ItemGroup>

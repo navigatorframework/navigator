@@ -1,6 +1,5 @@
-﻿using Navigator.Abstraction;
-using Navigator.Actions.Abstraction;
-using Action = Navigator.Actions.Action;
+﻿using Navigator.Abstractions;
+using Navigator.Extensions.Actions;
 
 namespace Navigator.Samples.Echo.Actions
 {

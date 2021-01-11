@@ -31,7 +31,7 @@ namespace Navigator.Samples.Echo
             }
             else
             {
-                loggerConf.MinimumLevel.Information();
+                loggerConf.MinimumLevel.Debug();
             }
 
             return loggerConf.CreateLogger();

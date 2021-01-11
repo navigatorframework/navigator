@@ -23,6 +23,8 @@ namespace Navigator.Samples.Echo
 
             services.AddMediatR(typeof(Startup).Assembly);
 
+            services.AddApiVersioning();
+
             services.AddNavigator(options =>
             {
                 options.BotToken = Configuration["BOT_TOKEN"];
