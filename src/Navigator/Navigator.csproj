@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageVersion>0.9.9-beta</PackageVersion>
         <PackageId>Navigator</PackageId>
         <Title>Navigator Framework</Title>
