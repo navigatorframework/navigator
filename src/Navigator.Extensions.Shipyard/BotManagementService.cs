@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -27,47 +28,61 @@ namespace Navigator.Extensions.Shipyard
         }
 
         /// <inheritdoc />
-        public async Task<BotInfo> GetBotInfo(CancellationToken cancellationToken = default)
+        public async Task<BotInfo?> GetBotInfo(CancellationToken cancellationToken = default)
         {
-            _logger.LogTrace("Requesting bot info.");
-
-            var info = await _botClient.GetMeAsync(cancellationToken);
-
-            return new BotInfo
+            try
             {
-                Id = info.Id,
-                Username = info.Username,
-                Name = info.FirstName,
-                Permissions = new BotInfo.BotPermissions
+                var info = await _botClient.GetMeAsync(cancellationToken);
+
+                return new BotInfo
                 {
-                    CanJoinGroups = info.CanJoinGroups ?? false,
-                    CanReadAllGroupMessages = info.CanReadAllGroupMessages ?? false,
-                    SupportsInlineQueries = info.SupportsInlineQueries ?? false
-                }
-            };
+                    Id = info.Id,
+                    Username = info.Username,
+                    Name = info.FirstName,
+                    Permissions = new BotInfo.BotPermissions
+                    {
+                        CanJoinGroups = info.CanJoinGroups ?? false,
+                        CanReadAllGroupMessages = info.CanReadAllGroupMessages ?? false,
+                        SupportsInlineQueries = info.SupportsInlineQueries ?? false
+                    }
+                };
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unhandled exception requesting bot information.");
+
+                return default;
+            }
         }
 
         /// <inheritdoc />
         public async Task<BotPic?> GetBotPic(CancellationToken cancellationToken = default)
         {
-            var photos = await _botClient.GetUserProfilePhotosAsync(_botClient.BotId, cancellationToken: cancellationToken);
-
-            if (photos.TotalCount > 0)
+            try
             {
-                var botPicId = photos.Photos.FirstOrDefault()?
-                    .OrderByDescending(x => x.FileSize).FirstOrDefault()
-                    ?.FileId;
+                var photos = await _botClient.GetUserProfilePhotosAsync(_botClient.BotId, cancellationToken: cancellationToken);
 
-                if (!string.IsNullOrWhiteSpace(botPicId))
+                if (photos.TotalCount > 0)
                 {
-                    var pictureStream = new MemoryStream();
-                    await _botClient.GetInfoAndDownloadFileAsync(botPicId, pictureStream, cancellationToken);
+                    var botPicId = photos.Photos.FirstOrDefault()?
+                        .OrderByDescending(x => x.FileSize).FirstOrDefault()
+                        ?.FileId;
 
-                    return new BotPic
+                    if (!string.IsNullOrWhiteSpace(botPicId))
                     {
-                        File = pictureStream
-                    };
+                        var pictureStream = new MemoryStream();
+                        await _botClient.GetInfoAndDownloadFileAsync(botPicId, pictureStream, cancellationToken);
+
+                        return new BotPic
+                        {
+                            File = pictureStream
+                        };
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unhandled exception requesting bot pic.");
             }
 
             return default;
