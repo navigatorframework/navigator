@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Navigator.Abstractions;
+using Scrutor;
 
 namespace Navigator
 {
@@ -32,10 +34,19 @@ namespace Navigator
         /// <param name="options">The <see cref="NavigatorOptions"/> to use.</param>
         /// <param name="services">The <see cref="IServiceCollection"/> to attach to.</param>
 
-        public NavigatorBuilder(NavigatorOptions options, IServiceCollection services)
+        public NavigatorBuilder(Action<NavigatorOptions> options, IServiceCollection services)
         {
-            Options = options;
+            Options = new NavigatorOptions();
+            options.Invoke(Options);
+            
             Services = services;
+
+            services.AddSingleton(Options);
+        }
+
+        public void RegisterOrReplaceOptions()
+        {
+            Services.Replace(ServiceDescriptor.Singleton<INavigatorOptions>(Options));
         }
     }
 }

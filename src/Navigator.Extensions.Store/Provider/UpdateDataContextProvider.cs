@@ -13,7 +13,7 @@ namespace Navigator.Extensions.Store.Provider
         where TUser : User
         where TChat : Chat
     {
-        public int Order => 450;
+        public int Order => 250;
 
         private readonly ILogger<UpdateDataContextProvider<TUser, TChat>> _logger;
         private readonly IEntityManager<TUser, TChat> _entityManager;

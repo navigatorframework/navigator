@@ -6,7 +6,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Navigator.Abstractions;
-using Navigator.Configuration;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 

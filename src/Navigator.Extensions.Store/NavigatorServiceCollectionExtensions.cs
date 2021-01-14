@@ -5,71 +5,87 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
 using Navigator.Extensions.Store.Abstractions;
 using Navigator.Extensions.Store.Abstractions.Entity;
-using Navigator.Extensions.Store.Configuration;
- using Navigator.Extensions.Store.Context;
+using Navigator.Extensions.Store.Context;
 using Navigator.Extensions.Store.Provider;
 
  namespace Navigator.Extensions.Store
 {
     public static class NavigatorServiceCollectionExtensions
     {
-        public static IServiceCollection AddNavigatorStore(this IServiceCollection services, Action<DbContextOptionsBuilder> dbContextOptions = null,
-            Action<NavigatorStoreOptions> options = null)
+        #region Default Implementation
+
+        public static NavigatorBuilder AddNavigatorStore(this NavigatorBuilder navigatorBuilder, Action<DbContextOptionsBuilder> dbContextOptions = default,
+            Action<NavigatorOptions> options = default)
         {
-            return services.AddNavigatorStore<NavigatorDbContext, User, Chat>(dbContextOptions, options);
+            navigatorBuilder.Options.SetUserMapper<DefaultUserMapper>();
+            navigatorBuilder.Options.SetChatMapper<DefaultChatMapper>();
+            
+            navigatorBuilder.AddNavigatorStore<NavigatorDbContext, User, Chat>(dbContextOptions, options);
+            
+            return navigatorBuilder;
         }
+
+        #endregion
         
-        public static IServiceCollection AddNavigatorStore<TContext, TUser>(this IServiceCollection services, Action<DbContextOptionsBuilder> dbContextOptions = null,
-            Action<NavigatorStoreOptions> options = null)
+        public static NavigatorBuilder AddNavigatorStore<TContext, TUser>(this NavigatorBuilder navigatorBuilder, Action<DbContextOptionsBuilder> dbContextOptions = default,
+            Action<NavigatorOptions> options = default)
             where TContext : NavigatorDbContext<TUser, Chat> 
             where TUser : User
         {
-            return services.AddNavigatorStore<TContext, TUser, Chat>(dbContextOptions, options);
+            navigatorBuilder.Options.SetChatMapper<DefaultChatMapper>();
+
+            return navigatorBuilder.AddNavigatorStore<TContext, TUser, Chat>(dbContextOptions, options);
         }
         
-        public static IServiceCollection AddNavigatorStore<TContext, TUser, TChat>(this IServiceCollection services, Action<DbContextOptionsBuilder> dbContextOptions = null,
-            Action<NavigatorStoreOptions> options = null) 
+        public static NavigatorBuilder AddNavigatorStore<TContext, TUser, TChat>(this NavigatorBuilder navigatorBuilder, Action<DbContextOptionsBuilder>? dbContextOptions = default,
+            Action<NavigatorOptions>? options = default) 
             where TContext : NavigatorDbContext<TUser, TChat> 
             where TUser : User
             where TChat : Chat
         {
-            if (options == null)
-            {
-                options = navigatorStoreOptions => { };
-            }
+            navigatorBuilder.Options.SetUserType<TUser>();
+            navigatorBuilder.Options.SetChatType<TChat>();
             
-            services.Configure(options);
-            // services.AddDbContext<NavigatorDbContext<TUser, TChat>, TContext>(dbContextOptions);
-            services.AddDbContext<TContext>(dbContextOptions);
+            options?.Invoke(navigatorBuilder.Options);
 
-            var storeOptions = new NavigatorStoreOptions();
+            navigatorBuilder.Services.AddDbContext<TContext>(dbContextOptions);
 
-            options(storeOptions);
+            RegisterUserMapper<TUser>(navigatorBuilder);
             
-            if (typeof(IChatMapper<TChat>).IsAssignableFrom(storeOptions.ChatMapper))
+            RegisterChatMapper<TChat>(navigatorBuilder);
+            
+            navigatorBuilder.Services.AddScoped<IEntityManager<TUser, TChat>, DefaultEntityManager<TContext, TUser, TChat>>();
+            navigatorBuilder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, UpdateDataContextProvider<TUser, TChat>>());
+            navigatorBuilder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultUserContextProvider<TUser, TChat>>());
+            navigatorBuilder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultChatContextProvider<TUser, TChat>>());
+            
+            navigatorBuilder.RegisterOrReplaceOptions();
+            
+            return navigatorBuilder;
+        }
+
+        private static void RegisterUserMapper<TUser>(NavigatorBuilder navigatorBuilder) where TUser : User
+        {
+            if (navigatorBuilder.Options.GetUserMapper() is not null && typeof(IUserMapper<TUser>).IsAssignableFrom(navigatorBuilder.Options.GetUserMapper()))
             {
-                services.AddScoped(typeof(IChatMapper<TChat>), storeOptions.ChatMapper);
+                navigatorBuilder.Services.AddScoped(typeof(IUserMapper<TUser>), navigatorBuilder.Options.GetUserMapper()!);
             }
             else
             {
                 throw new ArgumentException("TODO");
             }
+        }
 
-            if (typeof(IUserMapper<TUser>).IsAssignableFrom(storeOptions.UserMapper))
+        private static void RegisterChatMapper<TChat>(NavigatorBuilder navigatorBuilder) where TChat : Chat
+        {
+            if (navigatorBuilder.Options.GetChatMapper() is not null && typeof(IChatMapper<TChat>).IsAssignableFrom(navigatorBuilder.Options.GetChatMapper()))
             {
-                services.AddScoped(typeof(IUserMapper<TUser>), storeOptions.UserMapper);
+                navigatorBuilder.Services.AddScoped(typeof(IChatMapper<TChat>), navigatorBuilder.Options.GetChatMapper()!);
             }
             else
             {
                 throw new ArgumentException("TODO");
             }
-            
-            services.AddScoped<IEntityManager<TUser, TChat>, DefaultEntityManager<TContext, TUser, TChat>>();
-            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, UpdateDataContextProvider<TUser, TChat>>());
-            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultUserContextProvider<TUser, TChat>>());
-            services.TryAddEnumerable(ServiceDescriptor.Scoped<INavigatorContextExtensionProvider, DefaultChatContextProvider<TUser, TChat>>());
-            
-            return services;
         }
     }
 }

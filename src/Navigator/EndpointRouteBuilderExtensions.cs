@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Navigator.Abstractions;
-using Navigator.Configuration;
 
 namespace Navigator
 {

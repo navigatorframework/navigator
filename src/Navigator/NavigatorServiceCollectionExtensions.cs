@@ -1,8 +1,6 @@
 using System;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
-using Navigator.Configuration;
 using Navigator.Hosted;
 using Scrutor;
 
@@ -17,13 +15,8 @@ namespace Navigator
                 throw new ArgumentNullException(nameof(options), "Navigator options are required for navigator framework to work.");
             }
 
-            var invokedOptions = new NavigatorOptions();
-            options.Invoke(invokedOptions);
+            var navigatorBuilder = new NavigatorBuilder(options, services);
 
-            var navigatorBuilder = new NavigatorBuilder(invokedOptions, services);
-            
-            services.AddSingleton(invokedOptions);
-            
             services.AddSingleton<IBotClient, BotClient>();
 
             services.AddHostedService<SetTelegramBotWebHookHostedService>();
@@ -34,11 +27,13 @@ namespace Navigator
             services.AddScoped<INavigatorMiddleware, NavigatorMiddleware>();
             
             services.Scan(scan => scan
-                .FromAssemblies(invokedOptions.GetActionsAssemblies())
+                .FromAssemblies(navigatorBuilder.Options.GetActionsAssemblies())
                 .AddClasses(classes => classes.AssignableTo<IAction>())
                 .UsingRegistrationStrategy(RegistrationStrategy.Append)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+            
+            navigatorBuilder.RegisterOrReplaceOptions();
             
             return navigatorBuilder;
         }

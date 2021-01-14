@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,7 @@ using User = Navigator.Extensions.Store.Abstractions.Entity.User;
 
 namespace Navigator.Extensions.Store
 {
-    public class DefaultEntityManager<TContext, TUser, TChat> : IEntityManager<TUser, TChat>
-        where TContext : NavigatorDbContext<TUser, TChat>
+    public class DefaultEntityManager<TContext, TUser, TChat> : IEntityManager<TUser, TChat> where TContext : NavigatorDbContext<TUser, TChat>
         where TUser : User
         where TChat : Chat
     {
@@ -103,6 +103,11 @@ namespace Navigator.Extensions.Store
             return await _navigatorDbContext.Users.FindAsync(id);
         }
 
+        public IEnumerable<TUser> FindAllUsersAsync(CancellationToken cancellationToken = default)
+        {
+            return _navigatorDbContext.Users.AsEnumerable();
+        }
+
         public TChat FindChat(long id)
         {
             return _navigatorDbContext.Chats.Find(id);
@@ -111,6 +116,11 @@ namespace Navigator.Extensions.Store
         public async Task<TChat> FindChatAsync(long id, CancellationToken cancellationToken = default)
         {
             return await _navigatorDbContext.Chats.FindAsync(id);
+        }
+
+        public IEnumerable<TChat> FindAllChatsAsync(CancellationToken cancellationToken = default)
+        {
+            return _navigatorDbContext.Chats.AsEnumerable();
         }
 
         public async Task MigrateFromGroup(Telegram.Bot.Types.Message telegramMessage, CancellationToken cancellationToken = default)

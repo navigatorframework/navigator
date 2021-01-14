@@ -2,7 +2,6 @@ using System.Net.Http;
 using Microsoft.Extensions.Options;
 using MihaZupan.TelegramBotClients;
 using Navigator.Abstractions;
-using Navigator.Configuration;
 
 namespace Navigator
 {
