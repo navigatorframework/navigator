@@ -10,7 +10,7 @@ namespace Navigator
     public class BotClient : RateLimitedTelegramBotClient, IBotClient
     {
         /// <inheritdoc />
-        public BotClient(IOptions<NavigatorOptions> options) : base(options.Value.BotToken, (HttpClient) default!, options.Value.SchedulerSettings)
+        public BotClient(NavigatorOptions options) : base(options.GetTelegramToken(), (HttpClient) default!, options.GetSchedulerSettingsOrDefault())
         {
         }
     }

@@ -10,14 +10,19 @@ namespace Navigator
 {
     public static class NavigatorServiceCollectionExtensions
     {
-        public static IServiceCollection AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options, params Assembly[] actionAssemblies)
+        public static NavigatorBuilder AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
         {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options), "Navigator options are required for navigator framework to work.");
             }
+
+            var invokedOptions = new NavigatorOptions();
+            options.Invoke(invokedOptions);
+
+            var navigatorBuilder = new NavigatorBuilder(invokedOptions, services);
             
-            services.Configure(options);
+            services.AddSingleton(invokedOptions);
             
             services.AddSingleton<IBotClient, BotClient>();
 
@@ -29,13 +34,13 @@ namespace Navigator
             services.AddScoped<INavigatorMiddleware, NavigatorMiddleware>();
             
             services.Scan(scan => scan
-                .FromAssemblies(actionAssemblies)
+                .FromAssemblies(invokedOptions.GetActionsAssemblies())
                 .AddClasses(classes => classes.AssignableTo<IAction>())
                 .UsingRegistrationStrategy(RegistrationStrategy.Append)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
             
-            return services;
+            return navigatorBuilder;
         }
     }
 }

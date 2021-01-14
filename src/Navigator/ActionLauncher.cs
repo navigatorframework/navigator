@@ -16,14 +16,14 @@ namespace Navigator
     {
         protected readonly ILogger<ActionLauncher> Logger;
         protected readonly IMediator Mediator;
-        protected readonly bool MultipleLaunchEnabled;
+        protected readonly bool MultipleActionsUsage;
         protected readonly IEnumerable<IAction> Actions;
         protected readonly INavigatorContext Ctx;
 
-        public ActionLauncher(ILogger<ActionLauncher> logger, IOptions<NavigatorOptions> options, IMediator mediator, IEnumerable<IAction> actions, INavigatorContext navigatorContext)
+        public ActionLauncher(ILogger<ActionLauncher> logger, NavigatorOptions options, IMediator mediator, IEnumerable<IAction> actions, INavigatorContext navigatorContext)
         {
             Logger = logger;
-            MultipleLaunchEnabled = options.Value.MultipleLaunchEnabled;
+            MultipleActionsUsage = options.MultipleActionsUsageIsEnabled();
             Mediator = mediator;
             Actions = actions;
             Ctx = navigatorContext;
@@ -31,7 +31,7 @@ namespace Navigator
 
         public async Task Launch()
         {
-            Logger.LogTrace("Launching of multiple actions is {MultipleActionLaunchState}.", MultipleLaunchEnabled ? "active" : "inactive");
+            Logger.LogTrace("Launching of multiple actions is {MultipleActionLaunchState}.", MultipleActionsUsage ? "active" : "inactive");
             Logger.LogTrace("Starting with action launching.");
 
             var actions = GetActions(Ctx.Update).ToList();
@@ -65,7 +65,7 @@ namespace Navigator
                 return actions;
             }
 
-            if (MultipleLaunchEnabled)
+            if (MultipleActionsUsage)
             {
                 actions = Actions
                     .Where(a => a.Type == actionType)

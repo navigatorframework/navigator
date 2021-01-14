@@ -15,9 +15,9 @@ namespace Navigator
         {
             using var scope = endpointRouteBuilder.ServiceProvider.CreateScope();
 
-            var options = scope.ServiceProvider.GetRequiredService<IOptions<NavigatorOptions>>();
+            var options = scope.ServiceProvider.GetRequiredService<NavigatorOptions>();
 
-            endpointRouteBuilder.MapPost(options.Value.EndpointWebHook, ProcessTelegramUpdate);
+            endpointRouteBuilder.MapPost(options.GetWebHookEndpointOrDefault(), ProcessTelegramUpdate);
         }
 
         private static async Task ProcessTelegramUpdate(HttpContext context)

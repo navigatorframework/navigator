@@ -27,17 +27,17 @@ namespace Navigator.Hosted
         /// <param name="navigatorOptions"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public SetTelegramBotWebHookHostedService(ILogger<SetTelegramBotWebHookHostedService> logger, IServiceScopeFactory serviceScopeFactory,
-            IOptions<NavigatorOptions> navigatorOptions)
+            NavigatorOptions navigatorOptions)
         {
             _logger = logger;
             _serviceScopeFactory = serviceScopeFactory;
 
-            if (string.IsNullOrWhiteSpace(navigatorOptions.Value.BaseWebHookUrl))
+            if (string.IsNullOrWhiteSpace(navigatorOptions.GetWebHookBaseUrl()))
             {
                 throw new ArgumentNullException(nameof(navigatorOptions), "An URL for WebHook is required.");
             }
             
-            _webHookUrl = $"{navigatorOptions.Value.BaseWebHookUrl}/{navigatorOptions.Value.EndpointWebHook}";
+            _webHookUrl = $"{navigatorOptions.GetWebHookBaseUrl()}/{navigatorOptions.GetWebHookEndpointOrDefault()}";
         }
 
         /// <inheritdoc />
