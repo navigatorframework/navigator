@@ -1,10 +1,16 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Navigator.Configuration;
 using Navigator.Extensions.Shipyard;
+using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Configuration;
+using Navigator.Samples.Echo.Entity;
+using Navigator.Samples.Echo.Persistence;
 
 namespace Navigator.Samples.Echo
 {
@@ -28,9 +34,21 @@ namespace Navigator.Samples.Echo
 
             services.AddNavigator(options =>
             {
-                options.BotToken = Configuration["BOT_TOKEN"];
-                options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
-            }, typeof(Startup).Assembly);
+                options.SetTelegramToken(Configuration["BOT_TOKEN"]);
+                options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]);
+                options.RegisterActionsFromAssemblies(typeof(Startup).Assembly);
+            });
+            
+            services.AddNavigatorStore<NavigatorSampleDbContext, SampleUser>(
+                builder =>
+                {
+                    builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+                        b => b.MigrationsAssembly("Navigator.Samples.Echo"));                    
+                },
+                options =>
+                {
+                    options.SeUserMapper<SampleUserMapper>();
+                });
 
             services.AddShipyard();
         }
@@ -42,6 +60,9 @@ namespace Navigator.Samples.Echo
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
+            serviceScope?.ServiceProvider.GetRequiredService<NavigatorSampleDbContext>().Database.Migrate();
             
             app.UseRouting();
 

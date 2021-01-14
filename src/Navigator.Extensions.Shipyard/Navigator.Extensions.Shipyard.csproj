@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Navigator.Extensions.Shipyard.Abstractions\Navigator.Extensions.Shipyard.Abstractions.csproj" />
+      <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
     </ItemGroup>
     
 </Project>
