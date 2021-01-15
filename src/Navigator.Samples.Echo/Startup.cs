@@ -44,7 +44,10 @@ namespace Navigator.Samples.Echo
                         b => b.MigrationsAssembly("Navigator.Samples.Echo"));
                 },
                 options => { options.SetUserMapper<SampleUserMapper>(); }
-            ).AddShipyard();
+            ).AddShipyard(options =>
+            {
+                options.SetShipyardApiKey(Configuration["SHIPYARD_API_KEY"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

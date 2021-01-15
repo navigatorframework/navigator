@@ -1,7 +1,12 @@
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Extensions.Shipyard.Abstractions;
 using Navigator.Extensions.Shipyard.Middleware;
+using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Abstractions;
+using Navigator.Extensions.Store.Abstractions.Entity;
 
 namespace Navigator.Extensions.Shipyard
 {
@@ -11,18 +16,32 @@ namespace Navigator.Extensions.Shipyard
     public static class NavigatorServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers all the necessary services for shipyard to work.
+        /// Registers all the necessary navigatorBuilder for shipyard to work.
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="navigatorBuilder"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
-        public static IServiceCollection AddShipyard(this IServiceCollection services)
+        public static NavigatorBuilder AddShipyard(this NavigatorBuilder navigatorBuilder, Action<NavigatorOptions>? options = default)
         {
-            services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, ShipyardApiKeyAuthenticationHandler>(
-                nameof(ShipyardApiKeyAuthenticationHandler), o => {  });
+            if (options is null)
+            {
+                throw new ArgumentException("Please configure shipyard options.");
+            }
+            
+            options.Invoke(navigatorBuilder.Options);
+            
+            navigatorBuilder.RegisterOrReplaceOptions();
 
-            services.AddScoped<IBotManagementService, BotManagementService>();
+            navigatorBuilder.Services.AddControllers().ConfigureApplicationPartManager(m =>
+                m.FeatureProviders.Add(
+                    new GenericControllerFeatureProvider(navigatorBuilder.Options.GetUserType()!, navigatorBuilder.Options.GetChatType()!)
+                ));
+            navigatorBuilder.Services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, ShipyardApiKeyAuthenticationHandler>(
+                nameof(ShipyardApiKeyAuthenticationHandler), o => { });
 
-            return services;
+            navigatorBuilder.Services.AddScoped<IBotManagementService, BotManagementService>();
+
+            return navigatorBuilder;
         }
     }
 }

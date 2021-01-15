@@ -11,20 +11,24 @@ namespace Navigator.Extensions.Shipyard.Middleware
 {
     internal class ShipyardApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-        private readonly string _shipyardApiKey;
+        private readonly NavigatorOptions _navigatorOptions;
 
-        public ShipyardApiKeyAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IConfiguration configuration) : base(options, logger, encoder, clock)
+        public ShipyardApiKeyAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, NavigatorOptions navigatorOptions) : base(options, logger, encoder, clock)
         {
-            _shipyardApiKey = configuration["SHIPYARD_API_KEY"];
-
+            _navigatorOptions = navigatorOptions;
         }
 
         /// <inheritdoc />
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if (Context.Request.Headers.TryGetValue("SHIPYARD-API-KEY", out var headerApiKey) && headerApiKey == _shipyardApiKey)
+            if (_navigatorOptions.GetShipyardApiKey() is null)
             {
-                string username = "manager";
+                return Task.FromResult(AuthenticateResult.Fail("Navigator Shipyard is not configured. Please configure an API KEY."));
+            }
+            
+            if (Context.Request.Headers.TryGetValue("SHIPYARD-API-KEY", out var headerApiKey) && headerApiKey == _navigatorOptions.GetShipyardApiKey())
+            {
+                const string username = "manager";
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, username, ClaimValueTypes.String, Options.ClaimsIssuer),
