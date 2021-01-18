@@ -4,8 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>0.9.99-beta</PackageVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageVersion>0.9.100-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Store.Abstractions</PackageId>
         <Title>Navigator Extensions Store Abstractions</Title>
         <Authors>Lucas Maximiliano Marino</Authors>

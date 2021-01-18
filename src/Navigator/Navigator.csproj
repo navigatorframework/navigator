@@ -5,7 +5,7 @@
         <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.100-beta</PackageVersion>
+        <PackageVersion>0.9.101-beta</PackageVersion>
         <PackageId>Navigator</PackageId>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>

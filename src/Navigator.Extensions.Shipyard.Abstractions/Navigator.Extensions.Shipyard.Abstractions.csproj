@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.99-beta</PackageVersion>
+        <PackageVersion>0.9.100-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Shipyard.Abstractions</PackageId>
         <Title>Navigator Extensions Shipyard Abstractions</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -21,7 +21,7 @@
 
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.99-beta" />
+        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.100-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">

@@ -71,7 +71,14 @@ namespace Navigator
 
         public static string GetWebHookEndpointOrDefault(this NavigatorOptions navigatorOptions)
         {
-            return navigatorOptions.RetrieveOption<string>(WebHookEndpointKey) ?? $"bot/{Guid.NewGuid()}";
+            var webHookEndpoint = navigatorOptions.RetrieveOption<string>(WebHookEndpointKey);
+
+            if (webHookEndpoint is null)
+            {
+                navigatorOptions.SetWebHookEndpoint($"bot/{Guid.NewGuid()}");
+            }
+            
+            return navigatorOptions.RetrieveOption<string>(WebHookEndpointKey)!;
         }
 
         #endregion

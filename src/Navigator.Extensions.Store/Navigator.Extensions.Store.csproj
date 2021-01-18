@@ -4,8 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <PackageVersion>0.9.99-beta</PackageVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageVersion>0.9.100-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Store</PackageId>
         <Title>Navigator Extensions Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -30,7 +30,7 @@
 
     <ItemGroup Condition="'$(Configuration)'=='Release'">
         <PackageReference Include="Navigator" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.99-beta" />
+        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.100-beta" />
         <PackageReference Include="Navigator.Extensions.Store.Abstractions.Extensions" Version="0.9.99-beta" />
     </ItemGroup>
 

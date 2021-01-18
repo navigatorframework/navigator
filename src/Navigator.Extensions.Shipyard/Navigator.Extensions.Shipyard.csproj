@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.99-beta</PackageVersion>
+        <PackageVersion>0.9.100-beta</PackageVersion>
         <PackageId>Navigator.Extensions.Shipyard</PackageId>
         <Title>Navigator Extensions Shipyard</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -27,9 +27,14 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Navigator.Extensions.Shipyard.Abstractions\Navigator.Extensions.Shipyard.Abstractions.csproj" />
-      <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
+    <ItemGroup Condition="'$(Configuration)'=='Release'">
+        <PackageReference Include="Navigator.Extensions.Shipyard.Abstractions" Version="0.9.100-beta" />
+        <PackageReference Include="Navigator.Extensions.Store" Version="0.9.100-beta" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug'">
+        <ProjectReference Include="..\Navigator.Extensions.Shipyard.Abstractions\Navigator.Extensions.Shipyard.Abstractions.csproj" />
+        <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
     </ItemGroup>
     
 </Project>
