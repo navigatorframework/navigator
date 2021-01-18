@@ -3,9 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Navigator.Abstractions;
 using Navigator.Extensions.Shipyard.Middleware;
 using Navigator.Extensions.Store.Abstractions;
 using Navigator.Extensions.Store.Abstractions.Entity;
+using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Extensions.Shipyard.Controllers
 {
@@ -21,14 +23,17 @@ namespace Navigator.Extensions.Shipyard.Controllers
     public class ConversationController<TUser, TChat> : ControllerBase where TUser : User where TChat : Chat
     {
         private readonly IEntityManager<TUser, TChat> _entityManager;
+        private readonly IBotClient _botClient;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="entityManager"></param>
-        public ConversationController(IEntityManager<TUser, TChat> entityManager)
+        /// <param name="botClient"></param>
+        public ConversationController(IEntityManager<TUser, TChat> entityManager, IBotClient botClient)
         {
             _entityManager = entityManager;
+            _botClient = botClient;
         }
 
         /// <summary>
@@ -86,8 +91,12 @@ namespace Navigator.Extensions.Shipyard.Controllers
         {
             if (await _entityManager.FindChatAsync(chatId, cancellationToken) is null)
             {
-                
+                return NotFound();
             }
+
+            await _botClient.SendTextMessageAsync(chatId, message, ParseMode.MarkdownV2, cancellationToken: cancellationToken);
+
+            return Ok();
         }
     }
 }
