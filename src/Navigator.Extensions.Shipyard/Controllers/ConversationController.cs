@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Navigator.Extensions.Shipyard.Middleware;
@@ -78,6 +79,15 @@ namespace Navigator.Extensions.Shipyard.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost("chat/{chatId}")]
+        public async Task<IActionResult> SendMessage([FromRoute] long chatId, [FromBody] string message, CancellationToken cancellationToken)
+        {
+            if (await _entityManager.FindChatAsync(chatId, cancellationToken) is null)
+            {
+                
+            }
         }
     }
 }

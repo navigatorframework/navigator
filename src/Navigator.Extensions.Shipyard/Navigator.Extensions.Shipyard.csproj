@@ -2,9 +2,21 @@
     
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Nullable>enable</Nullable>
+        <PackageVersion>0.9.99-beta</PackageVersion>
+        <PackageId>Navigator.Extensions.Shipyard</PackageId>
+        <Title>Navigator Extensions Shipyard</Title>
+        <Authors>Lucas Maximiliano Marino</Authors>
+        <Description>A highly opinionated telegram bot framework, mainly based on Telegram.Bot.</Description>
+        <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/navigatorframework/navigator/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
+        <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
+        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
     </PropertyGroup>
 
     <ItemGroup>
