@@ -93,26 +93,24 @@ public class EchoAction : MessageAction
     {
         return !string.IsNullOrWhiteSpace(MessageToEcho);
     }
-
-    /// ...
-
-    public class EchoActionHandler : ActionHandler<EchoAction>
-    {
-        public EchoActionHandler(INavigatorContext ctx) : base(ctx)
-        {
-        }
-
-        public override async Task<Unit> Handle(EchoAction request, CancellationToken cancellationToken)
-        {
-            await Ctx.Client.SendTextMessageAsync(Ctx.GetTelegramChat(), request.MessageToEcho,
-                cancellationToken: cancellationToken);
-
-            return Unit.Value;
-        }
-    }
 }
 
+/// ...
 
+public class EchoActionHandler : ActionHandler<EchoAction>
+{
+    public EchoActionHandler(INavigatorContext ctx) : base(ctx)
+    {
+    }
+
+    public override async Task<Unit> Handle(EchoAction request, CancellationToken cancellationToken)
+    {
+        await Ctx.Client.SendTextMessageAsync(Ctx.GetTelegramChat(), request.MessageToEcho,
+            cancellationToken: cancellationToken);
+
+        return Unit.Value;
+    }
+}
 ```
 
 
