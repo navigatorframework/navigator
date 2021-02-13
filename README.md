@@ -1,25 +1,35 @@
 # Navigator
 A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot).
 
+This framework relies heavily in [MediatR](https://github.com/jbogard/MediatR) and it is shaped accordingly. 
+
+The base package ([Navigator](https://www.nuget.org/packages/Navigator/)) it's usable on it's own but the [Actions](https://www.nuget.org/packages/Navigator.Extensions.Actions) extension it's highly encouraged as it brings default implementations for almost every type of incoming telegram update, in the future we may merge it into the base package.
+
+For storage of users, chats and conversations the [Store](https://www.nuget.org/packages/Navigator.Extensions.Store) extension works amazing with Navigator, it automatically recognizes users and groups, saves them to the database for future use and injects into the NavigatorContext all the data you may have about a user or a chat, you can also use your own models and it will still work, check out the examples for more information.
+
+Finally the [Shipyard](https://www.nuget.org/packages/Navigator.Extensions.Shipyard) WIP package gives you an useful API to retrieve information about your bot, change some of it's configuration and launch some actions. A companion web-based UI is also planned.
+
 ## Packages
 
 | Package | Last Stable | Last Prerelease |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Navigator | [![package.nav](https://img.shields.io/nuget/v/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) | [![package.nav.pre](https://img.shields.io/nuget/vpre/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) |
 | Navigator.Extensions.Actions | [![package.nav.ext.act](https://img.shields.io/nuget/v/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Actions) | [![package.nav.ext.act.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Actions) |
-| Navigator.Extensions.Store | [![package.nav.ext.sto](https://img.shields.io/nuget/v/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) | [![package.nav.ext.sto.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) |
+| Navigator.Extensions.Store | [![package.nav.ext.sto](https://img.shields.io/nuget/v/Navigator.Extensions.Actions?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) | [![package.nav.ext.sto.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Store?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Store) |
+| Navigator.Extensions.Shipyard | [![package.nav.ext.ship](https://img.shields.io/nuget/v/Navigator.Extensions.Shipyard?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Shipyard) | [![package.nav.ext.ship.pre](https://img.shields.io/nuget/vpre/Navigator.Extensions.Shipyard?style=flat-square)](https://www.nuget.org/packages/Navigator.Extensions.Shipyard) |
 
 # Requirements
-- ASP.NET Core 3 or higher
-- MediatR
+- ASP.NET (>= net5.0)
+- MediatR (>= 9.0.0)
 
 # Examples
 Some examples can be found in the [samples](https://github.com/navigatorframework/navigator/src/) repository.
 
 Also checkout some bots made with `Navigator`:
-- ThankiesBot | [Source](https://github.com/elementh/thankies) | Speak with it at [@ThankiesBot](https://t.me/thankiesbot).
+- [@ThankiesBot](https://t.me/thankiesbot), check out it's [source code](https://github.com/elementh/thankies).
+- [@FOSCBot](https://t.me/foscbot), check out it's [source code](https://github.com/elementh/foscbot).
 
-# Usage
+# Basic Usage
 ## Configuration
 Including Navigator in your project is simple:
 
@@ -31,19 +41,32 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // ...
+        services.AddControllers().AddNewtonsoftJson();
 
-        services.AddMediatR(typeof(Startup).Assembly);
+        services.AddMediatR(typeof(Startup).Assembly); // And any other assembly that may be needed.
         
         services.AddNavigator(options =>
         {
-            options.BotToken = Configuration["BOT_TOKEN"];
-            options.BaseWebHookUrl = Configuration["BASE_WEBHOOK_URL"];
-        }, typeof(Startup).Assembly); // params reference all assemblies where actions are.
+            options.SetTelegramToken(Configuration["BOT_TOKEN"]); // Your telegram token.
+            options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]); // The base url where you are going to receive the updates from teelgram.
+            options.RegisterActionsFromAssemblies(typeof(Startup).Assembly); // All your actions.
+        });
 
         /// ...
     }
 
-    // ...
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            /// ...
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapNavigator(); // In order to receive updates from telegram.
+            });
+
+            /// ...
+        }
 }
 ```
 
@@ -53,7 +76,7 @@ More options are available, check them out here. //TODO
 
 # License
 Navigator Framework
-Copyright (C) 2019  Lucas Maximiliano Marino
+Copyright (C) 2019-2021  Lucas Maximiliano Marino
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
