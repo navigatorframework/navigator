@@ -7,7 +7,7 @@ namespace Navigator.Extensions.Actions
     public abstract class Action : IAction
     {
         /// <inheritdoc />
-        public int Order { get; } = 1000;
+        public virtual int Order => 1000;
 
         /// <inheritdoc />
         public abstract string Type { get; }
