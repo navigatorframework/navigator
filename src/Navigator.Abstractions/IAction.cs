@@ -3,12 +3,37 @@ using MediatR;
 
 namespace Navigator.Abstractions
 {
+    /// <summary>
+    /// Base action.
+    /// </summary>
     public interface IAction : IRequest
     {
+        /// <summary>
+        /// Order at which the action must be evaluated, default is 1000.
+        /// </summary>
         int Order { get; }
+        /// <summary>
+        /// Defines the type of action it can handle. See <see cref="ActionType"/>
+        /// </summary>
         string Type { get; }
+        
+        /// <summary>
+        /// Timestamp at which the action was launched, in UTC.
+        /// </summary>
         DateTime Timestamp { get; }
+        
+        /// <summary>
+        /// Can be used to populate the action before triggering "CanHandle".
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         IAction Init(INavigatorContext ctx);
+        
+        /// <summary>
+        /// This function must return true when the incoming update can be handled by this action.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         bool CanHandle(INavigatorContext ctx);
     }
 

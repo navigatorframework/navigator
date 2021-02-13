@@ -18,13 +18,9 @@ namespace Navigator.Samples.Echo.Actions
 
         public override async Task<Unit> Handle(EchoAction request, CancellationToken cancellationToken)
         {
-            var user = Ctx.GetUser<SampleUser>();
-            
-            await Ctx.Client.SendTextMessageAsync(Ctx.Update.Message.Chat.Id, request.EchoMessage + ":" + JsonConvert.SerializeObject(user, settings: new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            }), cancellationToken: cancellationToken);
-            
+            await Ctx.Client.SendTextMessageAsync(Ctx.GetTelegramChat(), request.MessageToEcho,
+                cancellationToken: cancellationToken);
+
             return Unit.Value;
         }
     }

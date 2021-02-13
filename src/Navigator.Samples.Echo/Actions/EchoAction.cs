@@ -3,19 +3,22 @@ using Navigator.Extensions.Actions;
 
 namespace Navigator.Samples.Echo.Actions
 {
-    public class EchoAction : Action
+    public class EchoAction : MessageAction
     {
-        public override string Type => ActionType.Message;
-        public string EchoMessage { get; private set; } = string.Empty;
+        public string MessageToEcho { get; set; } = string.Empty;
+        
         public override IAction Init(INavigatorContext ctx)
         {
-            EchoMessage = ctx.Update.Message.Text;
+            if (string.IsNullOrWhiteSpace(ctx.Update.Message.Text))
+            {
+                MessageToEcho = ctx.Update.Message.Text;
+            }
             return this;
         }
 
         public override bool CanHandle(INavigatorContext ctx)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(MessageToEcho);
         }
     }
 }
