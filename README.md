@@ -70,9 +70,51 @@ public class Startup
 }
 ```
 
-More options are available, check them out here. //TODO
+More options are available, check out the wiki.
 
 ## Bot Actions
+Example of a basic echo action using the base package + the actions extension.
+
+```csharp
+public class EchoAction : MessageAction
+{
+    public string MessageToEcho { get; set; } = string.Empty;
+    
+    public override IAction Init(INavigatorContext ctx)
+    {
+        if (string.IsNullOrWhiteSpace(ctx.Update.Message.Text))
+        {
+            MessageToEcho = ctx.Update.Message.Text;
+        }
+        return this;
+    }
+
+    public override bool CanHandle(INavigatorContext ctx)
+    {
+        return !string.IsNullOrWhiteSpace(MessageToEcho);
+    }
+
+    /// ...
+
+    public class EchoActionHandler : ActionHandler<EchoAction>
+    {
+        public EchoActionHandler(INavigatorContext ctx) : base(ctx)
+        {
+        }
+
+        public override async Task<Unit> Handle(EchoAction request, CancellationToken cancellationToken)
+        {
+            await Ctx.Client.SendTextMessageAsync(Ctx.GetTelegramChat(), request.MessageToEcho,
+                cancellationToken: cancellationToken);
+
+            return Unit.Value;
+        }
+    }
+}
+
+
+```
+
 
 # License
 Navigator Framework
