@@ -5,7 +5,7 @@
         <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.101-beta</PackageVersion>
+        <PackageVersion>0.9.102-beta</PackageVersion>
         <PackageId>Navigator</PackageId>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
@@ -35,7 +35,7 @@
     <ItemGroup Condition="'$(Configuration)'=='Release'">
         <PackageReference Include="Navigator.Abstractions" Version="0.9.99-beta" />
         <PackageReference Include="Navigator.Abstractions.Extensions" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Extensions.Actions" Version="0.9.99-beta" />
+        <PackageReference Include="Navigator.Extensions.Actions" Version="0.9.100-beta" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug'">
