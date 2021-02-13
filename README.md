@@ -5,7 +5,7 @@ This framework relies heavily in [MediatR](https://github.com/jbogard/MediatR) a
 
 The base package ([Navigator](https://www.nuget.org/packages/Navigator/)) it's usable on it's own but the [Actions](https://www.nuget.org/packages/Navigator.Extensions.Actions) extension it's highly encouraged as it brings default implementations for almost every type of incoming telegram update, in the future we may merge it into the base package.
 
-For storage of users, chats and conversations the [Store](https://www.nuget.org/packages/Navigator.Extensions.Store) extension works amazing with Navigator, it automatically recognizes users and groups, saves them to the database for future use and injects into the NavigatorContext all the data you may have about a user or a chat, you can also use your own models and it will still work, check out the examples for more information.
+For storage of users, chats and conversations the [Store](https://www.nuget.org/packages/Navigator.Extensions.Store) extension works really well with Navigator, it automatically recognizes users and groups, saves them to the database for future use and injects into the NavigatorContext all the data you may have about a user or a chat, you can also use your own models and it will still work, check out the examples for more information.
 
 Finally the [Shipyard](https://www.nuget.org/packages/Navigator.Extensions.Shipyard) WIP package gives you an useful API to retrieve information about your bot, change some of it's configuration and launch some actions. A companion web-based UI is also planned.
 
