@@ -47,7 +47,7 @@ public class Startup
         
         services.AddNavigator(options =>
         {
-            options.SetTelegramToken(Configuration["BOT_TOKEN"]); // Your telegram token.
+            options.SetTelegramToken(Configuration["BOT_TOKEN"]); // Your telegram bot token.
             options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]); // The base url where you are going to receive the updates from teelgram.
             options.RegisterActionsFromAssemblies(typeof(Startup).Assembly); // All your actions.
         });
