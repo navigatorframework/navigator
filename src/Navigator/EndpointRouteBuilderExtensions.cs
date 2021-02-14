@@ -10,14 +10,18 @@ namespace Navigator
 {
     public static class EndpointRouteBuilderExtensions
     {
-        public static void MapNavigator(this IEndpointRouteBuilder endpointRouteBuilder)
+        public static NavigatorRouteConfiguration MapNavigator(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             using var scope = endpointRouteBuilder.ServiceProvider.CreateScope();
 
             var options = scope.ServiceProvider.GetRequiredService<NavigatorOptions>();
 
             endpointRouteBuilder.MapPost(options.GetWebHookEndpointOrDefault(), ProcessTelegramUpdate);
+
+            return new NavigatorRouteConfiguration(endpointRouteBuilder);
         }
+        
+        public static 
 
         private static async Task ProcessTelegramUpdate(HttpContext context)
         {
