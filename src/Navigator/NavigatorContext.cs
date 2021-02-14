@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Navigator.Entities;
 using Telegram.Bot.Types;
 
 namespace Navigator.Old
 {
     /// <summary>
-    /// Default implementation of INavigatorContext.
+    /// Navigator Context present in all actions.
     /// </summary>
     public class NavigatorContext : INavigatorContext
     {
@@ -22,7 +23,7 @@ namespace Navigator.Old
         public Dictionary<string, string> Items { get; }
 
         /// <inheritdoc />
-        public User BotProfile { get; protected set; } = null!;
+        public BotUser BotProfile { get; protected set; } = null!;
 
         /// <inheritdoc />
         public Update Update { get; protected set; } = null!;
@@ -41,7 +42,7 @@ namespace Navigator.Old
         public async Task Init(Update update, Dictionary<string, object> extensions)
         {
             Update = update;
-            BotProfile = await Client.GetMeAsync();
+            BotProfile = await Client.GetBotUser();
             Extensions = new ReadOnlyDictionary<string, object>(extensions);
         }
 
@@ -58,7 +59,7 @@ namespace Navigator.Old
 
             return throwIfNotFound 
                 ? throw new KeyNotFoundException($"{typeof(TExtension).Name} was not found.") 
-                : (TExtension) default;
+                : default;
         }
     }
 }
