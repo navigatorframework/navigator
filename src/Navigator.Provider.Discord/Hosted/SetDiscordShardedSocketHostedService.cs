@@ -39,7 +39,6 @@ namespace Navigator.Provider.Telegram.Hosted
         /// <inheritdoc />
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            
             using var scope = _serviceScopeFactory.CreateScope();
             
             var navigatorClient = scope.ServiceProvider.GetRequiredService<DiscordShardedClient>();
