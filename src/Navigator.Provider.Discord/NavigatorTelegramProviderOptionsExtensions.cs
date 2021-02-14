@@ -25,7 +25,7 @@ namespace Navigator.Provider.Discord
         
         #region Shards
 
-        private const string TotalShardsKey = "_navigator.options.webhook_endpoint";
+        private const string TotalShardsKey = "_navigator.options.discord.total_shards";
 
         public static void SetTotalShards(this NavigatorDiscordProviderOptions navigatorOptions, int totalShards)
         {

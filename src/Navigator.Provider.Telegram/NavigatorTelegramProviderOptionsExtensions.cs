@@ -8,7 +8,7 @@ namespace Navigator.Provider.Telegram
     {
         #region SchedulerSettings
 
-        private const string SchedulerSettingsKey = "_navigator.options.scheduler_settings";
+        private const string SchedulerSettingsKey = "_navigator.options.telegram.scheduler_settings";
 
         public static void SetSchedulerSettings(this NavigatorTelegramProviderOptions navigatorOptions, SchedulerSettings schedulerSettings)
         {
@@ -24,7 +24,7 @@ namespace Navigator.Provider.Telegram
         
         #region TelegramToken
 
-        private const string TelegramTokenKey = "_navigator.options.telegram_token";
+        private const string TelegramTokenKey = "_navigator.options.telegram.telegram_token";
 
         public static void SetTelegramToken(this NavigatorTelegramProviderOptions navigatorOptions, string telegramToken)
         {
@@ -41,7 +41,7 @@ namespace Navigator.Provider.Telegram
         
         #region WebHookEndpoint
 
-        private const string WebHookEndpointKey = "_navigator.options.webhook_endpoint";
+        private const string WebHookEndpointKey = "_navigator.options.telegram.webhook_endpoint";
 
         public static void SetWebHookEndpoint(this NavigatorTelegramProviderOptions navigatorOptions, string webHookEndpoint)
         {
