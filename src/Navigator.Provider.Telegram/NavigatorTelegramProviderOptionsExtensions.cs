@@ -1,5 +1,6 @@
 using System;
 using MihaZupan.TelegramBotClients.RateLimitedClient;
+using Navigator.Configuration;
 
 namespace Navigator.Provider.Telegram
 {

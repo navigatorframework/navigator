@@ -3,7 +3,7 @@ using Navigator.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
 
-namespace Navigator.Notification
+namespace Navigator.Old.Notification
 {
     public abstract class NavigatorNotification : INavigatorNotification
     {

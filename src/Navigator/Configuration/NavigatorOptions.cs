@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Navigator
+namespace Navigator.Configuration
 {
     /// <summary>
     /// Represents all the options you can use to configure the navigator framework.

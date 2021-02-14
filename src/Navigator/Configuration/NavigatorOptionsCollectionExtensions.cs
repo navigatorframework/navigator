@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MihaZupan.TelegramBotClients.RateLimitedClient;
 
-namespace Navigator
+namespace Navigator.Configuration
 {
     /// <summary>
     /// Navigator Configuration Options.

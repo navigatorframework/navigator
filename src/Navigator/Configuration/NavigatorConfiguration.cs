@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Navigator.Provider;
+using Navigator.Configuration.Provider;
 
-namespace Navigator
+namespace Navigator.Configuration
 {
     /// <summary>
     /// Helper functions for configuring navigator services.

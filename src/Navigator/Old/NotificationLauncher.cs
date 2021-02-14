@@ -2,10 +2,10 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
-using Navigator.Notification;
+using Navigator.Old.Notification;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator
+namespace Navigator.Old
 {
     public class NotificationLauncher : INotificationLauncher
     {

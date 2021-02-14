@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Routing;
-using Navigator.Provider;
+using Navigator.Configuration.Provider;
 
-namespace Navigator
+namespace Navigator.Configuration
 {
     public class NavigatorRouteConfiguration
     {

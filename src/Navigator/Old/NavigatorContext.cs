@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Navigator.Abstractions;
 using Telegram.Bot.Types;
 
-namespace Navigator
+namespace Navigator.Old
 {
     /// <summary>
     /// Default implementation of INavigatorContext.
@@ -17,7 +16,7 @@ namespace Navigator
         protected IDictionary<string, object> Extensions { get; set; } = null!;
 
         /// <inheritdoc />
-        public IBotClient Client { get; }
+        public INavigatorClient Client { get; }
 
         /// <inheritdoc />
         public Dictionary<string, string> Items { get; }
@@ -32,7 +31,7 @@ namespace Navigator
         /// Default constructor.
         /// </summary>
         /// <param name="client"></param>
-        public NavigatorContext(IBotClient client)
+        public NavigatorContext(INavigatorClient client)
         {
             Client = client;
             Items = new Dictionary<string, string>();

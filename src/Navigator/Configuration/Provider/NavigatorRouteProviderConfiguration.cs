@@ -1,8 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Navigator.Provider
+namespace Navigator.Configuration.Provider
 {
     public class NavigatorRouteProviderConfiguration
     {

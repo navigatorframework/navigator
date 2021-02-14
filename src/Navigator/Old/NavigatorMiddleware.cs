@@ -6,7 +6,7 @@ using Navigator.Abstractions;
 using Newtonsoft.Json;
 using Telegram.Bot.Types;
 
-namespace Navigator
+namespace Navigator.Old
 {
     /// <summary>
     /// 

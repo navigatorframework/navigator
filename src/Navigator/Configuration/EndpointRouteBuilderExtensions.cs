@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Routing;
 
-namespace Navigator
+namespace Navigator.Configuration
 {
     public static class EndpointRouteBuilderExtensions
     {

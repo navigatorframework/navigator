@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
+using Navigator.Configuration;
+using Navigator.Old;
 using Scrutor;
 
 namespace Navigator

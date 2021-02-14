@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
+using Navigator.Configuration;
+using Navigator.Configuration.Provider;
 
 namespace Navigator.Provider.Telegram
 {

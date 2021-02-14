@@ -1,5 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Navigator.Configuration;
+using Navigator.Configuration.Provider;
 using Navigator.Provider.Telegram.Hosted;
 
 namespace Navigator.Provider.Telegram

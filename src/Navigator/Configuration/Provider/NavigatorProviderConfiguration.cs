@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Navigator.Provider
+namespace Navigator.Configuration.Provider
 {
     /// <summary>
     /// Provides a entry point for configuring new providers for Navigator.

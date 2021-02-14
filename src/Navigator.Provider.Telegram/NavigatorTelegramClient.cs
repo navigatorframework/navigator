@@ -1,5 +1,6 @@
 using System.Net.Http;
 using MihaZupan.TelegramBotClients;
+using Navigator.Configuration;
 
 namespace Navigator.Provider.Telegram
 {

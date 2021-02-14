@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Navigator.Configuration;
 using Navigator.Extensions.Shipyard;
 using Navigator.Extensions.Store;
 using Navigator.Samples.Echo.Entity;

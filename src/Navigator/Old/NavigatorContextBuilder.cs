@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
 using Telegram.Bot.Types;
 
-namespace Navigator
+namespace Navigator.Old
 {
     public class NavigatorContextBuilder : INavigatorContextBuilder
     {
