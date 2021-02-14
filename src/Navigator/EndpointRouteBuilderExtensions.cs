@@ -1,18 +1,17 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Navigator.Abstractions;
 
 namespace Navigator
 {
     public static class EndpointRouteBuilderExtensions
     {
+        /// <summary>
+        /// Configure navigator's provider's endpoints.
+        /// </summary>
+        /// <param name="endpointRouteBuilder"></param>
+        /// <returns></returns>
         public static NavigatorRouteConfiguration MapNavigator(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            return new NavigatorRouteConfiguration(endpointRouteBuilder);
+            return new(endpointRouteBuilder);
         }
     }
 }

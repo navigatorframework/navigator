@@ -7,7 +7,7 @@ namespace Navigator
     {
         public IEndpointRouteBuilder EndpointRouteBuilder { get; internal set; }
         
-        public NavigatorRouteProviderConfiguration ForProvider { get; set; }
+        public NavigatorRouteProviderConfiguration ForProvider { get; internal set; }
 
         public NavigatorRouteConfiguration(IEndpointRouteBuilder endpointRouteBuilder)
         {
@@ -15,6 +15,5 @@ namespace Navigator
 
             ForProvider = new NavigatorRouteProviderConfiguration(this);
         }
-        
     }
 }
