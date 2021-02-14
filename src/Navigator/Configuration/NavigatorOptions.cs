@@ -2,9 +2,7 @@ using System.Collections.Generic;
 
 namespace Navigator.Configuration
 {
-    /// <summary>
-    /// Represents all the options you can use to configure the navigator framework.
-    /// </summary>
+    /// <inheritdoc />
     public class NavigatorOptions : INavigatorOptions
     {
         private readonly Dictionary<string, object> _options;
@@ -19,11 +17,11 @@ namespace Navigator.Configuration
             return _options.TryAdd(key, option);
         }
         
-        public bool ForceRegisterOption(string key, object option)
+        public void ForceRegisterOption(string key, object option)
         {
             _options.Remove(key);
 
-            return TryRegisterOption(key, option);
+            TryRegisterOption(key, option);
         }
 
         public TType? RetrieveOption<TType>(string key)
