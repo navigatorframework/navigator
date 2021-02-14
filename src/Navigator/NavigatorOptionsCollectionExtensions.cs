@@ -6,12 +6,10 @@ using MihaZupan.TelegramBotClients.RateLimitedClient;
 namespace Navigator
 {
     /// <summary>
-    /// 
+    /// Navigator Configuration Options.
     /// </summary>
     public static class NavigatorOptionsCollectionExtensions
     {
-   
-        
         #region WebHookBaseUrl
 
         private const string WebHookBaseUrlKey = "_navigator.options.webhook_base_url";
@@ -29,8 +27,6 @@ namespace Navigator
         
         #endregion
         
-
-
         #region MultipleActions
 
         private const string MultipleActionsKey = "_navigator.options.multiple_actions";
