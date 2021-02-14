@@ -18,7 +18,7 @@ namespace Navigator
         /// <value>
         /// The <see cref="NavigatorOptions"/> 
         /// </value>
-        public NavigatorOptions Options { get; private set; }
+        public NavigatorOptions Options { get; internal set; }
         
         /// <summary>
         /// Gets the <see cref="IServiceCollection"/> services are attached to.
@@ -26,7 +26,7 @@ namespace Navigator
         /// <value>
         /// The <see cref="IServiceCollection"/> services are attached to.
         /// </value>
-        public IServiceCollection Services { get; private set; }
+        public IServiceCollection Services { get; internal set; }
 
         /// <summary>
         /// Creates a new instance of <see cref="NavigatorConfiguration"/>.
