@@ -7,7 +7,7 @@ namespace Navigator.Abstractions
     public interface INavigatorContext
     {
         Dictionary<string, string> Items { get; }
-        public IBotClient Client { get; }
+        public INavigatorClient Client { get; }
         public User BotProfile { get; }
         public Update Update { get; }
 
