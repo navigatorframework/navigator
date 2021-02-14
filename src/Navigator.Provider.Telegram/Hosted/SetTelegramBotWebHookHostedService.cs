@@ -46,7 +46,7 @@ namespace Navigator.Provider.Telegram.Hosted
             
             using var scope = _serviceScopeFactory.CreateScope();
             
-            var navigatorClient = scope.ServiceProvider.GetRequiredService<IBotClient>();
+            var navigatorClient = scope.ServiceProvider.GetRequiredService<NavigatorTelegramClient>();
             
             await navigatorClient.SetWebhookAsync(_webHookUrl, cancellationToken: stoppingToken);
             
