@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Navigator.Abstractions;
 
-namespace Navigator.Hosted
+namespace Navigator.Provider.Telegram.Hosted
 {
     /// <summary>
-    /// WebHook service for Navigator.
+    /// WebHook service for navigator's telegram provider.
     /// </summary>
     public class SetTelegramBotWebHookHostedService : BackgroundService
     {
