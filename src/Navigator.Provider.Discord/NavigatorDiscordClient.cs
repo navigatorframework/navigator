@@ -1,8 +1,10 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
+using Navigator.Entities;
 
 namespace Navigator.Provider.Discord
 {
@@ -56,6 +58,15 @@ namespace Navigator.Provider.Discord
             }
             
             return Task.CompletedTask;
+        }
+
+        public Task<BotUser> GetBotUser(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(new BotUser
+            {
+                Id = CurrentUser.Id.ToString(),
+                Username = CurrentUser.Username
+            });
         }
     }
 }
