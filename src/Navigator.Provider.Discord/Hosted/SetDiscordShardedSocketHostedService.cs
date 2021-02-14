@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
 using Navigator.Configuration;
+using Navigator.Provider.Discord;
 
 namespace Navigator.Provider.Telegram.Hosted
 {
@@ -49,14 +50,21 @@ namespace Navigator.Provider.Telegram.Hosted
             await navigatorClient.LoginAsync(TokenType.Bot, _navigatorOptions.GetDiscordToken());
             await navigatorClient.StartAsync();
             
-            var me = await navigatorClient.CurrentUser;
+            var me = navigatorClient.CurrentUser;
 
-            _logger.LogInformation($"Navigator Discord Client is receiving updates for bot: @{me.Username}");
+            if (me is not null)
+            {
+                _logger.LogInformation($"Navigator Discord Client is receiving updates for bot: @{me.Username}");
+            }
+            else
+            {
+                _logger.LogError("Unhandled error starting navigator discord client");
+            }
         }
         
         private Task ReadyAsync(DiscordSocketClient shard)
         {
-            _logger.LogInformation("Navigator Discord Shard Number {ShardId} is connected and ready!", shard.ShardId);
+            _logger.LogInformation("Navigator Discord Shard Number {ShardId} is connected and ready", shard.ShardId);
             return Task.CompletedTask;
         }
 
