@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Navigator.Abstractions;
-using Scrutor;
 
 namespace Navigator
 {
@@ -12,6 +9,8 @@ namespace Navigator
     /// </summary>
     public class NavigatorBuilder
     {
+        public NavigatorProviderConfiguration WithProvider { get; protected set; }
+
         /// <summary>
         /// Gets the <see cref="NavigatorOptions"/> that are being used.
         /// </summary>
@@ -43,10 +42,15 @@ namespace Navigator
 
             services.AddSingleton(Options);
         }
+        
 
         public void RegisterOrReplaceOptions()
         {
-            Services.Replace(ServiceDescriptor.Singleton<INavigatorOptions>(Options));
+            Services.Replace(ServiceDescriptor.Singleton<NavigatorOptions>(Options));
         }
+    }
+
+    public class NavigatorProviderConfiguration
+    {
     }
 }
