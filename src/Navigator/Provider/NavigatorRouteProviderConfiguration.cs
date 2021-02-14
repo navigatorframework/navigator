@@ -1,3 +1,5 @@
+using System;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Navigator.Provider
@@ -10,20 +12,12 @@ namespace Navigator.Provider
         {
             _navigatorRouteConfiguration = navigatorRouteConfiguration;
         }
-        
-        /// <summary>
-        /// Configure a new provider using this method.
-        /// </summary>
-        /// <param name="optionsAction"></param>
-        /// <param name="servicesAction"></param>
-        /// <returns></returns>
-        public NavigatorRouteConfiguration Provider()
-        {
-            optionsAction?.Invoke(_navigatorConfiguration.Options);
-            
-            servicesAction?.Invoke(_navigatorConfiguration.Services);
 
-            return _navigatorConfiguration;
+        public NavigatorRouteConfiguration Provider(Action<IEndpointRouteBuilder> routeActions)
+        {
+            routeActions.Invoke(_navigatorRouteConfiguration.EndpointRouteBuilder);
+
+            return _navigatorRouteConfiguration;
         }
     }
 }

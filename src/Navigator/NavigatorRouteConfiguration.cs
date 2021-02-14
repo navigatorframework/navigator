@@ -5,13 +5,13 @@ namespace Navigator
 {
     public class NavigatorRouteConfiguration
     {
-        private readonly IEndpointRouteBuilder _endpointRouteBuilder;
+        public IEndpointRouteBuilder EndpointRouteBuilder { get; internal set; }
         
         public NavigatorRouteProviderConfiguration ForProvider { get; set; }
 
         public NavigatorRouteConfiguration(IEndpointRouteBuilder endpointRouteBuilder)
         {
-            _endpointRouteBuilder = endpointRouteBuilder;
+            EndpointRouteBuilder = endpointRouteBuilder;
 
             ForProvider = new NavigatorRouteProviderConfiguration(this);
         }
