@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Navigator.Entities;
 using Telegram.Bot.Types;
 
 namespace Navigator
@@ -8,7 +9,7 @@ namespace Navigator
     {
         Dictionary<string, string> Items { get; }
         public INavigatorClient Client { get; }
-        public User BotProfile { get; }
+        public BotUser BotProfile { get; }
         public Update Update { get; }
 
         Task Init(Update update, Dictionary<string, object> extensions);
