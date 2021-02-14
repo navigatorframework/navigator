@@ -1,12 +1,11 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
-using Navigator.Hosted;
 using Scrutor;
 
 namespace Navigator
 {
-    public static class NavigatorServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
         {
