@@ -1,3 +1,4 @@
+using System;
 using MihaZupan.TelegramBotClients.RateLimitedClient;
 
 namespace Navigator.Provider.Telegram
@@ -24,13 +25,13 @@ namespace Navigator.Provider.Telegram
 
         private const string TelegramTokenKey = "_navigator.options.telegram_token";
 
-        public static void SetTelegramToken(this NavigatorOptions navigatorOptions, string telegramToken)
+        public static void SetTelegramToken(this NavigatorTelegramProviderOptions navigatorOptions, string telegramToken)
         {
             navigatorOptions.TryRegisterOption(TelegramTokenKey, telegramToken);
 
         }
 
-        public static string? GetTelegramToken(this NavigatorOptions navigatorOptions)
+        public static string? GetTelegramToken(this INavigatorOptions navigatorOptions)
         {
             return navigatorOptions.RetrieveOption<string>(TelegramTokenKey);
         }
@@ -41,18 +42,18 @@ namespace Navigator.Provider.Telegram
 
         private const string WebHookEndpointKey = "_navigator.options.webhook_endpoint";
 
-        public static void SetWebHookEndpoint(this NavigatorOptions navigatorOptions, string webHookEndpoint)
+        public static void SetWebHookEndpoint(this NavigatorTelegramProviderOptions navigatorOptions, string webHookEndpoint)
         {
             navigatorOptions.TryRegisterOption(WebHookEndpointKey, webHookEndpoint);
         }
 
-        public static string GetWebHookEndpointOrDefault(this NavigatorOptions navigatorOptions)
+        public static string GetWebHookEndpointOrDefault(this INavigatorOptions navigatorOptions)
         {
             var webHookEndpoint = navigatorOptions.RetrieveOption<string>(WebHookEndpointKey);
 
             if (webHookEndpoint is null)
             {
-                navigatorOptions.SetWebHookEndpoint($"bot/{Guid.NewGuid()}");
+                navigatorOptions.TryRegisterOption(WebHookEndpointKey,$"bot/{Guid.NewGuid()}");
             }
             
             return navigatorOptions.RetrieveOption<string>(WebHookEndpointKey)!;
