@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Navigator.Configuration;
 using Navigator.Extensions.Shipyard;
 using Navigator.Extensions.Store;
+using Navigator.Provider.Telegram;
 using Navigator.Samples.Echo.Entity;
 using Navigator.Samples.Echo.Persistence;
 
@@ -31,24 +32,25 @@ namespace Navigator.Samples.Echo
 
             services.AddApiVersioning();
 
-            services.AddNavigator(
-                options =>
-                {
-                    options.SetTelegramToken(Configuration["BOT_TOKEN"]);
-                    options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]);
-                    options.RegisterActionsFromAssemblies(typeof(Startup).Assembly);
-                }
-            ).AddNavigatorStore<NavigatorSampleDbContext, SampleUser>(
-                builder =>
-                {
-                    builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly("Navigator.Samples.Echo"));
-                },
-                options => { options.SetUserMapper<SampleUserMapper>(); }
-            ).AddShipyard(options =>
+            services.AddNavigator(options =>
             {
-                options.SetShipyardApiKey(Configuration["SHIPYARD_API_KEY"]);
+                options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]);
+                options.RegisterActionsFromAssemblies(typeof(Startup).Assembly);
+            }).WithProvider.Telegram(options =>
+            {
+                options.SetTelegramToken(Configuration["BOT_TOKEN"]);
             });
+            // ).AddNavigatorStore<NavigatorSampleDbContext, SampleUser>(
+            //     builder =>
+            //     {
+            //         builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+            //             b => b.MigrationsAssembly("Navigator.Samples.Echo"));
+            //     },
+            //     options => { options.SetUserMapper<SampleUserMapper>(); }
+            // ).AddShipyard(options =>
+            // {
+            //     options.SetShipyardApiKey(Configuration["SHIPYARD_API_KEY"]);
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +72,8 @@ namespace Navigator.Samples.Echo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapNavigator();
+                endpoints.MapNavigator()
+                    .ForProvider.Telegram();
             });
         }
     }

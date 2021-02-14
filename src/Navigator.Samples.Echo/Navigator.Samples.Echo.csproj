@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Navigator.Abstractions.Extensions\Navigator.Abstractions.Extensions.csproj" />
+        <ProjectReference Include="..\Navigator.Provider.Telegram\Navigator.Provider.Telegram.csproj" />
         <ProjectReference Include="..\Navigator\Navigator.csproj" />
         <ProjectReference Include="..\Navigator.Extensions.Actions\Navigator.Extensions.Actions.csproj" />
         <ProjectReference Include="..\Navigator.Extensions.Shipyard\Navigator.Extensions.Shipyard.csproj" />
