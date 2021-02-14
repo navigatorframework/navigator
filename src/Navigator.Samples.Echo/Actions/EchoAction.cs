@@ -1,4 +1,5 @@
 ﻿using Navigator.Abstractions;
+using Navigator.Context;
 using Navigator.Extensions.Actions;
 
 namespace Navigator.Samples.Echo.Actions

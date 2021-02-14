@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Navigator.Entities;
 using Telegram.Bot.Types;
 
-namespace Navigator.Old
+namespace Navigator.Context
 {
     /// <summary>
     /// Navigator Context present in all actions.

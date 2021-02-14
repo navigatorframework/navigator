@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Navigator.Entities;
 using Telegram.Bot.Types;
 
-namespace Navigator
+namespace Navigator.Context
 {
     public interface INavigatorContext
     {

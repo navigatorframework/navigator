@@ -2,6 +2,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions;
 using Navigator.Configuration;
+using Navigator.Context;
 using Navigator.Old;
 using Scrutor;
 
