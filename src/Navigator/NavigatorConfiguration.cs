@@ -7,7 +7,7 @@ namespace Navigator
     /// <summary>
     /// Helper functions for configuring navigator services.
     /// </summary>
-    public class NavigatorBuilder
+    public class NavigatorConfiguration
     {
         public NavigatorProviderConfiguration WithProvider { get; protected set; }
 
@@ -28,12 +28,12 @@ namespace Navigator
         public IServiceCollection Services { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of <see cref="NavigatorBuilder"/>.
+        /// Creates a new instance of <see cref="NavigatorConfiguration"/>.
         /// </summary>
         /// <param name="options">The <see cref="NavigatorOptions"/> to use.</param>
         /// <param name="services">The <see cref="IServiceCollection"/> to attach to.</param>
 
-        public NavigatorBuilder(Action<NavigatorOptions> options, IServiceCollection services)
+        public NavigatorConfiguration(Action<NavigatorOptions> options, IServiceCollection services)
         {
             Options = new NavigatorOptions();
             options.Invoke(Options);
@@ -52,5 +52,20 @@ namespace Navigator
 
     public class NavigatorProviderConfiguration
     {
+        private readonly NavigatorConfiguration _navigatorConfiguration;
+
+        public NavigatorProviderConfiguration(NavigatorConfiguration navigatorConfiguration)
+        {
+            _navigatorConfiguration = navigatorConfiguration;
+        }
+
+        public NavigatorConfiguration Provider(Action<NavigatorOptions>? optionsAction, Action<IServiceCollection>? servicesAction)
+        {
+            optionsAction?.Invoke(_navigatorConfiguration.Options);
+            
+            servicesAction?.Invoke(_navigatorConfiguration.Services);
+
+            return _navigatorConfiguration;
+        }
     }
 }

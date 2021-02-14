@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using Navigator.Abstractions;
 
 namespace Navigator
 {
     /// <summary>
     /// Represents all the options you can use to configure the navigator framework.
     /// </summary>
-    public class NavigatorOptions : INavigatorOptions
+    public class NavigatorOptions
     {
         private readonly Dictionary<string, object> _options;
 
@@ -35,6 +34,29 @@ namespace Navigator
             }
 
             return default;
+        }
+
+        public Dictionary<string, object> RetrieveAllOptions()
+        {
+            return _options;
+        }
+
+        public void Import(Dictionary<string, object> options, bool overwrite = false)
+        {
+            if (overwrite)
+            {
+                foreach (var (key, option) in options)
+                {
+                    ForceRegisterOption(key, option);
+                }
+                
+                return;
+            }
+
+            foreach (var (key, option) in options)
+            {
+                TryRegisterOption(key, option);
+            }
         }
     }
 }

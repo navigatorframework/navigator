@@ -1,6 +1,6 @@
 namespace Navigator.Provider.Telegram
 {
-    public class NavigatorTelegramProviderOptions
+    public class NavigatorTelegramProviderOptions : NavigatorOptions
     {
         
     }
