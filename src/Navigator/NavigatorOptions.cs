@@ -5,7 +5,7 @@ namespace Navigator
     /// <summary>
     /// Represents all the options you can use to configure the navigator framework.
     /// </summary>
-    public class NavigatorOptions
+    public class NavigatorOptions : INavigatorOptions
     {
         private readonly Dictionary<string, object> _options;
 
