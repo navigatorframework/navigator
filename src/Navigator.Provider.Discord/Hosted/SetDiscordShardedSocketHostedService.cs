@@ -41,10 +41,7 @@ namespace Navigator.Provider.Telegram.Hosted
         {
             using var scope = _serviceScopeFactory.CreateScope();
             
-            var navigatorClient = scope.ServiceProvider.GetRequiredService<DiscordShardedClient>();
-            
-            navigatorClient.ShardReady += ReadyAsync;
-            navigatorClient.Log += LogAsync;
+            var navigatorClient = scope.ServiceProvider.GetRequiredService<NavigatorDiscordClient>();
             
             await navigatorClient.LoginAsync(TokenType.Bot, _navigatorOptions.GetDiscordToken());
             await navigatorClient.StartAsync();
@@ -57,44 +54,8 @@ namespace Navigator.Provider.Telegram.Hosted
             }
             else
             {
-                _logger.LogError("Unhandled error starting navigator discord client");
+                _logger.LogCritical("Unhandled error starting navigator discord client");
             }
-        }
-        
-        private Task ReadyAsync(DiscordSocketClient shard)
-        {
-            _logger.LogInformation("Navigator Discord Shard Number {ShardId} is connected and ready", shard.ShardId);
-            return Task.CompletedTask;
-        }
-
-        private Task LogAsync(LogMessage log)
-        {
-            switch (log.Severity)
-            {
-                case LogSeverity.Critical:
-                    _logger.LogCritical(log.Exception, "Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                case LogSeverity.Error:
-                    _logger.LogError(log.Exception, "Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                case LogSeverity.Warning:
-                    _logger.LogWarning(log.Exception, "Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                case LogSeverity.Info:
-                    _logger.LogInformation("Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                case LogSeverity.Verbose:
-                    _logger.LogTrace("Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                case LogSeverity.Debug:
-                    _logger.LogDebug("Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-                default:
-                    _logger.LogInformation("Message: {Message} Source: {Source}", log.Message, log.Source);
-                    break;
-            }
-            
-            return Task.CompletedTask;
         }
     }
 }
