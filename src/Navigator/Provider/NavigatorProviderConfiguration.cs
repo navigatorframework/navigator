@@ -28,9 +28,11 @@ namespace Navigator.Provider
         public NavigatorConfiguration Provider(Action<NavigatorOptions>? optionsAction, Action<IServiceCollection>? servicesAction)
         {
             optionsAction?.Invoke(_navigatorConfiguration.Options);
-            
+
             servicesAction?.Invoke(_navigatorConfiguration.Services);
 
+            _navigatorConfiguration.RegisterOrReplaceOptions();
+            
             return _navigatorConfiguration;
         }
     }
