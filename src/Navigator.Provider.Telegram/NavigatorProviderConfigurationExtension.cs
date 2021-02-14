@@ -2,7 +2,7 @@ using System;
 
 namespace Navigator.Provider.Telegram
 {
-    public static class NavigatorProviderConfigurationExtension
+    public static class NavigatorProviderConfigurationExtensions
     {
         public static NavigatorConfiguration Telegram(this NavigatorProviderConfiguration providerConfiguration,
             Action<NavigatorTelegramProviderOptions> options)
