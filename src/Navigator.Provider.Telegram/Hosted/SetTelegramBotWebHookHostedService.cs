@@ -46,11 +46,11 @@ namespace Navigator.Provider.Telegram.Hosted
             
             using var scope = _serviceScopeFactory.CreateScope();
             
-            var botClient = scope.ServiceProvider.GetRequiredService<IBotClient>();
+            var navigatorClient = scope.ServiceProvider.GetRequiredService<IBotClient>();
             
-            await botClient.SetWebhookAsync(_webHookUrl, cancellationToken: stoppingToken);
+            await navigatorClient.SetWebhookAsync(_webHookUrl, cancellationToken: stoppingToken);
             
-            var me = await botClient.GetMeAsync(stoppingToken);
+            var me = await navigatorClient.GetMeAsync(stoppingToken);
 
             _logger.LogInformation($"Telegram Bot Client is receiving updates for bot: @{me.Username} at the url: {_webHookUrl}");
         }

@@ -16,9 +16,6 @@ namespace Navigator
 
             var navigatorBuilder = new NavigatorConfiguration(options, services);
 
-            services.AddSingleton<IBotClient, BotClient>();
-
-            services.AddHostedService<SetTelegramBotWebHookHostedService>();
             services.AddScoped<INotificationLauncher, NotificationLauncher>();
             services.AddScoped<IActionLauncher, ActionLauncher>();
             services.AddScoped<INavigatorContext, NavigatorContext>();

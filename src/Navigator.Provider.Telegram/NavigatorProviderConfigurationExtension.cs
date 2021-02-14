@@ -1,4 +1,6 @@
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Navigator.Provider.Telegram.Hosted;
 
 namespace Navigator.Provider.Telegram
 {
@@ -11,8 +13,15 @@ namespace Navigator.Provider.Telegram
             options.Invoke(telegramProviderOptions);
 
             return providerConfiguration.Provider(
-                optionsAction => optionsAction.Import(optionsAction.RetrieveAllOptions()), 
-                null);
+                optionsAction => optionsAction.Import(optionsAction.RetrieveAllOptions()),
+                services =>
+                {
+                    services.AddSingleton<NavigatorTelegramClient>();
+                    services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
+
+                    services.AddHostedService<SetTelegramBotWebHookHostedService>();
+
+                });
         }
     }
 }
