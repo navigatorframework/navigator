@@ -60,7 +60,7 @@ namespace Navigator.Provider.Discord
             return Task.CompletedTask;
         }
 
-        public Task<BotUser> GetBotUser(CancellationToken cancellationToken = default)
+        public Task<BotUser> GetProfile(CancellationToken cancellationToken = default)
         {
             return Task.FromResult(new BotUser
             {

@@ -14,7 +14,7 @@ namespace Navigator.Provider.Telegram
         {
         }
 
-        public async Task<BotUser> GetBotUser(CancellationToken cancellationToken = default)
+        public async Task<BotUser> GetProfile(CancellationToken cancellationToken = default)
         {
             var bot = await GetMeAsync(cancellationToken);
 
