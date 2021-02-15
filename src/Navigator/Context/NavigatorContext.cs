@@ -9,39 +9,27 @@ namespace Navigator.Context
     /// <summary>
     /// Navigator Context present in all actions.
     /// </summary>
-    public class NavigatorContext : INavigatorContext
+    public class NavigatorContext
     {
-        /// <summary>
-        /// Extensions.
-        /// </summary>
-        protected IDictionary<string, object> Extensions { get; set; } = null!;
-
-        /// <inheritdoc />
-        public INavigatorClient Client { get; }
-
-        /// <inheritdoc />
+        public readonly IDictionary<string, object> Extensions;
+        public readonly INavigatorClient Client;
         public Dictionary<string, string> Items { get; }
 
         /// <inheritdoc />
-        public BotUser BotProfile { get; protected set; } = null!;
-
-        /// <inheritdoc />
-        public Update Update { get; protected set; } = null!;
+        public BotUser BotProfile { get; private set; } = null!;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <param name="client"></param>
-        public NavigatorContext(INavigatorClient client)
+        public NavigatorContext(INavigatorClient )
         {
-            Client = client;
             Items = new Dictionary<string, string>();
         }
 
         /// <inheritdoc />
-        public async Task Init(Update update, Dictionary<string, object> extensions)
+        public async Task Init(INavigatorClient client, Dictionary<string, object> extensions)
         {
-            Update = update;
+            Client = client;
             BotProfile = await Client.GetBotUser();
             Extensions = new ReadOnlyDictionary<string, object>(extensions);
         }
