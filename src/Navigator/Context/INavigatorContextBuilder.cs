@@ -8,6 +8,6 @@ namespace Navigator.Context
         INavigatorContextBuilder ForProvider(IProvider provider);
         INavigatorContextBuilder From(IUser user);
 
-        Task<NavigatorContext> Retrieve();
+        Task<INavigatorContext> Build();
     }
 }
