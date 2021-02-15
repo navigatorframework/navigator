@@ -68,5 +68,10 @@ namespace Navigator.Providers.Discord
                 Username = CurrentUser.Username
             });
         }
+
+        public IProvider IsClientFor()
+        {
+            return Provider.For<DiscordProvider>();
+        }
     }
 }

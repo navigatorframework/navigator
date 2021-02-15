@@ -9,7 +9,7 @@ namespace Navigator.Providers.Telegram
 {
     public class NavigatorTelegramClient : RateLimitedTelegramBotClient, INavigatorClient
     {
-        public NavigatorTelegramClient(NavigatorOptions options) 
+        public NavigatorTelegramClient(INavigatorOptions options) 
             : base(options.GetTelegramToken(), (HttpClient) default!, options.GetSchedulerSettingsOrDefault())
         {
         }
@@ -23,6 +23,11 @@ namespace Navigator.Providers.Telegram
                 Id = bot.Id.ToString(),
                 Username = bot.Username
             };
+        }
+
+        public IProvider IsClientFor()
+        {
+            return Provider.For<TelegramProvider>();
         }
     }
 }
