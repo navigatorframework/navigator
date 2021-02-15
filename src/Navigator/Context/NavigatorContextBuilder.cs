@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +36,15 @@ namespace Navigator.Context
 
         public async Task<INavigatorContext> Build()
         {
-            var client = _navigatorClients.First(navigatorClient => navigatorClient.IsClientFor().GetType() == _options.Provider.GetType());
+            var client = _navigatorClients.GetClientFor(_options.Provider);
+
+            if (client is null)
+            {
+                _logger.LogError("No client found for provider: {@Provider}", _options.Provider);
+                //TODO: make NavigatorException
+                throw new Exception($"No client found for provider: {_options.Provider}");
+            }
+            
             var context = new NavigatorContext(client, await client.GetProfile());
 
             return context;
@@ -43,8 +52,8 @@ namespace Navigator.Context
 
         private class NavigatorContextBuilderOptions
         {
-            public IProvider Provider { get; set; }
-            public IUser From { get; set; }
+            public IProvider? Provider { get; set; }
+            public IUser? From { get; set; }
         }
     }
 }
