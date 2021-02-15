@@ -5,6 +5,9 @@ namespace Navigator.Context
 {
     public interface INavigatorContextBuilder
     {
-        Task Build(IProvider provider, IUser from, IConversation conversation);
+        INavigatorContextBuilder ForProvider(IProvider provider);
+        INavigatorContextBuilder From(IUser user);
+
+        Task<NavigatorContext> Retrieve();
     }
 }

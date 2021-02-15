@@ -16,35 +16,26 @@ namespace Navigator.Context
         /// 
         /// </summary>
         public readonly INavigatorClient Client;
-        public readonly IDictionary<string, object> Extensions;
-        public Dictionary<string, string> Items { get; }
-
-        public readonly BotUser BotProfile { get; }
 
         /// <summary>
-        /// Default constructor.
+        /// 
         /// </summary>
-        public NavigatorContext(INavigatorClient client)
+        public readonly BotUser BotProfile;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly Dictionary<string, string> Items;
+
+        /// <summary>
+        /// Builds a new Navigator Context.
+        /// </summary>
+        public NavigatorContext(INavigatorClient client, BotUser botProfile)
         {
             Client = client;
-            BotProfile = client.GetProfile();
+            BotProfile = botProfile;
+            
             Items = new Dictionary<string, string>();
-        }
-
-        /// <inheritdoc />
-        public TExtension? Get<TExtension>(string extensionKey, bool throwIfNotFound = false)
-        {
-            if (Extensions.TryGetValue(extensionKey, out var extension))
-            {
-                if (extension is TExtension castedExtension)
-                {
-                    return castedExtension;
-                }
-            }
-
-            return throwIfNotFound 
-                ? throw new KeyNotFoundException($"{typeof(TExtension).Name} was not found.") 
-                : default;
         }
     }
 }

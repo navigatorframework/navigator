@@ -13,6 +13,6 @@ namespace Navigator
         /// <returns></returns>
         Task<BotUser> GetProfile(CancellationToken cancellationToken = default);
 
-        IProvider Handles();
+        IProvider Provider();
     }
 }
