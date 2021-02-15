@@ -1,6 +1,6 @@
 using Navigator.Configuration;
 
-namespace Navigator.Provider.Discord
+namespace Navigator.Providers.Discord
 {
     public class NavigatorDiscordProviderOptions : NavigatorOptions
     {

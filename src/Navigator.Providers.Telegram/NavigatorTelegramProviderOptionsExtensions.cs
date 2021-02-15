@@ -2,7 +2,7 @@ using System;
 using MihaZupan.TelegramBotClients.RateLimitedClient;
 using Navigator.Configuration;
 
-namespace Navigator.Provider.Telegram
+namespace Navigator.Providers.Telegram
 {
     public static class NavigatorTelegramProviderOptionsExtensions
     {

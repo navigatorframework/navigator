@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
 using Navigator.Entities;
 
-namespace Navigator.Provider.Discord
+namespace Navigator.Providers.Discord
 {
     public class NavigatorDiscordClient : DiscordShardedClient, INavigatorClient
     {

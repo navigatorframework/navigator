@@ -2,9 +2,9 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
 using Navigator.Configuration.Provider;
-using Navigator.Provider.Telegram.Hosted;
+using Navigator.Providers.Telegram.Hosted;
 
-namespace Navigator.Provider.Telegram
+namespace Navigator.Providers.Telegram
 {
     public static class NavigatorProviderConfigurationExtensions
     {

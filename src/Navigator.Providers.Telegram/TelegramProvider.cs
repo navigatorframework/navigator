@@ -1,4 +1,4 @@
-namespace Navigator.Provider.Telegram
+namespace Navigator.Providers.Telegram
 {
     public class TelegramProvider : IProvider
     {

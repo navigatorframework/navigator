@@ -9,7 +9,7 @@ using Navigator.Configuration.Provider;
 using Newtonsoft.Json;
 using Telegram.Bot.Types;
 
-namespace Navigator.Provider.Telegram
+namespace Navigator.Providers.Telegram
 {
     public static class NavigatorRouteProviderConfigurationExtensions
     {

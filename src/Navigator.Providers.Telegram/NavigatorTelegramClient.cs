@@ -5,7 +5,7 @@ using MihaZupan.TelegramBotClients;
 using Navigator.Configuration;
 using Navigator.Entities;
 
-namespace Navigator.Provider.Telegram
+namespace Navigator.Providers.Telegram
 {
     public class NavigatorTelegramClient : RateLimitedTelegramBotClient, INavigatorClient
     {

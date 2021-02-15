@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
 using Navigator.Configuration;
 
-namespace Navigator.Provider.Telegram.Hosted
+namespace Navigator.Providers.Telegram.Hosted
 {
     /// <summary>
     /// WebHook service for navigator's telegram provider.

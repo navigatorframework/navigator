@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
 using Navigator.Configuration;
-using Navigator.Provider.Discord;
+using Navigator.Providers.Discord;
 
 namespace Navigator.Provider.Telegram.Hosted
 {

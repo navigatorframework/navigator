@@ -4,7 +4,7 @@ using Navigator.Configuration;
 using Navigator.Configuration.Provider;
 using Navigator.Provider.Telegram.Hosted;
 
-namespace Navigator.Provider.Discord
+namespace Navigator.Providers.Discord
 {
     public static class NavigatorProviderConfigurationExtensions
     {

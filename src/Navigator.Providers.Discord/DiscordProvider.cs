@@ -1,4 +1,4 @@
-namespace Navigator.Provider.Discord
+namespace Navigator.Providers.Discord
 {
     public class DiscordProvider : IProvider
     {

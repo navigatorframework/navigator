@@ -36,9 +36,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Shipya
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{DAA22477-BB29-475C-AD2C-905F81B4AD8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Provider.Telegram", "Navigator.Provider.Telegram\Navigator.Provider.Telegram.csproj", "{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Providers.Telegram", "Navigator.Providers.Telegram\Navigator.Providers.Telegram.csproj", "{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Provider.Discord", "Navigator.Provider.Discord\Navigator.Provider.Discord.csproj", "{54039A52-DB2D-4428-A8D0-F998CA50B079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Providers.Discord", "Navigator.Providers.Discord\Navigator.Providers.Discord.csproj", "{54039A52-DB2D-4428-A8D0-F998CA50B079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
