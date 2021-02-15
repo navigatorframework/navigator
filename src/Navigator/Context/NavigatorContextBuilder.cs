@@ -33,12 +33,12 @@ namespace Navigator.Context
             return this;
         }
 
-        public async Task<NavigatorContext> Retrieve()
+        public async Task<INavigatorContext> Build()
         {
             var client = _navigatorClients.First(navigatorClient => navigatorClient.Provider().GetType() == _options.Provider.GetType());
             var context = new NavigatorContext(client, await client.GetProfile());
 
-            throw new System.NotImplementedException();
+            return context;
         }
 
         private class NavigatorContextBuilderOptions
