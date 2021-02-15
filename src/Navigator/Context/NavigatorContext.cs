@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Navigator.Entities;
 using Telegram.Bot.Types;
 
@@ -21,7 +22,7 @@ namespace Navigator.Context
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public NavigatorContext(INavigatorClient )
+        public NavigatorContext(IHttpContextAccessor)
         {
             Items = new Dictionary<string, string>();
         }
