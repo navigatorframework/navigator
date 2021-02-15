@@ -12,27 +12,23 @@ namespace Navigator.Context
     /// </summary>
     public class NavigatorContext
     {
-        public readonly IDictionary<string, object> Extensions;
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly INavigatorClient Client;
+        public readonly IDictionary<string, object> Extensions;
         public Dictionary<string, string> Items { get; }
 
-        /// <inheritdoc />
-        public BotUser BotProfile { get; private set; } = null!;
+        public readonly BotUser BotProfile { get; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public NavigatorContext(IHttpContextAccessor)
-        {
-            Items = new Dictionary<string, string>();
-        }
-
-        /// <inheritdoc />
-        public async Task Init(INavigatorClient client, Dictionary<string, object> extensions)
+        public NavigatorContext(INavigatorClient client)
         {
             Client = client;
-            BotProfile = await Client.GetBotUser();
-            Extensions = new ReadOnlyDictionary<string, object>(extensions);
+            BotProfile = client.GetProfile();
+            Items = new Dictionary<string, string>();
         }
 
         /// <inheritdoc />

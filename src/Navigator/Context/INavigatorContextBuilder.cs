@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
+using Navigator.Entities;
+
 namespace Navigator.Context
 {
-    public class INavigatorContextBuilder
+    public interface INavigatorContextBuilder
     {
-        
+        Task Build(IProvider provider, IUser from, IConversation conversation);
     }
 }
