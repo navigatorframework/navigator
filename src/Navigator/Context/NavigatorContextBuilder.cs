@@ -35,7 +35,7 @@ namespace Navigator.Context
 
         public async Task<INavigatorContext> Build()
         {
-            var client = _navigatorClients.First(navigatorClient => navigatorClient.Provider().GetType() == _options.Provider.GetType());
+            var client = _navigatorClients.First(navigatorClient => navigatorClient.IsClientFor().GetType() == _options.Provider.GetType());
             var context = new NavigatorContext(client, await client.GetProfile());
 
             return context;
