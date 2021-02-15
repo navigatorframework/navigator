@@ -1,31 +1,27 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Navigator.Entities;
-using Telegram.Bot.Types;
 
 namespace Navigator.Context
 {
     /// <summary>
     /// Navigator Context present in all actions.
     /// </summary>
-    public class NavigatorContext
+    public class NavigatorContext : INavigatorContext
     {
         /// <summary>
         /// 
         /// </summary>
-        public readonly INavigatorClient Client;
+        public INavigatorClient Client { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public readonly BotUser BotProfile;
+        public BotUser BotProfile { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public readonly Dictionary<string, string> Items;
+        public Dictionary<string, string> Items { get; }
 
         /// <summary>
         /// Builds a new Navigator Context.
