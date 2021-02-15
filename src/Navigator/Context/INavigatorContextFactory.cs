@@ -1,7 +1,12 @@
+using System;
+using System.Threading.Tasks;
+
 namespace Navigator.Context
 {
     public interface INavigatorContextFactory
     {
-        INavigatorContextBuilder Supply();
+        Task Supply(Action<INavigatorContextBuilder> action);
+
+        INavigatorContext Retrieve();
     }
 }
