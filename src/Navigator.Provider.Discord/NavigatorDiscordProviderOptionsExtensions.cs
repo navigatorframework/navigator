@@ -1,10 +1,8 @@
-using System;
-using MihaZupan.TelegramBotClients.RateLimitedClient;
 using Navigator.Configuration;
 
 namespace Navigator.Provider.Discord
 {
-    public static class NavigatorTelegramProviderOptionsExtensions
+    public static class NavigatorDiscordProviderOptionsExtensions
     {
         #region DiscordToken
 
