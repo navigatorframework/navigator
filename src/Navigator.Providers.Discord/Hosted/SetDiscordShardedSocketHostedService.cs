@@ -2,15 +2,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Discord;
-using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstractions;
 using Navigator.Configuration;
-using Navigator.Providers.Discord;
 
-namespace Navigator.Provider.Telegram.Hosted
+namespace Navigator.Providers.Discord.Hosted
 {
     /// <summary>
     /// WebHook service for navigator's telegram provider.

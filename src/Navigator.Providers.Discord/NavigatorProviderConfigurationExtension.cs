@@ -2,7 +2,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
 using Navigator.Configuration.Provider;
-using Navigator.Provider.Telegram.Hosted;
+using Navigator.Providers.Discord.Hosted;
 
 namespace Navigator.Providers.Discord
 {
