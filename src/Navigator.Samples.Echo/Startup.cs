@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Navigator.Configuration;
 using Navigator.Extensions.Shipyard;
 using Navigator.Extensions.Store;
-using Navigator.Provider.Telegram;
+using Navigator.Providers.Telegram;
 using Navigator.Samples.Echo.Entity;
 using Navigator.Samples.Echo.Persistence;
 
