@@ -38,7 +38,11 @@ namespace Navigator.Context
             }
             
             var context = new NavigatorContext(client, await client.GetProfile());
-            
+
+            foreach (var contextExtension in _navigatorContextExtensions)
+            {
+                context = await contextExtension.Extend(context, _options);
+            }
             
 
             return context;

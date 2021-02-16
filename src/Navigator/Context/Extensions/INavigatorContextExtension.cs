@@ -4,6 +4,6 @@ namespace Navigator.Context.Extensions
 {
     public interface INavigatorContextExtension
     {
-        Task Extend(INavigatorContext navigatorContext, NavigatorContextBuilderOptions builderOptions);
+        Task<INavigatorContext> Extend(INavigatorContext navigatorContext, INavigatorContextBuilderOptions builderOptions);
     }
 }
