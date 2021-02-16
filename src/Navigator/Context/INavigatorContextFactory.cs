@@ -5,7 +5,7 @@ namespace Navigator.Context
 {
     public interface INavigatorContextFactory
     {
-        Task Supply(Action<NavigatorContextBuilderOptions> action);
+        Task Supply(Action<INavigatorContextBuilderOptions> action);
 
         INavigatorContext Retrieve();
     }
