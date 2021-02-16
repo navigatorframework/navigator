@@ -16,16 +16,13 @@ namespace Navigator.Context
             _navigatorContextBuilder = navigatorContextBuilder;
         }
 
-        public async Task Supply(Action<INavigatorContextBuilder> action)
+        public async Task Supply(Action<INavigatorContextBuilderOptions> action)
         {
-            
-            action.Invoke(_navigatorContextBuilder);
-
             try
             {
                 _logger.LogTrace("Building a new NavigatorContext");
                 
-                NavigatorContext = await _navigatorContextBuilder.Build();
+                NavigatorContext = await _navigatorContextBuilder.Build(action);
             }
             catch (Exception e)
             {

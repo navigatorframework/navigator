@@ -11,8 +11,9 @@ namespace Navigator.Context
     {
         private readonly ILogger<NavigatorContextBuilder> _logger;
         private readonly IEnumerable<INavigatorClient> _navigatorClients;
-        private readonly NavigatorContextBuilderOptions _options;
+        private readonly INavigatorContextBuilderOptions _options;
 
+        
         public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorClient> navigatorClients)
         {
             _logger = logger;
@@ -20,40 +21,24 @@ namespace Navigator.Context
             _options = new NavigatorContextBuilderOptions();
         }
 
-        public INavigatorContextBuilder ForProvider(IProvider provider)
+      
+
+        public async Task<INavigatorContext> Build(Action<INavigatorContextBuilderOptions> optionsAction)
         {
-            _options.Provider = provider;
-
-            return this;
-        }
-
-        public INavigatorContextBuilder From(IUser user)
-        {
-            _options.From = user;
-
-            return this;
-        }
-
-        public async Task<INavigatorContext> Build()
-        {
-            var client = _navigatorClients.GetClientFor(_options.Provider);
+            optionsAction.Invoke(_options);
+            
+            var client = _navigatorClients.GetClientFor(_options.GetProvider());
 
             if (client is null)
             {
-                _logger.LogError("No client found for provider: {@Provider}", _options.Provider);
+                _logger.LogError("No client found for provider: {@Provider}", _options.GetProvider());
                 //TODO: make NavigatorException
-                throw new Exception($"No client found for provider: {_options.Provider}");
+                throw new Exception($"No client found for provider: {_options.GetProvider()?.Name}");
             }
             
             var context = new NavigatorContext(client, await client.GetProfile());
 
             return context;
-        }
-
-        private class NavigatorContextBuilderOptions
-        {
-            public IProvider? Provider { get; set; }
-            public IUser? From { get; set; }
         }
     }
 }
