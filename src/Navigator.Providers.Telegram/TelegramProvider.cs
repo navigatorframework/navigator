@@ -11,7 +11,7 @@ namespace Navigator.Providers.Telegram
         {
             _client = client;
         }
-
+        
         public INavigatorClient GetClient()
         {
             return _client;
