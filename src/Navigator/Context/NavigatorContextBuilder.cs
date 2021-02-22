@@ -11,14 +11,14 @@ namespace Navigator.Context
     public class NavigatorContextBuilder : INavigatorContextBuilder
     {
         private readonly ILogger<NavigatorContextBuilder> _logger;
-        private readonly IEnumerable<INavigatorClient> _navigatorClients;
+        private readonly IEnumerable<IProvider> _navigatorProviders;
         private readonly IEnumerable<INavigatorContextExtension> _navigatorContextExtensions;
         private readonly INavigatorContextBuilderOptions _options;
 
-        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorClient> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions)
+        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<IProvider> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions)
         {
             _logger = logger;
-            _navigatorClients = navigatorClients;
+            _navigatorProviders = navigatorClients;
             _navigatorContextExtensions = navigatorContextExtensions;
             
             _options = new NavigatorContextBuilderOptions();
@@ -28,7 +28,7 @@ namespace Navigator.Context
         {
             optionsAction.Invoke(_options);
             
-            var client = _navigatorClients.GetClientFor(_options.GetProvider());
+            var client = _navigatorProviders.GetClientFor(_options.GetProvider());
 
             if (client is null)
             {

@@ -21,6 +21,7 @@ namespace Navigator.Providers.Telegram
             await _navigatorContextFactory.Supply(builder =>
             {
                 builder.SetProvider<TelegramProvider>();
+                builder.SetActionType
                 builder.TryRegisterOption("navigator.provider.telegram.original_update", update);
             });
         }
