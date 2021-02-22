@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Navigator.Actions;
+using Navigator.Configuration;
 using Navigator.Context;
 
 namespace Navigator
@@ -10,6 +11,14 @@ namespace Navigator
     {
         protected readonly INavigatorContext NavigatorContext;
         protected readonly IEnumerable<IAction> Actions;
+        protected readonly NavigatorOptions NavigatorOptions;
+
+        public ActionLauncher(INavigatorContext navigatorContext, IEnumerable<IAction> actions, NavigatorOptions navigatorOptions)
+        {
+            NavigatorContext = navigatorContext;
+            Actions = actions;
+            NavigatorOptions = navigatorOptions;
+        }
 
         public Task Launch()
         {
@@ -19,17 +28,17 @@ namespace Navigator
         protected IEnumerable<IAction> GetActions()
         {
             var actions = new List<IAction>();
-            var actionType = NavigatorContext.;
+            var actionType = NavigatorContext.ActionType;
 
             if (string.IsNullOrWhiteSpace(actionType))
             {
                 return actions;
             }
 
-            if (MultipleActionsUsage)
+            if (NavigatorOptions.MultipleActionsUsageIsEnabled())
             {
                 actions = Actions
-                    .Where(a => a.Type == actionType)
+                    .Where(a => a. == actionType)
                     .Where(a => a.Init(Ctx).CanHandle(Ctx))
                     .OrderBy(a => a.Order)
                     .ToList();
