@@ -1,14 +1,37 @@
+using System;
 using System.Threading.Tasks;
 using Navigator.Context;
 
 namespace Navigator.Actions
 {
+    /// <summary>
+    /// Base action to use for any action.
+    /// </summary>
     public abstract class BaseAction : IAction
     {
+        /// <inheritdoc />
         public abstract string Type { get; protected set; }
-        
-        public abstract ushort Priority { get; protected set; }
 
-        public abstract Task Init(INavigatorContext navigatorContext);
+        /// <inheritdoc />
+        public abstract ushort Priority { get; protected set; }
+        
+        /// <summary>
+        /// Timestamp of the request on creation.
+        /// </summary>
+        public DateTime Timestamp { get; }
+
+        /// <summary>
+        /// Default constructor for <see cref="BaseAction"/>
+        /// </summary>
+        protected BaseAction()
+        {
+            Timestamp = DateTime.UtcNow;
+        }
+
+        /// <inheritdoc />
+        public abstract IAction Init(INavigatorContext navigatorContext);
+
+        /// <inheritdoc />
+        public abstract bool CanHandle(INavigatorContext ctx);
     }
 }
