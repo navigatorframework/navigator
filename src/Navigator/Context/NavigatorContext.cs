@@ -24,13 +24,19 @@ namespace Navigator.Context
         public Dictionary<string, string> Items { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string ActionType { get; }
+        
+        /// <summary>
         /// Builds a new Navigator Context.
         /// </summary>
-        public NavigatorContext(INavigatorClient client, BotUser botProfile)
+        public NavigatorContext(INavigatorClient client, BotUser botProfile, string actionType)
         {
             Client = client;
             BotProfile = botProfile;
-            
+            ActionType = actionType;
+
             Items = new Dictionary<string, string>();
         }
     }

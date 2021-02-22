@@ -27,8 +27,8 @@ namespace Navigator.Context
         public async Task<INavigatorContext> Build(Action<INavigatorContextBuilderOptions> optionsAction)
         {
             optionsAction.Invoke(_options);
-            
-            var client = _navigatorProviders.GetClientFor(_options.GetProvider());
+
+            var client = _navigatorProviders.FirstOrDefault(provider => provider.GetType() == _options.GetProvider())?.GetClient();
 
             if (client is null)
             {
@@ -36,8 +36,10 @@ namespace Navigator.Context
                 //TODO: make NavigatorException
                 throw new Exception($"No client found for provider: {_options.GetProvider()?.Name}");
             }
+
+            var acitonType = _options.GetAcitonType() ?? throw new InvalidOperationException();
             
-            INavigatorContext context = new NavigatorContext(client, await client.GetProfile());
+            INavigatorContext context = new NavigatorContext(client, await client.GetProfile(), acitonType);
 
             foreach (var contextExtension in _navigatorContextExtensions)
             {

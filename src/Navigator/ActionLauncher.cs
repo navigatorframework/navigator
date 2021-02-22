@@ -16,7 +16,7 @@ namespace Navigator
             
         }
         
-        protected IEnumerable<IAction> GetActions(object origina)
+        protected IEnumerable<IAction> GetActions()
         {
             var actions = new List<IAction>();
             var actionType = NavigatorContext.;
