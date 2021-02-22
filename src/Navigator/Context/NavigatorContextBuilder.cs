@@ -37,13 +37,12 @@ namespace Navigator.Context
                 throw new Exception($"No client found for provider: {_options.GetProvider()?.Name}");
             }
             
-            var context = new NavigatorContext(client, await client.GetProfile());
+            INavigatorContext context = new NavigatorContext(client, await client.GetProfile());
 
             foreach (var contextExtension in _navigatorContextExtensions)
             {
                 context = await contextExtension.Extend(context, _options);
             }
-            
 
             return context;
         }

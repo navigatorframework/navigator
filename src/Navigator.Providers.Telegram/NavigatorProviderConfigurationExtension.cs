@@ -21,6 +21,8 @@ namespace Navigator.Providers.Telegram
                     services.AddSingleton<NavigatorTelegramClient>();
                     services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
 
+                    services.AddScoped<TelegramMiddleware>();
+                    
                     services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
                 });

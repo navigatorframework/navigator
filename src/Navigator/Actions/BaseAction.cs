@@ -1,17 +1,15 @@
+using System.Threading.Tasks;
 using MediatR;
 using Navigator.Context;
 
 namespace Navigator.Actions
 {
-    public abstract class Action : IRequest
+    public abstract class BaseAction : IRequest
     {
-        public string Type { get; protected set; }
-        f
-        protected readonly INavigatorContext NavigatorContext;
-        
-        public Action(INavigatorContextAccessor navigatorContextAccessor)
+        public static string Type { get; protected set; }
+        protected 
+        public Task Init(INavigatorContext navigatorContext)
         {
-            NavigatorContext = navigatorContextAccessor.NavigatorContext;
         }
     }
 }

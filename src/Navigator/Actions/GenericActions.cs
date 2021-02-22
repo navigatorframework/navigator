@@ -1,7 +1,7 @@
 namespace Navigator.Actions
 {
-    public class GenericActions
+    public static class GenericActions
     {
-        
+        public static string Message => "navigator.actions.default.message";
     }
 }

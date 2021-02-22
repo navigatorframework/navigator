@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+            <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageVersion>0.9.102-beta</PackageVersion>
         <PackageId>Navigator</PackageId>
         <Title>Navigator Framework</Title>
@@ -25,20 +25,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
         <PackageReference Include="Scrutor" Version="3.3.0" />
     </ItemGroup>
 
-
-    <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator.Abstractions" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Abstractions.Extensions" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Extensions.Actions" Version="0.9.100-beta" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Debug'">
-        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
-    </ItemGroup>
 </Project>
