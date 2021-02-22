@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Abstractions;
 using Navigator.Configuration;
 using Navigator.Configuration.Provider;
 using Newtonsoft.Json;
@@ -36,16 +35,14 @@ namespace Navigator.Providers.Telegram
 
             var telegramUpdate = await ParseTelegramUpdate(context.Request.Body);
 
-            if (telegramUpdate is null)
+            if (telegramUpdate is not null)
             {
-                return;
+                using var scope = context.RequestServices.CreateScope();
+
+                var navigatorMiddleware = context.RequestServices.GetRequiredService<TelegramMiddleware>();
+
+                await navigatorMiddleware.Process(telegramUpdate);
             }
-    
-            using var scope = context.RequestServices.CreateScope();
-
-            var navigatorMiddleware = context.RequestServices.GetRequiredService<INavigatorMiddleware>();
-
-            await navigatorMiddleware.Handle(context.Request);
         }
         
         private static async Task<Update?> ParseTelegramUpdate(Stream stream)
