@@ -1,6 +1,6 @@
 namespace Navigator.Actions
 {
-    public static class Action
+    public static class ActionHelper
     {
         public static class Priority
         {
