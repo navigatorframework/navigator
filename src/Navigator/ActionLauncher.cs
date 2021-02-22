@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,54 +10,63 @@ namespace Navigator
 {
     public class ActionLauncher : IActionLauncher
     {
-        protected readonly INavigatorContext NavigatorContext;
+        /// <summary>
+        /// Navigator context accessor.
+        /// </summary>
+        protected readonly INavigatorContextAccessor NavigatorContextAccessor;
+        
+        /// <summary>
+        /// Collection of available actions.
+        /// </summary>
         protected readonly IEnumerable<IAction> Actions;
+        
+        /// <summary>
+        /// Navigator otpions.
+        /// </summary>
         protected readonly NavigatorOptions NavigatorOptions;
 
-        public ActionLauncher(INavigatorContext navigatorContext, IEnumerable<IAction> actions, NavigatorOptions navigatorOptions)
+        /// <summary>
+        /// Builds a new <see cref="ActionLauncher"/>.
+        /// </summary>
+        /// <param name="actions"></param>
+        /// <param name="navigatorOptions"></param>
+        /// <param name="navigatorContextAccessor"></param>
+        public ActionLauncher(IEnumerable<IAction> actions, NavigatorOptions navigatorOptions,
+            INavigatorContextAccessor navigatorContextAccessor)
         {
-            NavigatorContext = navigatorContext;
             Actions = actions;
             NavigatorOptions = navigatorOptions;
+            NavigatorContextAccessor = navigatorContextAccessor;
         }
 
         public Task Launch()
         {
-            
+            throw new NotImplementedException();
         }
-        
+
         protected IEnumerable<IAction> GetActions()
         {
-            var actions = new List<IAction>();
-            var actionType = NavigatorContext.ActionType;
-
-            if (string.IsNullOrWhiteSpace(actionType))
+            if (string.IsNullOrWhiteSpace(NavigatorContextAccessor.NavigatorContext.ActionType))
             {
-                return actions;
+                return Array.Empty<IAction>();
             }
 
             if (NavigatorOptions.MultipleActionsUsageIsEnabled())
             {
-                actions = Actions
-                    .Where(a => a. == actionType)
-                    .Where(a => a.Init(Ctx).CanHandle(Ctx))
-                    .OrderBy(a => a.Order)
-                    .ToList();
-            }
-            else
-            {
-                var action = Actions
-                    .Where(a => a.Type == actionType)
-                    .OrderBy(a => a.Order)
-                    .FirstOrDefault(a => a.Init(Ctx).CanHandle(Ctx));
-
-                if (action != null)
-                {
-                    actions.Add(action);
-                }
+                return Actions
+                    .Where(a => a.Type == NavigatorContextAccessor.NavigatorContext.ActionType)
+                    .Where(a => a.Init(NavigatorContextAccessor.NavigatorContext)
+                        .CanHandle(NavigatorContextAccessor.NavigatorContext))
+                    .OrderBy(a => a.Priority).AsEnumerable();
             }
 
-            return actions;
+            var action = Actions
+                .Where(a => a.Type == NavigatorContextAccessor.NavigatorContext.ActionType)
+                .OrderBy(a => a.Priority)
+                .FirstOrDefault(a => a.Init(NavigatorContextAccessor.NavigatorContext)
+                    .CanHandle(NavigatorContextAccessor.NavigatorContext));
+
+            return action is not null ? new[] {action} : Array.Empty<IAction>();
         }
     }
 }
