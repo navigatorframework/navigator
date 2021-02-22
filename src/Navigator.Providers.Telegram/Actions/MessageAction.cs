@@ -4,14 +4,9 @@ using Navigator.Context;
 
 namespace Navigator.Providers.Telegram.Actions
 {
-    public class MessageAction : BaseAction
+    public abstract class MessageAction : BaseAction
     {
-        public override string Type { get; protected set; } = Action.Type.For<TelegramProvider>("message");
-        public override ushort Priority { get; protected set; } = Action.Priority.Default;
-        
-        public override Task Init(INavigatorContext navigatorContext)
-        {
-            throw new System.NotImplementedException();
-        }
+        public override string Type { get; protected set; } = ActionHelper.Type.For<TelegramProvider>(nameof(MessageAction));
+        public override ushort Priority { get; protected set; } = ActionHelper.Priority.Default;
     }
 }
