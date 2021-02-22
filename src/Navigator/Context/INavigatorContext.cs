@@ -19,5 +19,10 @@ namespace Navigator.Context
         /// 
         /// </summary>
         Dictionary<string, string> Items { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ActionType { get; }
     }
 }
