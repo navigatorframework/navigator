@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Navigator
 {
     /// <summary>
@@ -9,6 +11,8 @@ namespace Navigator
         /// Gets the specific client for this provider. 
         /// </summary>
         /// <returns>An implementation of <see cref="INavigatorClient"/></returns>
-        INavigatorClient GetClient(); 
+        INavigatorClient GetClient();
+
+        Task HandleReply();
     }
 }

@@ -3,7 +3,10 @@ using Navigator.Context;
 
 namespace Navigator.Actions.Model
 {
-    public interface IAction : IRequest
+    /// <summary>
+    /// Base contract for an action.
+    /// </summary>
+    public interface IAction : IRequest<ActionResult>
     {
         /// <summary>
         /// Type of the action.
