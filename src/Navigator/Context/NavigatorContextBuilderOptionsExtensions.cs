@@ -37,5 +37,22 @@ namespace Navigator.Context
         }
         
         #endregion
+        
+        #region ActionType
+
+        private const string OriginalUpdateKey = "_navigator.context.options.original_update";
+
+        public static void SetOriginalUpdate(this INavigatorContextBuilderOptions contextBuilderOptions, object originalUpdate)
+        {
+            contextBuilderOptions.TryRegisterOption(OriginalUpdateKey, originalUpdate);
+
+        }
+
+        public static object? GetOriginalUpdateOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
+        {
+            return contextBuilderOptions.RetrieveOption<object>(OriginalUpdateKey);
+        }
+        
+        #endregion
     }
 }
