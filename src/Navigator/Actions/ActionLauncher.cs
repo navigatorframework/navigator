@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using Navigator.Actions;
+using Navigator.Actions.Model;
 using Navigator.Configuration;
 using Navigator.Context;
 
-namespace Navigator
+namespace Navigator.Actions
 {
     internal class ActionLauncher : IActionLauncher
     {

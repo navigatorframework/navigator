@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
+using Navigator.Actions.Model;
 using Navigator.Configuration;
 using Navigator.Context;
 using Scrutor;

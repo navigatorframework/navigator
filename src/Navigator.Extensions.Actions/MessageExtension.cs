@@ -14,7 +14,7 @@ namespace Navigator.Extensions.Actions
 
             if (!command.Contains('@')) return command;
 
-            if (!command.Contains(botName)) return default;
+            if (!command.Contains(botName)) return command;
 
             command = command.Substring(0, command.IndexOf('@'));
 

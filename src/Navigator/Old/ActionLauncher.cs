@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
+using Navigator.Actions;
 using Navigator.Configuration;
 using Navigator.Context;
 using Telegram.Bot.Types;

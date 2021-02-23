@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Navigator
+namespace Navigator.Actions
 {
     public interface IActionLauncher
     {

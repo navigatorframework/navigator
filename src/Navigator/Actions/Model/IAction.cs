@@ -1,8 +1,7 @@
-using System.Threading.Tasks;
 using MediatR;
 using Navigator.Context;
 
-namespace Navigator.Actions
+namespace Navigator.Actions.Model
 {
     public interface IAction : IRequest
     {

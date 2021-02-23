@@ -11,7 +11,7 @@ namespace Navigator.Extensions.Actions
         public int? ReplyToMessageId { get; protected set; }
         public string Command { get; set; } = string.Empty;
         
-        public override IAction Init(INavigatorContext ctx)
+        public override IAction Init(Update ctx)
         {
             MessageTimestamp = ctx.Update.Message.Date;
             MessageId = ctx.Update.Message.MessageId;

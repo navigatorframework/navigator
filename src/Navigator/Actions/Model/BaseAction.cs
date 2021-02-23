@@ -1,8 +1,7 @@
 using System;
-using System.Threading.Tasks;
 using Navigator.Context;
 
-namespace Navigator.Actions
+namespace Navigator.Actions.Model
 {
     /// <summary>
     /// Base action to use for any action.
