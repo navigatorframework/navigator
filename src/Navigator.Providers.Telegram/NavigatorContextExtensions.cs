@@ -1,9 +1,4 @@
-using System;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.Payments;
-
-namespace Navigator.Providers.Telegram.Extensions
+namespace Navigator.Providers.Telegram
 {
     /// <summary>
     /// Useful extensions for Navigator Context.
