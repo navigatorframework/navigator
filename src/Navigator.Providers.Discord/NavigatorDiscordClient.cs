@@ -69,9 +69,9 @@ namespace Navigator.Providers.Discord
             });
         }
 
-        public IProvider IsClientFor()
+        public INavigatorProvider IsClientFor()
         {
-            return Provider.For<DiscordProvider>();
+            return Provider.For<DiscordNavigatorProvider>();
         }
     }
 }

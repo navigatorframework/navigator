@@ -11,11 +11,11 @@ namespace Navigator.Context
     public class NavigatorContextBuilder : INavigatorContextBuilder
     {
         private readonly ILogger<NavigatorContextBuilder> _logger;
-        private readonly IEnumerable<IProvider> _navigatorProviders;
+        private readonly IEnumerable<INavigatorProvider> _navigatorProviders;
         private readonly IEnumerable<INavigatorContextExtension> _navigatorContextExtensions;
         private readonly INavigatorContextBuilderOptions _options;
 
-        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<IProvider> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions)
+        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorProvider> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions)
         {
             _logger = logger;
             _navigatorProviders = navigatorClients;

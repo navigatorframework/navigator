@@ -8,7 +8,7 @@ namespace Navigator.Context
 
         private const string ProviderKey = "_navigator.context.options.provider";
 
-        public static void SetProvider<TProvider>(this INavigatorContextBuilderOptions contextBuilderOptions) where TProvider : IProvider
+        public static void SetProvider<TProvider>(this INavigatorContextBuilderOptions contextBuilderOptions) where TProvider : INavigatorProvider
         {
             contextBuilderOptions.TryRegisterOption(ProviderKey, typeof(TProvider));
 

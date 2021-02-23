@@ -13,7 +13,7 @@ namespace Navigator.Providers.Telegram.Actions
             Arguments = string.Empty;
         }
 
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramProvider>(nameof(CommandAction));
+        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CommandAction));
         public override ushort Priority { get; protected set; } = ActionsHelper.Priority.Default;
         
         public override IAction Init(INavigatorContext navigatorContext)

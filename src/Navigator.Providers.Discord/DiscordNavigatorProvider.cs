@@ -1,6 +1,6 @@
 namespace Navigator.Providers.Discord
 {
-    public class DiscordProvider : IProvider
+    public class DiscordNavigatorProvider : INavigatorProvider
     {
         public INavigatorClient GetClient()
         {

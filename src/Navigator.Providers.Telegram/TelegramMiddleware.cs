@@ -33,7 +33,7 @@ namespace Navigator.Providers.Telegram
             
             await _navigatorContextFactory.Supply(builder =>
             {
-                builder.SetProvider<TelegramProvider>();
+                builder.SetProvider<TelegramNavigatorProvider>();
                 builder.SetActionType(actionType);
                 builder.SetOriginalUpdate(update);
             });
@@ -45,7 +45,7 @@ namespace Navigator.Providers.Telegram
         {
             return update.Type switch
             {
-                UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => ActionsHelper.Type.For<TelegramProvider>(nameof(CommandAction)),
+                UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CommandAction)),
                 UpdateType.Message => update.Message.Type switch
                 {
                     // MessageType.ChatMembersAdded => ActionType.ChatMembersAdded,
@@ -59,7 +59,7 @@ namespace Navigator.Providers.Telegram
                     // MessageType.ChannelCreated => ActionType.ChannelCreated,
                     // MessageType.MigratedToSupergroup => ActionType.MigratedToSupergroup,
                     // MessageType.MigratedFromGroup => ActionType.MigratedFromGroup,
-                    _ => ActionsHelper.Type.For<TelegramProvider>(nameof(MessageAction))
+                    _ => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction))
                 },
                 // UpdateType.InlineQuery => ActionType.InlineQuery,
                 // UpdateType.ChosenInlineResult => ActionType.InlineResultChosen,
