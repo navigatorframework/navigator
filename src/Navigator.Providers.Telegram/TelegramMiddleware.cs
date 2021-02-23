@@ -35,7 +35,7 @@ namespace Navigator.Providers.Telegram
             {
                 builder.SetProvider<TelegramProvider>();
                 builder.SetActionType(actionType);
-                builder.TryRegisterOption("navigator.provider.telegram.original_update", update);
+                builder.SetOriginalUpdate(update);
             });
 
             await _actionLauncher.Launch();
