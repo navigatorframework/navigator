@@ -24,10 +24,5 @@ namespace Navigator.Providers.Telegram
                 Username = bot.Username
             };
         }
-
-        public IProvider IsClientFor()
-        {
-            return Provider.For<TelegramProvider>();
-        }
     }
 }

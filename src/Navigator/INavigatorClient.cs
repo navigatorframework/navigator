@@ -12,7 +12,5 @@ namespace Navigator
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<BotUser> GetProfile(CancellationToken cancellationToken = default);
-
-        IProvider IsClientFor();
     }
 }
