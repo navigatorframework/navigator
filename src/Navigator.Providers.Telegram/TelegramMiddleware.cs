@@ -9,7 +9,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Providers.Telegram
 {
-    public class TelegramMiddleware
+    internal class TelegramMiddleware
     {
         private readonly ILogger<TelegramMiddleware> _logger;
         private readonly INavigatorContextFactory _navigatorContextFactory;

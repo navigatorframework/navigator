@@ -28,18 +28,18 @@ namespace Navigator.Context
         {
             optionsAction.Invoke(_options);
 
-            var client = _navigatorProviders.FirstOrDefault(provider => provider.GetType() == _options.GetProvider())?.GetClient();
+            var provider = _navigatorProviders.FirstOrDefault(p => p.GetType() == _options.GetProvider());
 
-            if (client is null)
+            if (provider is null)
             {
-                _logger.LogError("No client found for provider: {@Provider}", _options.GetProvider());
+                _logger.LogError("No provider found for: {@Provider}", _options.GetProvider());
                 //TODO: make NavigatorException
-                throw new Exception($"No client found for provider: {_options.GetProvider()?.Name}");
+                throw new Exception($"No provider found for: {_options.GetProvider()?.Name}");
             }
 
-            var acitonType = _options.GetAcitonType() ?? throw new InvalidOperationException();
+            var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
             
-            INavigatorContext context = new NavigatorContext(client, await client.GetProfile(), acitonType);
+            INavigatorContext context = new NavigatorContext(provider, await provider.GetClient().GetProfile(), actionType);
 
             foreach (var contextExtension in _navigatorContextExtensions)
             {

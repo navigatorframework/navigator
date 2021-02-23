@@ -11,7 +11,7 @@ namespace Navigator.Context
         /// <summary>
         /// 
         /// </summary>
-        public INavigatorClient Client { get; }
+        public INavigatorProvider Provider { get; }
 
         /// <summary>
         /// 
@@ -33,9 +33,9 @@ namespace Navigator.Context
         /// <summary>
         /// Builds a new Navigator Context.
         /// </summary>
-        public NavigatorContext(INavigatorClient client, BotUser botProfile, string actionType)
+        public NavigatorContext(INavigatorProvider provider, BotUser botProfile, string actionType)
         {
-            Client = client;
+            Provider = provider;
             BotProfile = botProfile;
             ActionType = actionType;
 

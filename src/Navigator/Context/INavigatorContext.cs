@@ -8,7 +8,7 @@ namespace Navigator.Context
         /// <summary>
         /// 
         /// </summary>
-        INavigatorClient Client { get; }
+        INavigatorProvider Provider { get; }
 
         /// <summary>
         /// 
