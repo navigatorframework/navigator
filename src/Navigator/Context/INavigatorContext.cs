@@ -18,6 +18,11 @@ namespace Navigator.Context
         /// <summary>
         /// 
         /// </summary>
+        Dictionary<string, object?> Extensions { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         Dictionary<string, string> Items { get; }
         
         /// <summary>

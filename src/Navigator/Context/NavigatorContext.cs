@@ -18,6 +18,8 @@ namespace Navigator.Context
         /// </summary>
         public BotUser BotProfile { get; }
 
+        public Dictionary<string, object?> Extensions { get; }
+
         /// <summary>
         /// 
         /// </summary>
