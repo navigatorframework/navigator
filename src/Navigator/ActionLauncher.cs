@@ -2,69 +2,70 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Navigator.Actions;
 using Navigator.Configuration;
 using Navigator.Context;
 
 namespace Navigator
 {
-    public class ActionLauncher : IActionLauncher
+    internal class ActionLauncher : IActionLauncher
     {
-        /// <summary>
-        /// Navigator context accessor.
-        /// </summary>
-        protected readonly INavigatorContextAccessor NavigatorContextAccessor;
-        
-        /// <summary>
-        /// Collection of available actions.
-        /// </summary>
-        protected readonly IEnumerable<IAction> Actions;
-        
-        /// <summary>
-        /// Navigator otpions.
-        /// </summary>
-        protected readonly NavigatorOptions NavigatorOptions;
+        private readonly INavigatorContextAccessor _navigatorContextAccessor;
 
-        /// <summary>
-        /// Builds a new <see cref="ActionLauncher"/>.
-        /// </summary>
-        /// <param name="actions"></param>
-        /// <param name="navigatorOptions"></param>
-        /// <param name="navigatorContextAccessor"></param>
+        private readonly IEnumerable<IAction> _actions;
+
+        private readonly NavigatorOptions _navigatorOptions;
+
+        private readonly ISender _sender;
+        
         public ActionLauncher(IEnumerable<IAction> actions, NavigatorOptions navigatorOptions,
-            INavigatorContextAccessor navigatorContextAccessor)
+            INavigatorContextAccessor navigatorContextAccessor, ISender sender)
         {
-            Actions = actions;
-            NavigatorOptions = navigatorOptions;
-            NavigatorContextAccessor = navigatorContextAccessor;
+            _actions = actions;
+            _navigatorOptions = navigatorOptions;
+            _navigatorContextAccessor = navigatorContextAccessor;
+            _sender = sender;
         }
 
-        public Task Launch()
+        public async Task Launch()
         {
-            throw new NotImplementedException();
+            var actions = GetActions();
+            
+            foreach (var action in actions)
+            {
+                try
+                {
+                    await _sender.Send(action);
+                }
+                catch (Exception e)
+                {
+                    //TODO: logs
+                }
+            }
         }
 
-        protected IEnumerable<IAction> GetActions()
+        private IEnumerable<IAction> GetActions()
         {
-            if (string.IsNullOrWhiteSpace(NavigatorContextAccessor.NavigatorContext.ActionType))
+            if (string.IsNullOrWhiteSpace(_navigatorContextAccessor.NavigatorContext.ActionType))
             {
                 return Array.Empty<IAction>();
             }
 
-            if (NavigatorOptions.MultipleActionsUsageIsEnabled())
+            if (_navigatorOptions.MultipleActionsUsageIsEnabled())
             {
-                return Actions
-                    .Where(a => a.Type == NavigatorContextAccessor.NavigatorContext.ActionType)
-                    .Where(a => a.Init(NavigatorContextAccessor.NavigatorContext)
-                        .CanHandle(NavigatorContextAccessor.NavigatorContext))
+                return _actions
+                    .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
+                    .Where(a => a.Init(_navigatorContextAccessor.NavigatorContext)
+                        .CanHandle(_navigatorContextAccessor.NavigatorContext))
                     .OrderBy(a => a.Priority).AsEnumerable();
             }
 
-            var action = Actions
-                .Where(a => a.Type == NavigatorContextAccessor.NavigatorContext.ActionType)
+            var action = _actions
+                .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
                 .OrderBy(a => a.Priority)
-                .FirstOrDefault(a => a.Init(NavigatorContextAccessor.NavigatorContext)
-                    .CanHandle(NavigatorContextAccessor.NavigatorContext));
+                .FirstOrDefault(a => a.Init(_navigatorContextAccessor.NavigatorContext)
+                    .CanHandle(_navigatorContextAccessor.NavigatorContext));
 
             return action is not null ? new[] {action} : Array.Empty<IAction>();
         }
