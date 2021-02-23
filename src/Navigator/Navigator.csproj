@@ -2,14 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <LangVersion>9</LangVersion>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-            <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.102-beta</PackageVersion>
-        <PackageId>Navigator</PackageId>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Title>Navigator Framework</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>A highly opinionated telegram bot framework, mainly based on Telegram.Bot.</Description>
+        <Description>A highly opinionated universal bot framework.</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/navigatorframework/navigator/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
@@ -17,7 +14,6 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
