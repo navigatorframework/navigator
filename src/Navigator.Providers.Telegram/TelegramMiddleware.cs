@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
+using Navigator.Providers.Telegram.Entities;
+using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -36,6 +38,7 @@ namespace Navigator.Providers.Telegram
                 builder.SetProvider<TelegramNavigatorProvider>();
                 builder.SetActionType(actionType);
                 builder.SetOriginalUpdate(update);
+                builder.SetConversation(update.GetConversation());
             });
 
             await _actionLauncher.Launch();

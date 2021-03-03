@@ -1,4 +1,5 @@
 using System;
+using Navigator.Entities;
 
 namespace Navigator.Context
 {
@@ -38,7 +39,7 @@ namespace Navigator.Context
         
         #endregion
         
-        #region ActionType
+        #region OriginalUpdate
 
         private const string OriginalUpdateKey = "_navigator.context.options.original_update";
 
@@ -51,6 +52,23 @@ namespace Navigator.Context
         public static object? GetOriginalUpdateOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
         {
             return contextBuilderOptions.RetrieveOption<object>(OriginalUpdateKey);
+        }
+        
+        #endregion
+        
+        #region Conversation
+
+        private const string ConversationKey = "_navigator.context.options.conversation";
+
+        public static void SetConversation(this INavigatorContextBuilderOptions contextBuilderOptions, IConversation conversation)
+        {
+            contextBuilderOptions.TryRegisterOption(ConversationKey, conversation);
+
+        }
+
+        public static IConversation? GetConversationOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
+        {
+            return contextBuilderOptions.RetrieveOption<IConversation>(ConversationKey);
         }
         
         #endregion
