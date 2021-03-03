@@ -8,7 +8,7 @@ using Navigator.Replies;
 
 namespace Navigator.Actions
 {
-    public abstract class ActionHandler<TAction> : IRequestHandler<TAction, ActionResult> where TAction : IAction
+    public abstract class ActionHandler<TAction> : IRequestHandler<TAction, ActionStatus> where TAction : IAction
     {
         public INavigatorContext NavigatorContext;
 
@@ -17,13 +17,17 @@ namespace Navigator.Actions
             NavigatorContext = navigatorContextAccessor.NavigatorContext;
         }
 
-        public abstract Task<ActionResult> Handle(TAction request, CancellationToken cancellationToken);
+        public abstract Task<ActionStatus> Handle(TAction request, CancellationToken cancellationToken);
 
-        public Task Reply(Action<ReplyBuilderOptions> replyBuilder, CancellationToken cancellationToken)
+        public static ActionStatus Success()
         {
-            
-            
-            NavigatorContext.Provider.HandleReply()
+            return new(true);
+        }
+        
+        
+        public static ActionStatus Error()
+        {
+            return new(false);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Navigator.Actions.Model
     /// <summary>
     /// Base contract for an action.
     /// </summary>
-    public interface IAction : IRequest<ActionResult>
+    public interface IAction : IRequest<ActionStatus>
     {
         /// <summary>
         /// Type of the action.
