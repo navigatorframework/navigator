@@ -11,6 +11,6 @@ namespace Navigator.Entities
     public interface IChat
     {
         string Id { get; init; }
-        string Title { get; init; }
+        string? Title { get; init; }
     }
 }
