@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Navigator.Actions.Model;
 
-namespace Navigator.Actions.Filter
+namespace Navigator.Actions.Filters
 {
     public abstract class ActionFilter<TAction> : IPipelineBehavior<TAction, ActionStatus> where TAction : IAction
     {
