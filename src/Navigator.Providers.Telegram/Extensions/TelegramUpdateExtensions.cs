@@ -2,9 +2,9 @@ using System.Linq;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Providers.Telegram
+namespace Navigator.Providers.Telegram.Extensions
 {
-    public static class MessageExtension
+    internal static class TelegramUpdateExtensions
     {
         public static string? ExtractCommand(this Message message, string botName)
         {
