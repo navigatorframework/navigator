@@ -38,8 +38,9 @@ namespace Navigator.Context
             }
 
             var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
+            var conversation = _options.GetConversationOrDefault() ?? throw new InvalidOperationException();
             
-            INavigatorContext context = new NavigatorContext(provider, await provider.GetClient().GetProfile(), actionType);
+            INavigatorContext context = new NavigatorContext(provider, await provider.GetClient().GetProfile(), actionType, conversation);
 
             foreach (var contextExtension in _navigatorContextExtensions)
             {

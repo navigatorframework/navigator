@@ -29,5 +29,7 @@ namespace Navigator.Context
         /// 
         /// </summary>
         public string ActionType { get; }
+        
+        public IConversation Conversation { get; }
     }
 }

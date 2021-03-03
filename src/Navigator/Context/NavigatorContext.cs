@@ -20,24 +20,21 @@ namespace Navigator.Context
 
         public Dictionary<string, object?> Extensions { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Dictionary<string, string> Items { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public string ActionType { get; }
         
+        public IConversation Conversation { get; }
+
         /// <summary>
         /// Builds a new Navigator Context.
         /// </summary>
-        public NavigatorContext(INavigatorProvider provider, BotUser botProfile, string actionType)
+        public NavigatorContext(INavigatorProvider provider, BotUser botProfile, string actionType, IConversation conversation)
         {
             Provider = provider;
             BotProfile = botProfile;
             ActionType = actionType;
+            Conversation = conversation;
 
             Items = new Dictionary<string, string>();
         }
