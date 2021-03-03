@@ -17,14 +17,13 @@ namespace Navigator.Actions
             NavigatorContext = navigatorContextAccessor.NavigatorContext;
         }
 
-        public abstract Task<ActionStatus> Handle(TAction request, CancellationToken cancellationToken);
+        public abstract Task<ActionStatus> Handle(TAction action, CancellationToken cancellationToken);
 
         public static ActionStatus Success()
         {
             return new(true);
         }
-        
-        
+
         public static ActionStatus Error()
         {
             return new(false);
