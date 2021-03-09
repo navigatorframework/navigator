@@ -37,6 +37,7 @@ namespace Navigator.Context
             Conversation = conversation;
 
             Items = new Dictionary<string, string>();
+            Extensions = new Dictionary<string, object?>();
         }
     }
 }
