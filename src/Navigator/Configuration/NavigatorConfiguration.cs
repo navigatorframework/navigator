@@ -51,7 +51,7 @@ namespace Navigator.Configuration
 
         public void RegisterOrReplaceOptions()
         {
-            Services.Replace(ServiceDescriptor.Singleton<NavigatorOptions>(Options));
+            Services.Replace(ServiceDescriptor.Singleton<INavigatorOptions, NavigatorOptions>(_ => Options));
         }
     }
 }
