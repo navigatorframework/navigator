@@ -1,16 +1,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navigator.Configuration;
-using Navigator.Extensions.Shipyard;
-using Navigator.Extensions.Store;
 using Navigator.Providers.Telegram;
-using Navigator.Samples.Echo.Entity;
-using Navigator.Samples.Echo.Persistence;
 
 namespace Navigator.Samples.Echo
 {
@@ -28,10 +23,6 @@ namespace Navigator.Samples.Echo
         {
             services.AddControllers().AddNewtonsoftJson();
 
-            services.AddMediatR(typeof(Startup).Assembly);
-
-            services.AddApiVersioning();
-
             services.AddNavigator(options =>
             {
                 options.SetWebHookBaseUrl(Configuration["BASE_WEBHOOK_URL"]);
@@ -40,17 +31,6 @@ namespace Navigator.Samples.Echo
             {
                 options.SetTelegramToken(Configuration["BOT_TOKEN"]);
             });
-            // ).AddNavigatorStore<NavigatorSampleDbContext, SampleUser>(
-            //     builder =>
-            //     {
-            //         builder.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
-            //             b => b.MigrationsAssembly("Navigator.Samples.Echo"));
-            //     },
-            //     options => { options.SetUserMapper<SampleUserMapper>(); }
-            // ).AddShipyard(options =>
-            // {
-            //     options.SetShipyardApiKey(Configuration["SHIPYARD_API_KEY"]);
-            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,13 +41,7 @@ namespace Navigator.Samples.Echo
                 app.UseDeveloperExceptionPage();
             }
 
-            using var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
-            serviceScope?.ServiceProvider.GetRequiredService<NavigatorSampleDbContext>().Database.Migrate();
-
             app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

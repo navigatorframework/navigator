@@ -6,11 +6,18 @@ namespace Navigator.Samples.Echo.Actions
 {
     public class EchoAction : MessageAction
     {
-        public string MessageToEcho { get; set; } = string.Empty;
+        public EchoAction()
+        {
+            MessageToEcho = string.Empty;
+        }
+
+        public string MessageToEcho { get; set; }
         
         public override IAction Init(INavigatorContext ctx)
         {
-            if (string.IsNullOrWhiteSpace(Message.Text))
+            base.Init(ctx);
+            
+            if (!string.IsNullOrWhiteSpace(Message.Text))
             {
                 MessageToEcho = Message.Text;
             }

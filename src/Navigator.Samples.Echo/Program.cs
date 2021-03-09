@@ -1,14 +1,17 @@
 using System;
+using System.IO;
+using Ele.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using ConfigurationExtensions = Ele.Extensions.Configuration.ConfigurationExtensions;
 
 namespace Navigator.Samples.Echo
 {
     public class Program
     {
-        private static IConfiguration Configuration { get; } = ConfigurationExtension.LoadConfiguration();
+        private static IConfiguration Configuration { get; } = ConfigurationExtensions.LoadConfiguration(Directory.GetCurrentDirectory());
 
         
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -21,7 +24,7 @@ namespace Navigator.Samples.Echo
         
         public static void Main(string[] args)
         {
-            Log.Logger = ConfigurationExtension.LoadLogger(Configuration);
+            Log.Logger = LoggingExtensions.LoadLogger(Configuration);
 
             try
             {
