@@ -1,3 +1,9 @@
+using System;
+using Navigator.Context;
+using Navigator.Context.Extensions;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+
 namespace Navigator.Providers.Telegram
 {
     /// <summary>
@@ -44,40 +50,40 @@ namespace Navigator.Providers.Telegram
         //
         // #endregion
         //
-        // #region Chat
-        //
-        // /// <summary>
-        // /// Get a Telegram chat.
-        // /// </summary>
-        // /// <param name="ctx"></param>
-        // /// <exception cref="Exception">When chat is not found.</exception>
-        // /// <returns></returns>
-        // public static Chat GetTelegramChat(this INavigatorContext ctx)
-        // {
-        //     var chat = ctx.GetTelegramChatOrDefault();
-        //
-        //     return chat ?? throw new Exception("Chat not found in update.");
-        // }
-        //
-        // /// <summary>
-        // /// Get a Telegram chat or default if not found.
-        // /// </summary>
-        // /// <param name="ctx"></param>
-        // /// <returns>Telegram Chat</returns>
-        // public static Chat? GetTelegramChatOrDefault(this INavigatorContext ctx)
-        // {
-        //     return ctx.Update.Type switch
-        //     {
-        //         UpdateType.CallbackQuery => ctx.Update.CallbackQuery.Message.Chat,
-        //         UpdateType.Message => ctx.Update.Message.Chat,
-        //         UpdateType.EditedMessage => ctx.Update.EditedMessage.Chat,
-        //         UpdateType.ChannelPost => ctx.Update.ChannelPost.Chat,
-        //         UpdateType.EditedChannelPost => ctx.Update.EditedChannelPost.Chat,
-        //         _ => default
-        //     };
-        // }
-        //
-        // #endregion
+        #region Chat
+        
+        /// <summary>
+        /// Gets a <see cref="Entities.Chat"/>.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <exception cref="Exception">When chat is not found.</exception>
+        /// <returns></returns>
+        public static Chat GetTelegramChat(this INavigatorContext ctx)
+        {
+            var chat = ctx.GetTelegramChatOrDefault();
+        
+            return chat ?? throw new Exception("Chat was not found.");
+        }
+        
+        /// <summary>
+        /// Get a Telegram chat or default if not found.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns>Telegram Chat</returns>
+        public static Chat? GetTelegramChatOrDefault(this INavigatorContext ctx)
+        {
+            return ctx.GetOriginalUpdateOrDefault<Update>()?.Type switch
+            {
+                UpdateType.CallbackQuery => ctx.GetOriginalUpdate<Update>().CallbackQuery.Message.Chat,
+                UpdateType.Message => ctx.GetOriginalUpdate<Update>().Message.Chat,
+                UpdateType.EditedMessage => ctx.GetOriginalUpdate<Update>().EditedMessage.Chat,
+                UpdateType.ChannelPost => ctx.GetOriginalUpdate<Update>().ChannelPost.Chat,
+                UpdateType.EditedChannelPost => ctx.GetOriginalUpdate<Update>().EditedChannelPost.Chat,
+                _ => default
+            };
+        }
+        
+        #endregion
         //
         // #region Message
         //
