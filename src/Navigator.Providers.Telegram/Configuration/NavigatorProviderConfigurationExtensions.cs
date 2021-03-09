@@ -15,12 +15,14 @@ namespace Navigator.Providers.Telegram
             options.Invoke(telegramProviderOptions);
 
             return providerConfiguration.Provider(
-                optionsAction => optionsAction.Import(optionsAction.RetrieveAllOptions()),
+                optionsAction => optionsAction.Import(telegramProviderOptions.RetrieveAllOptions()),
                 services =>
                 {
                     services.AddSingleton<NavigatorTelegramClient>();
                     services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
 
+                    services.AddScoped<INavigatorProvider, TelegramNavigatorProvider>();
+                    
                     services.AddScoped<TelegramMiddleware>();
                     
                     services.AddHostedService<SetTelegramBotWebHookHostedService>();
