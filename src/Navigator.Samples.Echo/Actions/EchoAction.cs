@@ -1,6 +1,6 @@
-﻿using Navigator.Abstractions;
+﻿using Navigator.Actions.Model;
 using Navigator.Context;
-using Navigator.Extensions.Actions;
+using Navigator.Providers.Telegram.Actions;
 
 namespace Navigator.Samples.Echo.Actions
 {
@@ -10,10 +10,11 @@ namespace Navigator.Samples.Echo.Actions
         
         public override IAction Init(INavigatorContext ctx)
         {
-            if (string.IsNullOrWhiteSpace(ctx.Update.Message.Text))
+            if (string.IsNullOrWhiteSpace(Message.Text))
             {
-                MessageToEcho = ctx.Update.Message.Text;
+                MessageToEcho = Message.Text;
             }
+            
             return this;
         }
 

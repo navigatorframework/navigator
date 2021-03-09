@@ -1,27 +1,25 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Navigator.Abstractions;
+using Navigator.Actions;
+using Navigator.Actions.Model;
 using Navigator.Context;
-using Navigator.Extensions.Actions;
-using Navigator.Extensions.Store.Abstractions.Extensions;
-using Navigator.Samples.Echo.Entity;
-using Newtonsoft.Json;
+using Navigator.Providers.Telegram;
 
 namespace Navigator.Samples.Echo.Actions
 {
     public class EchoActionHandler : ActionHandler<EchoAction>
     {
-        public EchoActionHandler(INavigatorContext ctx) : base(ctx)
+        public EchoActionHandler(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
         }
 
-        public override async Task<Unit> Handle(EchoAction request, CancellationToken cancellationToken)
+        public override async Task<ActionStatus> Handle(EchoAction action, CancellationToken cancellationToken)
         {
-            await Ctx.Client.SendTextMessageAsync(Ctx.GetTelegramChat(), request.MessageToEcho,
-                cancellationToken: cancellationToken);
+            await NavigatorContext.Provider.GetTelegramClient().SendTextMessageAsync(NavigatorContext.GetTelegramChat(), 
+                action.MessageToEcho, cancellationToken: cancellationToken);
 
-            return Unit.Value;
+            return Success();
         }
     }
 }
