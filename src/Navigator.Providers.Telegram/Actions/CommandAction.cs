@@ -1,6 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Model;
 using Navigator.Context;
+using Navigator.Providers.Telegram.Extensions;
 
 namespace Navigator.Providers.Telegram.Actions
 {

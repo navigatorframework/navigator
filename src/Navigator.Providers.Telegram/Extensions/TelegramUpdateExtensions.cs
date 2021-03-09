@@ -28,11 +28,11 @@ namespace Navigator.Providers.Telegram.Extensions
             return command;
         }
         
-        public static string ExtractArguments(this Message message, string botName)
+        public static string? ExtractArguments(this Message message, string botName)
         {
-            return message.Text.Contains(' ') 
-                ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1) 
-                : string.Empty;
+            return message.Text.Contains(' ')
+                ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1)
+                : default;
         }
         
         public static User? GetUserOrDefault(this Update update)
