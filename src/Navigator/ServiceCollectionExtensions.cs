@@ -1,9 +1,11 @@
 using System;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Actions.Model;
 using Navigator.Configuration;
 using Navigator.Context;
+using Navigator.Context.Extensions;
 using Scrutor;
 
 namespace Navigator
@@ -20,8 +22,12 @@ namespace Navigator
             var navigatorBuilder = new NavigatorConfiguration(options, services);
 
             services.AddNavigatorContextServices();
+
+            services.AddScoped<INavigatorContextExtension, OriginalUpdateContextExtension>();
             
             services.AddScoped<IActionLauncher, ActionLauncher>();
+
+            services.AddMediatR(navigatorBuilder.Options.GetActionsAssemblies());
             
             services.Scan(scan => scan
                 .FromAssemblies(navigatorBuilder.Options.GetActionsAssemblies())
@@ -39,7 +45,7 @@ namespace Navigator
         {
             services.AddScoped<INavigatorContextBuilder, NavigatorContextBuilder>();
             services.AddScoped<INavigatorContextFactory, NavigatorContextFactory>();
-            services.AddScoped<INavigatorContextAccessor, NavigatorContextAccessor>();
+            services.AddTransient<INavigatorContextAccessor, NavigatorContextAccessor>();
         }
     }
 }
