@@ -11,6 +11,8 @@ namespace Navigator.Configuration
     public class NavigatorConfiguration
     {
         public NavigatorProviderConfiguration WithProvider { get; internal set; }
+        
+        public NavigatorExtensionConfiguration WithExtension { get; internal set; }
 
         /// <summary>
         /// Gets the <see cref="NavigatorOptions"/> that are being used.
@@ -33,7 +35,6 @@ namespace Navigator.Configuration
         /// </summary>
         /// <param name="options">The <see cref="NavigatorOptions"/> to use.</param>
         /// <param name="services">The <see cref="IServiceCollection"/> to attach to.</param>
-
         public NavigatorConfiguration(Action<NavigatorOptions> options, IServiceCollection services)
         {
             Options = new NavigatorOptions();
@@ -44,6 +45,7 @@ namespace Navigator.Configuration
             services.AddSingleton(Options);
             
             WithProvider = new NavigatorProviderConfiguration(this);
+            WithExtension = new NavigatorExtensionConfiguration(this);
         }
         
 
