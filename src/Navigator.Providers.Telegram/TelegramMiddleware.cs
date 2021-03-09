@@ -44,7 +44,7 @@ namespace Navigator.Providers.Telegram
             await _actionLauncher.Launch();
         }
 
-        public string? DefineActionType(Update update)
+        private string? DefineActionType(Update update)
         {
             return update.Type switch
             {
