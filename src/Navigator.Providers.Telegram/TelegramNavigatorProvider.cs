@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
 namespace Navigator.Providers.Telegram
@@ -15,6 +16,11 @@ namespace Navigator.Providers.Telegram
         public INavigatorClient GetClient()
         {
             return _client;
+        }
+
+        public Task HandleReply()
+        {
+            throw new NotImplementedException();
         }
     }
 }
