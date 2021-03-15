@@ -72,7 +72,7 @@ namespace Navigator.Providers.Telegram
                 // UpdateType.EditedChannelPost => ActionType.EditedChannelPost,
                 // UpdateType.ShippingQuery => ActionType.ShippingQuery,
                 // UpdateType.PreCheckoutQuery => ActionType.PreCheckoutQuery,
-                // UpdateType.Poll => ActionType.Poll,
+                UpdateType.Poll => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(PollAction)),
                 UpdateType.Unknown => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(UnknownAction)),
                 _ => default
             };
