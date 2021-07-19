@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using Navigator.Actions;
-using Navigator.Actions.Model;
 using Navigator.Context;
 using Navigator.Providers.Telegram;
 
@@ -14,7 +13,7 @@ namespace Navigator.Samples.Echo.Actions
         {
         }
 
-        public override async Task<ActionStatus> Handle(EchoAction action, CancellationToken cancellationToken)
+        public override async Task<Status> Handle(EchoAction action, CancellationToken cancellationToken)
         {
             await NavigatorContext.Provider.GetTelegramClient().SendTextMessageAsync(NavigatorContext.GetTelegramChat(), 
                 action.MessageToEcho, cancellationToken: cancellationToken);

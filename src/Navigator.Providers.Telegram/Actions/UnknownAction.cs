@@ -1,5 +1,4 @@
 using Navigator.Actions;
-using Navigator.Actions.Model;
 
 namespace Navigator.Providers.Telegram.Actions
 {
@@ -7,8 +6,5 @@ namespace Navigator.Providers.Telegram.Actions
     {
         /// <inheritdoc />
         public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(UnknownAction));
-
-        /// <inheritdoc />
-        public override ushort Priority { get; protected set; } = Navigator.Actions.Priority.Default;
     }
 }

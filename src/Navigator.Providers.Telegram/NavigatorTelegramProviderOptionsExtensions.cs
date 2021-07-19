@@ -37,7 +37,7 @@ namespace Navigator.Providers.Telegram
 
             if (webHookEndpoint is null)
             {
-                navigatorOptions.TryRegisterOption(WebHookEndpointKey,$"bot/{Guid.NewGuid()}");
+                navigatorOptions.TryRegisterOption(WebHookEndpointKey,$"telegram/bot/{Guid.NewGuid()}");
             }
             
             return navigatorOptions.RetrieveOption<string>(WebHookEndpointKey)!;

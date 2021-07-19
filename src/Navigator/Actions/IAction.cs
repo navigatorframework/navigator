@@ -1,12 +1,12 @@
 using MediatR;
 using Navigator.Context;
 
-namespace Navigator.Actions.Model
+namespace Navigator.Actions
 {
     /// <summary>
     /// Base contract for an action.
     /// </summary>
-    public interface IAction : IRequest<ActionStatus>
+    public interface IAction : IRequest<Status>
     {
         /// <summary>
         /// Type of the action.

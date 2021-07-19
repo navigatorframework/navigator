@@ -1,5 +1,4 @@
 using Navigator.Actions;
-using Navigator.Actions.Model;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Extensions;
 
@@ -19,7 +18,6 @@ namespace Navigator.Providers.Telegram.Actions
             base.Init(navigatorContext);
             
             Command = Message.ExtractCommand(navigatorContext.BotProfile.Username) ?? string.Empty;
-
             Arguments = Message.ExtractArguments(navigatorContext.BotProfile.Username);
 
             return this;    

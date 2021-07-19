@@ -1,4 +1,4 @@
-﻿using Navigator.Actions.Model;
+﻿using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
 
@@ -12,7 +12,9 @@ namespace Navigator.Samples.Echo.Actions
         }
 
         public string MessageToEcho { get; set; }
-        
+
+        public override ushort Priority { get; protected set; } = Navigator.Actions.Priority.High;
+
         public override IAction Init(INavigatorContext ctx)
         {
             base.Init(ctx);

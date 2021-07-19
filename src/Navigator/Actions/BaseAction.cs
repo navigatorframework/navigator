@@ -1,7 +1,7 @@
 using System;
 using Navigator.Context;
 
-namespace Navigator.Actions.Model
+namespace Navigator.Actions
 {
     /// <summary>
     /// Base action to use for any action.
@@ -12,7 +12,7 @@ namespace Navigator.Actions.Model
         public abstract string Type { get; protected set; }
 
         /// <inheritdoc />
-        public abstract ushort Priority { get; protected set; }
+        public virtual ushort Priority { get; protected set; } = Actions.Priority.Default;
         
         /// <summary>
         /// Timestamp of the request on creation.

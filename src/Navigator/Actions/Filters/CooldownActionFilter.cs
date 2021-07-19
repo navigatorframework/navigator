@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Navigator.Actions.Model;
 using Navigator.Context;
 
 namespace Navigator.Actions.Filters
@@ -17,7 +16,7 @@ namespace Navigator.Actions.Filters
             _navigatorContext = navigatorContextAccessor.NavigatorContext;
         }
 
-        public override async Task<ActionStatus> Handle(TAction action, CancellationToken cancellationToken, RequestHandlerDelegate<ActionStatus> next)
+        public override async Task<Status> Handle(TAction action, CancellationToken cancellationToken, RequestHandlerDelegate<Status> next)
         {
             var key = GenerateKey(action);
             
@@ -25,7 +24,7 @@ namespace Navigator.Actions.Filters
 
             if (cooldownStatus is not null)
             {
-                return new ActionStatus(true);
+                return new Status(true);
             }
 
             var status = await next();
