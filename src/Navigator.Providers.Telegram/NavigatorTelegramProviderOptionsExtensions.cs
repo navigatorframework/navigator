@@ -1,27 +1,10 @@
 using System;
-using MihaZupan.TelegramBotClients.RateLimitedClient;
 using Navigator.Configuration;
 
 namespace Navigator.Providers.Telegram
 {
     public static class NavigatorTelegramProviderOptionsExtensions
     {
-        #region SchedulerSettings
-
-        private const string SchedulerSettingsKey = "_navigator.options.telegram.scheduler_settings";
-
-        public static void SetSchedulerSettings(this NavigatorTelegramProviderOptions navigatorOptions, SchedulerSettings schedulerSettings)
-        {
-            navigatorOptions.TryRegisterOption(SchedulerSettingsKey, schedulerSettings);
-        }
-
-        public static SchedulerSettings GetSchedulerSettingsOrDefault(this INavigatorOptions navigatorOptions)
-        {
-            return navigatorOptions.RetrieveOption<SchedulerSettings>(SchedulerSettingsKey) ?? SchedulerSettings.Default;
-        }
-
-        #endregion
-        
         #region TelegramToken
 
         private const string TelegramTokenKey = "_navigator.options.telegram.telegram_token";

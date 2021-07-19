@@ -1,16 +1,15 @@
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using MihaZupan.TelegramBotClients;
 using Navigator.Configuration;
 using Navigator.Entities;
+using Telegram.Bot;
 
 namespace Navigator.Providers.Telegram
 {
-    public class NavigatorTelegramClient : RateLimitedTelegramBotClient, INavigatorClient
+    public class NavigatorTelegramClient : TelegramBotClient, INavigatorClient
     {
         public NavigatorTelegramClient(INavigatorOptions options) 
-            : base(options.GetTelegramToken(), (HttpClient) default!, options.GetSchedulerSettingsOrDefault())
+            : base(options.GetTelegramToken())
         {
         }
 
