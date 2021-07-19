@@ -64,7 +64,7 @@ namespace Navigator.Providers.Telegram
                     // MessageType.MigratedFromGroup => ActionType.MigratedFromGroup,
                     _ => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction))
                 },
-                // UpdateType.InlineQuery => ActionType.InlineQuery,
+                UpdateType.InlineQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(InlineQueryAction)),
                 // UpdateType.ChosenInlineResult => ActionType.InlineResultChosen,
                 UpdateType.CallbackQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CallbackQueryAction)),
                 UpdateType.EditedMessage => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(EditedMessageAction)),
