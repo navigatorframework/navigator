@@ -65,7 +65,7 @@ namespace Navigator.Providers.Telegram
                     _ => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction))
                 },
                 UpdateType.InlineQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(InlineQueryAction)),
-                // UpdateType.ChosenInlineResult => ActionType.InlineResultChosen,
+                UpdateType.ChosenInlineResult => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(ChosenInlineResult)),
                 UpdateType.CallbackQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CallbackQueryAction)),
                 UpdateType.EditedMessage => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(EditedMessageAction)),
                 // UpdateType.ChannelPost => ActionType.ChannelPost,
