@@ -15,7 +15,7 @@ namespace Navigator.Providers.Telegram.Actions
         public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction));
 
         /// <inheritdoc />
-        public override ushort Priority { get; protected set; } = ActionsHelper.Priority.Default;
+        public override ushort Priority { get; protected set; } = Navigator.Actions.Priority.Default;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)
