@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
+using Navigator.Providers.Telegram.Actions.Message;
+using Navigator.Providers.Telegram.Actions.Update;
 using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
@@ -44,13 +46,20 @@ namespace Navigator.Providers.Telegram
             await _actionLauncher.Launch();
         }
 
-        private string? DefineActionType(Update update)
+        private static string? DefineActionType(Update update)
         {
             return update.Type switch
             {
-                UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CommandAction)),
+                UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => typeof(CommandAction).FullName,
                 UpdateType.Message => update.Message.Type switch
                 {
+                    // MessageType.Document => ActionType.ChatMembersAdded,
+                    // MessageType.Location => ActionType.ChatMembersAdded,
+                    // MessageType.Contact => ActionType.ChatMembersAdded,
+                    // MessageType.Game => ActionType.ChatMembersAdded,
+                    // MessageType.Invoice => ActionType.ChatMembersAdded,
+                    // MessageType.SuccessfulPayment => ActionType.ChatMembersAdded,
+                    // MessageType.WebsiteConnected => ActionType.ChatMembersAdded,
                     // MessageType.ChatMembersAdded => ActionType.ChatMembersAdded,
                     // MessageType.ChatMemberLeft => ActionType.ChatMemberLeft,
                     // MessageType.ChatTitleChanged => ActionType.ChatTitleChanged,
@@ -62,18 +71,28 @@ namespace Navigator.Providers.Telegram
                     // MessageType.ChannelCreated => ActionType.ChannelCreated,
                     // MessageType.MigratedToSupergroup => ActionType.MigratedToSupergroup,
                     // MessageType.MigratedFromGroup => ActionType.MigratedFromGroup,
-                    _ => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction))
+                    // MessageType.Dice => ActionType.MigratedFromGroup,
+                    // MessageType.MessageAutoDeleteTimerChanged => ActionType.MigratedFromGroup,
+                    // MessageType.ProximityAlertTriggered => ActionType.MigratedFromGroup,
+                    // MessageType.VoiceChatScheduled => ActionType.MigratedFromGroup,
+                    // MessageType.VoiceChatStarted => ActionType.MigratedFromGroup,
+                    // MessageType.VoiceChatEnded => ActionType.MigratedFromGroup,
+                    // MessageType.VoiceChatParticipantsInvited => ActionType.MigratedFromGroup,
+                    _ => typeof(MessageAction).FullName,
                 },
-                UpdateType.InlineQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(InlineQueryAction)),
-                UpdateType.ChosenInlineResult => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(ChosenInlineResult)),
-                UpdateType.CallbackQuery => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CallbackQueryAction)),
-                UpdateType.EditedMessage => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(EditedMessageAction)),
+                UpdateType.InlineQuery => typeof(CommandAction).FullName,
+                UpdateType.ChosenInlineResult => typeof(ChosenInlineResultAction).FullName,
+                UpdateType.CallbackQuery => typeof(CallbackQueryAction).FullName,
+                UpdateType.EditedMessage => typeof(EditedMessageAction).FullName,
                 // UpdateType.ChannelPost => ActionType.ChannelPost,
                 // UpdateType.EditedChannelPost => ActionType.EditedChannelPost,
                 // UpdateType.ShippingQuery => ActionType.ShippingQuery,
                 // UpdateType.PreCheckoutQuery => ActionType.PreCheckoutQuery,
-                UpdateType.Poll => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(PollAction)),
-                UpdateType.Unknown => ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(UnknownAction)),
+                UpdateType.Poll => typeof(PollAction).FullName,
+                // UpdateType.PollAnswer => typeof(PollAction).FullName,
+                // UpdateType.MyChatMember => typeof(UnknownAction).FullName,
+                // UpdateType.ChatMember => typeof(UnknownAction).FullName,
+                UpdateType.Unknown => typeof(UnknownAction).FullName,
                 _ => default
             };
         }

@@ -3,7 +3,7 @@ using Navigator.Context;
 using Navigator.Context.Extensions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions
+namespace Navigator.Providers.Telegram.Actions.Update
 {
     /// <summary>
     /// A callback query based action.
@@ -11,12 +11,12 @@ namespace Navigator.Providers.Telegram.Actions
     public abstract class CallbackQueryAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CallbackQueryAction));
+        public override string Type { get; protected set; } = typeof(CallbackQueryAction).FullName!;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)
         {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<Update>();
+            var update = navigatorContext.GetOriginalUpdateOrDefault<global::Telegram.Bot.Types.Update>();
             
             if (update is not null)
             {
@@ -27,7 +27,7 @@ namespace Navigator.Providers.Telegram.Actions
             }
 
             return this;  
-        }
+        } 
 
         /// <summary>
         /// The original <see cref="Update.CallbackQuery"/>
@@ -37,7 +37,7 @@ namespace Navigator.Providers.Telegram.Actions
         /// <summary>
         /// The message that originated the callback query. Iy may be null if the message is too old.
         /// </summary>
-        public Message? OriginalMessage { get; protected set; }
+        public global::Telegram.Bot.Types.Message? OriginalMessage { get; protected set; }
         
         /// <summary>
         /// Any data present on the callback query.

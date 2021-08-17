@@ -2,7 +2,7 @@ using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Extensions;
 
-namespace Navigator.Providers.Telegram.Actions
+namespace Navigator.Providers.Telegram.Actions.Message
 {
     /// <summary>
     /// Command based action.
@@ -10,7 +10,7 @@ namespace Navigator.Providers.Telegram.Actions
     public abstract class CommandAction : MessageAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(CommandAction));
+        public override string Type { get; protected set; } = typeof(CommandAction).FullName!;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)

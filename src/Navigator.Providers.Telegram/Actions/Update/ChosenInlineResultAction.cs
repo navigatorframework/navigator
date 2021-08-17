@@ -3,7 +3,7 @@ using Navigator.Context;
 using Navigator.Context.Extensions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions
+namespace Navigator.Providers.Telegram.Actions.Update
 {
     /// <summary>
     /// Inline result based action.
@@ -11,12 +11,12 @@ namespace Navigator.Providers.Telegram.Actions
     public abstract class ChosenInlineResultAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(ChosenInlineResultAction));
+        public override string Type { get; protected set; } = typeof(ChosenInlineResultAction).FullName!;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)
         {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<Update>();
+            var update = navigatorContext.GetOriginalUpdateOrDefault<global::Telegram.Bot.Types.Update>();
 
             if (update is not null)
             {

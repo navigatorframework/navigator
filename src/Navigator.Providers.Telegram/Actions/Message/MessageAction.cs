@@ -1,9 +1,8 @@
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Context.Extensions;
-using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions
+namespace Navigator.Providers.Telegram.Actions.Message
 {
     /// <summary>
     /// A message based action.
@@ -11,12 +10,12 @@ namespace Navigator.Providers.Telegram.Actions
     public abstract class MessageAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(MessageAction));
+        public override string Type { get; protected set; } = typeof(MessageAction).FullName!;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)
         {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<Update>();
+            var update = navigatorContext.GetOriginalUpdateOrDefault<global::Telegram.Bot.Types.Update>();
 
             if (update is not null)
             {
@@ -28,10 +27,19 @@ namespace Navigator.Providers.Telegram.Actions
             return this;    
         }
         
-        public Message Message { get; protected set; } = null!;
+        /// <summary>
+        /// The original Message.
+        /// </summary>
+        public global::Telegram.Bot.Types.Message Message { get; protected set; } = null!;
 
+        /// <summary>
+        /// Determines if this message is a reply to another message.
+        /// </summary>
         public bool IsReply { get; protected set; }
         
+        /// <summary>
+        /// Determines if this message is a forwarded message.
+        /// </summary>
         public bool IsForwarded { get; protected set; }
     }
 }

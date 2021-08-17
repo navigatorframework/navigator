@@ -1,5 +1,6 @@
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
+using Navigator.Providers.Telegram.Actions.Update;
 
 namespace Navigator.Samples.Echo.Actions
 {

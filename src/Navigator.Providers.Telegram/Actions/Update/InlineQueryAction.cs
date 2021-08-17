@@ -3,7 +3,7 @@ using Navigator.Context;
 using Navigator.Context.Extensions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions
+namespace Navigator.Providers.Telegram.Actions.Update
 {
     /// <summary>
     /// Inline query based action.
@@ -11,12 +11,12 @@ namespace Navigator.Providers.Telegram.Actions
     public abstract class InlineQueryAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = ActionsHelper.Type.For<TelegramNavigatorProvider>(nameof(InlineQueryAction));
+        public override string Type { get; protected set; } = typeof(InlineQueryAction).FullName!;
 
         /// <inheritdoc />
         public override IAction Init(INavigatorContext navigatorContext)
         {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<Update>();
+            var update = navigatorContext.GetOriginalUpdateOrDefault<global::Telegram.Bot.Types.Update>();
 
             if (update is not null)
             {

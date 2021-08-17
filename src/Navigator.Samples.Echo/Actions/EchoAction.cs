@@ -1,6 +1,7 @@
 ﻿using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
+using Navigator.Providers.Telegram.Actions.Message;
 
 namespace Navigator.Samples.Echo.Actions
 {

@@ -12,7 +12,5 @@ namespace Navigator
         /// </summary>
         /// <returns>An implementation of <see cref="INavigatorClient"/></returns>
         INavigatorClient GetClient();
-
-        Task HandleReply();
     }
 }

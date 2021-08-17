@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
 using Navigator.Context;
 
@@ -11,20 +12,19 @@ namespace Navigator.Actions
     internal class ActionLauncher : IActionLauncher
     {
         private readonly INavigatorContextAccessor _navigatorContextAccessor;
-
         private readonly IEnumerable<IAction> _actions;
-
         private readonly NavigatorOptions _navigatorOptions;
-
         private readonly ISender _sender;
+        private readonly ILogger<ActionLauncher> _logger;
         
         public ActionLauncher(IEnumerable<IAction> actions, NavigatorOptions navigatorOptions,
-            INavigatorContextAccessor navigatorContextAccessor, ISender sender)
+            INavigatorContextAccessor navigatorContextAccessor, ISender sender, ILogger<ActionLauncher> logger)
         {
             _actions = actions;
             _navigatorOptions = navigatorOptions;
             _navigatorContextAccessor = navigatorContextAccessor;
             _sender = sender;
+            _logger = logger;
         }
 
         public async Task Launch()
@@ -39,7 +39,7 @@ namespace Navigator.Actions
                 }
                 catch (Exception e)
                 {
-                    //TODO: logs
+                    _logger.LogError(e, "Unhandled exception running {@Action}", action);
                 }
             }
         }
