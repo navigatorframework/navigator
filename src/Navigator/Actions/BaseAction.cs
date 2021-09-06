@@ -8,6 +8,11 @@ namespace Navigator.Actions
     /// </summary>
     public abstract class BaseAction : IAction
     {
+        /// <summary>
+        /// Used to access <see cref="INavigatorContext"/> inside the action.
+        /// </summary>
+        protected readonly INavigatorContextAccessor NavigatorContextAccessor;
+        
         /// <inheritdoc />
         public abstract string Type { get; protected set; }
 
@@ -22,15 +27,13 @@ namespace Navigator.Actions
         /// <summary>
         /// Default constructor for <see cref="BaseAction"/>
         /// </summary>
-        protected BaseAction()
+        public BaseAction(INavigatorContextAccessor navigatorContextAccessor)
         {
+            NavigatorContextAccessor = navigatorContextAccessor;
             Timestamp = DateTime.UtcNow;
         }
 
         /// <inheritdoc />
-        public abstract IAction Init(INavigatorContext navigatorContext);
-
-        /// <inheritdoc />
-        public abstract bool CanHandle(INavigatorContext ctx);
+        public abstract bool CanHandleCurrentContext();
     }
 }

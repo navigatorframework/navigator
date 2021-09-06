@@ -55,16 +55,15 @@ namespace Navigator.Actions
             {
                 return _actions
                     .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
-                    .Where(a => a.Init(_navigatorContextAccessor.NavigatorContext)
-                        .CanHandle(_navigatorContextAccessor.NavigatorContext))
-                    .OrderBy(a => a.Priority).AsEnumerable();
+                    .Where(a => a.CanHandleCurrentContext())
+                    .OrderBy(a => a.Priority)
+                    .AsEnumerable();
             }
 
             var action = _actions
                 .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
                 .OrderBy(a => a.Priority)
-                .FirstOrDefault(a => a.Init(_navigatorContextAccessor.NavigatorContext)
-                    .CanHandle(_navigatorContextAccessor.NavigatorContext));
+                .FirstOrDefault(a => a.CanHandleCurrentContext());
 
             return action is not null ? new[] {action} : Array.Empty<IAction>();
         }
