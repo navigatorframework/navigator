@@ -41,17 +41,17 @@ namespace Navigator.Context
         
         #region OriginalUpdate
 
-        private const string OriginalUpdateKey = "_navigator.context.options.original_update";
+        private const string OriginalEventKey = "_navigator.context.options.original_event";
 
-        public static void SetOriginalUpdate(this INavigatorContextBuilderOptions contextBuilderOptions, object originalUpdate)
+        public static void SetOriginalEvent(this INavigatorContextBuilderOptions contextBuilderOptions, object originalUpdate)
         {
-            contextBuilderOptions.TryRegisterOption(OriginalUpdateKey, originalUpdate);
+            contextBuilderOptions.TryRegisterOption(OriginalEventKey, originalUpdate);
 
         }
 
-        public static object? GetOriginalUpdateOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
+        public static object? GetOriginalEventOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
         {
-            return contextBuilderOptions.RetrieveOption<object>(OriginalUpdateKey);
+            return contextBuilderOptions.RetrieveOption<object>(OriginalEventKey);
         }
         
         #endregion

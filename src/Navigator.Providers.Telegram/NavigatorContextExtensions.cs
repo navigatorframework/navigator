@@ -72,13 +72,13 @@ namespace Navigator.Providers.Telegram
         /// <returns>Telegram Chat</returns>
         public static Chat? GetTelegramChatOrDefault(this INavigatorContext ctx)
         {
-            return ctx.GetOriginalUpdateOrDefault<Update>()?.Type switch
+            return ctx.GetOriginalEventOrDefault<Update>()?.Type switch
             {
-                UpdateType.CallbackQuery => ctx.GetOriginalUpdate<Update>().CallbackQuery.Message.Chat,
-                UpdateType.Message => ctx.GetOriginalUpdate<Update>().Message.Chat,
-                UpdateType.EditedMessage => ctx.GetOriginalUpdate<Update>().EditedMessage.Chat,
-                UpdateType.ChannelPost => ctx.GetOriginalUpdate<Update>().ChannelPost.Chat,
-                UpdateType.EditedChannelPost => ctx.GetOriginalUpdate<Update>().EditedChannelPost.Chat,
+                UpdateType.CallbackQuery => ctx.GetOriginalEvent<Update>().CallbackQuery.Message.Chat,
+                UpdateType.Message => ctx.GetOriginalEvent<Update>().Message.Chat,
+                UpdateType.EditedMessage => ctx.GetOriginalEvent<Update>().EditedMessage.Chat,
+                UpdateType.ChannelPost => ctx.GetOriginalEvent<Update>().ChannelPost.Chat,
+                UpdateType.EditedChannelPost => ctx.GetOriginalEvent<Update>().EditedChannelPost.Chat,
                 _ => default
             };
         }

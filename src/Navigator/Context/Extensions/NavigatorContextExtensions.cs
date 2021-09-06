@@ -5,20 +5,20 @@ namespace Navigator.Context.Extensions
 {
     public static class NavigatorContextExtensions
     {
-        public static TUpdate GetOriginalUpdate<TUpdate>(this INavigatorContext navigatorContext) where TUpdate : class
+        public static TEvent GetOriginalEvent<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
         {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<TUpdate>();
+            var update = navigatorContext.GetOriginalEventOrDefault<TEvent>();
         
-            return update ?? throw new Exception("Update was not found.");
+            return update ?? throw new NavigatorException("Update was not found.");
         }
         
-        public static TUpdate? GetOriginalUpdateOrDefault<TUpdate>(this INavigatorContext navigatorContext) where TUpdate : class
+        public static TEvent? GetOriginalEventOrDefault<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
         {
-            var update = navigatorContext.Extensions.GetValueOrDefault(OriginalUpdateContextExtension.OriginalUpdateKey);
+            var @event = navigatorContext.Extensions.GetValueOrDefault(OriginalEventContextExtension.OriginalEventKey);
 
-            if (update is TUpdate originalUpdate)
+            if (@event is TEvent originalEvent)
             {
-                return originalUpdate;
+                return originalEvent;
             }
 
             return default;

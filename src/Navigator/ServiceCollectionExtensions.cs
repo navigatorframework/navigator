@@ -22,7 +22,7 @@ namespace Navigator
 
             services.AddNavigatorContextServices();
 
-            services.AddScoped<INavigatorContextExtension, OriginalUpdateContextExtension>();
+            services.AddScoped<INavigatorContextExtension, OriginalEventContextExtension>();
             
             services.AddScoped<IActionLauncher, ActionLauncher>();
 
