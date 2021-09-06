@@ -1,4 +1,5 @@
 using Navigator.Actions;
+using Navigator.Context;
 
 namespace Navigator.Providers.Telegram.Actions
 {
@@ -6,5 +7,10 @@ namespace Navigator.Providers.Telegram.Actions
     {
         /// <inheritdoc />
         public override string Type { get; protected set; } = typeof(UnknownAction).FullName!;
+
+        /// <inheritdoc />
+        protected UnknownAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
+        {
+        }
     }
 }

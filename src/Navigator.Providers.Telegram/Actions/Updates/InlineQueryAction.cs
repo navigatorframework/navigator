@@ -3,7 +3,7 @@ using Navigator.Context;
 using Navigator.Context.Extensions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions.Update
+namespace Navigator.Providers.Telegram.Actions.Updates
 {
     /// <summary>
     /// Inline query based action.
@@ -13,21 +13,6 @@ namespace Navigator.Providers.Telegram.Actions.Update
         /// <inheritdoc />
         public override string Type { get; protected set; } = typeof(InlineQueryAction).FullName!;
 
-        /// <inheritdoc />
-        public override IAction Init(INavigatorContext navigatorContext)
-        {
-            var update = navigatorContext.GetOriginalUpdateOrDefault<global::Telegram.Bot.Types.Update>();
-
-            if (update is not null)
-            {
-                InlineQuery = update.InlineQuery;
-                Query = update.InlineQuery.Query;
-                Offset = update.InlineQuery.Offset;
-            }
-
-            return this;
-        }
-        
         /// <summary>
         /// The original <see cref="Update.InlineQuery"/>
         /// </summary>
@@ -42,5 +27,15 @@ namespace Navigator.Providers.Telegram.Actions.Update
         /// The offset.
         /// </summary>
         public string Offset { get; protected set; } = string.Empty;
+
+        /// <inheritdoc />
+        protected InlineQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
+        {
+            var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
+            
+            InlineQuery = update.InlineQuery;
+            Query = update.InlineQuery.Query;
+            Offset = update.InlineQuery.Offset;
+        }
     }
 }
