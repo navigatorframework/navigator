@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator", "Navigator\Navigator.csproj", "{6DBAD041-6623-4903-9939-254FDC4EBD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Samples.Echo", "Navigator.Samples.Echo\Navigator.Samples.Echo.csproj", "{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store", "Navigator.Extensions.Store\Navigator.Extensions.Store.csproj", "{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Actions", "Navigator.Extensions.Actions\Navigator.Extensions.Actions.csproj", "{2711B76D-B24C-4A3A-A33F-5A0077C49CB6}"
@@ -34,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Providers.Telegram", "Navigator.Providers.Telegram\Navigator.Providers.Telegram.csproj", "{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Samples.Echo", "Navigator.Samples.Echo\Navigator.Samples.Echo.csproj", "{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,10 +44,6 @@ Global
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBAD041-6623-4903-9939-254FDC4EBD60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -76,9 +72,12 @@ Global
 		{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7E8F867E-70E1-4C5B-AE65-A2C6822BFD6E} = {6D6A8E40-8C40-49AA-BEAD-B046D43F511A}
 		{F178DCF2-AD03-44C8-AF8F-95C60664DD10} = {895808DE-1CA6-406C-924A-7E43F293CF7D}
 		{E6F24E3B-A066-4572-94F0-14665E19EFC7} = {895808DE-1CA6-406C-924A-7E43F293CF7D}
 		{6DBAD041-6623-4903-9939-254FDC4EBD60} = {E6F24E3B-A066-4572-94F0-14665E19EFC7}
@@ -93,5 +92,6 @@ Global
 		{294C1716-C054-4585-B66E-C79D155AE684} = {E2FF61C3-F081-40C8-9CC3-BBE1F81543F6}
 		{DAA22477-BB29-475C-AD2C-905F81B4AD8E} = {895808DE-1CA6-406C-924A-7E43F293CF7D}
 		{8E0F6DCA-FAA4-4FA8-B9E0-75E9DC0F3573} = {DAA22477-BB29-475C-AD2C-905F81B4AD8E}
+		{4F4CEC5E-5FAF-4914-8EC0-E6BC9EB1B975} = {6D6A8E40-8C40-49AA-BEAD-B046D43F511A}
 	EndGlobalSection
 EndGlobal

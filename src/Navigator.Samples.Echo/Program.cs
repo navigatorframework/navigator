@@ -1,47 +1,34 @@
-using System;
-using System.IO;
-using Ele.Extensions.Configuration;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using ConfigurationExtensions = Ele.Extensions.Configuration.ConfigurationExtensions;
+using Navigator;
+using Navigator.Configuration;
+using Navigator.Providers.Telegram;
 
-namespace Navigator.Samples.Echo
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddNavigator(options =>
 {
-    public class Program
-    {
-        private static IConfiguration Configuration { get; } = ConfigurationExtensions.LoadConfiguration(Directory.GetCurrentDirectory());
+    options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]);
+    options.RegisterActionsFromAssemblies(typeof(Program).Assembly);
+}).WithProvider.Telegram(options => { options.SetTelegramToken(builder.Configuration["BOT_TOKEN"]); });
 
-        
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>(); 
-                    webBuilder.UseSerilog();
-                });
-        
-        public static void Main(string[] args)
-        {
-            Log.Logger = LoggingExtensions.LoadLogger(Configuration);
+var app = builder.Build();
 
-            try
-            {
-                var host = CreateHostBuilder(args).Build();
-
-                Log.Information("Starting WebApi");
-
-                host.Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "WebApi terminated unexpectedly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
-        }
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.MapNavigator()
+    .ForProvider.Telegram();
+
+app.Run();

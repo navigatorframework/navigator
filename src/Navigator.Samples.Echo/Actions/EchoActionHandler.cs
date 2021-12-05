@@ -4,6 +4,7 @@ using MediatR;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram;
+using Telegram.Bot;
 
 namespace Navigator.Samples.Echo.Actions
 {
