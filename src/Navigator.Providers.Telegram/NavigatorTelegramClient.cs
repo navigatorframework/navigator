@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Navigator.Configuration;
@@ -9,17 +10,17 @@ namespace Navigator.Providers.Telegram
     public class NavigatorTelegramClient : TelegramBotClient, INavigatorClient
     {
         public NavigatorTelegramClient(INavigatorOptions options) 
-            : base(options.GetTelegramToken())
+            : base(options.GetTelegramToken() ?? throw new ArgumentNullException())
         {
         }
 
         public async Task<BotUser> GetProfile(CancellationToken cancellationToken = default)
         {
-            var bot = await GetMeAsync(cancellationToken);
+            var bot = await this.GetProfile(cancellationToken);
 
             return new BotUser
             {
-                Id = bot.Id.ToString(),
+                Id = bot.Id,
                 Username = bot.Username
             };
         }
