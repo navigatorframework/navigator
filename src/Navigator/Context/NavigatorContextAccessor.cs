@@ -9,6 +9,13 @@ namespace Navigator.Context
             _navigatorContextFactory = navigatorContextFactory;
         }
 
-        public INavigatorContext NavigatorContext => _navigatorContextFactory.Retrieve();
+        public INavigatorContext NavigatorContext
+        {
+            get
+            {
+                var a = 1;
+                return _navigatorContextFactory.Retrieve();
+            }
+        }
     }
 }

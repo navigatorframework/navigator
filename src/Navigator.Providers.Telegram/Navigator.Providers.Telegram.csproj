@@ -15,6 +15,10 @@
         <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
     </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugType>full</DebugType>
+    </PropertyGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\Navigator\Navigator.csproj" />

@@ -6,7 +6,6 @@ using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
 using Navigator.Providers.Telegram.Actions.Messages;
 using Navigator.Providers.Telegram.Actions.Updates;
-using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -14,7 +13,7 @@ using Telegram.Bot.Types.Payments;
 
 namespace Navigator.Providers.Telegram
 {
-    internal class TelegramMiddleware
+    public class TelegramMiddleware
     {
         private readonly ILogger<TelegramMiddleware> _logger;
         private readonly INavigatorContextFactory _navigatorContextFactory;
@@ -51,7 +50,7 @@ namespace Navigator.Providers.Telegram
         {
             return update.Type switch
             {
-                UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => typeof(CommandAction).FullName,
+                UpdateType.Message when update.Message?.Entities?.First()?.Type == MessageEntityType.BotCommand => typeof(CommandAction).FullName,
                 UpdateType.Message => update.Message.Type switch
                 {
                     MessageType.Document => typeof(DocumentAction).FullName,
