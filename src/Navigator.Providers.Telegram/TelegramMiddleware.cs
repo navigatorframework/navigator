@@ -10,6 +10,7 @@ using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.Payments;
 
 namespace Navigator.Providers.Telegram
 {
@@ -53,7 +54,7 @@ namespace Navigator.Providers.Telegram
                 UpdateType.Message when update.Message.Entities?.First()?.Type == MessageEntityType.BotCommand => typeof(CommandAction).FullName,
                 UpdateType.Message => update.Message.Type switch
                 {
-                    // MessageType.Document => ActionType.ChatMembersAdded,
+                    MessageType.Document => typeof(DocumentAction).FullName,
                     // MessageType.Location => ActionType.ChatMembersAdded,
                     // MessageType.Contact => ActionType.ChatMembersAdded,
                     // MessageType.Game => ActionType.ChatMembersAdded,
@@ -67,8 +68,8 @@ namespace Navigator.Providers.Telegram
                     // MessageType.MessagePinned => ActionType.MessagePinned,
                     // MessageType.ChatPhotoDeleted => ActionType.ChatPhotoDeleted,
                     // MessageType.GroupCreated => ActionType.GroupCreated,
-                    // MessageType.SupergroupCreated => ActionType.SupergroupCreated,
-                    // MessageType.ChannelCreated => ActionType.ChannelCreated,
+                    MessageType.SupergroupCreated => typeof(SupergroupCreatedAction).FullName,
+                    MessageType.ChannelCreated => typeof(ChannelCreatedAction).FullName,
                     // MessageType.MigratedToSupergroup => ActionType.MigratedToSupergroup,
                     // MessageType.MigratedFromGroup => ActionType.MigratedFromGroup,
                     // MessageType.Dice => ActionType.MigratedFromGroup,
@@ -84,10 +85,10 @@ namespace Navigator.Providers.Telegram
                 UpdateType.ChosenInlineResult => typeof(ChosenInlineResultAction).FullName,
                 UpdateType.CallbackQuery => typeof(CallbackQueryAction).FullName,
                 UpdateType.EditedMessage => typeof(EditedMessageAction).FullName,
-                // UpdateType.ChannelPost => ActionType.ChannelPost,
+                UpdateType.ChannelPost => typeof(ChannelPostAction).FullName,
                 // UpdateType.EditedChannelPost => ActionType.EditedChannelPost,
-                // UpdateType.ShippingQuery => ActionType.ShippingQuery,
-                // UpdateType.PreCheckoutQuery => ActionType.PreCheckoutQuery,
+                UpdateType.ShippingQuery => typeof(ShippingQueryAction).FullName,
+                UpdateType.PreCheckoutQuery => typeof(PreCheckoutQuery).FullName,
                 UpdateType.Poll => typeof(PollAction).FullName,
                 // UpdateType.PollAnswer => typeof(PollAction).FullName,
                 // UpdateType.MyChatMember => typeof(UnknownAction).FullName,
