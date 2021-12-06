@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
@@ -23,20 +24,24 @@ namespace Navigator
             services.AddNavigatorContextServices();
 
             services.AddScoped<INavigatorContextExtension, OriginalEventContextExtension>();
-            
+
             services.AddScoped<IActionLauncher, ActionLauncher>();
 
             services.AddMediatR(navigatorBuilder.Options.GetActionsAssemblies());
-            
+
             services.Scan(scan => scan
                 .FromAssemblies(navigatorBuilder.Options.GetActionsAssemblies())
                 .AddClasses(classes => classes.AssignableTo<IAction>())
                 .UsingRegistrationStrategy(RegistrationStrategy.Append)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
-            
+
+            navigatorBuilder.Options.RegisterActions(services
+                .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
+                .Select(descriptor => descriptor.ImplementationType!));
+
             navigatorBuilder.RegisterOrReplaceOptions();
-            
+
             return navigatorBuilder;
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
 using Navigator.Context;
@@ -11,20 +12,19 @@ namespace Navigator.Actions
 {
     internal class ActionLauncher : IActionLauncher
     {
-        private readonly INavigatorContextAccessor _navigatorContextAccessor;
-        private readonly IEnumerable<IAction> _actions;
-        private readonly NavigatorOptions _navigatorOptions;
-        private readonly ISender _sender;
         private readonly ILogger<ActionLauncher> _logger;
-        
-        public ActionLauncher(IEnumerable<IAction> actions, NavigatorOptions navigatorOptions,
-            INavigatorContextAccessor navigatorContextAccessor, ISender sender, ILogger<ActionLauncher> logger)
+        private readonly NavigatorOptions _navigatorOptions;
+        private readonly INavigatorContextAccessor _navigatorContextAccessor;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ISender _sender;
+
+        public ActionLauncher(ILogger<ActionLauncher> logger, NavigatorOptions navigatorOptions, INavigatorContextAccessor navigatorContextAccessor, IServiceProvider serviceProvider, ISender sender)
         {
-            _actions = actions;
+            _logger = logger;
             _navigatorOptions = navigatorOptions;
             _navigatorContextAccessor = navigatorContextAccessor;
+            _serviceProvider = serviceProvider;
             _sender = sender;
-            _logger = logger;
         }
 
         public async Task Launch()
@@ -51,17 +51,20 @@ namespace Navigator.Actions
                 return Array.Empty<IAction>();
             }
 
+            var _actions = _navigatorOptions.RetrieveActions()
+                    .Where(a => a.Key == _navigatorContextAccessor.NavigatorContext.ActionType);
+            
             if (_navigatorOptions.MultipleActionsUsageIsEnabled())
             {
                 return _actions
-                    .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
+                    .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
                     .Where(a => a.CanHandleCurrentContext())
                     .OrderBy(a => a.Priority)
                     .AsEnumerable();
             }
 
             var action = _actions
-                .Where(a => a.Type == _navigatorContextAccessor.NavigatorContext.ActionType)
+                .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
                 .OrderBy(a => a.Priority)
                 .FirstOrDefault(a => a.CanHandleCurrentContext());
 

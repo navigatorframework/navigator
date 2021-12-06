@@ -39,7 +39,7 @@ namespace Navigator.Actions.Filters
 
         private string GenerateKey(TAction action)
         {
-            return $"{action.Type}:{_navigatorContext.Conversation.Chat.Id}";
+            return $"{action.GetType().GetActionType()}:{_navigatorContext.Conversation.Chat.Id}";
         }
     }
 }
