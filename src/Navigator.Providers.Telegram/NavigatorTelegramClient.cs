@@ -16,11 +16,11 @@ namespace Navigator.Providers.Telegram
 
         public async Task<BotUser> GetProfile(CancellationToken cancellationToken = default)
         {
-            var bot = await this.GetProfile(cancellationToken);
+            var bot = await this.GetMeAsync(cancellationToken);
 
             return new BotUser
             {
-                Id = bot.Id,
+                Id = bot.Id.ToString(),
                 Username = bot.Username
             };
         }
