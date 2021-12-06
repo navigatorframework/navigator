@@ -6,7 +6,7 @@ using Navigator.Context;
 
 namespace Navigator.Actions.Filters
 {
-    public class CooldownActionFilter<TAction> : ActionFilter<TAction> where TAction : IAction
+    public class CooldownActionFilter<TAction> : IActionMiddleware<TAction> where TAction : IAction
     {
         private readonly IDistributedCache _cache;
         private readonly INavigatorContext _navigatorContext;
@@ -16,7 +16,7 @@ namespace Navigator.Actions.Filters
             _navigatorContext = navigatorContextAccessor.NavigatorContext;
         }
 
-        public override async Task<Status> Handle(TAction action, CancellationToken cancellationToken, RequestHandlerDelegate<Status> next)
+        public async Task<Status> Handle(TAction action, CancellationToken cancellationToken, RequestHandlerDelegate<Status> next)
         {
             var key = GenerateKey(action);
             
