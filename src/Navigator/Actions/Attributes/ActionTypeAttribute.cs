@@ -1,4 +1,4 @@
-namespace Navigator.Actions;
+namespace Navigator.Actions.Attributes;
 
 [System.AttributeUsage(System.AttributeTargets.Class)]
 public class ActionTypeAttribute : System.Attribute

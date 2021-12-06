@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Navigator.Actions.Attributes;
 using Navigator.Configuration;
 
 namespace Navigator.Actions;

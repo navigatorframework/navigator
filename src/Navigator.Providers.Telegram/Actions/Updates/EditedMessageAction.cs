@@ -1,4 +1,5 @@
 using Navigator.Actions;
+using Navigator.Actions.Attributes;
 using Navigator.Context;
 using Navigator.Context.Extensions;
 using Telegram.Bot.Types;
