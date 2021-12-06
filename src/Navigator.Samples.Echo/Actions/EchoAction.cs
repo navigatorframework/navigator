@@ -1,22 +1,15 @@
-﻿using Navigator.Actions;
-using Navigator.Context;
-using Navigator.Providers.Telegram.Actions;
+﻿using Navigator.Context;
 using Navigator.Providers.Telegram.Actions.Messages;
 
 namespace Navigator.Samples.Echo.Actions
 {
     public class EchoAction : MessageAction
     {
-        public override ushort Priority { get; protected set; } = Navigator.Actions.Priority.High;
-
-        public string MessageToEcho { get; protected set; } = string.Empty;
+        public readonly string MessageToEcho;
 
         public EchoAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
-            if (!string.IsNullOrWhiteSpace(Message.Text))
-            {
-                MessageToEcho = Message.Text;
-            }
+            MessageToEcho = !string.IsNullOrWhiteSpace(Message.Text) ? Message.Text : string.Empty;
         }
 
         public override bool CanHandleCurrentContext()
