@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
@@ -51,19 +52,20 @@ namespace Navigator.Actions
                 return Array.Empty<IAction>();
             }
 
-            var _actions = _navigatorOptions.RetrieveActions()
-                    .Where(a => a.Key == _navigatorContextAccessor.NavigatorContext.ActionType);
+            var actions = _navigatorOptions.RetrieveActions()
+                    .Where(a => a.Key == _navigatorContextAccessor.NavigatorContext.ActionType)
+                    .ToImmutableList();
             
             if (_navigatorOptions.MultipleActionsUsageIsEnabled())
             {
-                return _actions
+                return actions
                     .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
                     .Where(a => a.CanHandleCurrentContext())
                     .OrderBy(a => a.Priority)
                     .AsEnumerable();
             }
-
-            var action = _actions
+            
+            var action = actions
                 .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
                 .OrderBy(a => a.Priority)
                 .FirstOrDefault(a => a.CanHandleCurrentContext());

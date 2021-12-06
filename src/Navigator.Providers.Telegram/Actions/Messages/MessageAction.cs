@@ -33,8 +33,8 @@ namespace Navigator.Providers.Telegram.Actions.Messages
         {
             var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
 
-            Message = update.Message;
-            IsReply = update.Message.ReplyToMessage is not null;
+            Message = update.Message!;
+            IsReply = update.Message!.ReplyToMessage is not null;
             IsForwarded = update.Message.ForwardDate is not null;
         }
     }

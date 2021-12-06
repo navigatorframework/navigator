@@ -33,7 +33,7 @@ namespace Navigator
                 .FromAssemblies(navigatorBuilder.Options.GetActionsAssemblies())
                 .AddClasses(classes => classes.AssignableTo<IAction>())
                 .UsingRegistrationStrategy(RegistrationStrategy.Append)
-                .AsImplementedInterfaces()
+                .AsSelf()
                 .WithScopedLifetime());
 
             navigatorBuilder.Options.RegisterActions(services
