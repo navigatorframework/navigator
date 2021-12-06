@@ -8,6 +8,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// A callback query based action.
     /// </summary>
+    [ActionType(nameof(CallbackQueryAction))]
     public abstract class CallbackQueryAction : BaseAction
     {
         /// <summary>

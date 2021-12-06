@@ -8,6 +8,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// Inline query based action.
     /// </summary>
+    [ActionType(nameof(InlineQueryAction))]
     public abstract class InlineQueryAction : BaseAction
     {
         /// <summary>

@@ -7,6 +7,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(DocumentAction))]
     public abstract class DocumentAction : BaseAction
     {
         /// <inheritdoc />

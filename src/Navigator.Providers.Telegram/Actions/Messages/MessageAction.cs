@@ -10,6 +10,7 @@ namespace Navigator.Providers.Telegram.Actions.Messages
     /// <summary>
     /// A message based action.
     /// </summary>
+    [ActionType(nameof(MessageAction))]
     public abstract class MessageAction : BaseAction
     {
         /// <summary>

@@ -8,6 +8,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(PollAction))]
     public abstract class PollAction : BaseAction
     {
         /// <summary>

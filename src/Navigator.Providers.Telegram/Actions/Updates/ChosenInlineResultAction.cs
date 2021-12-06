@@ -8,6 +8,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// Inline result based action.
     /// </summary>
+    [ActionType(nameof(ChosenInlineResultAction))]
     public abstract class ChosenInlineResultAction : BaseAction
     {
         /// <summary>

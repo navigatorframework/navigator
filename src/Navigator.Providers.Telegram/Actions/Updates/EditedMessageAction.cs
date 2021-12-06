@@ -8,6 +8,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(EditedMessageAction))]
     public abstract class EditedMessageAction : BaseAction
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(PreCheckoutQueryAction))]
     public abstract class PreCheckoutQueryAction : BaseAction
     {
         /// <inheritdoc />

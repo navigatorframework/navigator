@@ -3,6 +3,7 @@ using Navigator.Context;
 
 namespace Navigator.Providers.Telegram.Actions
 {
+    [ActionType(nameof(UnknownAction))]
     public abstract class UnknownAction : BaseAction
     { 
         /// <inheritdoc />

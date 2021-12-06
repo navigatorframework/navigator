@@ -6,6 +6,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(ChannelCreatedAction))]
     public abstract class ChannelCreatedAction : BaseAction
     {
         /// <inheritdoc />

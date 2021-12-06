@@ -6,6 +6,7 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// <summary>
     /// TODO
     /// </summary>
+    [ActionType(nameof(ChannelPostAction))]
     public abstract class ChannelPostAction : BaseAction
     {
         /// <inheritdoc />
