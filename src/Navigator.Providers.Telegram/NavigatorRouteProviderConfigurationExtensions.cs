@@ -37,12 +37,9 @@ namespace Navigator.Providers.Telegram
 
             if (telegramUpdate is not null)
             {
-                await using (var scope = context.RequestServices.CreateAsyncScope())
-                {
-                    var navigatorMiddleware = scope.ServiceProvider.GetRequiredService<TelegramMiddleware>();
+                var navigatorMiddleware = context.RequestServices.GetRequiredService<TelegramMiddleware>();
 
-                    await navigatorMiddleware.Process(telegramUpdate);
-                }
+                await navigatorMiddleware.Process(telegramUpdate);
             }
         }
         
