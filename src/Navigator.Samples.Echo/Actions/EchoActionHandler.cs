@@ -16,7 +16,7 @@ namespace Navigator.Samples.Echo.Actions
 
         public override async Task<Status> Handle(EchoAction action, CancellationToken cancellationToken)
         {
-            await NavigatorContext.Provider.GetTelegramClient().SendTextMessageAsync(NavigatorContext.GetTelegramChat(), 
+            await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
                 action.MessageToEcho, cancellationToken: cancellationToken);
 
             return Success();

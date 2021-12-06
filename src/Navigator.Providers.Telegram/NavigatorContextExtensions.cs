@@ -11,6 +11,16 @@ namespace Navigator.Providers.Telegram
     /// </summary>
     public static class NavigatorContextExtensions
     {
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static NavigatorTelegramClient GetTelegramClient(this INavigatorContext context)
+        {
+            return context.Provider.GetTelegramClient();
+        }
+        
         // #region User
         //
         // /// <summary>
@@ -74,11 +84,11 @@ namespace Navigator.Providers.Telegram
         {
             return ctx.GetOriginalEventOrDefault<Update>()?.Type switch
             {
-                UpdateType.CallbackQuery => ctx.GetOriginalEvent<Update>().CallbackQuery.Message.Chat,
-                UpdateType.Message => ctx.GetOriginalEvent<Update>().Message.Chat,
-                UpdateType.EditedMessage => ctx.GetOriginalEvent<Update>().EditedMessage.Chat,
-                UpdateType.ChannelPost => ctx.GetOriginalEvent<Update>().ChannelPost.Chat,
-                UpdateType.EditedChannelPost => ctx.GetOriginalEvent<Update>().EditedChannelPost.Chat,
+                UpdateType.CallbackQuery => ctx.GetOriginalEvent<Update>().CallbackQuery?.Message?.Chat,
+                UpdateType.Message => ctx.GetOriginalEvent<Update>().Message?.Chat,
+                UpdateType.EditedMessage => ctx.GetOriginalEvent<Update>().EditedMessage?.Chat,
+                UpdateType.ChannelPost => ctx.GetOriginalEvent<Update>().ChannelPost?.Chat,
+                UpdateType.EditedChannelPost => ctx.GetOriginalEvent<Update>().EditedChannelPost?.Chat,
                 _ => default
             };
         }
