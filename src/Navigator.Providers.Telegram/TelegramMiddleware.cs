@@ -50,10 +50,10 @@ namespace Navigator.Providers.Telegram
         {
             return update.Type switch
             {
-                UpdateType.Message when update.Message?.Entities?.First()?.Type == MessageEntityType.BotCommand => typeof(CommandAction).FullName,
-                UpdateType.Message => update.Message.Type switch
+                UpdateType.Message when update.Message?.Entities?.First().Type == MessageEntityType.BotCommand => nameof(CommandAction),
+                UpdateType.Message => update.Message?.Type switch
                 {
-                    MessageType.Document => typeof(DocumentAction).FullName,
+                    MessageType.Document => nameof(DocumentAction),
                     // MessageType.Location => ActionType.ChatMembersAdded,
                     // MessageType.Contact => ActionType.ChatMembersAdded,
                     // MessageType.Game => ActionType.ChatMembersAdded,
@@ -67,8 +67,8 @@ namespace Navigator.Providers.Telegram
                     // MessageType.MessagePinned => ActionType.MessagePinned,
                     // MessageType.ChatPhotoDeleted => ActionType.ChatPhotoDeleted,
                     // MessageType.GroupCreated => ActionType.GroupCreated,
-                    MessageType.SupergroupCreated => typeof(SupergroupCreatedAction).FullName,
-                    MessageType.ChannelCreated => typeof(ChannelCreatedAction).FullName,
+                    MessageType.SupergroupCreated => nameof(SupergroupCreatedAction),
+                    MessageType.ChannelCreated => nameof(ChannelCreatedAction),
                     // MessageType.MigratedToSupergroup => ActionType.MigratedToSupergroup,
                     // MessageType.MigratedFromGroup => ActionType.MigratedFromGroup,
                     // MessageType.Dice => ActionType.MigratedFromGroup,
@@ -78,21 +78,21 @@ namespace Navigator.Providers.Telegram
                     // MessageType.VoiceChatStarted => ActionType.MigratedFromGroup,
                     // MessageType.VoiceChatEnded => ActionType.MigratedFromGroup,
                     // MessageType.VoiceChatParticipantsInvited => ActionType.MigratedFromGroup,
-                    _ => typeof(MessageAction).FullName,
+                    _ => nameof(MessageAction),
                 },
-                UpdateType.InlineQuery => typeof(CommandAction).FullName,
-                UpdateType.ChosenInlineResult => typeof(ChosenInlineResultAction).FullName,
-                UpdateType.CallbackQuery => typeof(CallbackQueryAction).FullName,
-                UpdateType.EditedMessage => typeof(EditedMessageAction).FullName,
-                UpdateType.ChannelPost => typeof(ChannelPostAction).FullName,
+                UpdateType.InlineQuery => nameof(InlineQueryAction),
+                UpdateType.ChosenInlineResult => nameof(ChosenInlineResultAction),
+                UpdateType.CallbackQuery => nameof(CallbackQueryAction),
+                UpdateType.EditedMessage => nameof(EditedMessageAction),
+                UpdateType.ChannelPost => nameof(ChannelPostAction),
                 // UpdateType.EditedChannelPost => ActionType.EditedChannelPost,
-                UpdateType.ShippingQuery => typeof(ShippingQueryAction).FullName,
-                UpdateType.PreCheckoutQuery => typeof(PreCheckoutQuery).FullName,
-                UpdateType.Poll => typeof(PollAction).FullName,
+                UpdateType.ShippingQuery => nameof(ShippingQueryAction),
+                UpdateType.PreCheckoutQuery => nameof(PreCheckoutQuery),
+                UpdateType.Poll => nameof(PollAction),
                 // UpdateType.PollAnswer => typeof(PollAction).FullName,
                 // UpdateType.MyChatMember => typeof(UnknownAction).FullName,
                 // UpdateType.ChatMember => typeof(UnknownAction).FullName,
-                UpdateType.Unknown => typeof(UnknownAction).FullName,
+                UpdateType.Unknown => nameof(UnknownAction),
                 _ => default
             };
         }
