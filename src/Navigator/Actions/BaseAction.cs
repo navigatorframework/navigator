@@ -1,4 +1,5 @@
 using System;
+using Navigator.Actions.Attributes;
 using Navigator.Context;
 
 namespace Navigator.Actions
@@ -6,6 +7,7 @@ namespace Navigator.Actions
     /// <summary>
     /// Base action to use for any action.
     /// </summary>
+    [ActionPriority(Actions.Priority.Default)]
     public abstract class BaseAction : IAction
     {
         /// <summary>

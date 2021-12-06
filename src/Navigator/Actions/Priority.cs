@@ -2,8 +2,8 @@ namespace Navigator.Actions
 {
     public static class Priority
     {
-        public static ushort Low = 15000;
-        public static ushort Default = 10000;
-        public static ushort High = 5000;
+        public const ushort Low = 15000;
+        public const ushort Default = 10000;
+        public const ushort High = 5000;
     }
 }
