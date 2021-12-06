@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using Navigator.Context;
 
-namespace Navigator.Actions.Filters
+namespace Navigator.Actions.MIddleware
 {
     public class CooldownActionFilter<TAction> : IActionMiddleware<TAction> where TAction : IAction
     {
