@@ -10,9 +10,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// </summary>
     public abstract class InlineQueryAction : BaseAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(InlineQueryAction).FullName!;
-
         /// <summary>
         /// The original <see cref="Update.InlineQuery"/>
         /// </summary>

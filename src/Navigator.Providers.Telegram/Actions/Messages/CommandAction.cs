@@ -9,9 +9,6 @@ namespace Navigator.Providers.Telegram.Actions.Messages
     /// </summary>
     public abstract class CommandAction : MessageAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(CommandAction).FullName!;
-
         /// <summary>
         /// Command.
         /// </summary>

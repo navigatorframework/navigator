@@ -10,9 +10,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// </summary>
     public abstract class ChosenInlineResultAction : BaseAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(ChosenInlineResultAction).FullName!;
-
         /// <summary>
         /// The original chosen inline result.
         /// </summary>

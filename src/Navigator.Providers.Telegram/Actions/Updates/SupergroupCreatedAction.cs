@@ -9,9 +9,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     public abstract class SupergroupCreatedAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(SupergroupCreatedAction).FullName!;
-
-        /// <inheritdoc />
         protected SupergroupCreatedAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
             //TODO

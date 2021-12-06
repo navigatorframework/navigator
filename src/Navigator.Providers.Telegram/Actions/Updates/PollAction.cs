@@ -10,9 +10,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// </summary>
     public abstract class PollAction : BaseAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(PollAction).FullName!;
-
         /// <summary>
         /// The original Poll.
         /// </summary>

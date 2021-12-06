@@ -10,9 +10,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// </summary>
     public abstract class EditedMessageAction : BaseAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(EditedMessageAction).FullName!;
-
         /// <summary>
         /// TODO
         /// </summary>

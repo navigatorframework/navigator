@@ -10,9 +10,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     /// </summary>
     public abstract class CallbackQueryAction : BaseAction
     {
-        /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(CallbackQueryAction).FullName!;
-
         /// <summary>
         /// The original <see cref="Update.CallbackQuery"/>
         /// </summary>

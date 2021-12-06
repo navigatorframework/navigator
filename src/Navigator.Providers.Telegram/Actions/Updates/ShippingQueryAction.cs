@@ -9,9 +9,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     public abstract class ShippingQueryAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(ShippingQueryAction).FullName!;
-
-        /// <inheritdoc />
         protected ShippingQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
             //TODO

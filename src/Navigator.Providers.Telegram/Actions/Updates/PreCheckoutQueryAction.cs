@@ -9,9 +9,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     public abstract class PreCheckoutQueryAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(PreCheckoutQueryAction).FullName!;
-
-        /// <inheritdoc />
         protected PreCheckoutQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
             //TODO

@@ -9,9 +9,6 @@ namespace Navigator.Providers.Telegram.Actions.Updates
     public abstract class ChannelPostAction : BaseAction
     {
         /// <inheritdoc />
-        public override string Type { get; protected set; } = typeof(ChannelPostAction).FullName!;
-
-        /// <inheritdoc />
         protected ChannelPostAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
         {
             //TODO
