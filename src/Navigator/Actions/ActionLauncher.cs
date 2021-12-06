@@ -39,7 +39,7 @@ namespace Navigator.Actions
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, "Unhandled exception running {@Action}", action);
+                    _logger.LogError(e, "Unhandled exception running {ActionName} ({@ActionData})", action.GetType().Name, action);
                 }
             }
         }
