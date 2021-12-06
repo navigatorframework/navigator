@@ -12,9 +12,6 @@ namespace Navigator.Actions
         /// Used to access <see cref="INavigatorContext"/> inside the action.
         /// </summary>
         protected readonly INavigatorContextAccessor NavigatorContextAccessor;
-        
-        /// <inheritdoc />
-        public abstract string Type { get; protected set; }
 
         /// <inheritdoc />
         public virtual ushort Priority { get; protected set; } = Actions.Priority.Default;

@@ -9,11 +9,6 @@ namespace Navigator.Actions
     public interface IAction : IRequest<Status>
     {
         /// <summary>
-        /// Type of the action.
-        /// </summary>
-        string Type { get; }
-        
-        /// <summary>
         /// Priority of the action when launching multiple actions.
         /// </summary>
         ushort Priority { get; }
