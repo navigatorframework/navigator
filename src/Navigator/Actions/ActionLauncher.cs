@@ -14,18 +14,22 @@ namespace Navigator.Actions
     internal class ActionLauncher : IActionLauncher
     {
         private readonly ILogger<ActionLauncher> _logger;
-        private readonly NavigatorOptions _navigatorOptions;
         private readonly INavigatorContextAccessor _navigatorContextAccessor;
         private readonly IServiceProvider _serviceProvider;
         private readonly ISender _sender;
+        private readonly NavigatorOptions _navigatorOptions;
+        private readonly ImmutableDictionary<string, Type> _actions;
+        private readonly ImmutableDictionary<string, ushort> _priorities;
 
         public ActionLauncher(ILogger<ActionLauncher> logger, NavigatorOptions navigatorOptions, INavigatorContextAccessor navigatorContextAccessor, IServiceProvider serviceProvider, ISender sender)
         {
             _logger = logger;
-            _navigatorOptions = navigatorOptions;
             _navigatorContextAccessor = navigatorContextAccessor;
             _serviceProvider = serviceProvider;
             _sender = sender;
+            _navigatorOptions = navigatorOptions;
+            _actions = _navigatorOptions.RetrieveActions();
+            _priorities = _navigatorOptions.RetrievePriorities();
         }
 
         public async Task Launch()
@@ -52,22 +56,24 @@ namespace Navigator.Actions
                 return Array.Empty<IAction>();
             }
 
-            var actions = _navigatorOptions.RetrieveActions()
+            var actions = _actions
                     .Where(a => a.Key == _navigatorContextAccessor.NavigatorContext.ActionType)
                     .ToImmutableList();
             
             if (_navigatorOptions.MultipleActionsUsageIsEnabled())
             {
                 return actions
-                    .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
-                    .Where(a => a.CanHandleCurrentContext())
-                    .OrderBy(a => a.Priority)
+                    .Select(pair => ((IAction) _serviceProvider.GetService(pair.Value)!, pair.Value.FullName))
+                    .Where(a => a.Item1.CanHandleCurrentContext())
+                    .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
+                    .Select(a => a.Item1)
                     .AsEnumerable();
             }
             
             var action = actions
-                .Select(pair => (IAction) _serviceProvider.GetService(pair.Value)!)
-                .OrderBy(a => a.Priority)
+                .Select(pair => ((IAction) _serviceProvider.GetService(pair.Value)!, pair.Value.FullName))
+                .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
+                .Select(a => a.Item1)
                 .FirstOrDefault(a => a.CanHandleCurrentContext());
 
             return action is not null ? new[] {action} : Array.Empty<IAction>();

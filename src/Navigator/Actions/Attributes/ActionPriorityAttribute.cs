@@ -6,9 +6,10 @@ namespace Navigator.Actions.Attributes;
 [System.AttributeUsage(System.AttributeTargets.Class)]
 public class ActionPriorityAttribute : System.Attribute
 {
-    private ushort _priority;
+    public readonly ushort Priority;
+    
     public ActionPriorityAttribute(ushort priority)
     {
-        _priority = priority;
+        Priority = priority;
     }
 }

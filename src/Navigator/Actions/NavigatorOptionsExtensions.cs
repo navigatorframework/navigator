@@ -9,29 +9,51 @@ namespace Navigator.Actions;
 
 internal static class NavigatorOptionsExtensions
 {
-    #region NavigatorActions
+    #region NavigatorActionTypeCollection
         
-    private const string NavigatorActions = "_navigator.options.actions";
+    private const string NavigatorActionTypeCollection = "_navigator.options.action_type_collection";
 
     public static void RegisterActions(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
     {
-        navigatorOptions.TryRegisterOption(NavigatorActions, actions.ToImmutableDictionary(
+        navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actions.ToImmutableDictionary(
             type => type.GetActionType(), 
             type => type));
     }
 
     public static ImmutableDictionary<string,Type> RetrieveActions(this NavigatorOptions navigatorOptions)
     {
-        return navigatorOptions.RetrieveOption<ImmutableDictionary<string,Type>>(NavigatorActions) ?? ImmutableDictionary<string, Type>.Empty;
+        return navigatorOptions.RetrieveOption<ImmutableDictionary<string,Type>>(NavigatorActionTypeCollection) ?? ImmutableDictionary<string, Type>.Empty;
     }
 
     #endregion
+    
+    #region NavigatorActionPriorityCollection
+        
+    private const string NavigatorActionPriorityCollection = "_navigator.options.action_priority_collection";
 
+    public static void RegisterPriority(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
+    {
+        navigatorOptions.TryRegisterOption(NavigatorActionPriorityCollection, actions.ToImmutableDictionary(
+            type => type.FullName ?? string.Empty, 
+            type => type.GetActionPriority()));
+    }
+
+    public static ImmutableDictionary<string, ushort> RetrievePriorities(this NavigatorOptions navigatorOptions)
+    {
+        return navigatorOptions.RetrieveOption<ImmutableDictionary<string, ushort>>(NavigatorActionPriorityCollection) ?? ImmutableDictionary<string, ushort>.Empty;
+    }
+
+    #endregion
+    
     public static string GetActionType(this Type? type)
     {
+        ActionTypeAttribute? actionTypeAttribute = default;
+        
         if (type?.CustomAttributes.Any(data => data.AttributeType == typeof(ActionTypeAttribute)) ?? false)
         {
-            return type.Name;
+            actionTypeAttribute = Attribute.GetCustomAttribute(type, typeof(ActionTypeAttribute)) as ActionTypeAttribute;
+
+            return actionTypeAttribute?.ActionType ?? string.Empty;
         }
         
         if (type?.BaseType is not null && !type.BaseType.IsInterface)
@@ -44,7 +66,30 @@ internal static class NavigatorOptionsExtensions
             }
         }
 
-        return type?.Name ?? string.Empty;
+        if (type is not null)
+        {
+            actionTypeAttribute = Attribute.GetCustomAttribute(type, typeof(ActionTypeAttribute)) as ActionTypeAttribute;
+        }
+
+        return actionTypeAttribute?.ActionType ?? string.Empty;
+    }
+    public static ushort GetActionPriority(this Type? type)
+    {
+        if (type?.CustomAttributes.Any(data => data.AttributeType == typeof(ActionPriorityAttribute)) ?? false)
+        {
+            var priorityAttribute = (ActionPriorityAttribute) Attribute.GetCustomAttribute(type, typeof(ActionPriorityAttribute))!;
+
+            return priorityAttribute.Priority;
+        }
+        
+        if (type?.BaseType is not null && !type.BaseType.IsInterface)
+        {
+            var priority = GetActionPriority(type.BaseType);
+
+            return priority;
+        }
+
+        return Priority.Default;
     }
     
 }
