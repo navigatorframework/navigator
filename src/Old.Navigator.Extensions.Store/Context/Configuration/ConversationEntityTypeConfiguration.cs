@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Navigator.Extensions.Store.Abstractions.Entity;
+using Old.Navigator.Extensions.Store.Abstractions.Entity;
 
-namespace Navigator.Extensions.Store.Context.Configuration
+namespace Old.Navigator.Extensions.Store.Context.Configuration
 {
     /// <inheritdoc />
     public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<Conversation>

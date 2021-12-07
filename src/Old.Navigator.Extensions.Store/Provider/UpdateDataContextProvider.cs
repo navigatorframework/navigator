@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstractions;
+using Old.Navigator.Extensions.Store.Abstractions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Chat = Navigator.Extensions.Store.Abstractions.Entity.Chat;
-using User = Navigator.Extensions.Store.Abstractions.Entity.User;
+using Chat = Old.Navigator.Extensions.Store.Abstractions.Entity.Chat;
+using User = Old.Navigator.Extensions.Store.Abstractions.Entity.User;
 
-namespace Navigator.Extensions.Store.Provider
+namespace Old.Navigator.Extensions.Store.Provider
 {
     public class UpdateDataContextProvider<TUser, TChat> : INavigatorContextExtensionProvider
         where TUser : User

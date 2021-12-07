@@ -4,14 +4,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Navigator.Extensions.Store.Abstractions;
-using Navigator.Extensions.Store.Abstractions.Entity;
-using Navigator.Extensions.Store.Context;
+using Old.Navigator.Extensions.Store.Abstractions;
+using Old.Navigator.Extensions.Store.Abstractions.Entity;
+using Old.Navigator.Extensions.Store.Context;
 using Telegram.Bot.Types;
-using Chat = Navigator.Extensions.Store.Abstractions.Entity.Chat;
-using User = Navigator.Extensions.Store.Abstractions.Entity.User;
+using Chat = Old.Navigator.Extensions.Store.Abstractions.Entity.Chat;
+using User = Old.Navigator.Extensions.Store.Abstractions.Entity.User;
 
-namespace Navigator.Extensions.Store
+namespace Old.Navigator.Extensions.Store
 {
     public class DefaultEntityManager<TContext, TUser, TChat> : IEntityManager<TUser, TChat> where TContext : NavigatorDbContext<TUser, TChat>
         where TUser : User

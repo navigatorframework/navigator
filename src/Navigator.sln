@@ -1,8 +1,7 @@
-﻿﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator", "Navigator\Navigator.csproj", "{6DBAD041-6623-4903-9939-254FDC4EBD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store", "Navigator.Extensions.Store\Navigator.Extensions.Store.csproj", "{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old.Navigator.Extensions.Store", "Old.Navigator.Extensions.Store\Old.Navigator.Extensions.Store.csproj", "{9DEA166A-AE92-438F-8F3D-7C2F777ABBDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{6D6A8E40-8C40-49AA-BEAD-B046D43F511A}"
 EndProject
@@ -33,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Cooldown", "Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj", "{B7013C91-C736-4041-9952-5AC2471D9E9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store", "Navigator\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj", "{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +77,10 @@ Global
 		{B7013C91-C736-4041-9952-5AC2471D9E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7013C91-C736-4041-9952-5AC2471D9E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7013C91-C736-4041-9952-5AC2471D9E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F178DCF2-AD03-44C8-AF8F-95C60664DD10} = {895808DE-1CA6-406C-924A-7E43F293CF7D}
@@ -92,5 +97,6 @@ Global
 		{B7013C91-C736-4041-9952-5AC2471D9E9A} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 		{DAA22477-BB29-475C-AD2C-905F81B4AD8E} = {E6F24E3B-A066-4572-94F0-14665E19EFC7}
 		{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E} = {E6F24E3B-A066-4572-94F0-14665E19EFC7}
+		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 	EndGlobalSection
 EndGlobal

@@ -6,7 +6,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageVersion>0.9.100-beta</PackageVersion>
-        <PackageId>Navigator.Extensions.Store</PackageId>
+        <PackageId>Old.Navigator.Extensions.Store</PackageId>
         <Title>Navigator Extensions Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
         <Description>Store extension for Navigator Framework.</Description>

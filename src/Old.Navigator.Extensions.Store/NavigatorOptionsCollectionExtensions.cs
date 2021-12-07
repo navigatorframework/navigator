@@ -1,8 +1,8 @@
 using System;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstractions.Entity;
+using Old.Navigator.Extensions.Store.Abstractions.Entity;
 
-namespace Navigator.Extensions.Store
+namespace Old.Navigator.Extensions.Store
 {
     public static class NavigatorOptionsCollectionExtensions
     {

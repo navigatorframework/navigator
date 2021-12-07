@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
  using Microsoft.Extensions.DependencyInjection.Extensions;
 using Navigator.Abstractions;
-using Navigator.Extensions.Store.Abstractions;
-using Navigator.Extensions.Store.Abstractions.Entity;
-using Navigator.Extensions.Store.Context;
-using Navigator.Extensions.Store.Provider;
+using Old.Navigator.Extensions.Store.Abstractions;
+using Old.Navigator.Extensions.Store.Abstractions.Entity;
+using Old.Navigator.Extensions.Store.Context;
+using Old.Navigator.Extensions.Store.Provider;
 
- namespace Navigator.Extensions.Store
+namespace Old.Navigator.Extensions.Store
 {
     public static class NavigatorServiceCollectionExtensions
     {

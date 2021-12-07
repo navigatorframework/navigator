@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Navigator.Extensions.Store.Abstractions.Entity;
-using Navigator.Extensions.Store.Context.Configuration;
+using Old.Navigator.Extensions.Store.Abstractions.Entity;
+using Old.Navigator.Extensions.Store.Context.Configuration;
 
-namespace Navigator.Extensions.Store.Context
+namespace Old.Navigator.Extensions.Store.Context
 {
     public class NavigatorDbContext : NavigatorDbContext<User, Chat>
     {
