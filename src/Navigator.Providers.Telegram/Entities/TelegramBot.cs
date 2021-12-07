@@ -3,12 +3,17 @@ using Navigator.Entities;
 
 namespace Navigator.Providers.Telegram.Entities;
 
-public record TelegramBot(long ExternalIdentifier) : Bot(ExternalIdentifier.ToString())
+public class TelegramBot : Bot
 {
+    public TelegramBot(long externalIdentifier) : base(externalIdentifier.ToString())
+    {
+        ExternalIdentifier = externalIdentifier;
+    }
+
     /// <summary>
     /// Telegram identifier for the bot.
     /// </summary>
-    public long ExternalIdentifier { get; init; } = ExternalIdentifier;
+    public long ExternalIdentifier { get; init; }
     
     /// <summary>
     /// Username of the bot.
@@ -18,7 +23,7 @@ public record TelegramBot(long ExternalIdentifier) : Bot(ExternalIdentifier.ToSt
     /// <summary>
     /// First name of the bot.
     /// </summary>
-    public string FirstName { get; init; } = default!;
+    public string FirstName { get; init; }
     
     /// <summary>
     /// Last name of the bot.
@@ -51,5 +56,4 @@ public record TelegramBot(long ExternalIdentifier) : Bot(ExternalIdentifier.ToSt
     /// </remarks>
     /// </summary>
     public bool? SupportsInlineQueries { get; set; }
-
 }

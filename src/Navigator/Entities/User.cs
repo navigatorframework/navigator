@@ -8,7 +8,7 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents a user.
 /// </summary>
-public abstract record User
+public abstract class User
 {
     protected User(string input)
     {

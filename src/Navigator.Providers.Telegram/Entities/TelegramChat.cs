@@ -3,12 +3,17 @@ using Navigator.Entities;
 
 namespace Navigator.Providers.Telegram.Entities;
 
-public record TelegramChat(long ExternalIdentifier) : Chat(ExternalIdentifier.ToString())
+public class TelegramChat : Chat
 {
+    public TelegramChat(long externalIdentifier) : base(externalIdentifier.ToString())
+    {
+        ExternalIdentifier = externalIdentifier;
+    }
+
     /// <summary>
     /// Telegram identifier for the user.
     /// </summary>
-    public long ExternalIdentifier { get; init; } = ExternalIdentifier;
+    public long ExternalIdentifier { get; init; }
 
     /// <summary>
     /// Title of the chat, if any.

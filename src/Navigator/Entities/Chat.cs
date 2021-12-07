@@ -8,7 +8,7 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents a chat.
 /// </summary>
-public abstract record Chat
+public abstract class Chat
 {
     protected Chat(string input)
     {

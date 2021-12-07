@@ -2,12 +2,17 @@ using Navigator.Entities;
 
 namespace Navigator.Providers.Telegram.Entities;
 
-public record TelegramUser(long ExternalIdentifier) : User(ExternalIdentifier.ToString())
+public class TelegramUser : User
 {
+    public TelegramUser(long externalIdentifier) : base(externalIdentifier.ToString())
+    {
+        ExternalIdentifier = externalIdentifier;
+    }
+
     /// <summary>
     /// Telegram identifier for the user.
     /// </summary>
-    public long ExternalIdentifier { get; init; } = ExternalIdentifier;
+    public long ExternalIdentifier { get; init; }
 
     /// <summary>
     /// Username of the user, if any.
@@ -20,7 +25,7 @@ public record TelegramUser(long ExternalIdentifier) : User(ExternalIdentifier.To
     /// <summary>
     /// First name of the user.
     /// </summary>
-    public string FirstName { get; init; } = default!;
+    public string FirstName { get; init; }
     
     /// <summary>
     /// Last name of the user.

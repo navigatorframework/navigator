@@ -1,11 +1,23 @@
 using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
-namespace Navigator.Entities
+namespace Navigator.Entities;
+
+public abstract class Bot
 {
-    public abstract record Bot : User
+        
+    protected Bot(string input)
     {
-        protected Bot(string input) : base(input)
-        {
-        }
+        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());
     }
+        
+    /// <summary>
+    /// Id of the bot.
+    /// <remarks>
+    ///     Generally a deterministic Guid based on some kind of input.
+    /// </remarks>
+    /// </summary>
+    public Guid Id { get; init; }
 }
