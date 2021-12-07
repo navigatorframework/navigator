@@ -6,7 +6,8 @@ namespace Navigator.Actions
     /// TODO
     /// </summary>
     /// <typeparam name="TAction"></typeparam>
-    public interface IActionMiddleware<in TAction> : IPipelineBehavior<TAction, Status> where TAction : IAction
+    /// <typeparam name="TResponse"></typeparam>
+    public interface IActionMiddleware<in TAction, TResponse> : IPipelineBehavior<TAction, Status> where TAction : IAction
     {
     }
 }
