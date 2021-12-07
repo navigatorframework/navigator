@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Cooldo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store", "Navigator\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj", "{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store", "Navigator.Extensions.Store\Navigator.Extensions.Store.csproj", "{E7D6F33B-C30E-4ED2-878C-B2F899CF1805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
