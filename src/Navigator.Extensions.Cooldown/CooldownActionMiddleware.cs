@@ -6,7 +6,7 @@ using Navigator.Extensions.Cooldown.Extensions;
 
 namespace Navigator.Extensions.Cooldown;
 
-internal class CooldownActionMiddleware<TAction> : IActionMiddleware<TAction> where TAction : IAction
+internal class CooldownActionMiddleware<TAction, TResponse> : IActionMiddleware<TAction, TResponse> where TAction : IAction
 {
     private readonly IDistributedCache _cache;
     private readonly INavigatorContext _navigatorContext;
@@ -21,7 +21,7 @@ internal class CooldownActionMiddleware<TAction> : IActionMiddleware<TAction> wh
     {
         var key = GenerateKey(action);
             
-        var cooldownStatus = await _cache.GetAsync<string>(key, cancellationToken);
+        var cooldownStatus = await _cache.GetAsync(key, cancellationToken);
 
         if (cooldownStatus is not null)
         {
