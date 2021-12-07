@@ -5,7 +5,13 @@ namespace Navigator.Entities;
 /// </summary>
 public abstract record Conversation
 {
-    User User { get; init; }
-    
-    Chat Chat { get; init; }
+    /// <summary>
+    /// User
+    /// </summary>
+    public User User { get; init; }
+
+    /// <summary>
+    /// Chat
+    /// </summary>
+    public Chat Chat { get; init; }
 }

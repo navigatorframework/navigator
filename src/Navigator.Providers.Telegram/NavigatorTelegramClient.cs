@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Navigator.Configuration;
 using Navigator.Entities;
+using Navigator.Providers.Telegram.Entities;
 using Telegram.Bot;
 
 namespace Navigator.Providers.Telegram
@@ -14,14 +15,13 @@ namespace Navigator.Providers.Telegram
         {
         }
 
-        public async Task<BotUser> GetProfile(CancellationToken cancellationToken = default)
+        public async Task<Bot> GetProfile(CancellationToken cancellationToken = default)
         {
             var bot = await this.GetMeAsync(cancellationToken);
 
-            return new BotUser
+            return new TelegramBot(bot.Id)
             {
-                Id = bot.Id.ToString(),
-                Username = bot.Username
+                Username = bot.Username!
             };
         }
     }

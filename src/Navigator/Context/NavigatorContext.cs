@@ -16,7 +16,7 @@ namespace Navigator.Context
         /// <summary>
         /// 
         /// </summary>
-        public BotUser BotProfile { get; }
+        public Bot BotProfile { get; }
 
         public Dictionary<string, object?> Extensions { get; }
 
@@ -24,12 +24,12 @@ namespace Navigator.Context
 
         public string ActionType { get; }
         
-        public IConversation Conversation { get; }
+        public Conversation Conversation { get; }
 
         /// <summary>
         /// Builds a new Navigator Context.
         /// </summary>
-        public NavigatorContext(INavigatorProvider provider, BotUser botProfile, string actionType, IConversation conversation)
+        public NavigatorContext(INavigatorProvider provider, Bot botProfile, string actionType, Conversation conversation)
         {
             Provider = provider;
             BotProfile = botProfile;

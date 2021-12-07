@@ -21,13 +21,5 @@ public abstract record Chat
     ///     Generally a deterministic Guid based on some kind of input.
     /// </remarks>
     /// </summary>
-    Guid Id { get; init; }
-    
-    /// <summary>
-    /// Title of the chat, if any.
-    /// <remarks>
-    ///     Optional.
-    /// </remarks>
-    /// </summary>
-    string? Title { get; init; }
+    public Guid Id { get; init; }
 }

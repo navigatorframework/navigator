@@ -11,6 +11,6 @@ namespace Navigator
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<BotUser> GetProfile(CancellationToken cancellationToken = default);
+        Task<Bot> GetProfile(CancellationToken cancellationToken = default);
     }
 }

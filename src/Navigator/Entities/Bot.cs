@@ -2,9 +2,8 @@ using System;
 
 namespace Navigator.Entities
 {
-    public record Bot : User
+    public abstract record Bot : User
     {
-        /// <inheritdoc />
         protected Bot(string input) : base(input)
         {
         }

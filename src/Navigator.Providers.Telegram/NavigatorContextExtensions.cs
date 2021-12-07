@@ -21,7 +21,7 @@ namespace Navigator.Providers.Telegram
             return context.Provider.GetTelegramClient();
         }
         
-        // #region User
+        // #region TelegramUser
         //
         // /// <summary>
         // /// Get a Telegram user.

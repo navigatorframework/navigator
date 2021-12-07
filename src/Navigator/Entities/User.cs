@@ -21,5 +21,5 @@ public abstract record User
     ///     Generally a deterministic Guid based on some kind of input.
     /// </remarks>
     /// </summary>
-    Guid Id { get; init; }
+    public Guid Id { get; init; }
 }

@@ -1,6 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context;
+using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 
 namespace Navigator.Providers.Telegram.Actions.Messages
@@ -26,8 +27,8 @@ namespace Navigator.Providers.Telegram.Actions.Messages
         {
             var botProfile = NavigatorContextAccessor.NavigatorContext.BotProfile;
 
-            Command = Message.ExtractCommand(botProfile.Username) ?? string.Empty;
-            Arguments = Message.ExtractArguments(botProfile.Username);
+            Command = Message.ExtractCommand((botProfile as TelegramBot)?.Username) ?? string.Empty;
+            Arguments = Message.ExtractArguments();
         }
     }
 }

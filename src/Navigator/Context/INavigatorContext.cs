@@ -13,7 +13,7 @@ namespace Navigator.Context
         /// <summary>
         /// 
         /// </summary>
-        BotUser BotProfile { get; }
+        Bot BotProfile { get; }
 
         /// <summary>
         /// 
@@ -30,6 +30,6 @@ namespace Navigator.Context
         /// </summary>
         public string ActionType { get; }
         
-        public IConversation Conversation { get; }
+        public Conversation Conversation { get; }
     }
 }

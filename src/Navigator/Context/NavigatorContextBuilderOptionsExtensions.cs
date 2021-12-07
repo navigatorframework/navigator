@@ -60,15 +60,15 @@ namespace Navigator.Context
 
         private const string ConversationKey = "_navigator.context.options.conversation";
 
-        public static void SetConversation(this INavigatorContextBuilderOptions contextBuilderOptions, IConversation conversation)
+        public static void SetConversation(this INavigatorContextBuilderOptions contextBuilderOptions, Conversation conversation)
         {
             contextBuilderOptions.TryRegisterOption(ConversationKey, conversation);
 
         }
 
-        public static IConversation? GetConversationOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
+        public static Conversation? GetConversationOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
         {
-            return contextBuilderOptions.RetrieveOption<IConversation>(ConversationKey);
+            return contextBuilderOptions.RetrieveOption<Conversation>(ConversationKey);
         }
         
         #endregion

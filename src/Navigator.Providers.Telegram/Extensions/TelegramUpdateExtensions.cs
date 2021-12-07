@@ -1,8 +1,5 @@
 using System;
 using System.Linq;
-using Navigator.Context;
-using Navigator.Context.Extensions;
-using Navigator.Entities;
 using Navigator.Providers.Telegram.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -13,28 +10,28 @@ namespace Navigator.Providers.Telegram.Extensions
 {
     internal static class TelegramUpdateExtensions
     {
-        public static string? ExtractCommand(this Message message, string botName)
+        public static string? ExtractCommand(this Message message, string? botName)
         {
-            if (message.Entities?.First()?.Type != MessageEntityType.BotCommand) return default;
+            if (message.Entities?.First().Type != MessageEntityType.BotCommand) return default;
 
-            var command = message.EntityValues.First();
+            var command = message.EntityValues?.First();
 
-            if (!command.Contains('@')) return command;
+            if (command?.Contains('@') == false) return command;
 
-            if (!command.Contains(botName)) return default;
+            if (botName is not null && !command?.Contains(botName) == false) return default;
 
-            command = command.Substring(0, command.IndexOf('@'));
+            command = command?[..command.IndexOf('@')];
 
             return command;
         }
-        
-        public static string? ExtractArguments(this Message message, string botName)
+
+        public static string? ExtractArguments(this Message message)
         {
-            return message.Text.Contains(' ')
+            return message.Text is not null && message.Text.Contains(' ')
                 ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1)
                 : default;
         }
-        
+
         public static User? GetUserOrDefault(this Update update)
         {
             return update.Type switch
@@ -51,7 +48,7 @@ namespace Navigator.Providers.Telegram.Extensions
                 _ => default
             };
         }
-        
+
         public static Chat? GetChatOrDefault(this Update update)
         {
             return update.Type switch
@@ -65,7 +62,7 @@ namespace Navigator.Providers.Telegram.Extensions
             };
         }
 
-        public static IConversation GetConversation(this Update update)
+        public static TelegramConversation GetConversation(this Update update)
         {
             var user = update.GetUserOrDefault();
             var chat = update.GetChatOrDefault();
@@ -75,17 +72,15 @@ namespace Navigator.Providers.Telegram.Extensions
                 throw new Exception("TODO NAvigator exception no conversation could be built.");
             }
 
-            return new Conversation
+            return new TelegramConversation
             {
-                User = new Entities.User
+                User = new TelegramUser(user.Id)
                 {
-                    Id = user.Id.ToString(),
-                    Username = string.IsNullOrWhiteSpace(user.Username) ? chat.FirstName : user.Username
+                    Username = user.Username
                 },
-                Chat = new Entities.Chat
+                Chat = new TelegramChat(chat.Id)
                 {
-                    Id = chat.Id.ToString(),
-                    Title = string.IsNullOrWhiteSpace(chat.Title) ? chat.Username : chat.Title
+                    Title = chat.Title
                 }
             };
         }
