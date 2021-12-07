@@ -18,7 +18,7 @@ namespace Navigator.Providers.Telegram.Extensions
 
             if (command?.Contains('@') == false) return command;
 
-            if (botName is not null && !command?.Contains(botName) == false) return default;
+            if (botName is not null && !command?.Contains(botName) == true) return default;
 
             command = command?[..command.IndexOf('@')];
 
@@ -72,17 +72,18 @@ namespace Navigator.Providers.Telegram.Extensions
                 throw new Exception("TODO NAvigator exception no conversation could be built.");
             }
 
-            return new TelegramConversation
-            {
-                User = new TelegramUser(user.Id)
+            return new TelegramConversation(
+                new TelegramUser(user.Id)
                 {
-                    Username = user.Username
-                },
-                Chat = new TelegramChat(chat.Id)
+                    Username = user.Username,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    LanguageCode = user.LanguageCode
+                }, 
+                new TelegramChat(chat.Id)
                 {
                     Title = chat.Title
-                }
-            };
+                });
         }
     }
 }
