@@ -14,7 +14,7 @@ namespace Navigator.Context
         public INavigatorProvider Provider { get; }
 
         /// <summary>
-        /// 
+        /// Profile of the bot running in this context.
         /// </summary>
         public Bot BotProfile { get; }
 
