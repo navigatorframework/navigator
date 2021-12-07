@@ -4,7 +4,7 @@ using Navigator.Providers.Telegram.Actions.Messages;
 
 namespace Navigator.Samples.Echo.Actions;
 
-[Cooldown]
+[Cooldown(Seconds = 10)]
 public class CooldownAction : CommandAction
 {
     public CooldownAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
@@ -13,6 +13,6 @@ public class CooldownAction : CommandAction
 
     public override bool CanHandleCurrentContext()
     {
-        return Command == "/cooldown";
+        return Command.StartsWith("/cooldown", true, default);
     }
 }
