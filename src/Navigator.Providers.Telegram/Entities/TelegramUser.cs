@@ -16,4 +16,25 @@ public record TelegramUser(long ExternalIdentifier) : User(ExternalIdentifier.To
     /// </remarks>
     /// </summary>
     public string? Username { get; init; }
+
+    /// <summary>
+    /// First name of the user.
+    /// </summary>
+    public string FirstName { get; init; } = default!;
+    
+    /// <summary>
+    /// Last name of the user.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public string? LastName { get; init; }
+
+    /// <summary>
+    /// Language code of the user.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public string? LanguageCode { get; init; }
 }
