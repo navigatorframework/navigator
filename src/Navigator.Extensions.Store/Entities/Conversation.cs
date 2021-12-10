@@ -1,6 +1,6 @@
 namespace Navigator.Extensions.Store.Entities;
 
-public class Conversation
+public class Conversation : Navigator.Entities.Conversation
 {
     public Chat Chat { get; set; }
     

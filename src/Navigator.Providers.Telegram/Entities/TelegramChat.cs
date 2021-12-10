@@ -5,7 +5,7 @@ namespace Navigator.Providers.Telegram.Entities;
 
 public class TelegramChat : Chat
 {
-    public TelegramChat(long externalIdentifier) : base(externalIdentifier.ToString())
+    public TelegramChat(long externalIdentifier) : base($"{nameof(TelegramChat)}.{externalIdentifier.ToString()}")
     {
         ExternalIdentifier = externalIdentifier;
     }

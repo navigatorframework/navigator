@@ -5,6 +5,10 @@ namespace Navigator.Entities;
 /// </summary>
 public abstract class Conversation
 {
+    protected Conversation()
+    {
+    }
+    
     protected Conversation(User user, Chat chat)
     {
         User = user;

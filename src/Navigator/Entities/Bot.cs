@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Navigator.Entities;
 
-public abstract class Bot
+public abstract class Bot : User
 {
         
     protected Bot(string input)

@@ -1,6 +1,6 @@
 using Navigator.Extensions.Store.Entities;
 
-public class Chat
+public class Chat : Navigator.Entities.Chat
 {
     public Chat()
     {

@@ -5,7 +5,7 @@ namespace Navigator.Providers.Telegram.Entities;
 
 public class TelegramBot : Bot
 {
-    public TelegramBot(long externalIdentifier) : base(externalIdentifier.ToString())
+    public TelegramBot(long externalIdentifier) : base($"{nameof(TelegramBot)}.{externalIdentifier.ToString()}")
     {
         ExternalIdentifier = externalIdentifier;
     }

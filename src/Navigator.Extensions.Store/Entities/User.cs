@@ -1,6 +1,6 @@
 namespace Navigator.Extensions.Store.Entities;
 
-public class User
+public class User : Navigator.Entities.User
 {
     public User()
     {

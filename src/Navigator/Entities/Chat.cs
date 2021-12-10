@@ -10,6 +10,10 @@ namespace Navigator.Entities;
 /// </summary>
 public abstract class Chat
 {
+    protected Chat()
+    {
+    }
+    
     protected Chat(string input)
     {
         Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());

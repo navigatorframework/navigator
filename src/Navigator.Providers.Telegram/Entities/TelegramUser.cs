@@ -4,7 +4,7 @@ namespace Navigator.Providers.Telegram.Entities;
 
 public class TelegramUser : User
 {
-    public TelegramUser(long externalIdentifier) : base(externalIdentifier.ToString())
+    public TelegramUser(long externalIdentifier) : base($"{nameof(TelegramUser)}.{externalIdentifier.ToString()}")
     {
         ExternalIdentifier = externalIdentifier;
     }
