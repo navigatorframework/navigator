@@ -2,6 +2,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
 using Navigator.Configuration.Provider;
+using Navigator.Context;
 using Navigator.Providers.Telegram.Hosted;
 
 namespace Navigator.Providers.Telegram
@@ -22,6 +23,8 @@ namespace Navigator.Providers.Telegram
                     services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
 
                     services.AddScoped<INavigatorProvider, TelegramNavigatorProvider>();
+
+                    services.AddScoped<INavigatorContextBuilderConversationSource, TelegramNavigatorContextBuilderConversationSource>();
                     
                     services.AddScoped<TelegramMiddleware>();
                     

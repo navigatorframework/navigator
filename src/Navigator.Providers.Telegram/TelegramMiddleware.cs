@@ -40,7 +40,6 @@ namespace Navigator.Providers.Telegram
                 builder.SetProvider<TelegramNavigatorProvider>();
                 builder.SetActionType(actionType);
                 builder.SetOriginalEvent(update);
-                builder.SetConversation(update.GetConversation());
             });
 
             await _actionLauncher.Launch();
