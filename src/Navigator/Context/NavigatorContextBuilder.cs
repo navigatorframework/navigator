@@ -14,13 +14,15 @@ namespace Navigator.Context
         private readonly IEnumerable<INavigatorProvider> _navigatorProviders;
         private readonly IEnumerable<INavigatorContextExtension> _navigatorContextExtensions;
         private readonly INavigatorContextBuilderOptions _options;
+        private readonly INavigatorContextBuilderConversationSource _conversationSource;
 
-        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorProvider> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions)
+        public NavigatorContextBuilder(ILogger<NavigatorContextBuilder> logger, IEnumerable<INavigatorProvider> navigatorClients, IEnumerable<INavigatorContextExtension> navigatorContextExtensions, INavigatorContextBuilderConversationSource conversationSource)
         {
             _logger = logger;
             _navigatorProviders = navigatorClients;
             _navigatorContextExtensions = navigatorContextExtensions;
-            
+            _conversationSource = conversationSource;
+
             _options = new NavigatorContextBuilderOptions();
         }
 
@@ -38,7 +40,8 @@ namespace Navigator.Context
             }
 
             var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
-            var conversation = _options.GetConversationOrDefault() ?? throw new InvalidOperationException();
+
+            var conversation = await _conversationSource.GetConversationAsync(_options.GetOriginalEventOrDefault);
             
             INavigatorContext context = new NavigatorContext(provider, await provider.GetClient().GetProfile(), actionType, conversation);
 
