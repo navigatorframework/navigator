@@ -41,7 +41,7 @@ namespace Navigator.Context
 
             var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
 
-            var conversation = await _conversationSource.GetConversationAsync(_options.GetOriginalEventOrDefault);
+            var conversation = await _conversationSource.GetConversationAsync(_options.GetOriginalEventOrDefault());
             
             INavigatorContext context = new NavigatorContext(provider, await provider.GetClient().GetProfile(), actionType, conversation);
 
