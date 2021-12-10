@@ -1,6 +1,8 @@
 using System;
 using Navigator.Context;
 using Navigator.Context.Extensions;
+using Navigator.Context.Extensions.Bundled;
+using Navigator.Context.Extensions.Bundled.OriginalEvent;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
