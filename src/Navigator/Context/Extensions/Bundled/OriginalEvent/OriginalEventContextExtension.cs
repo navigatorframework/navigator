@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Navigator.Context.Extensions
+namespace Navigator.Context.Extensions.Bundled.OriginalEvent
 {
-    public class OriginalEventContextExtension : INavigatorContextExtension
+    internal class OriginalEventContextExtension : INavigatorContextExtension
     {
         public const string OriginalEventKey = "_navigator.extensions.original_event";
         

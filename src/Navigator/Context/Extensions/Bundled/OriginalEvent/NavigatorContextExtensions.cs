@@ -1,10 +1,11 @@
-using System;
 using System.Collections.Generic;
 
-namespace Navigator.Context.Extensions
+namespace Navigator.Context.Extensions.Bundled.OriginalEvent
 {
     public static class NavigatorContextExtensions
     {
+        #region OriginalEvent
+
         public static TEvent GetOriginalEvent<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
         {
             var update = navigatorContext.GetOriginalEventOrDefault<TEvent>();
@@ -23,5 +24,7 @@ namespace Navigator.Context.Extensions
 
             return default;
         }
+
+        #endregion
     }
 }
