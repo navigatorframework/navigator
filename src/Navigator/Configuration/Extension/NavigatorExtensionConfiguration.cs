@@ -1,39 +1,38 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Navigator.Configuration.Extension
+namespace Navigator.Configuration.Extension;
+
+/// <summary>
+/// Provides a entry point for configuring new extensions for Navigator.
+/// </summary>
+public class NavigatorExtensionConfiguration
 {
+    private readonly NavigatorConfiguration _navigatorConfiguration;
+
     /// <summary>
-    /// Provides a entry point for configuring new extensions for Navigator.
+    /// Default constructor for <see cref="NavigatorExtensionConfiguration"/>.
     /// </summary>
-    public class NavigatorExtensionConfiguration
+    /// <param name="navigatorConfiguration"></param>
+    public NavigatorExtensionConfiguration(NavigatorConfiguration navigatorConfiguration)
     {
-        private readonly NavigatorConfiguration _navigatorConfiguration;
+        _navigatorConfiguration = navigatorConfiguration;
+    }
 
-        /// <summary>
-        /// Default constructor for <see cref="NavigatorExtensionConfiguration"/>.
-        /// </summary>
-        /// <param name="navigatorConfiguration"></param>
-        public NavigatorExtensionConfiguration(NavigatorConfiguration navigatorConfiguration)
-        {
-            _navigatorConfiguration = navigatorConfiguration;
-        }
+    /// <summary>
+    /// Configure a new extension using this method.
+    /// </summary>
+    /// <param name="optionsAction"></param>
+    /// <param name="servicesAction"></param>
+    /// <returns></returns>
+    public NavigatorConfiguration Extension(Action<NavigatorOptions>? optionsAction, Action<IServiceCollection>? servicesAction)
+    {
+        optionsAction?.Invoke(_navigatorConfiguration.Options);
 
-        /// <summary>
-        /// Configure a new extension using this method.
-        /// </summary>
-        /// <param name="optionsAction"></param>
-        /// <param name="servicesAction"></param>
-        /// <returns></returns>
-        public NavigatorConfiguration Extension(Action<NavigatorOptions>? optionsAction, Action<IServiceCollection>? servicesAction)
-        {
-            optionsAction?.Invoke(_navigatorConfiguration.Options);
+        servicesAction?.Invoke(_navigatorConfiguration.Services);
 
-            servicesAction?.Invoke(_navigatorConfiguration.Services);
-
-            _navigatorConfiguration.RegisterOrReplaceOptions();
+        _navigatorConfiguration.RegisterOrReplaceOptions();
             
-            return _navigatorConfiguration;
-        }
+        return _navigatorConfiguration;
     }
 }

@@ -4,31 +4,30 @@ using Navigator.Context;
 using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 
-namespace Navigator.Providers.Telegram.Actions.Messages
+namespace Navigator.Providers.Telegram.Actions.Messages;
+
+/// <summary>
+/// Command based action.
+/// </summary>
+[ActionType(nameof(CommandAction))]
+public abstract class CommandAction : MessageAction
 {
     /// <summary>
-    /// Command based action.
+    /// Command.
     /// </summary>
-    [ActionType(nameof(CommandAction))]
-    public abstract class CommandAction : MessageAction
+    public readonly string Command;
+
+    /// <summary>
+    /// Any arguments passed with the command. If no arguments were passed, it will be null.
+    /// </summary>
+    public readonly string? Arguments;
+
+    /// <inheritdoc />
+    protected CommandAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        /// <summary>
-        /// Command.
-        /// </summary>
-        public readonly string Command;
+        var botProfile = NavigatorContextAccessor.NavigatorContext.BotProfile;
 
-        /// <summary>
-        /// Any arguments passed with the command. If no arguments were passed, it will be null.
-        /// </summary>
-        public readonly string? Arguments;
-
-        /// <inheritdoc />
-        protected CommandAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
-        {
-            var botProfile = NavigatorContextAccessor.NavigatorContext.BotProfile;
-
-            Command = Message.ExtractCommand((botProfile as TelegramBot)?.Username) ?? string.Empty;
-            Arguments = Message.ExtractArguments();
-        }
+        Command = Message.ExtractCommand((botProfile as TelegramBot)?.Username) ?? string.Empty;
+        Arguments = Message.ExtractArguments();
     }
 }

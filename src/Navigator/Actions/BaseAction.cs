@@ -2,37 +2,36 @@ using System;
 using Navigator.Actions.Attributes;
 using Navigator.Context;
 
-namespace Navigator.Actions
+namespace Navigator.Actions;
+
+/// <summary>
+/// Base action to use for any action.
+/// </summary>
+[ActionPriority(Actions.Priority.Default)]
+public abstract class BaseAction : IAction
 {
     /// <summary>
-    /// Base action to use for any action.
+    /// Used to access <see cref="INavigatorContext"/> inside the action.
     /// </summary>
-    [ActionPriority(Actions.Priority.Default)]
-    public abstract class BaseAction : IAction
-    {
-        /// <summary>
-        /// Used to access <see cref="INavigatorContext"/> inside the action.
-        /// </summary>
-        protected readonly INavigatorContextAccessor NavigatorContextAccessor;
+    protected readonly INavigatorContextAccessor NavigatorContextAccessor;
 
-        /// <inheritdoc />
-        public virtual ushort Priority { get; protected set; } = Actions.Priority.Default;
+    /// <inheritdoc />
+    public virtual ushort Priority { get; protected set; } = Actions.Priority.Default;
         
-        /// <summary>
-        /// Timestamp of the request on creation.
-        /// </summary>
-        public DateTime Timestamp { get; }
+    /// <summary>
+    /// Timestamp of the request on creation.
+    /// </summary>
+    public DateTime Timestamp { get; }
 
-        /// <summary>
-        /// Default constructor for <see cref="BaseAction"/>
-        /// </summary>
-        public BaseAction(INavigatorContextAccessor navigatorContextAccessor)
-        {
-            NavigatorContextAccessor = navigatorContextAccessor;
-            Timestamp = DateTime.UtcNow;
-        }
-
-        /// <inheritdoc />
-        public abstract bool CanHandleCurrentContext();
+    /// <summary>
+    /// Default constructor for <see cref="BaseAction"/>
+    /// </summary>
+    public BaseAction(INavigatorContextAccessor navigatorContextAccessor)
+    {
+        NavigatorContextAccessor = navigatorContextAccessor;
+        Timestamp = DateTime.UtcNow;
     }
+
+    /// <inheritdoc />
+    public abstract bool CanHandleCurrentContext();
 }

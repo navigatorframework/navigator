@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Navigator.Actions
+namespace Navigator.Actions;
+
+public interface IActionLauncher
 {
-    public interface IActionLauncher
-    {
-        Task Launch();
-    }
+    Task Launch();
 }

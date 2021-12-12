@@ -1,7 +1,6 @@
-namespace Navigator.Replies
+namespace Navigator.Replies;
+
+public class ReplyBuilderOptions
 {
-    public class ReplyBuilderOptions
-    {
         
-    }
 }

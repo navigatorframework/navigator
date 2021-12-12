@@ -1,9 +1,8 @@
 using Navigator.Configuration;
 
-namespace Navigator.Providers.Telegram
+namespace Navigator.Providers.Telegram;
+
+public class NavigatorTelegramProviderOptions : NavigatorOptions
 {
-    public class NavigatorTelegramProviderOptions : NavigatorOptions
-    {
         
-    }
 }

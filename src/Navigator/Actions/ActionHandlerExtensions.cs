@@ -1,7 +1,6 @@
-namespace Navigator.Actions
+namespace Navigator.Actions;
+
+public class ActionHandlerExtensions
 {
-    public class ActionHandlerExtensions
-    {
         
-    }
 }

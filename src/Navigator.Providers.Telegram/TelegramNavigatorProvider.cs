@@ -2,25 +2,24 @@ using System;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram
+namespace Navigator.Providers.Telegram;
+
+public class TelegramNavigatorProvider : INavigatorProvider
 {
-    public class TelegramNavigatorProvider : INavigatorProvider
+    private readonly NavigatorTelegramClient _client;
+
+    public TelegramNavigatorProvider(NavigatorTelegramClient client)
     {
-        private readonly NavigatorTelegramClient _client;
-
-        public TelegramNavigatorProvider(NavigatorTelegramClient client)
-        {
-            _client = client;
-        }
+        _client = client;
+    }
         
-        public INavigatorClient GetClient()
-        {
-            return _client;
-        }
+    public INavigatorClient GetClient()
+    {
+        return _client;
+    }
 
-        public Task HandleReply()
-        {
-            throw new NotImplementedException();
-        }
+    public Task HandleReply()
+    {
+        throw new NotImplementedException();
     }
 }

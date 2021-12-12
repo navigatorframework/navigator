@@ -2,38 +2,37 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Navigator.Context
+namespace Navigator.Context;
+
+internal class NavigatorContextFactory : INavigatorContextFactory
 {
-    public class NavigatorContextFactory : INavigatorContextFactory
+    private readonly ILogger<NavigatorContextFactory> _logger;
+    private readonly INavigatorContextBuilder _navigatorContextBuilder;
+    private INavigatorContext? NavigatorContext { get; set; }
+
+    public NavigatorContextFactory(ILogger<NavigatorContextFactory> logger, INavigatorContextBuilder navigatorContextBuilder)
     {
-        private readonly ILogger<NavigatorContextFactory> _logger;
-        private readonly INavigatorContextBuilder _navigatorContextBuilder;
-        private INavigatorContext NavigatorContext { get; set; }
+        _logger = logger;
+        _navigatorContextBuilder = navigatorContextBuilder;
+    }
 
-        public NavigatorContextFactory(ILogger<NavigatorContextFactory> logger, INavigatorContextBuilder navigatorContextBuilder)
+    public async Task Supply(Action<INavigatorContextBuilderOptions> action)
+    {
+        try
         {
-            _logger = logger;
-            _navigatorContextBuilder = navigatorContextBuilder;
-        }
-
-        public async Task Supply(Action<INavigatorContextBuilderOptions> action)
-        {
-            try
-            {
-                _logger.LogTrace("Building a new NavigatorContext");
+            _logger.LogTrace("Building a new NavigatorContext");
                 
-                NavigatorContext = await _navigatorContextBuilder.Build(action);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unhandled exception building NavigatorContext");
-                throw;
-            }
+            NavigatorContext = await _navigatorContextBuilder.Build(action);
         }
-
-        public INavigatorContext Retrieve()
+        catch (Exception e)
         {
-            return NavigatorContext ?? throw new NullReferenceException();
+            _logger.LogError(e, "Unhandled exception building NavigatorContext");
+            throw;
         }
+    }
+
+    public INavigatorContext Retrieve()
+    {
+        return NavigatorContext ?? throw new NullReferenceException();
     }
 }

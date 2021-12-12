@@ -1,35 +1,34 @@
 using System.Collections.Generic;
 using Navigator.Entities;
 
-namespace Navigator.Context
+namespace Navigator.Context;
+
+public interface INavigatorContext
 {
-    public interface INavigatorContext
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        INavigatorProvider Provider { get; }
+    /// <summary>
+    /// 
+    /// </summary>
+    INavigatorProvider Provider { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        Bot BotProfile { get; }
+    /// <summary>
+    /// 
+    /// </summary>
+    Bot BotProfile { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        Dictionary<string, object?> Extensions { get; }
+    /// <summary>
+    /// 
+    /// </summary>
+    Dictionary<string, object?> Extensions { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        Dictionary<string, string> Items { get; }
+    /// <summary>
+    /// 
+    /// </summary>
+    Dictionary<string, string> Items { get; }
         
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ActionType { get; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ActionType { get; }
         
-        public Conversation Conversation { get; }
-    }
+    public Conversation Conversation { get; }
 }

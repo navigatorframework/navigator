@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Navigator.Context.Extensions
+namespace Navigator.Context.Extensions;
+
+public interface INavigatorContextExtension
 {
-    public interface INavigatorContextExtension
-    {
-        Task<INavigatorContext> Extend(INavigatorContext navigatorContext, INavigatorContextBuilderOptions builderOptions);
-    }
+    Task<INavigatorContext> Extend(INavigatorContext navigatorContext, INavigatorContextBuilderOptions builderOptions);
 }

@@ -1,16 +1,15 @@
 using System.Threading.Tasks;
 
-namespace Navigator
+namespace Navigator;
+
+/// <summary>
+/// Represents a provider for Navigator.
+/// </summary>
+public interface INavigatorProvider
 {
     /// <summary>
-    /// Represents a provider for Navigator.
+    /// Gets the specific client for this provider. 
     /// </summary>
-    public interface INavigatorProvider
-    {
-        /// <summary>
-        /// Gets the specific client for this provider. 
-        /// </summary>
-        /// <returns>An implementation of <see cref="INavigatorClient"/></returns>
-        INavigatorClient GetClient();
-    }
+    /// <returns>An implementation of <see cref="INavigatorClient"/></returns>
+    INavigatorClient GetClient();
 }

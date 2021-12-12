@@ -6,25 +6,24 @@ using Navigator.Context.Extensions.Bundled;
 using Navigator.Context.Extensions.Bundled.OriginalEvent;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions.Updates
+namespace Navigator.Providers.Telegram.Actions.Updates;
+
+/// <summary>
+/// TODO
+/// </summary>
+[ActionType(nameof(PollAction))]
+public abstract class PollAction : BaseAction
 {
     /// <summary>
-    /// TODO
+    /// The original Poll.
     /// </summary>
-    [ActionType(nameof(PollAction))]
-    public abstract class PollAction : BaseAction
+    public Poll Poll { get; protected set; }
+
+    /// <inheritdoc />
+    protected PollAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        /// <summary>
-        /// The original Poll.
-        /// </summary>
-        public Poll Poll { get; protected set; }
+        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
 
-        /// <inheritdoc />
-        protected PollAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
-        {
-            var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
-
-            Poll = update.Poll;
-        }
+        Poll = update.Poll;
     }
 }

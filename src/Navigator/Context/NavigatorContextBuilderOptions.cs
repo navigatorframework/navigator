@@ -1,42 +1,41 @@
 using System.Collections.Generic;
 using Navigator.Entities;
 
-namespace Navigator.Context
+namespace Navigator.Context;
+
+public class NavigatorContextBuilderOptions : INavigatorContextBuilderOptions
 {
-    public class NavigatorContextBuilderOptions : INavigatorContextBuilderOptions
+    private readonly Dictionary<string, object> _options;
+
+    public NavigatorContextBuilderOptions()
     {
-        private readonly Dictionary<string, object> _options;
+        _options = new Dictionary<string, object>();
+    }
 
-        public NavigatorContextBuilderOptions()
-        {
-            _options = new Dictionary<string, object>();
-        }
-
-        public bool TryRegisterOption(string key, object option)
-        {
-            return _options.TryAdd(key, option);
-        }
+    public bool TryRegisterOption(string key, object option)
+    {
+        return _options.TryAdd(key, option);
+    }
         
-        public void ForceRegisterOption(string key, object option)
-        {
-            _options.Remove(key);
+    public void ForceRegisterOption(string key, object option)
+    {
+        _options.Remove(key);
 
-            TryRegisterOption(key, option);
+        TryRegisterOption(key, option);
+    }
+
+    public TType? RetrieveOption<TType>(string key)
+    {
+        if (_options.TryGetValue(key, out var option))
+        {
+            return (TType) option;
         }
 
-        public TType? RetrieveOption<TType>(string key)
-        {
-            if (_options.TryGetValue(key, out var option))
-            {
-                return (TType) option;
-            }
+        return default;
+    }
 
-            return default;
-        }
-
-        public Dictionary<string, object> RetrieveAllOptions()
-        {
-            return _options;
-        }
+    public Dictionary<string, object> RetrieveAllOptions()
+    {
+        return _options;
     }
 }
