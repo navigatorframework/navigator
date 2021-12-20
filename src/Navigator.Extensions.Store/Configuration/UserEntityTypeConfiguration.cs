@@ -4,9 +4,9 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Configuration;
 
-public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
+public class UserEntityTypeConfiguration : IEntityTypeConfiguration<UniversalUser>
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public void Configure(EntityTypeBuilder<UniversalUser> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -15,7 +15,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasMany(e => e.Chats)
             .WithMany(e => e.Users)
-            .UsingEntity<Conversation>(
+            .UsingEntity<UniversalConversation>(
                 e => e.HasOne(e => e.Chat)
                     .WithMany(e => e.Conversations),
                 e=> e.HasOne(e => e.User)
