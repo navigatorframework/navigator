@@ -4,19 +4,10 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store;
 
-public class NavigatorDbContext : NavigatorDbContext<User, Chat>
+public class NavigatorDbContext : DbContext
 {
-    public NavigatorDbContext(DbContextOptions options) : base(options)
-    {
-    }
-}
-
-public class NavigatorDbContext<TUser, TChat> : DbContext
-    where TUser : User
-    where TChat : Chat
-{
-    public DbSet<TUser> Users { get; set; }
-    public DbSet<TChat> Chats { get; set; }
+    public DbSet<UniversalUser> Users { get; set; }
+    public DbSet<UniversalChat> Chats { get; set; }
 
     protected DbSet<INavigatorProviderChatEntity> NavigatorProviderUserEntities { get; set; }
     protected DbSet<INavigatorProviderChatEntity> NavigatorProviderChatEntities { get; set; }
