@@ -1,11 +1,11 @@
 using Navigator.Extensions.Store.Entities;
 
-public class Chat : Navigator.Entities.Chat
+public class UniversalChat : Navigator.Entities.Chat
 {
-    public Chat()
+    public UniversalChat()
     {
         ProviderEntities = new List<INavigatorProviderChatEntity>();
-        Users = new List<User>();
+        Users = new List<UniversalUser>();
     }
 
     public Guid Id { get; set; }
@@ -15,9 +15,9 @@ public class Chat : Navigator.Entities.Chat
     /// <summary>
     /// Users related to the chat.
     /// </summary>
-    public ICollection<User> Users { get; set; }
+    public ICollection<UniversalUser> Users { get; set; }
     
-    public ICollection<Conversation> Conversations { get; set; }
+    public ICollection<UniversalConversation> Conversations { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.

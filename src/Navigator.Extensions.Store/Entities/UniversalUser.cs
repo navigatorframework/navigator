@@ -1,11 +1,11 @@
 namespace Navigator.Extensions.Store.Entities;
 
-public class User : Navigator.Entities.User
+public class UniversalUser : Navigator.Entities.User
 {
-    public User()
+    public UniversalUser()
     {
         ProviderEntities = new List<INavigatorProviderUserEntity>();
-        Chats = new List<Chat>();
+        Chats = new List<UniversalChat>();
     }
     public Guid Id { get; set; }
     
@@ -14,9 +14,9 @@ public class User : Navigator.Entities.User
     /// <summary>
     /// Chats related to the user.
     /// </summary>
-    public IList<Chat> Chats { get; set; }
+    public IList<UniversalChat> Chats { get; set; }
     
-    public ICollection<Conversation> Conversations { get; set; }
+    public ICollection<UniversalConversation> Conversations { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.

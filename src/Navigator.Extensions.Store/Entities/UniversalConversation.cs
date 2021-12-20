@@ -1,10 +1,10 @@
 namespace Navigator.Extensions.Store.Entities;
 
-public class Conversation : Navigator.Entities.Conversation
+public class UniversalConversation : Navigator.Entities.Conversation
 {
-    public Chat Chat { get; set; }
+    public new UniversalChat Chat { get; set; }
     
-    public User User { get; set; }
+    public new UniversalUser User { get; set; }
     
     /// <summary>
     /// Date of first interaction for this chat.
