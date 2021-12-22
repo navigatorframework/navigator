@@ -8,9 +8,8 @@ public class NavigatorDbContext : DbContext
 {
     public DbSet<UniversalUser> Users { get; set; }
     public DbSet<UniversalChat> Chats { get; set; }
-
-    protected DbSet<INavigatorProviderChatEntity> NavigatorProviderUserEntities { get; set; }
-    protected DbSet<INavigatorProviderChatEntity> NavigatorProviderChatEntities { get; set; }
+    public DbSet<UniversalConversation> Conversations { get; set; }
+    public DbSet<UniversalProfile> Profiles { get; set; }
 
     protected NavigatorDbContext()
     {
@@ -27,5 +26,10 @@ public class NavigatorDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ProfileEntityTypeConfiguration());
+
+        modelBuilder.Entity<ChatProfile>(b => b.HasBaseType<UniversalProfile>());
+        modelBuilder.Entity<UserProfile>(b => b.HasBaseType<UniversalProfile>());
+        modelBuilder.Entity<ConversationProfile>(b => b.HasBaseType<UniversalProfile>());
     }
 }

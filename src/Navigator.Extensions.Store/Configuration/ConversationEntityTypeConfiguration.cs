@@ -10,5 +10,8 @@ public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<Univ
     {
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();
+
+        builder.HasMany(e => e.Profiles)
+            .WithOne();
     }
 }

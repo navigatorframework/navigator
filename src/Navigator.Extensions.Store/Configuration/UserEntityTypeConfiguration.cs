@@ -10,9 +10,9 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<UniversalUse
     {
         builder.HasKey(e => e.Id);
 
-        builder.HasMany(e => e.ProviderEntities)
+        builder.HasMany(e => e.Profiles)
             .WithOne();
-
+        
         builder.HasMany(e => e.Chats)
             .WithMany(e => e.Users)
             .UsingEntity<UniversalConversation>(

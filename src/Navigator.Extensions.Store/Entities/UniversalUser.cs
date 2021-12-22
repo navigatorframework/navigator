@@ -4,12 +4,11 @@ public class UniversalUser : Navigator.Entities.User
 {
     public UniversalUser()
     {
-        ProviderEntities = new List<INavigatorProviderUserEntity>();
         Chats = new List<UniversalChat>();
     }
     public Guid Id { get; set; }
     
-    public IList<INavigatorProviderUserEntity> ProviderEntities { get; set; }
+    public IList<UserProfile> Profiles { get; set; }
 
     /// <summary>
     /// Chats related to the user.
@@ -22,9 +21,4 @@ public class UniversalUser : Navigator.Entities.User
     /// Date of first interaction for this chat.
     /// </summary>
     public DateTime FirstInteractionAt { get; set; }
-}
-
-public interface INavigatorProviderUserEntity
-{
-    public Guid Id { get; set; }
 }

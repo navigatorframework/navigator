@@ -10,9 +10,9 @@ public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<UniversalCha
     {
         builder.HasKey(e => e.Id);
 
-        builder.HasMany(e => e.ProviderEntities)
+        builder.HasMany(e => e.Profiles)
             .WithOne();
-
+        
         builder.HasMany(e => e.Users)
             .WithMany(e => e.Chats)
             .UsingEntity<UniversalConversation>(

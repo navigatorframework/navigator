@@ -42,8 +42,8 @@ public static class NavigatorContextExtensions
     {
         return await context.GetStore().Chats
             .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.ProviderEntities
-                .Any(p => p.Id == context.Conversation.Chat.Id));
+            .FirstOrDefaultAsync(e => e.Profiles
+                .Any(p => p.Identification == context.Conversation.Chat.Id));
     }
 
     #endregion
@@ -59,10 +59,10 @@ public static class NavigatorContextExtensions
     {
         return await context.GetStore().Users
             .AsNoTracking()
-            .Where(e => e.ProviderEntities
-                .Any(p => p.Id == context.Conversation.User.Id))
-            .Select(e => e.Conversations.FirstOrDefault(c => c.Chat.ProviderEntities
-                .Any(p => p.Id == context.Conversation.Chat.Id)))
+            .Where(e => e.Profiles
+                .Any(p => p.Identification == context.Conversation.User.Id))
+            .Select(e => e.Conversations.FirstOrDefault(c => c.Chat.Profiles
+                .Any(p => p.Identification == context.Conversation.Chat.Id)))
             .FirstOrDefaultAsync();
     }
 
@@ -79,8 +79,8 @@ public static class NavigatorContextExtensions
     {
         return await context.GetStore().Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.ProviderEntities
-                .Any(p => p.Id == context.Conversation.User.Id));
+            .FirstOrDefaultAsync(e => e.Profiles
+                .Any(p => p.Identification == context.Conversation.User.Id));
     }
 
     #endregion
