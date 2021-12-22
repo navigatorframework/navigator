@@ -1,7 +1,7 @@
 ﻿using Navigator.Context;
 using Navigator.Providers.Telegram.Actions.Messages;
 
-namespace Navigator.Samples.Echo.Actions;
+namespace Navigator.Samples.Store.Actions;
 
 public class EchoAction : MessageAction
 {

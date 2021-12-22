@@ -2,7 +2,7 @@ using Navigator.Context;
 using Navigator.Extensions.Cooldown;
 using Navigator.Providers.Telegram.Actions.Messages;
 
-namespace Navigator.Samples.Echo.Actions;
+namespace Navigator.Samples.Store.Actions;
 
 [Cooldown(Seconds = 10)]
 public class CooldownAction : CommandAction

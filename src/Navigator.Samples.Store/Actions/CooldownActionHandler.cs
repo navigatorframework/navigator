@@ -5,7 +5,7 @@ using Navigator.Context;
 using Navigator.Providers.Telegram;
 using Telegram.Bot;
 
-namespace Navigator.Samples.Echo.Actions;
+namespace Navigator.Samples.Store.Actions;
 
 public class CooldownActionHandler : ActionHandler<CooldownAction>
 {

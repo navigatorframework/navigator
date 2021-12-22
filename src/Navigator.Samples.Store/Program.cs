@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navigator;
@@ -7,7 +8,7 @@ using Navigator.Configuration;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Store;
 using Navigator.Providers.Telegram;
-using Navigator.Samples.Echo.Actions;
+using Navigator.Samples.Store.Actions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ builder.Services
     .WithExtension.Store(dbBuilder =>
     {
         dbBuilder.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
-            b => b.MigrationsAssembly("Navigator.Samples.Echo"));
+            b => b.MigrationsAssembly("Navigator.Samples.Store"));
     });
 
 var app = builder.Build();
@@ -36,6 +37,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
 }
+
+
+using var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
+serviceScope?.ServiceProvider.GetRequiredService<NavigatorDbContext>().Database.Migrate();
 
 app.UseHttpsRedirection();
 
