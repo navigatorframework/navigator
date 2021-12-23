@@ -1,12 +1,18 @@
+using Navigator.Entities;
+
 namespace Navigator.Extensions.Store.Entities;
 
 public class UniversalUser : Navigator.Entities.User
 {
     public UniversalUser()
     {
+        Profiles = new List<UserProfile>();
         Chats = new List<UniversalChat>();
+        Conversations = new List<UniversalConversation>();
+        FirstInteractionAt = DateTime.UtcNow;
     }
-    public Guid Id { get; set; }
+    
+    public new Guid Id { get; set; }
     
     public IList<UserProfile> Profiles { get; set; }
 

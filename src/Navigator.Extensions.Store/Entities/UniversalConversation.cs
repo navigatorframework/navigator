@@ -4,6 +4,17 @@ namespace Navigator.Extensions.Store.Entities;
 
 public class UniversalConversation : Navigator.Entities.Conversation
 {
+    public UniversalConversation()
+    {
+        Profiles = new List<ConversationProfile>();
+        FirstInteractionAt = DateTime.UtcNow;
+    }
+    public UniversalConversation(User user, Chat chat) : base(user, chat)
+    {
+        Profiles = new List<ConversationProfile>();
+        FirstInteractionAt = DateTime.UtcNow;
+    }
+
     public new UniversalChat Chat { get; set; }
     
     public new UniversalUser User { get; set; }
