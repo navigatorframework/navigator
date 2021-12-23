@@ -57,13 +57,15 @@ public class NavigatorDbContext : DbContext
         modelBuilder.Entity<ChatProfile>(b =>
         {
             b.HasBaseType<UniversalProfile>();
-            // b.OwnsOne(e => e.Data);
+            b.HasOne(e => e.Data)
+                .WithOne();
         });
         
         modelBuilder.Entity<UserProfile>(b => 
         {
             b.HasBaseType<UniversalProfile>();
-            // b.OwnsOne(e => e.Data);
+            b.HasOne(e => e.Data)
+                .WithOne();
         });
         
         modelBuilder.Entity<ConversationProfile>(b => 
@@ -76,8 +78,6 @@ public class NavigatorDbContext : DbContext
         foreach (var entityTypeConfiguration in _entityTypeConfigurations)
         {
             entityTypeConfiguration.Invoke(modelBuilder);
-            
-            Console.WriteLine("##### EXECUTING EXTENSION #####");
         }
     }
 }
