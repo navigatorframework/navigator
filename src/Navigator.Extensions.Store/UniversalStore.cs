@@ -63,13 +63,14 @@ public class UniversalStore : IUniversalStore
             
             universalConversation = new UniversalConversation
             {
+                Id = Guid.NewGuid(),
                 User = user,
                 Chat = chat,
             };
             
             universalConversation.Profiles.Add(new ConversationProfile
             {
-                Id = Guid.NewGuid(),
+                Id = conversation.Id,
                 Provider = provider,
                 Identification = Guid.NewGuid()
             });
