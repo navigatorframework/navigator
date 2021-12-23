@@ -18,6 +18,7 @@ public static class NavigatorExtensionConfigurationExtensions
             {
                 services.AddDbContext<NavigatorDbContext>(dbContextOptions);
                 services.AddScoped<INavigatorContextExtension, StoreContextExtension>();
+                services.AddScoped<INavigatorContextExtension, UniversalConversationContextExtension>();
                 services.AddTransient<IUniversalStore, UniversalStore>();
             });
     }
