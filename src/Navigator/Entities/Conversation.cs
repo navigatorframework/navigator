@@ -22,15 +22,15 @@ public abstract class Conversation
         Chat = chat;
     }
 
-    public Guid Id { get; init; }
+    public Guid Id { get; set; }
 
     /// <summary>
     /// User
     /// </summary>
-    public User User { get; init; }
+    public User User { get; set; }
 
     /// <summary>
     /// Chat
     /// </summary>
-    public Chat Chat { get; init; }
+    public Chat Chat { get; set; }
 }
