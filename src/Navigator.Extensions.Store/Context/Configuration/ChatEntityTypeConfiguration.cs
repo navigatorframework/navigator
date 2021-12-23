@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Navigator.Extensions.Store.Entities;
 
-namespace Navigator.Extensions.Store.Configuration;
+namespace Navigator.Extensions.Store.Context.Configuration;
 
 public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<UniversalChat>
 {

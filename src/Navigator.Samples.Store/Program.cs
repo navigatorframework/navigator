@@ -7,6 +7,7 @@ using Navigator;
 using Navigator.Configuration;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Context;
 using Navigator.Providers.Telegram;
 using Navigator.Samples.Store.Actions;
 

@@ -5,6 +5,7 @@ using Navigator.Configuration;
 using Navigator.Configuration.Extension;
 using Navigator.Context.Extensions;
 using Navigator.Extensions.Store.Bundled;
+using Navigator.Extensions.Store.Context;
 
 namespace Navigator.Extensions.Store;
 

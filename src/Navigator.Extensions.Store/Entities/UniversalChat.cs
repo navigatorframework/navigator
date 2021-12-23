@@ -1,4 +1,4 @@
-using Navigator.Extensions.Store.Entities;
+namespace Navigator.Extensions.Store.Entities;
 
 public class UniversalChat : Navigator.Entities.Chat
 {

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Navigator.Extensions.Store.Configuration;
+using Navigator.Extensions.Store.Context.Configuration;
 using Navigator.Extensions.Store.Entities;
 
-namespace Navigator.Extensions.Store;
+namespace Navigator.Extensions.Store.Context;
 
 public class NavigatorDbContext : DbContext
 {

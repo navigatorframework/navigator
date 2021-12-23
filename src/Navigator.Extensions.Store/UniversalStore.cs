@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Navigator.Entities;
+using Navigator.Extensions.Store.Context;
 using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store;

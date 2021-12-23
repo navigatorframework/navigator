@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Extensions.Store;
+using Navigator.Extensions.Store.Context;
 using Navigator.Providers.Telegram;
 using Telegram.Bot;
 
