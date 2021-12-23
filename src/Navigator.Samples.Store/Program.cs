@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,8 @@ using Navigator.Configuration;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Store;
 using Navigator.Extensions.Store.Context;
+using Navigator.Extensions.Store.Context.Extension;
+using Navigator.Extensions.Store.Telegram;
 using Navigator.Providers.Telegram;
 using Navigator.Samples.Store.Actions;
 
@@ -30,6 +33,8 @@ builder.Services
     {
         dbBuilder.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly("Navigator.Samples.Store"));
+
+        dbBuilder.UsingStoreExtension<NavigatorStoreTelegramExtension>();
     });
 
 var app = builder.Build();
