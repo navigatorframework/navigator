@@ -25,7 +25,7 @@ public class EchoActionHandler : ActionHandler<EchoAction>
         var uc = await NavigatorContext.GetStoreOrDefault()?.FindConversation(NavigatorContext.Conversation, NavigatorContext.Provider.Name, cancellationToken);
         
         await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
-             uc.FirstInteractionAt.ToLongDateString(), cancellationToken: cancellationToken);
+             uc.Id.ToString(), cancellationToken: cancellationToken);
         
         await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
             action.MessageToEcho, cancellationToken: cancellationToken);
