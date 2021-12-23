@@ -1,3 +1,8 @@
+using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
 namespace Navigator.Entities;
 
 /// <summary>
@@ -11,9 +16,13 @@ public abstract class Conversation
     
     protected Conversation(User user, Chat chat)
     {
+        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes($"{user.Id}+{chat.Id}")).Take(16).ToArray());
+
         User = user;
         Chat = chat;
     }
+
+    public Guid Id { get; init; }
 
     /// <summary>
     /// User
