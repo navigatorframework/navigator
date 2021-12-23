@@ -1,3 +1,5 @@
+using Navigator.Entities;
+
 namespace Navigator.Extensions.Store.Entities;
 
 public class UniversalProfile
@@ -17,15 +19,18 @@ public class UniversalProfile
 
 public class UserProfile : UniversalProfile
 {
-    
+    public User Data { get; set; }
+    public Guid DataId { get; set; }
 }
 
 public class ChatProfile : UniversalProfile
 {
-    
+    public Chat Data { get; set; }
+    public Guid DataId { get; set; }
 }
 
 public class ConversationProfile : UniversalProfile
 {
-    
+    public Conversation Data { get; set; }
+    public Guid DataId { get; set; }
 }

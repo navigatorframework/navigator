@@ -10,7 +10,7 @@ public class UniversalChat : Navigator.Entities.Chat
         FirstInteractionAt = DateTime.UtcNow;
     }
 
-    public Guid Id { get; set; }
+    public new Guid Id { get; set; }
     
     public IList<ChatProfile> Profiles { get; set; }
 

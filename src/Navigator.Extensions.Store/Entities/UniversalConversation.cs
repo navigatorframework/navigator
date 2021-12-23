@@ -15,6 +15,8 @@ public class UniversalConversation : Navigator.Entities.Conversation
         FirstInteractionAt = DateTime.UtcNow;
     }
 
+    public new Guid Id { get; set; }
+
     public new UniversalChat Chat { get; set; }
     
     public new UniversalUser User { get; set; }
