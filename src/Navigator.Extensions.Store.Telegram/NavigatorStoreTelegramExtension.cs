@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Navigator.Entities;
 using Navigator.Extensions.Store.Context.Extension;
 using Navigator.Extensions.Store.Entities;
+using Navigator.Extensions.Store.Telegram.Profiles;
 using Navigator.Providers.Telegram.Entities;
 
 namespace Navigator.Extensions.Store.Telegram;
