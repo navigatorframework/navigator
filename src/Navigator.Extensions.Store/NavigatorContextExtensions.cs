@@ -12,16 +12,16 @@ public static class NavigatorContextExtensions
 {
     #region Store
 
-    public static NavigatorDbContext GetStore(this INavigatorContext context)
+    public static IUniversalStore GetStore(this INavigatorContext context)
     {
         return GetStoreOrDefault(context) ?? throw new InvalidOperationException();
     }
     
-    public static NavigatorDbContext? GetStoreOrDefault(this INavigatorContext context)
+    public static IUniversalStore? GetStoreOrDefault(this INavigatorContext context)
     {
         var value = context.Extensions.GetValueOrDefault(StoreContextExtension.StoreKey);
     
-        if (value is NavigatorDbContext store)
+        if (value is IUniversalStore store)
         {
             return store;
         }
@@ -31,56 +31,44 @@ public static class NavigatorContextExtensions
 
     #endregion
 
-    #region User
+    #region Chat
 
-    public static async Task<UniversalChat> GetUniversalChat(this INavigatorContext context)
+    public static async Task<UniversalChat> GetUniversalChat(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await GetUniversalChatOrDefault(context) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalChat?> GetUniversalChatOrDefault(this INavigatorContext context)
+    public static async Task<UniversalChat?> GetUniversalChatOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
-        return await context.GetStore().Chats
-            .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.Profiles
-                .Any(p => p.Identification == context.Conversation.Chat.Id));
+        return await context.GetStore().FindChat(context.Conversation.Chat, context.Provider.Name, cancellationToken);
     }
 
     #endregion
     
     #region Conversation
 
-    public static async Task<UniversalConversation> GetUniversalConversation(this INavigatorContext context)
+    public static async Task<UniversalConversation> GetUniversalConversation(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
-        return await GetUniversalConversationOrDefault(context) ?? throw new InvalidOperationException();
+        return await GetUniversalConversationOrDefault(context, cancellationToken) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalConversation?> GetUniversalConversationOrDefault(this INavigatorContext context)
+    public static async Task<UniversalConversation?> GetUniversalConversationOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
-        return await context.GetStore().Users
-            .AsNoTracking()
-            .Where(e => e.Profiles
-                .Any(p => p.Identification == context.Conversation.User.Id))
-            .Select(e => e.Conversations.FirstOrDefault(c => c.Chat.Profiles
-                .Any(p => p.Identification == context.Conversation.Chat.Id)))
-            .FirstOrDefaultAsync();
+        return await context.GetStore().FindConversation(context.Conversation, context.Provider.Name, cancellationToken);
     }
 
     #endregion
     
     #region User
 
-    public static async Task<UniversalUser> GetUniversalUser(this INavigatorContext context)
+    public static async Task<UniversalUser> GetUniversalUser(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
-        return await GetUniversalUserOrDefault(context) ?? throw new InvalidOperationException();
+        return await GetUniversalUserOrDefault(context, cancellationToken) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalUser?> GetUniversalUserOrDefault(this INavigatorContext context)
+    public static async Task<UniversalUser?> GetUniversalUserOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
-        return await context.GetStore().Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.Profiles
-                .Any(p => p.Identification == context.Conversation.User.Id));
+        return await context.GetStore().FindUser(context.Conversation.User, context.Provider.Name, cancellationToken);
     }
 
     #endregion
