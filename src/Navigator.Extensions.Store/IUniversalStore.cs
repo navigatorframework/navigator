@@ -5,12 +5,24 @@ namespace Navigator.Extensions.Store;
 
 public interface IUniversalStore
 {
+    #region Chat
+
+    Task<UniversalChat?> FindChat(Chat chat, string provider, CancellationToken cancellationToken = default);
+
+    #endregion
+    
     #region Conversation
 
     Task<UniversalConversation> FindOrCreateConversation(Conversation conversation, string provider,
         CancellationToken cancellationToken = default);
     Task<UniversalConversation?> FindConversation(Conversation conversation, string provider,
         CancellationToken cancellationToken = default);
+    
+    #endregion
+
+    #region User
+
+    Task<UniversalUser?> FindUser(User user, string provider, CancellationToken cancellationToken = default);
     
     #endregion
     

@@ -13,6 +13,18 @@ public class UniversalStore : IUniversalStore
         _dbContext = dbContext;
     }
     
+    #region Chat
+
+    public async Task<UniversalChat?> FindChat(Chat chat, string provider, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Chats
+            .Where(e => e.Profiles.Any(p => p.Provider == provider))
+            .Where(e => e.Profiles.Any(p => p.Identification == chat.Id))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+    
+    #endregion
+    
     #region Conversation
 
     public async Task<UniversalConversation> FindOrCreateConversation(Conversation conversation, string provider, CancellationToken cancellationToken = default)
@@ -77,6 +89,18 @@ public class UniversalStore : IUniversalStore
             .Where(e => e.Profiles.Any(p => p.Provider == provider))
             .Where(e => e.Chat.Profiles.Any(p => p.Provider == provider && p.Identification == conversation.Chat.Id))
             .Where(e => e.User.Profiles.Any(p => p.Provider == provider && p.Identification == conversation.User.Id))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+    
+    #endregion
+    
+    #region User
+
+    public async Task<UniversalUser?> FindUser(User user, string provider, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Users
+            .Where(e => e.Profiles.Any(p => p.Provider == provider))
+            .Where(e => e.Profiles.Any(p => p.Identification == user.Id))
             .FirstOrDefaultAsync(cancellationToken);
     }
     
