@@ -26,16 +26,16 @@ public interface IUniversalStore
     
     #endregion
     
-    #region Profile
-
-    Task AddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    Task TryAddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    
-    Task AddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    Task TryAddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-
-    Task AddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    Task TryAddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-
-    #endregion
+    // #region Profile
+    //
+    // Task AddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    //
+    // Task AddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    //
+    // Task AddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    //
+    // #endregion
 }

@@ -26,7 +26,5 @@ public class NavigatorStoreTelegramExtension : NavigatorStoreModelExtension
         Info = new NavigatorStoreTelegramExtensionInfo(this);
     }
 
-    public Action<ModelBuilder> Extension { get; }
-
     public override DbContextOptionsExtensionInfo Info { get; }
 }

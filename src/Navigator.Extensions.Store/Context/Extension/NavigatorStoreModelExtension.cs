@@ -6,7 +6,9 @@ namespace Navigator.Extensions.Store.Context.Extension;
 
 public abstract class NavigatorStoreModelExtension : IDbContextOptionsExtension
 {
-    public Action<ModelBuilder> Extension { get; }
+    public Action<ModelBuilder>? Extension { get; protected set; }
+    public Action<IServiceCollection>? ExtensionServices { get; protected set; }
+
     public void ApplyServices(IServiceCollection services)
     {
         
