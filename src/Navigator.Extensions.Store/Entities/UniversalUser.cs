@@ -12,7 +12,7 @@ public class UniversalUser : Navigator.Entities.User
         FirstInteractionAt = DateTime.UtcNow;
     }
     
-    public new Guid Id { get; set; }
+    // public new Guid Id { get; set; }
     
     public IList<UserProfile> Profiles { get; set; }
 
