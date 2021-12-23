@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Samples.Store", "Navigator.Samples.Store\Navigator.Samples.Store.csproj", "{50766B99-2587-4298-B43C-58DE387F5860}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Store.Telegram", "Navigator.Extensions.Store.Telegram\Navigator.Extensions.Store.Telegram.csproj", "{342AEA62-E0C8-4B02-A048-5FACD34E9B29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{50766B99-2587-4298-B43C-58DE387F5860}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50766B99-2587-4298-B43C-58DE387F5860}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50766B99-2587-4298-B43C-58DE387F5860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342AEA62-E0C8-4B02-A048-5FACD34E9B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342AEA62-E0C8-4B02-A048-5FACD34E9B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342AEA62-E0C8-4B02-A048-5FACD34E9B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342AEA62-E0C8-4B02-A048-5FACD34E9B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6DBAD041-6623-4903-9939-254FDC4EBD60} = {E6F24E3B-A066-4572-94F0-14665E19EFC7}
@@ -59,5 +65,6 @@ Global
 		{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E} = {E6F24E3B-A066-4572-94F0-14665E19EFC7}
 		{E7D6F33B-C30E-4ED2-878C-B2F899CF1805} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 		{50766B99-2587-4298-B43C-58DE387F5860} = {6D6A8E40-8C40-49AA-BEAD-B046D43F511A}
+		{342AEA62-E0C8-4B02-A048-5FACD34E9B29} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 	EndGlobalSection
 EndGlobal
