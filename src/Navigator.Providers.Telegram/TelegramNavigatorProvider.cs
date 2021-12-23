@@ -1,12 +1,15 @@
 using System;
 using System.Threading.Tasks;
+using Navigator.Providers.Telegram.Entities;
 using Telegram.Bot.Types;
 
 namespace Navigator.Providers.Telegram;
 
-public class TelegramNavigatorProvider : INavigatorProvider
+internal class TelegramNavigatorProvider : INavigatorProvider
 {
     private readonly NavigatorTelegramClient _client;
+
+    public string Name => "navigator.provider.telegram";
 
     public TelegramNavigatorProvider(NavigatorTelegramClient client)
     {
@@ -18,8 +21,8 @@ public class TelegramNavigatorProvider : INavigatorProvider
         return _client;
     }
 
-    public Task HandleReply()
+    public Type GetConversationType()
     {
-        throw new NotImplementedException();
+        return typeof(TelegramConversation);
     }
 }
