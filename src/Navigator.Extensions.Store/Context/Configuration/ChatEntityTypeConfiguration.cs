@@ -8,7 +8,7 @@ public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<UniversalCha
 {
     public void Configure(EntityTypeBuilder<UniversalChat> builder)
     {
-        builder.HasKey(e => e.Id);
+        // builder.HasKey(e => e.Id);
 
         builder.HasMany(e => e.Profiles)
             .WithOne();
