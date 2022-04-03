@@ -24,7 +24,6 @@ public static class NavigatorExtensionConfigurationExtensions
             {
                 services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
-                services.AddScoped<INavigatorContextExtension, StoreContextExtension>();
                 services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
                 
                 foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())

@@ -19,11 +19,6 @@ public class EchoActionHandler : ActionHandler<EchoAction>
 
     public override async Task<Status> Handle(EchoAction action, CancellationToken cancellationToken)
     {
-        var uc = await NavigatorContext.GetStoreOrDefault()?.FindConversation(NavigatorContext.Conversation, NavigatorContext.Provider.Name, cancellationToken);
-        
-        await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
-             uc.Id.ToString(), cancellationToken: cancellationToken);
-        
         await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
             action.MessageToEcho, cancellationToken: cancellationToken);
 
