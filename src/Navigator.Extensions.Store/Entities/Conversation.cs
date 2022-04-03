@@ -6,10 +6,12 @@ public class Conversation : Navigator.Entities.Conversation
 {
     public Conversation()
     {
+        Data = new Dictionary<string, string>();
         FirstInteractionAt = DateTime.UtcNow;
     }
-    public Conversation(Navigator.Entities.User user, Chat chat) : base(user, chat)
+    public Conversation(User user, Chat chat) : base(user, chat)
     {
+        Data = new Dictionary<string, string>();
         FirstInteractionAt = DateTime.UtcNow;
     }
 
@@ -18,6 +20,8 @@ public class Conversation : Navigator.Entities.Conversation
     public new Chat Chat { get; set; }
     
     public new User User { get; set; }
+    
+    public IDictionary<string, string> Data { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.

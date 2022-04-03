@@ -6,6 +6,7 @@ public class Chat : Navigator.Entities.Chat
     {
         Users = new List<User>();
         Conversations = new List<Conversation>();
+        Data = new Dictionary<string, string>();
         FirstInteractionAt = DateTime.UtcNow;
     }
 
@@ -15,6 +16,8 @@ public class Chat : Navigator.Entities.Chat
     public ICollection<User> Users { get; set; }
     
     public ICollection<Conversation> Conversations { get; set; }
+
+    public IDictionary<string, string> Data { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.
