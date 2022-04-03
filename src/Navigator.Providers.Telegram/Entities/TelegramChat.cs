@@ -11,7 +11,7 @@ public class TelegramChat : Chat
     }
 
     /// <summary>
-    /// Telegram identifier for the user.
+    /// Telegram identifier for the chat.
     /// </summary>
     public long ExternalIdentifier { get; init; }
 
