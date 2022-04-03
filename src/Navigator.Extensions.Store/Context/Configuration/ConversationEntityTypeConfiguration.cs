@@ -4,9 +4,9 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Context.Configuration;
 
-public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<UniversalConversation>
+public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<Conversation>
 {
-    public void Configure(EntityTypeBuilder<UniversalConversation> builder)
+    public void Configure(EntityTypeBuilder<Conversation> builder)
     {
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();

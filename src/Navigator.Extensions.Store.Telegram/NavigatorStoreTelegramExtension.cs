@@ -8,6 +8,9 @@ using Navigator.Extensions.Store.Mappers;
 using Navigator.Extensions.Store.Telegram.Profiles;
 using Navigator.Extensions.Store.Telegram.Profiles.Mappers;
 using Navigator.Providers.Telegram.Entities;
+using Chat = Navigator.Entities.Chat;
+using Conversation = Navigator.Entities.Conversation;
+using User = Navigator.Entities.User;
 
 namespace Navigator.Extensions.Store.Telegram;
 

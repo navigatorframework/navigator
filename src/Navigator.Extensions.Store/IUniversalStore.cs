@@ -1,5 +1,8 @@
 using Navigator.Entities;
 using Navigator.Extensions.Store.Entities;
+using Chat = Navigator.Extensions.Store.Entities.Chat;
+using Conversation = Navigator.Extensions.Store.Entities.Conversation;
+using User = Navigator.Extensions.Store.Entities.User;
 
 namespace Navigator.Extensions.Store;
 
@@ -7,35 +10,35 @@ public interface IUniversalStore
 {
     #region Chat
 
-    Task<UniversalChat?> FindChat(Chat chat, string provider, CancellationToken cancellationToken = default);
+    Task<Chat?> FindChat(Navigator.Entities.Chat chat, string provider, CancellationToken cancellationToken = default);
 
     #endregion
     
     #region Conversation
 
-    Task<UniversalConversation> FindOrCreateConversation(Conversation conversation, string provider,
+    Task<Conversation> FindOrCreateConversation(Navigator.Entities.Conversation conversation, string provider,
         CancellationToken cancellationToken = default);
-    Task<UniversalConversation?> FindConversation(Conversation conversation, string provider,
+    Task<Conversation?> FindConversation(Navigator.Entities.Conversation conversation, string provider,
         CancellationToken cancellationToken = default);
     
     #endregion
 
     #region User
 
-    Task<UniversalUser?> FindUser(User user, string provider, CancellationToken cancellationToken = default);
+    Task<User?> FindUser(Navigator.Entities.User user, string provider, CancellationToken cancellationToken = default);
     
     #endregion
     
     // #region Profile
     //
-    // Task AddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    // Task TryAddUserProfile(UniversalUser user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task AddUserProfile(User user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddUserProfile(User user, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
     //
-    // Task AddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    // Task TryAddChatProfile(UniversalChat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task AddChatProfile(Chat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddChatProfile(Chat chat, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
     //
-    // Task AddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
-    // Task TryAddConversationProfile(UniversalConversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task AddConversationProfile(Conversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
+    // Task TryAddConversationProfile(Conversation conversation, string provider, Guid identification, CancellationToken cancellationToken = default, bool? saveChanges = true);
     //
     // #endregion
 }

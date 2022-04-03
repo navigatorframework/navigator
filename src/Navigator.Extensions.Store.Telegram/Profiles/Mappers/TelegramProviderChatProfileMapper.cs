@@ -2,6 +2,7 @@ using Navigator.Entities;
 using Navigator.Extensions.Store.Entities;
 using Navigator.Extensions.Store.Mappers;
 using Navigator.Providers.Telegram.Entities;
+using Conversation = Navigator.Entities.Conversation;
 
 namespace Navigator.Extensions.Store.Telegram.Profiles.Mappers;
 

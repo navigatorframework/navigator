@@ -2,21 +2,21 @@ using Navigator.Entities;
 
 namespace Navigator.Extensions.Store.Entities;
 
-public class UniversalUser : Navigator.Entities.User
+public class User : Navigator.Entities.User
 {
-    public UniversalUser()
+    public User()
     {
-        Chats = new List<UniversalChat>();
-        Conversations = new List<UniversalConversation>();
+        Chats = new List<Chat>();
+        Conversations = new List<Conversation>();
         FirstInteractionAt = DateTime.UtcNow;
     }
 
     /// <summary>
     /// Chats related to the user.
     /// </summary>
-    public IList<UniversalChat> Chats { get; set; }
+    public IList<Chat> Chats { get; set; }
     
-    public ICollection<UniversalConversation> Conversations { get; set; }
+    public ICollection<Conversation> Conversations { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.

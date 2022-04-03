@@ -3,14 +3,17 @@ using Navigator.Entities;
 using Navigator.Extensions.Store.Context.Configuration;
 using Navigator.Extensions.Store.Context.Extension;
 using Navigator.Extensions.Store.Entities;
+using Chat = Navigator.Extensions.Store.Entities.Chat;
+using Conversation = Navigator.Extensions.Store.Entities.Conversation;
+using User = Navigator.Extensions.Store.Entities.User;
 
 namespace Navigator.Extensions.Store.Context;
 
 public class NavigatorDbContext : DbContext
 {
-    public DbSet<UniversalUser> Users { get; set; }
-    public DbSet<UniversalChat> Chats { get; set; }
-    public DbSet<UniversalConversation> Conversations { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Conversation> Conversations { get; set; }
 
     protected NavigatorDbContext()
     {
@@ -35,19 +38,6 @@ public class NavigatorDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
-
-        modelBuilder.Entity<Chat>(b =>
-        {
-            b.HasKey(e => e.Id);
-        });
-        modelBuilder.Entity<User>(b =>
-        {
-            b.HasKey(e => e.Id);
-        });
-        modelBuilder.Entity<Conversation>(b =>
-        {
-            b.HasKey(e => e.Id);
-        });
 
         foreach (var entityTypeConfiguration in _entityTypeConfigurations)
         {

@@ -137,17 +137,17 @@ namespace Navigator.Samples.Store.Migrations
                     b.HasDiscriminator().HasValue("ConversationProfile");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalChat", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.Chat", b =>
                 {
                     b.HasBaseType("Navigator.Entities.Chat");
 
                     b.Property<DateTime>("FirstInteractionAt")
                         .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("UniversalChat");
+                    b.HasDiscriminator().HasValue("Chat");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalConversation", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.Conversation", b =>
                 {
                     b.HasBaseType("Navigator.Entities.Conversation");
 
@@ -164,17 +164,17 @@ namespace Navigator.Samples.Store.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasDiscriminator().HasValue("UniversalConversation");
+                    b.HasDiscriminator().HasValue("Conversation");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalUser", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.User", b =>
                 {
                     b.HasBaseType("Navigator.Entities.User");
 
                     b.Property<DateTime>("FirstInteractionAt")
                         .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("UniversalUser");
+                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Navigator.Extensions.Store.Entities.UserProfile", b =>
@@ -278,7 +278,7 @@ namespace Navigator.Samples.Store.Migrations
                         .WithOne()
                         .HasForeignKey("Navigator.Extensions.Store.Entities.ChatProfile", "DataId");
 
-                    b.HasOne("Navigator.Extensions.Store.Entities.UniversalChat", null)
+                    b.HasOne("Navigator.Extensions.Store.Entities.Chat", null)
                         .WithMany("Profiles")
                         .HasForeignKey("UniversalChatId");
 
@@ -291,22 +291,22 @@ namespace Navigator.Samples.Store.Migrations
                         .WithOne()
                         .HasForeignKey("Navigator.Extensions.Store.Entities.ConversationProfile", "DataId");
 
-                    b.HasOne("Navigator.Extensions.Store.Entities.UniversalConversation", null)
+                    b.HasOne("Navigator.Extensions.Store.Entities.Conversation", null)
                         .WithMany("Profiles")
                         .HasForeignKey("UniversalConversationId");
 
                     b.Navigation("Data");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalConversation", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.Conversation", b =>
                 {
-                    b.HasOne("Navigator.Extensions.Store.Entities.UniversalChat", "Chat")
+                    b.HasOne("Navigator.Extensions.Store.Entities.Chat", "Chat")
                         .WithMany("Conversations")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Navigator.Extensions.Store.Entities.UniversalUser", "User")
+                    b.HasOne("Navigator.Extensions.Store.Entities.User", "User")
                         .WithMany("Conversations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -323,7 +323,7 @@ namespace Navigator.Samples.Store.Migrations
                         .WithOne()
                         .HasForeignKey("Navigator.Extensions.Store.Entities.UserProfile", "DataId");
 
-                    b.HasOne("Navigator.Extensions.Store.Entities.UniversalUser", null)
+                    b.HasOne("Navigator.Extensions.Store.Entities.User", null)
                         .WithMany("Profiles")
                         .HasForeignKey("UniversalUserId");
 
@@ -349,19 +349,19 @@ namespace Navigator.Samples.Store.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalChat", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.Chat", b =>
                 {
                     b.Navigation("Conversations");
 
                     b.Navigation("Profiles");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalConversation", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.Conversation", b =>
                 {
                     b.Navigation("Profiles");
                 });
 
-            modelBuilder.Entity("Navigator.Extensions.Store.Entities.UniversalUser", b =>
+            modelBuilder.Entity("Navigator.Extensions.Store.Entities.User", b =>
                 {
                     b.Navigation("Conversations");
 

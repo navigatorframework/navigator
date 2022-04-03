@@ -33,12 +33,12 @@ public static class NavigatorContextExtensions
 
     #region Chat
 
-    public static async Task<UniversalChat> GetUniversalChat(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<Chat> GetUniversalChat(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await GetUniversalChatOrDefault(context) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalChat?> GetUniversalChatOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<Chat?> GetUniversalChatOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await context.GetStore().FindChat(context.Conversation.Chat, context.Provider.Name, cancellationToken);
     }
@@ -47,12 +47,12 @@ public static class NavigatorContextExtensions
     
     #region Conversation
 
-    public static async Task<UniversalConversation> GetUniversalConversation(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<Conversation> GetUniversalConversation(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await GetUniversalConversationOrDefault(context, cancellationToken) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalConversation?> GetUniversalConversationOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<Conversation?> GetUniversalConversationOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await context.GetStore().FindConversation(context.Conversation, context.Provider.Name, cancellationToken);
     }
@@ -61,12 +61,12 @@ public static class NavigatorContextExtensions
     
     #region User
 
-    public static async Task<UniversalUser> GetUniversalUser(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<User> GetUniversalUser(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await GetUniversalUserOrDefault(context, cancellationToken) ?? throw new InvalidOperationException();
     }
     
-    public static async Task<UniversalUser?> GetUniversalUserOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
+    public static async Task<User?> GetUniversalUserOrDefault(this INavigatorContext context, CancellationToken cancellationToken = default)
     {
         return await context.GetStore().FindUser(context.Conversation.User, context.Provider.Name, cancellationToken);
     }

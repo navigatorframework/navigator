@@ -1,18 +1,19 @@
 using System.Text;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Navigator.Context;
 using Navigator.Context.Extensions;
 using Navigator.Extensions.Store.Context;
 
 namespace Navigator.Extensions.Store.Bundled;
 
-internal class UniversalConversationContextExtension : INavigatorContextExtension
+internal class StoreConversationContextExtension : INavigatorContextExtension
 {
-    public const string UniversalConversation = "_navigator.extensions.store.universal_conversation";
+    public const string UniversalConversation = "_navigator.extensions.store.conversation";
 
     private readonly NavigatorDbContext _dbContext;
 
-    public UniversalConversationContextExtension(NavigatorDbContext dbContext)
+    public StoreConversationContextExtension(NavigatorDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -21,8 +22,15 @@ internal class UniversalConversationContextExtension : INavigatorContextExtensio
     {
         var conversation = navigatorContext.Conversation;
 
-        var universalConversation = await _universalStore.FindOrCreateConversation(conversation, navigatorContext.Provider.Name);
-
+        if (await _dbContext.Conversations.AnyAsync(e => e.Id == navigatorContext.Conversation.Id))
+        {
+            return navigatorContext;
+        }
+        else
+        {
+            
+        }
+        
         return await Task.FromResult(navigatorContext);
     }
     

@@ -2,22 +2,22 @@ using Navigator.Entities;
 
 namespace Navigator.Extensions.Store.Entities;
 
-public class UniversalConversation : Navigator.Entities.Conversation
+public class Conversation : Navigator.Entities.Conversation
 {
-    public UniversalConversation()
+    public Conversation()
     {
         FirstInteractionAt = DateTime.UtcNow;
     }
-    public UniversalConversation(User user, Chat chat) : base(user, chat)
+    public Conversation(Navigator.Entities.User user, Chat chat) : base(user, chat)
     {
         FirstInteractionAt = DateTime.UtcNow;
     }
 
     // public new Guid Id { get; set; }
 
-    public new UniversalChat Chat { get; set; }
+    public new Chat Chat { get; set; }
     
-    public new UniversalUser User { get; set; }
+    public new User User { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.

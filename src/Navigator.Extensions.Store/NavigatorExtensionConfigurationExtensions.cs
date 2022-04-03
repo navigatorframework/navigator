@@ -23,10 +23,9 @@ public static class NavigatorExtensionConfigurationExtensions
             services =>
             {
                 services.AddDbContext<NavigatorDbContext>(dbContextOptions);
-                services.AddTransient<IUniversalStore, UniversalStore>();
-                
+
                 services.AddScoped<INavigatorContextExtension, StoreContextExtension>();
-                services.AddScoped<INavigatorContextExtension, UniversalConversationContextExtension>();
+                services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
                 
                 foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())
                 {
