@@ -10,12 +10,10 @@ internal class UniversalConversationContextExtension : INavigatorContextExtensio
 {
     public const string UniversalConversation = "_navigator.extensions.store.universal_conversation";
 
-    private readonly IUniversalStore _universalStore;
     private readonly NavigatorDbContext _dbContext;
 
-    public UniversalConversationContextExtension(IUniversalStore universalStore, NavigatorDbContext dbContext)
+    public UniversalConversationContextExtension(NavigatorDbContext dbContext)
     {
-        _universalStore = universalStore;
         _dbContext = dbContext;
     }
 
@@ -27,4 +25,6 @@ internal class UniversalConversationContextExtension : INavigatorContextExtensio
 
         return await Task.FromResult(navigatorContext);
     }
+    
+    
 }

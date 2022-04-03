@@ -7,12 +7,9 @@ namespace Navigator.Extensions.Store.Context.Configuration;
 public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<UniversalChat>
 {
     public void Configure(EntityTypeBuilder<UniversalChat> builder)
-    {
-        // builder.HasKey(e => e.Id);
+    {        
+        builder.HasKey(e => e.Id);
 
-        builder.HasMany(e => e.Profiles)
-            .WithOne();
-        
         builder.HasMany(e => e.Users)
             .WithMany(e => e.Chats)
             .UsingEntity<UniversalConversation>(

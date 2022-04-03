@@ -6,15 +6,10 @@ public class UniversalUser : Navigator.Entities.User
 {
     public UniversalUser()
     {
-        Profiles = new List<UserProfile>();
         Chats = new List<UniversalChat>();
         Conversations = new List<UniversalConversation>();
         FirstInteractionAt = DateTime.UtcNow;
     }
-    
-    // public new Guid Id { get; set; }
-    
-    public IList<UserProfile> Profiles { get; set; }
 
     /// <summary>
     /// Chats related to the user.

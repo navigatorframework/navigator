@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Extensions.Store;
-using Navigator.Extensions.Store.Context;
 using Navigator.Providers.Telegram;
 using Telegram.Bot;
 
@@ -14,10 +13,8 @@ namespace Navigator.Samples.Store.Actions;
 
 public class EchoActionHandler : ActionHandler<EchoAction>
 {
-    private readonly NavigatorDbContext _dbContext;
-    public EchoActionHandler(INavigatorContextAccessor navigatorContextAccessor, NavigatorDbContext dbContext) : base(navigatorContextAccessor)
+    public EchoActionHandler(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        _dbContext = dbContext;
     }
 
     public override async Task<Status> Handle(EchoAction action, CancellationToken cancellationToken)

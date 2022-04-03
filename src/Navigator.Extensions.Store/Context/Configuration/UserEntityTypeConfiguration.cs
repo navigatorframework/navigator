@@ -8,11 +8,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<UniversalUse
 {
     public void Configure(EntityTypeBuilder<UniversalUser> builder)
     {
-        // builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.Id);
 
-        builder.HasMany(e => e.Profiles)
-            .WithOne();
-        
         builder.HasMany(e => e.Chats)
             .WithMany(e => e.Users)
             .UsingEntity<UniversalConversation>(

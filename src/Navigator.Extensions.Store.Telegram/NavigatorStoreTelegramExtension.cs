@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using Navigator.Entities;
 using Navigator.Extensions.Store.Context.Extension;
 using Navigator.Extensions.Store.Entities;
+using Navigator.Extensions.Store.Mappers;
 using Navigator.Extensions.Store.Telegram.Profiles;
+using Navigator.Extensions.Store.Telegram.Profiles.Mappers;
 using Navigator.Providers.Telegram.Entities;
 
 namespace Navigator.Extensions.Store.Telegram;
@@ -24,6 +27,14 @@ public class NavigatorStoreTelegramExtension : NavigatorStoreModelExtension
             modelBuilder.Entity<TelegramConversationProfile>(typeBuilder => typeBuilder.HasBaseType<ConversationProfile>());
             modelBuilder.Entity<TelegramConversation>(typeBuilder => typeBuilder.HasBaseType<Conversation>());
         };
+
+        ExtensionServices = services =>
+        {
+            services.AddSingleton<IProviderProfileMapper, TelegramProviderChatProfileMapper>();
+            services.AddSingleton<IProviderProfileMapper, TelegramProviderUserProfileMapper>();
+            services.AddSingleton<IProviderProfileMapper, TelegramProviderConversationProfileMapper>();
+        };
+        
         Info = new NavigatorStoreTelegramExtensionInfo(this);
     }
 
