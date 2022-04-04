@@ -2,8 +2,19 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Title>Navigator.Extensions.Store</Title>
+        <Authors>Lucas Maximiliano Marino</Authors>
+        <Description>Telegram provider persistence implementation for Navigator Store Extension.</Description>
+        <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
+        <PackageTags>Store, Bot, Telegram, Navigator</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2022</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
