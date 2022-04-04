@@ -84,7 +84,7 @@ public class TelegramMiddleware
             UpdateType.CallbackQuery => nameof(CallbackQueryAction),
             UpdateType.EditedMessage => nameof(EditedMessageAction),
             UpdateType.ChannelPost => nameof(ChannelPostAction),
-            // UpdateType.EditedChannelPost => ActionType.EditedChannelPost,
+            UpdateType.EditedChannelPost => nameof(EditedChannelPostAction),
             UpdateType.ShippingQuery => nameof(ShippingQueryAction),
             UpdateType.PreCheckoutQuery => nameof(PreCheckoutQuery),
             UpdateType.Poll => nameof(PollAction),
