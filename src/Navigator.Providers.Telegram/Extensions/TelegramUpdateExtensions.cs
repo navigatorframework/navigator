@@ -36,15 +36,15 @@ internal static class TelegramUpdateExtensions
     {
         return update.Type switch
         {
-            UpdateType.Message => update.Message.From,
-            UpdateType.InlineQuery => update.InlineQuery.From,
-            UpdateType.ChosenInlineResult => update.ChosenInlineResult.From,
-            UpdateType.CallbackQuery => update.CallbackQuery.From,
-            UpdateType.EditedMessage => update.EditedMessage.From,
-            UpdateType.ChannelPost => update.ChannelPost.From,
-            UpdateType.EditedChannelPost => update.EditedChannelPost.From,
-            UpdateType.ShippingQuery => update.ShippingQuery.From,
-            UpdateType.PreCheckoutQuery => update.PreCheckoutQuery.From,
+            UpdateType.Message => update.Message?.From,
+            UpdateType.InlineQuery => update.InlineQuery?.From,
+            UpdateType.ChosenInlineResult => update.ChosenInlineResult?.From,
+            UpdateType.CallbackQuery => update.CallbackQuery?.From,
+            UpdateType.EditedMessage => update.EditedMessage?.From,
+            UpdateType.ChannelPost => update.ChannelPost?.From,
+            UpdateType.EditedChannelPost => update.EditedChannelPost?.From,
+            UpdateType.ShippingQuery => update.ShippingQuery?.From,
+            UpdateType.PreCheckoutQuery => update.PreCheckoutQuery?.From,
             _ => default
         };
     }
@@ -53,36 +53,43 @@ internal static class TelegramUpdateExtensions
     {
         return update.Type switch
         {
-            UpdateType.CallbackQuery => update.CallbackQuery.Message.Chat,
-            UpdateType.Message => update.Message.Chat,
-            UpdateType.EditedMessage => update.EditedMessage.Chat,
-            UpdateType.ChannelPost => update.ChannelPost.Chat,
-            UpdateType.EditedChannelPost => update.EditedChannelPost.Chat,
+            UpdateType.CallbackQuery => update.CallbackQuery?.Message?.Chat,
+            UpdateType.Message => update.Message?.Chat,
+            UpdateType.EditedMessage => update.EditedMessage?.Chat,
+            UpdateType.ChannelPost => update.ChannelPost?.Chat,
+            UpdateType.EditedChannelPost => update.EditedChannelPost?.Chat,
             _ => default
         };
     }
 
     public static TelegramConversation GetConversation(this Update update)
     {
-        var user = update.GetUserOrDefault();
-        var chat = update.GetChatOrDefault();
+        var rawUser = update.GetUserOrDefault();
+        var rawChat = update.GetChatOrDefault();
 
-        if (chat is null || user is null)
+        if (rawUser is null)
         {
-            throw new Exception("TODO NAvigator exception no conversation could be built.");
+            throw new NavigatorException("No conversation could be built, user not found.");
         }
 
-        return new TelegramConversation(
-            new TelegramUser(user.Id)
+        var user = new TelegramUser(rawUser.Id)
+        {
+            Username = rawUser.Username,
+            FirstName = rawUser.FirstName,
+            LastName = rawUser.LastName,
+            LanguageCode = rawUser.LanguageCode
+        };
+
+        var chat = default(TelegramChat);
+
+        if (rawChat is not null)
+        {
+            chat = new TelegramChat(rawChat.Id)
             {
-                Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                LanguageCode = user.LanguageCode
-            }, 
-            new TelegramChat(chat.Id)
-            {
-                Title = chat.Title
-            });
+                Title = rawChat.Title
+            };
+        }
+
+        return new TelegramConversation(user, chat);
     }
 }

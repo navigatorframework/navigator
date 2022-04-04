@@ -40,6 +40,6 @@ internal class CooldownActionMiddleware<TAction, TResponse> : IActionMiddleware<
 
     private string GenerateKey(TAction action)
     {
-        return $"{action.GetType().FullName}:{_navigatorContext.Conversation.Chat.Id}";
+        return $"{action.GetType().FullName}:{_navigatorContext.Conversation.Chat?.Id.ToString() ?? "no_chat"}";
     }
 }

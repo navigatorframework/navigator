@@ -19,4 +19,18 @@ public class TelegramChat : Chat
     /// Title of the chat, if any.
     /// </summary>
     public string? Title { get; init; }
+    
+    /// <summary>
+    /// Type of the chat, can be any of <see cref="TelegramChatType"/>.
+    /// </summary>
+    public TelegramChatType Type { get; init; }
+}
+
+public enum TelegramChatType
+{
+    Private,
+    Group,
+    Channel, 
+    Supergroup, 
+    Sender
 }

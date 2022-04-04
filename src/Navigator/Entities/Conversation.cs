@@ -14,9 +14,9 @@ public abstract class Conversation
     {
     }
     
-    protected Conversation(User user, Chat chat)
+    protected Conversation(User user, Chat? chat)
     {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes($"{user.Id}+{chat.Id}")).Take(16).ToArray());
+        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes($"{user.Id}+{chat?.Id}")).Take(16).ToArray());
 
         User = user;
         Chat = chat;
@@ -32,5 +32,5 @@ public abstract class Conversation
     /// <summary>
     /// Chat
     /// </summary>
-    public Chat Chat { get; set; }
+    public Chat? Chat { get; set; }
 }

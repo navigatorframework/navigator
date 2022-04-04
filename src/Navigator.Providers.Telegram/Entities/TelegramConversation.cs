@@ -9,7 +9,7 @@ public class TelegramConversation : Conversation
         
     }
     
-    public TelegramConversation(TelegramUser user, TelegramChat chat) : base(user, chat)
+    public TelegramConversation(TelegramUser user, TelegramChat? chat) : base(user, chat)
     {
         User = user;
         Chat = chat;
@@ -23,5 +23,5 @@ public class TelegramConversation : Conversation
     /// <summary>
     /// Telegram chat.
     /// </summary>
-    public new TelegramChat Chat { get; init; }
+    public new TelegramChat? Chat { get; init; }
 }

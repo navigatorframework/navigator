@@ -1,4 +1,6 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Navigator.Extensions.Store.Entities;
 
@@ -18,6 +20,13 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
                 e=> e.HasOne(e => e.User)
                     .WithMany(e => e.Conversations));
 
+        builder.Property(e => e.Data)
+            .HasConversion<string>(
+                dictionary => JsonSerializer.Serialize(dictionary, default(JsonSerializerOptions)),
+                json => JsonSerializer.Deserialize<Dictionary<string, string>>(json, default(JsonSerializerOptions))
+                        ?? new Dictionary<string, string>(),
+                ValueComparer.CreateDefault(typeof(IDictionary<string, string>), false));
+        
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();
     }

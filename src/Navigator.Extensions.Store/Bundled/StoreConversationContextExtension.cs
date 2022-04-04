@@ -29,17 +29,19 @@ internal class StoreConversationContextExtension : INavigatorContextExtension
             return navigatorContext;
         }
 
-        var user = await StoreUserAsync(navigatorContext.Conversation);
-        var chat = await StoreChatAsync(navigatorContext.Conversation);
-        await StoreConversationAsync(navigatorContext.Conversation, user, chat);
+        var user = await TryStoreUserAsync(navigatorContext.Conversation);
+        var chat = await TryStoreChatAsync(navigatorContext.Conversation);
+        await TryStoreConversationAsync(navigatorContext.Conversation, user, chat);
 
         await _dbContext.SaveChangesAsync();
         
         return navigatorContext;
     }
 
-    private async Task<User> StoreUserAsync(Navigator.Entities.Conversation source)
+    private async Task<User?> TryStoreUserAsync(Navigator.Entities.Conversation source)
     {
+        if (await _dbContext.Users.AnyAsync(user => user.Id == source.User.Id)) return default;
+
         var user = new User
         {
             Id = source.User.Id
@@ -62,8 +64,10 @@ internal class StoreConversationContextExtension : INavigatorContextExtension
         return user;
     }
     
-    private async Task<Chat> StoreChatAsync(Navigator.Entities.Conversation source)
+    private async Task<Chat?> TryStoreChatAsync(Navigator.Entities.Conversation source)
     {
+        if (source.Chat is null) return default;
+        
         var chat = new Chat
         {
             Id = source.Chat.Id
@@ -84,17 +88,20 @@ internal class StoreConversationContextExtension : INavigatorContextExtension
         await _dbContext.Chats.AddAsync(chat);
 
         return chat;
+
     }
 
-    private async Task StoreConversationAsync(Navigator.Entities.Conversation source, User user, Chat chat)
+    private async Task TryStoreConversationAsync(Navigator.Entities.Conversation source, User? user, Chat? chat)
     {
+        if (user is null || chat is null) return;
+
         var conversation = new Conversation(user, chat)
         {
             Id = source.Id,
             User = user,
             Chat = chat
         };
-        
+
         var data = _dataExtractors
             .FirstOrDefault(extractor => extractor.Maps(source.GetType()))?
             .From(source);
