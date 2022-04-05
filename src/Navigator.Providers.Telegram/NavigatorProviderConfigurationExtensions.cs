@@ -14,21 +14,16 @@ public static class NavigatorProviderConfigurationExtensions
         var telegramProviderOptions = new NavigatorTelegramProviderOptions();
         options.Invoke(telegramProviderOptions);
 
-        return providerConfiguration.Provider(
-            optionsAction => optionsAction.Import(telegramProviderOptions.RetrieveAllOptions()),
-            services =>
-            {
-                services.AddSingleton<NavigatorTelegramClient>();
-                services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
-
-                services.AddScoped<INavigatorProvider, TelegramNavigatorProvider>();
-
-                services.AddScoped<INavigatorContextBuilderConversationSource, TelegramNavigatorContextBuilderConversationSource>();
-                    
-                services.AddScoped<TelegramMiddleware>();
-                    
-                services.AddHostedService<SetTelegramBotWebHookHostedService>();
-
-            });
+        return providerConfiguration.Provider(configuration =>
+        {
+            configuration.Options.Import(telegramProviderOptions.RetrieveAllOptions());
+           
+            configuration.Services.AddSingleton<NavigatorTelegramClient>();
+            configuration.Services.AddSingleton<INavigatorClient, NavigatorTelegramClient>(sp => sp.GetRequiredService<NavigatorTelegramClient>());
+            configuration.Services.AddScoped<INavigatorProvider, TelegramNavigatorProvider>();
+            configuration.Services.AddScoped<INavigatorContextBuilderConversationSource, TelegramNavigatorContextBuilderConversationSource>();
+            configuration.Services.AddScoped<TelegramMiddleware>();
+            configuration.Services.AddHostedService<SetTelegramBotWebHookHostedService>();
+        });
     }
 }
