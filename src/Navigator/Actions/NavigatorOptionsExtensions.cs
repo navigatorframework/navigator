@@ -7,19 +7,29 @@ using Navigator.Configuration;
 
 namespace Navigator.Actions;
 
-internal static class NavigatorOptionsExtensions
+public static class NavigatorOptionsExtensions
 {
     #region NavigatorActionTypeCollection
         
     private const string NavigatorActionTypeCollection = "_navigator.options.action_type_collection";
 
-    public static void RegisterActions(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
+    /// <summary>
+    /// Pseudo-internal call, don't use it unless you know what you are doing.
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    /// <param name="actions"></param>
+    public static void RegisterActionsCore(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
     {
         var actionsDictionary = actions.GroupBy(type => type.GetActionType())
             .ToImmutableDictionary(types => types.Key, types => types.ToArray());
         navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actionsDictionary);
     }
 
+    /// <summary>
+    /// Pseudo-internal call, don't use it unless you know what you are doing.
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    /// <returns></returns>
     public static ImmutableDictionary<string,Type[]> RetrieveActions(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<ImmutableDictionary<string,Type[]>>(NavigatorActionTypeCollection) ?? ImmutableDictionary<string, Type[]>.Empty;
@@ -31,6 +41,11 @@ internal static class NavigatorOptionsExtensions
         
     private const string NavigatorActionPriorityCollection = "_navigator.options.action_priority_collection";
 
+    /// <summary>
+    /// Pseudo-internal call, don't use it unless you know what you are doing.
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    /// <returns></returns>
     public static void RegisterPriority(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
     {
         navigatorOptions.TryRegisterOption(NavigatorActionPriorityCollection, actions.ToImmutableDictionary(
@@ -38,6 +53,11 @@ internal static class NavigatorOptionsExtensions
             type => type.GetActionPriority()));
     }
 
+    /// <summary>
+    /// Pseudo-internal call, don't use it unless you know what you are doing.
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    /// <returns></returns>
     public static ImmutableDictionary<string, ushort> RetrievePriorities(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<ImmutableDictionary<string, ushort>>(NavigatorActionPriorityCollection) ?? ImmutableDictionary<string, ushort>.Empty;
@@ -45,7 +65,7 @@ internal static class NavigatorOptionsExtensions
 
     #endregion
     
-    public static string GetActionType(this Type? type)
+    internal static string GetActionType(this Type? type)
     {
         ActionTypeAttribute? actionTypeAttribute = default;
         
@@ -73,7 +93,7 @@ internal static class NavigatorOptionsExtensions
 
         return actionTypeAttribute?.ActionType ?? string.Empty;
     }
-    public static ushort GetActionPriority(this Type? type)
+    internal static ushort GetActionPriority(this Type? type)
     {
         if (type?.CustomAttributes.Any(data => data.AttributeType == typeof(ActionPriorityAttribute)) ?? false)
         {
@@ -91,5 +111,4 @@ internal static class NavigatorOptionsExtensions
 
         return Priority.Default;
     }
-    
 }

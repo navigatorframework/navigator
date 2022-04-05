@@ -38,7 +38,7 @@ public static class ServiceCollectionExtensions
             .AsSelf()
             .WithScopedLifetime());
 
-        navigatorBuilder.Options.RegisterActions(services
+        navigatorBuilder.Options.RegisterActionsCore(services
             .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
             .Select(descriptor => descriptor.ImplementationType!));
 
