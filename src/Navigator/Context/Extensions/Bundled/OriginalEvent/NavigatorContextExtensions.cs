@@ -4,6 +4,11 @@ public static class NavigatorContextExtensions
 {
     #region OriginalEvent
 
+    public static object? GetOriginalEvent(this INavigatorContext navigatorContext)
+    {
+        return navigatorContext.Extensions.GetValueOrDefault(OriginalEventContextExtension.OriginalEventKey);
+    }
+    
     public static TEvent GetOriginalEvent<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
     {
         var update = navigatorContext.GetOriginalEventOrDefault<TEvent>();
