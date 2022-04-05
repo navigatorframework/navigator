@@ -38,6 +38,10 @@ public static class ServiceCollectionExtensions
         navigatorBuilder.Options.RegisterActionsCore(services
             .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
             .Select(descriptor => descriptor.ImplementationType!));
+        
+        navigatorBuilder.Options.RegisterActionsPriorityCore(services
+            .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
+            .Select(descriptor => descriptor.ImplementationType!));
 
         navigatorBuilder.RegisterOrReplaceOptions();
 

@@ -15,11 +15,20 @@ public static class NavigatorOptionsExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <param name="actions"></param>
-    public static void RegisterActionsCore(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
+    /// <param name="force"></param>
+    public static void RegisterActionsCore(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions, bool force = false)
     {
         var actionsDictionary = actions.GroupBy(type => type.GetActionType())
             .ToImmutableDictionary(types => types.Key, types => types.ToArray());
-        navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actionsDictionary);
+        
+        if (force)
+        {
+            navigatorOptions.ForceRegisterOption(NavigatorActionTypeCollection, actionsDictionary);
+        }
+        else
+        {
+            navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actionsDictionary);
+        }
     }
 
     /// <summary>
@@ -42,12 +51,24 @@ public static class NavigatorOptionsExtensions
     /// Pseudo-internal call, don't use it unless you know what you are doing.
     /// </summary>
     /// <param name="navigatorOptions"></param>
+    /// <param name="actions"></param>
+    /// <param name="force"></param>
     /// <returns></returns>
-    public static void RegisterPriority(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
+    public static void RegisterActionsPriorityCore(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions, bool force = false)
     {
-        navigatorOptions.TryRegisterOption(NavigatorActionPriorityCollection, actions.ToImmutableDictionary(
+        var priorityTable = actions.ToImmutableDictionary(
             type => type.FullName ?? string.Empty, 
-            type => type.GetActionPriority()));
+            type => type.GetActionPriority());
+
+        if (force)
+        {
+            navigatorOptions.ForceRegisterOption(NavigatorActionPriorityCollection, priorityTable);
+
+        }
+        else
+        {
+            navigatorOptions.TryRegisterOption(NavigatorActionPriorityCollection, priorityTable);
+        }
     }
 
     /// <summary>
