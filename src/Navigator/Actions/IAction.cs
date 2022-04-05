@@ -1,5 +1,4 @@
 using MediatR;
-using Navigator.Context;
 
 namespace Navigator.Actions;
 

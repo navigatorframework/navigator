@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Navigator.Entities;
-
 namespace Navigator.Context;
 
 public class NavigatorContextBuilderOptions : INavigatorContextBuilderOptions

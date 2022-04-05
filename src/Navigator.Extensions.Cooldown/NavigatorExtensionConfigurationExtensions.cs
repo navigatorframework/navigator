@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Actions;
 using Navigator.Configuration;
 using Navigator.Configuration.Extension;
-using Scrutor;
 
 namespace Navigator.Extensions.Cooldown;
 

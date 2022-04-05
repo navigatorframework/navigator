@@ -1,4 +1,3 @@
-using System;
 using Navigator.Configuration;
 
 namespace Navigator.Providers.Telegram;

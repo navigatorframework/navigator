@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Navigator.Context.Extensions.Bundled.OriginalEvent;
 
 public static class NavigatorContextExtensions

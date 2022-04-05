@@ -1,5 +1,3 @@
-using Navigator.Entities;
-
 namespace Navigator.Extensions.Store.Entities;
 
 public class Conversation : Navigator.Entities.Conversation

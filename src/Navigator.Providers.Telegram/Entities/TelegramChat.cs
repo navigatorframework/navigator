@@ -1,4 +1,3 @@
-using System;
 using Navigator.Entities;
 
 namespace Navigator.Providers.Telegram.Entities;

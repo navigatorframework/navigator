@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Navigator.Entities;
 using Navigator.Extensions.Store.Context.Configuration;
 using Navigator.Extensions.Store.Context.Extension;
-using Navigator.Extensions.Store.Entities;
 using Chat = Navigator.Extensions.Store.Entities.Chat;
 using Conversation = Navigator.Extensions.Store.Entities.Conversation;
 using User = Navigator.Extensions.Store.Entities.User;

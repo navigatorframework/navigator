@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace Navigator.Context.Extensions.Bundled.OriginalEvent;
 
 internal class OriginalEventContextExtension : INavigatorContextExtension

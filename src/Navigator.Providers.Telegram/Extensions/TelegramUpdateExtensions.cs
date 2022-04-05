@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Navigator.Providers.Telegram.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;

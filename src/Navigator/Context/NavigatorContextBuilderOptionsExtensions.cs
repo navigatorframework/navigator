@@ -1,6 +1,3 @@
-using System;
-using Navigator.Entities;
-
 namespace Navigator.Context;
 
 public static class NavigatorContextBuilderOptionsExtensions

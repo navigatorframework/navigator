@@ -1,11 +1,7 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Navigator.Actions;
 using Navigator.Context;
-using Navigator.Extensions.Store;
 using Navigator.Providers.Telegram;
 using Telegram.Bot;
 

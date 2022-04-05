@@ -1,5 +1,3 @@
-using System;
-
 namespace Navigator.Providers.Telegram;
 
 public static class NavigatorProviderExtensions

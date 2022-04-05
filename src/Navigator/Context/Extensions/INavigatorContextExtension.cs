@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace Navigator.Context.Extensions;
 
 public interface INavigatorContextExtension

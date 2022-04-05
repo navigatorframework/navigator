@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Navigator.Entities;
+﻿using Navigator.Entities;
 
 namespace Navigator.Context;
 

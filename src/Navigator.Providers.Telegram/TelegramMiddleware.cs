@@ -1,12 +1,9 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Context;
 using Navigator.Providers.Telegram.Actions;
 using Navigator.Providers.Telegram.Actions.Messages;
 using Navigator.Providers.Telegram.Actions.Updates;
-using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;

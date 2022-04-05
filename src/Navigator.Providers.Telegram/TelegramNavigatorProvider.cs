@@ -1,7 +1,4 @@
-using System;
-using System.Threading.Tasks;
 using Navigator.Providers.Telegram.Entities;
-using Telegram.Bot.Types;
 
 namespace Navigator.Providers.Telegram;
 

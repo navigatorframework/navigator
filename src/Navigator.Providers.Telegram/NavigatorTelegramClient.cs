@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Navigator.Configuration;
 using Navigator.Entities;
 using Navigator.Providers.Telegram.Entities;
