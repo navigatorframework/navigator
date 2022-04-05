@@ -5,23 +5,23 @@ using Navigator.Configuration.Extension;
 
 namespace Navigator.Extensions.Cooldown;
 
+/// <summary>
+/// Extensions to NavigatorConfiguration
+/// </summary>
 public static class NavigatorExtensionConfigurationExtensions
 {
-    public static NavigatorConfiguration Cooldown(this NavigatorExtensionConfiguration providerConfiguration)
+    /// <summary>
+    /// Configures the Cooldown extension.
+    /// </summary>
+    /// <param name="extensionConfiguration"></param>
+    /// <returns></returns>
+    public static NavigatorConfiguration Cooldown(this NavigatorExtensionConfiguration extensionConfiguration)
     {
 
-        return providerConfiguration.Extension(
-            _ => {},
-            services =>
+        return extensionConfiguration.Extension(
+            configuration =>
             {
-                // services.Scan(source => source
-                //     .FromAssemblyOf<CooldownAttribute>()
-                //     .AddClasses(filter => filter.AssignableTo(typeof(IPipelineBehavior<,>)))
-                //     .UsingRegistrationStrategy(RegistrationStrategy.Append)
-                //     .AsImplementedInterfaces()
-                //     .WithScopedLifetime());
-
-                services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CooldownActionMiddleware<,>));
+                configuration.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CooldownActionMiddleware<,>));
             });
     }
 }

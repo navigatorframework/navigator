@@ -21,14 +21,11 @@ public class NavigatorExtensionConfiguration
     /// <summary>
     /// Configure a new extension using this method.
     /// </summary>
-    /// <param name="optionsAction"></param>
-    /// <param name="servicesAction"></param>
+    /// <param name="configuration"></param>
     /// <returns></returns>
-    public NavigatorConfiguration Extension(Action<NavigatorOptions>? optionsAction, Action<IServiceCollection>? servicesAction)
+    public NavigatorConfiguration Extension(Action<(NavigatorOptions Options, IServiceCollection Services)> configuration)
     {
-        optionsAction?.Invoke(_navigatorConfiguration.Options);
-
-        servicesAction?.Invoke(_navigatorConfiguration.Services);
+        configuration.Invoke((_navigatorConfiguration.Options, _navigatorConfiguration.Services));
 
         _navigatorConfiguration.RegisterOrReplaceOptions();
             

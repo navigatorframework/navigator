@@ -11,24 +11,23 @@ namespace Navigator.Extensions.Store;
 
 public static class NavigatorExtensionConfigurationExtensions
 {
-    public static NavigatorConfiguration Store(this NavigatorExtensionConfiguration providerConfiguration, Action<DbContextOptionsBuilder>? dbContextOptions = default)
+    public static NavigatorConfiguration Store(this NavigatorExtensionConfiguration extensionConfiguration, Action<DbContextOptionsBuilder>? dbContextOptions = default)
     {
         var temporal = new DbContextOptionsBuilder();
         
         dbContextOptions?.Invoke(temporal);
         
-        return providerConfiguration.Extension(
-            _ => {},
-            services =>
-            {
-                services.AddDbContext<NavigatorDbContext>(dbContextOptions);
+        return extensionConfiguration.Extension(configuration =>
+        {
+            
+            configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
-                services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
+            configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
                 
-                foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())
-                {
-                    extension.ExtensionServices?.Invoke(services);
-                }
-            });
+            foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())
+            {
+                extension.ExtensionServices?.Invoke(configuration.Services);
+            }
+        });
     }
 }
