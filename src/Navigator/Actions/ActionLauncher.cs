@@ -18,7 +18,7 @@ internal class ActionLauncher : IActionLauncher
     private readonly IServiceProvider _serviceProvider;
     private readonly ISender _sender;
     private readonly NavigatorOptions _navigatorOptions;
-    private readonly ImmutableDictionary<string, Type> _actions;
+    private readonly ImmutableDictionary<string, Type[]> _actions;
     private readonly ImmutableDictionary<string, ushort> _priorities;
 
     public ActionLauncher(ILogger<ActionLauncher> logger, NavigatorOptions navigatorOptions, INavigatorContextAccessor navigatorContextAccessor, IServiceProvider serviceProvider, ISender sender)
@@ -63,7 +63,8 @@ internal class ActionLauncher : IActionLauncher
         if (_navigatorOptions.MultipleActionsUsageIsEnabled())
         {
             return actions
-                .Select(pair => ((IAction) _serviceProvider.GetService(pair.Value)!, pair.Value.FullName))
+                .SelectMany(groups => groups.Value)
+                .Select(actionType => ((IAction) _serviceProvider.GetService(actionType)!, actionType.FullName))
                 .Where(a => a.Item1.CanHandleCurrentContext())
                 .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
                 .Select(a => a.Item1)
@@ -71,7 +72,8 @@ internal class ActionLauncher : IActionLauncher
         }
             
         var action = actions
-            .Select(pair => ((IAction) _serviceProvider.GetService(pair.Value)!, pair.Value.FullName))
+            .SelectMany(groups => groups.Value)
+            .Select(actionType => ((IAction) _serviceProvider.GetService(actionType)!, actionType.FullName))
             .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
             .Select(a => a.Item1)
             .FirstOrDefault(a => a.CanHandleCurrentContext());

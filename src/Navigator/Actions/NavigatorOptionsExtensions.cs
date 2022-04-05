@@ -15,14 +15,14 @@ internal static class NavigatorOptionsExtensions
 
     public static void RegisterActions(this NavigatorOptions navigatorOptions, IEnumerable<Type> actions)
     {
-        navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actions.ToImmutableDictionary(
-            type => type.GetActionType(), 
-            type => type));
+        var actionsDictionary = actions.GroupBy(type => type.GetActionType())
+            .ToImmutableDictionary(types => types.Key, types => types.ToArray());
+        navigatorOptions.TryRegisterOption(NavigatorActionTypeCollection, actionsDictionary);
     }
 
-    public static ImmutableDictionary<string,Type> RetrieveActions(this NavigatorOptions navigatorOptions)
+    public static ImmutableDictionary<string,Type[]> RetrieveActions(this NavigatorOptions navigatorOptions)
     {
-        return navigatorOptions.RetrieveOption<ImmutableDictionary<string,Type>>(NavigatorActionTypeCollection) ?? ImmutableDictionary<string, Type>.Empty;
+        return navigatorOptions.RetrieveOption<ImmutableDictionary<string,Type[]>>(NavigatorActionTypeCollection) ?? ImmutableDictionary<string, Type[]>.Empty;
     }
 
     #endregion
