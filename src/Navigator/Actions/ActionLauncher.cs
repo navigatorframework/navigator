@@ -57,7 +57,9 @@ internal class ActionLauncher : IActionLauncher
         }
 
         var actions = _actions
-            .Where(a => a.Key == _navigatorContextAccessor.NavigatorContext.ActionType)
+            .Where(a => 
+                a.Key == _navigatorContextAccessor.NavigatorContext.ActionType ||
+                a.Key == nameof(ProviderAgnosticAction))
             .ToImmutableList();
             
         if (_navigatorOptions.MultipleActionsUsageIsEnabled())
