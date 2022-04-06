@@ -32,9 +32,7 @@ builder.Services
     {
         dbBuilder.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly("Navigator.Samples.Store"));
-
-        dbBuilder.UsingStoreExtension<NavigatorStoreTelegramExtension>();
-    });
+    }).WithExtension.StoreForTelegram();
 
 var app = builder.Build();
 
