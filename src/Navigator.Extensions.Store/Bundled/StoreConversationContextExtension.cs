@@ -65,6 +65,8 @@ internal class StoreConversationContextExtension : INavigatorContextExtension
     private async Task<Chat?> TryStoreChatAsync(Navigator.Entities.Conversation source)
     {
         if (source.Chat is null) return default;
+
+        if (await _dbContext.Chats.AnyAsync(chat => chat.Id == source.Chat.Id)) return default;
         
         var chat = new Chat
         {
