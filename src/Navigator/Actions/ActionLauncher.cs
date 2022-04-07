@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
 using Navigator.Context;
@@ -61,7 +62,8 @@ internal class ActionLauncher : IActionLauncher
         {
             return actions
                 .SelectMany(groups => groups.Value)
-                .Select(actionType => ((IAction) _serviceProvider.GetService(actionType)!, actionType.FullName))
+                .SelectMany(actionType => _serviceProvider.GetServices(actionType)
+                    .Select(action =>((IAction) action!, actionType.FullName)))
                 .Where(a => a.Item1.CanHandleCurrentContext())
                 .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
                 .Select(a => a.Item1)
@@ -70,7 +72,8 @@ internal class ActionLauncher : IActionLauncher
             
         var action = actions
             .SelectMany(groups => groups.Value)
-            .Select(actionType => ((IAction) _serviceProvider.GetService(actionType)!, actionType.FullName))
+            .SelectMany(actionType => _serviceProvider.GetServices(actionType)
+                .Select(action =>((IAction) action!, actionType.FullName)))
             .OrderBy(a => _priorities.GetValueOrDefault(a.FullName ?? string.Empty, Priority.Default))
             .Select(a => a.Item1)
             .FirstOrDefault(a => a.CanHandleCurrentContext());
