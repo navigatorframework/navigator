@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj" />
       <ProjectReference Include="..\Navigator.Extensions.Store.Telegram\Navigator.Extensions.Store.Telegram.csproj" />
       <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
       <ProjectReference Include="..\Navigator.Providers.Telegram\Navigator.Providers.Telegram.csproj" />

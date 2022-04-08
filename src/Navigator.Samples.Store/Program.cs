@@ -5,10 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navigator;
 using Navigator.Configuration;
-using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Store;
 using Navigator.Extensions.Store.Context;
-using Navigator.Extensions.Store.Context.Extension;
 using Navigator.Extensions.Store.Telegram;
 using Navigator.Providers.Telegram;
 using Navigator.Samples.Store.Actions;
@@ -27,7 +25,6 @@ builder.Services
         options.RegisterActionsFromAssemblies(typeof(EchoAction).Assembly);
     })
     .WithProvider.Telegram(options => { options.SetTelegramToken(builder.Configuration["BOT_TOKEN"]); })
-    .WithExtension.Cooldown()
     .WithExtension.Store(dbBuilder =>
     {
         dbBuilder.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),

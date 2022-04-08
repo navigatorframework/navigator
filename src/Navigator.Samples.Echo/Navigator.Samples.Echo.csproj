@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj" />
       <ProjectReference Include="..\Navigator.Providers.Telegram\Navigator.Providers.Telegram.csproj" />
       <ProjectReference Include="..\Navigator\Navigator.csproj" />
     </ItemGroup>
