@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Navigator.Actions;
 using Navigator.Context;
+using Navigator.Extensions.Store.Bundled.Extensions;
 using Navigator.Providers.Telegram;
 using Telegram.Bot;
 
@@ -17,6 +19,10 @@ public class EchoActionHandler : ActionHandler<EchoAction>
     {
         await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
             action.MessageToEcho, cancellationToken: cancellationToken);
+
+        await this.GetTelegramClient().SendTextMessageAsync(this.GetTelegramChat().Id, 
+            JsonSerializer.Serialize(await NavigatorContext.GetStore().GetDataAsync(NavigatorContext.Conversation.User, cancellationToken)), 
+            cancellationToken: cancellationToken);
 
         return Success();
     }

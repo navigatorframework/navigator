@@ -23,6 +23,7 @@ public static class NavigatorExtensionConfigurationExtensions
             configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
             configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
+            configuration.Services.AddScoped<INavigatorContextExtension, StoreContextExtension>();
 
             configuration.Services.AddScoped<INavigatorStore, NavigatorStore>();
             

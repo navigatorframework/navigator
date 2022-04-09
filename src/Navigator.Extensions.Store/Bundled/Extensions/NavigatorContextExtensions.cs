@@ -4,14 +4,14 @@ namespace Navigator.Extensions.Store.Bundled.Extensions;
 
 public static class NavigatorContextExtensions
 {
-    public static INavigatorStore GetStore<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
+    public static INavigatorStore GetStore(this INavigatorContext navigatorContext)
     {
-        var store = navigatorContext.GetStoreOrDefault<TEvent>();
+        var store = navigatorContext.GetStoreOrDefault();
         
         return store ?? throw new NavigatorException("Store was not found.");
     }
         
-    public static INavigatorStore GetStoreOrDefault<TEvent>(this INavigatorContext navigatorContext) where TEvent : class
+    public static INavigatorStore? GetStoreOrDefault(this INavigatorContext navigatorContext)
     {
         var @store = navigatorContext.Extensions.GetValueOrDefault(StoreContextExtension.NavigatorStoreKey);
 
