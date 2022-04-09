@@ -23,7 +23,9 @@ public static class NavigatorExtensionConfigurationExtensions
             configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
             configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
-                
+
+            configuration.Services.AddScoped<INavigatorStore, NavigatorStore>();
+            
             foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())
             {
                 extension.ExtensionServices?.Invoke(configuration.Services);
