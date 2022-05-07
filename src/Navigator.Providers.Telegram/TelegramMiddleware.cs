@@ -86,9 +86,10 @@ public class TelegramMiddleware
             UpdateType.ShippingQuery => nameof(ShippingQueryAction),
             UpdateType.PreCheckoutQuery => nameof(PreCheckoutQuery),
             UpdateType.Poll => nameof(PollAction),
-            // UpdateType.PollAnswer => typeof(PollAction).FullName,
-            // UpdateType.MyChatMember => typeof(UnknownAction).FullName,
-            // UpdateType.ChatMember => typeof(UnknownAction).FullName,
+            UpdateType.PollAnswer => nameof(PollAnswerAction),
+            UpdateType.MyChatMember => nameof(MyChatMemberAction),
+            UpdateType.ChatMember => nameof(ChatMemberAction),
+            UpdateType.ChatJoinRequest => nameof(ChatJoinRequestAction),
             UpdateType.Unknown => nameof(UnknownAction),
             _ => default
         };
