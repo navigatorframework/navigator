@@ -1,6 +1,8 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context;
+using Navigator.Context.Extensions.Bundled.OriginalEvent;
+using Telegram.Bot.Types;
 
 namespace Navigator.Providers.Telegram.Actions.Updates;
 
@@ -13,9 +15,6 @@ public abstract class ChannelCreatedAction : BaseAction
     /// <inheritdoc />
     protected ChannelCreatedAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        //TODO
-    }
-
         
-
+    }
 }
