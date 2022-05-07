@@ -22,6 +22,6 @@ public abstract class PollAction : BaseAction
     {
         var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
 
-        Poll = update.Poll;
+        Poll = update.Poll!;
     }
 }
