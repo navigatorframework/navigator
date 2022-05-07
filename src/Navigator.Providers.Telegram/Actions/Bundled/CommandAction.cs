@@ -1,9 +1,10 @@
 using Navigator.Actions.Attributes;
 using Navigator.Context;
+using Navigator.Providers.Telegram.Actions.Messages;
 using Navigator.Providers.Telegram.Entities;
 using Navigator.Providers.Telegram.Extensions;
 
-namespace Navigator.Providers.Telegram.Actions.Messages;
+namespace Navigator.Providers.Telegram.Actions.Bundled;
 
 /// <summary>
 /// Command based action.
