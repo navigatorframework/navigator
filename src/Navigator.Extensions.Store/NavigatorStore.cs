@@ -8,31 +8,91 @@ public class NavigatorStore : INavigatorStore
 {
     private readonly NavigatorDbContext _dbContext;
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
+    /// <param name="dbContext"></param>
     public NavigatorStore(NavigatorDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public IDictionary<string, string>? GetData(User user)
+    /// <inheritdoc />
+    public IDictionary<string, string>? GetAllData(User user)
     {
         return _dbContext.Users.Find(user.Id)?.Data;
     }
 
-    public IDictionary<string, string>? GetData(Chat? chat = default)
+    /// <inheritdoc />
+    public IDictionary<string, string>? GetAllData(Chat chat)
     {
-        return _dbContext.Users.Find(chat?.Id)?.Data;
+        return _dbContext.Users.Find(chat.Id)?.Data;
     }
 
-    public async Task<IDictionary<string, string>?> GetDataAsync(User? user = default, CancellationToken cancellationToken = default)
+    /// <inheritdoc />
+    public async Task<IDictionary<string, string>?> GetAllDataAsync(User user, CancellationToken cancellationToken = default)
     {
         return (await _dbContext.Users.FindAsync(new object?[] { user.Id }, cancellationToken))?.Data;
     }
 
-    public async Task<IDictionary<string, string>?> GetDataAsync(Chat? chat = default, CancellationToken cancellationToken = default)
+    /// <inheritdoc />
+    public async Task<IDictionary<string, string>?> GetAllDataAsync(Chat chat, CancellationToken cancellationToken = default)
     {
         return (await _dbContext.Chats.FindAsync(new object?[] { chat?.Id }, cancellationToken))?.Data;
     }
 
+    /// <inheritdoc />
+    public string? TryGetData(User user, string key)
+    {
+        var data = GetAllData(user);
+
+        if (data?.TryGetValue(key, out var value) is not null)
+        {
+            return value;
+        }
+
+        return default;
+    }
+
+    public string? TryGetData(Chat chat, string key)
+    {
+        var data = GetAllData(chat);
+
+        if (data?.TryGetValue(key, out var value) is not null)
+        {
+            return value;
+        }
+
+        return default;
+    }
+
+    /// <inheritdoc />
+    public async Task<string?> TryGetDataAsync(User user, string key, CancellationToken cancellationToken = default)
+    {
+        var data = await GetAllDataAsync(user, cancellationToken);
+
+        if (data?.TryGetValue(key, out var value) is not null)
+        {
+            return value;
+        }
+
+        return default;
+    }
+
+    /// <inheritdoc />
+    public async Task<string?> TryGetDataAsync(Chat chat, string key, CancellationToken cancellationToken = default)
+    {
+        var data = await GetAllDataAsync(chat, cancellationToken);
+
+        if (data?.TryGetValue(key, out var value) is not null)
+        {
+            return value;
+        }
+
+        return default;
+    }
+
+    /// <inheritdoc />
     public bool TryAddData(User user, string key, object data, bool force = false)
     {
         var storedUser = _dbContext.Users.Find(user.Id);
@@ -68,6 +128,7 @@ public class NavigatorStore : INavigatorStore
         }
     }
 
+    /// <inheritdoc />
     public bool TryAddData(Chat chat, string key, object data, bool force = false)
     {
         var storedChat = _dbContext.Chats.Find(chat.Id);
@@ -103,6 +164,7 @@ public class NavigatorStore : INavigatorStore
         }
     }
 
+    /// <inheritdoc />
     public async Task<bool> TryAddDataAsync(User user, string key, object data, bool force = false, CancellationToken cancellationToken = default)
     {
         var storedUser = await _dbContext.Chats.FindAsync(new object?[] { user.Id }, cancellationToken);
@@ -139,6 +201,7 @@ public class NavigatorStore : INavigatorStore
         }
     }
 
+    /// <inheritdoc />
     public async Task<bool> TryAddDataAsync(Chat chat, string key, object data, bool force = false, CancellationToken cancellationToken = default)
     {
         var storedChat = await _dbContext.Chats.FindAsync(new object?[] { chat.Id }, cancellationToken);
