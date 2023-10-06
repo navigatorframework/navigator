@@ -1,7 +1,8 @@
+using Navigator.Context;
 using Navigator.Context.Builder.Options;
 using Navigator.Context.Builder.Options.Extensions;
 
-namespace Navigator.Context.Extensions.Bundled.OriginalEvent;
+namespace Navigator.Extensions.Bundled.OriginalEvent;
 
 internal class OriginalEventContextExtension : INavigatorContextExtension
 {

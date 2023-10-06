@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Client;
 using Navigator.Context.Builder.Options;
 using Navigator.Context.Builder.Options.Extensions;
-using Navigator.Context.Extensions;
+using Navigator.Extensions;
 
 namespace Navigator.Context.Builder;
 

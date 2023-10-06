@@ -5,8 +5,8 @@ using Navigator.Configuration;
 using Navigator.Context;
 using Navigator.Context.Accessor;
 using Navigator.Context.Builder;
-using Navigator.Context.Extensions;
-using Navigator.Context.Extensions.Bundled.OriginalEvent;
+using Navigator.Extensions;
+using Navigator.Extensions.Bundled.OriginalEvent;
 using Scrutor;
 
 namespace Navigator;

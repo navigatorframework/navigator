@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Navigator.Context;
 using Navigator.Context.Builder.Options;
-using Navigator.Context.Extensions;
 using Navigator.Extensions.Store.Context;
 using Navigator.Extensions.Store.Entities;
 using Navigator.Extensions.Store.Extractors;

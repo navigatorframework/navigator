@@ -1,6 +1,7 @@
+using Navigator.Context;
 using Navigator.Context.Builder.Options;
 
-namespace Navigator.Context.Extensions;
+namespace Navigator.Extensions;
 
 public interface INavigatorContextExtension
 {
