@@ -1,44 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <LangVersion>9</LangVersion>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>true</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.102-beta</PackageVersion>
-        <PackageId>Navigator</PackageId>
-        <Title>Navigator Framework</Title>
+        <Title>Navigator</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>A highly opinionated telegram bot framework, mainly based on Telegram.Bot.</Description>
+        <Description>A highly opinionated universal bot framework for .NET</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/navigatorframework/navigator/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
-        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
-        <Nullable>enable</Nullable>
+        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2022</Copyright>
     </PropertyGroup>
-
+    
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+    
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-        <PackageReference Include="Scrutor" Version="3.3.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+        <PackageReference Include="Scrutor" Version="4.1.0" />
     </ItemGroup>
 
-
-    <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator.Abstractions" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Abstractions.Extensions" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Extensions.Actions" Version="0.9.100-beta" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Debug'">
-        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
-    </ItemGroup>
 </Project>

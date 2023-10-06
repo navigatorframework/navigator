@@ -1,24 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Navigator.Extensions.Store.Abstractions.Entity;
+using Navigator.Extensions.Store.Entities;
 
-namespace Navigator.Extensions.Store.Context.Configuration
+namespace Navigator.Extensions.Store.Context.Configuration;
+
+public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<Conversation>
 {
-    /// <inheritdoc />
-    public class ConversationEntityTypeConfiguration : IEntityTypeConfiguration<Conversation>
+    public void Configure(EntityTypeBuilder<Conversation> builder)
     {
-        /// <inheritdoc />
-        public void Configure(EntityTypeBuilder<Conversation> builder)
-        {
-            builder.HasKey(e => new {e.ChatId, e.UserId});
-
-            builder.HasOne(e => e.User)
-                .WithMany(e => e.Conversations)
-                .HasForeignKey(e => e.UserId);
-
-            builder.HasOne(e => e.Chat)
-                .WithMany(e => e.Conversations)
-                .HasForeignKey(e => e.ChatId);
-        }
+        builder.Property(e => e.Data)
+            .HasConversion<string>(
+                dictionary => JsonSerializer.Serialize(dictionary, default(JsonSerializerOptions)),
+                json => JsonSerializer.Deserialize<Dictionary<string, string>>(json, default(JsonSerializerOptions))
+                        ?? new Dictionary<string, string>(),
+                ValueComparer.CreateDefault(typeof(IDictionary<string, string>), false));
+        
+        builder.Property(e => e.FirstInteractionAt)
+            .IsRequired();
     }
 }

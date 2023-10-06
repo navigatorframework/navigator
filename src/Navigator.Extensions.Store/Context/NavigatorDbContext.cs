@@ -1,38 +1,45 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Navigator.Extensions.Store.Abstractions.Entity;
+using Microsoft.EntityFrameworkCore;
 using Navigator.Extensions.Store.Context.Configuration;
+using Navigator.Extensions.Store.Context.Extension;
+using Chat = Navigator.Extensions.Store.Entities.Chat;
+using Conversation = Navigator.Extensions.Store.Entities.Conversation;
+using User = Navigator.Extensions.Store.Entities.User;
 
-namespace Navigator.Extensions.Store.Context
+namespace Navigator.Extensions.Store.Context;
+
+public class NavigatorDbContext : DbContext
 {
-    public class NavigatorDbContext : NavigatorDbContext<User, Chat>
+    public DbSet<User> Users { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Conversation> Conversations { get; set; }
+
+    protected NavigatorDbContext()
     {
-        public NavigatorDbContext(DbContextOptions options) : base(options)
+    }
+
+    private readonly IList<Action<ModelBuilder>> _entityTypeConfigurations = new List<Action<ModelBuilder>>();
+
+    public NavigatorDbContext(DbContextOptions options) : base(options)
+    {
+        foreach (var extension in options.Extensions
+                     .OfType<NavigatorStoreModelExtension>()
+                     .Select(e => e.Extension))
         {
+            if (extension is not null) _entityTypeConfigurations.Add(extension);
         }
     }
-    
-    public class NavigatorDbContext<TUser, TChat> : DbContext
-        where TUser : User
-        where TChat : Chat
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public DbSet<TUser> Users { get; set; }
-        public DbSet<TChat> Chats { get; set; }
-        public DbSet<Conversation> Conversations { get; set; }
+        base.OnModelCreating(modelBuilder);
 
-        protected NavigatorDbContext()
+        modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
+
+        foreach (var entityTypeConfiguration in _entityTypeConfigurations)
         {
-        }
-
-        public NavigatorDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
-
+            entityTypeConfiguration.Invoke(modelBuilder);
         }
     }
 }

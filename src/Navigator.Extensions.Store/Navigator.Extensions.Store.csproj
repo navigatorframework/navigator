@@ -1,42 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageVersion>0.9.100-beta</PackageVersion>
-        <PackageId>Navigator.Extensions.Store</PackageId>
-        <Title>Navigator Extensions Store</Title>
+        <Title>Navigator.Extensions.Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>Store extension for Navigator Framework.</Description>
+        <Description>Persistence extension for Navigator Framework bots, requires provider implementations.</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/navigatorframework/navigator/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
-        <PackageTags>Telegram, Bot, Framework, Navigator, EF Core, Store, Database, Extension</PackageTags>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2021</Copyright>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
+        <PackageTags>Store, Bot, Extension, Navigator</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2022</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(Configuration)'=='Release'">
-        <PackageReference Include="Navigator" Version="0.9.99-beta" />
-        <PackageReference Include="Navigator.Extensions.Store.Abstractions" Version="0.9.100-beta" />
-        <PackageReference Include="Navigator.Extensions.Store.Abstractions.Extensions" Version="0.9.99-beta" />
+    <ItemGroup>
+      <ProjectReference Include="..\Navigator\Navigator.csproj" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(Configuration)'=='Debug'">
-        <ProjectReference Include="..\Navigator\Navigator.csproj" />
-        <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions\Navigator.Extensions.Store.Abstractions.csproj" />
-        <ProjectReference Include="..\Navigator.Extensions.Store.Abstractions.Extensions\Navigator.Extensions.Store.Abstractions.Extensions.csproj" />
-    </ItemGroup>
 </Project>

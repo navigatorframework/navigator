@@ -1,24 +1,19 @@
-﻿using Navigator.Abstractions;
-using Navigator.Extensions.Actions;
+﻿using Navigator.Context;
+using Navigator.Providers.Telegram.Actions.Messages;
 
-namespace Navigator.Samples.Echo.Actions
+namespace Navigator.Samples.Echo.Actions;
+
+public class EchoAction : MessageAction
 {
-    public class EchoAction : MessageAction
-    {
-        public string MessageToEcho { get; set; } = string.Empty;
-        
-        public override IAction Init(INavigatorContext ctx)
-        {
-            if (string.IsNullOrWhiteSpace(ctx.Update.Message.Text))
-            {
-                MessageToEcho = ctx.Update.Message.Text;
-            }
-            return this;
-        }
+    public readonly string MessageToEcho;
 
-        public override bool CanHandle(INavigatorContext ctx)
-        {
-            return !string.IsNullOrWhiteSpace(MessageToEcho);
-        }
+    public EchoAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
+    {
+        MessageToEcho = !string.IsNullOrWhiteSpace(Message.Text) ? Message.Text : string.Empty;
+    }
+
+    public override bool CanHandleCurrentContext()
+    {
+        return !string.IsNullOrWhiteSpace(MessageToEcho);
     }
 }

@@ -1,44 +1,36 @@
-using System;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog;
+using Navigator;
+using Navigator.Configuration;
+using Navigator.Providers.Telegram;
+using Navigator.Samples.Echo.Actions;
 
-namespace Navigator.Samples.Echo
-{
-    public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+// For Extensions.Cooldown
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services
+    .AddNavigator(options =>
     {
-        private static IConfiguration Configuration { get; } = ConfigurationExtension.LoadConfiguration();
+        options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]);
+        options.RegisterActionsFromAssemblies(typeof(EchoAction).Assembly);
+    })
+    .WithProvider.Telegram(options => { options.SetTelegramToken(builder.Configuration["BOT_TOKEN"]); });
 
-        
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>(); 
-                    webBuilder.UseSerilog();
-                });
-        
-        public static void Main(string[] args)
-        {
-            Log.Logger = ConfigurationExtension.LoadLogger(Configuration);
+var app = builder.Build();
 
-            try
-            {
-                var host = CreateHostBuilder(args).Build();
-
-                Log.Information("Starting WebApi");
-
-                host.Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "WebApi terminated unexpectedly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
-        }
-    }
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
 }
+
+app.UseHttpsRedirection();
+
+app.MapNavigator()
+    .ForProvider.Telegram();
+
+app.Run();
