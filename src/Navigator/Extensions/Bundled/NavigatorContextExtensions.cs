@@ -20,7 +20,7 @@ public static class NavigatorContextExtensions
     {
         var @event = navigatorContext.Extensions.GetValueOrDefault(OriginalEventContextExtension.OriginalEventKey);
 
-        if (@event is Telegram.Bot.Types.Update originalEvent)
+        if (@event is Update originalEvent)
         {
             return originalEvent;
         }
