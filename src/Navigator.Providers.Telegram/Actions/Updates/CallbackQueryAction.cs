@@ -37,9 +37,9 @@ public abstract class CallbackQueryAction : BaseAction
     {
         var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
 
-        CallbackQuery = update.CallbackQuery;
-        OriginalMessage = update.CallbackQuery.Message;
-        Data = string.IsNullOrWhiteSpace(update.CallbackQuery.Data) ? update.CallbackQuery.Data : default;
-        IsGameQuery = update.CallbackQuery.IsGameQuery;
+        CallbackQuery = update.CallbackQuery!;
+        OriginalMessage = CallbackQuery.Message;
+        Data = string.IsNullOrWhiteSpace(CallbackQuery.Data) ? CallbackQuery.Data : default;
+        IsGameQuery = CallbackQuery.IsGameQuery;
     }
 }

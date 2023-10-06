@@ -5,7 +5,7 @@ namespace Navigator;
 /// </summary>
 public interface INavigatorProvider
 {
-    string Name { get; }
+    public string Name { get; init; }
 
     /// <summary>
     /// Gets the specific client for this provider. 

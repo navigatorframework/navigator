@@ -5,14 +5,15 @@ namespace Navigator.Providers.Telegram;
 internal class TelegramNavigatorProvider : INavigatorProvider
 {
     private readonly NavigatorTelegramClient _client;
-
-    public string Name => "navigator.provider.telegram";
+    
+    public string Name { get; init; } = "navigator.provider.telegram";
 
     public TelegramNavigatorProvider(NavigatorTelegramClient client)
     {
         _client = client;
     }
-        
+
+
     public INavigatorClient GetClient()
     {
         return _client;
