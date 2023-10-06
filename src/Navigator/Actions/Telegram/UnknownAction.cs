@@ -1,9 +1,7 @@
-using Navigator.Actions;
 using Navigator.Actions.Attributes;
-using Navigator.Context;
 using Navigator.Context.Accessor;
 
-namespace Navigator.Providers.Telegram.Actions;
+namespace Navigator.Actions.Telegram;
 
 [ActionType(nameof(UnknownAction))]
 public abstract class UnknownAction : BaseAction

@@ -1,9 +1,8 @@
-using Navigator.Context;
 using Navigator.Context.Builder;
 using Navigator.Entities;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram;
+namespace Navigator.Old;
 
 internal class TelegramNavigatorContextBuilderConversationSource : INavigatorContextBuilderConversationSource
 {

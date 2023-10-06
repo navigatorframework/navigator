@@ -1,16 +1,16 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
+using Navigator.Actions.Telegram;
+using Navigator.Actions.Telegram.Bundled;
+using Navigator.Actions.Telegram.Messages;
+using Navigator.Actions.Telegram.Updates;
 using Navigator.Context;
 using Navigator.Context.Builder.Options.Extensions;
-using Navigator.Providers.Telegram.Actions;
-using Navigator.Providers.Telegram.Actions.Bundled;
-using Navigator.Providers.Telegram.Actions.Messages;
-using Navigator.Providers.Telegram.Actions.Updates;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
 
-namespace Navigator.Providers.Telegram;
+namespace Navigator;
 
 public class TelegramMiddleware
 {

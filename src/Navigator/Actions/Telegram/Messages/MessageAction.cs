@@ -1,10 +1,8 @@
-using Navigator.Actions;
 using Navigator.Actions.Attributes;
-using Navigator.Context;
 using Navigator.Context.Accessor;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram.Actions.Messages;
+namespace Navigator.Actions.Telegram.Messages;
 
 /// <summary>
 /// A message based action.

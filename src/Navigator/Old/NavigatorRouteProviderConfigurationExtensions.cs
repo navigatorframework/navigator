@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
 using Navigator.Configuration.Provider;
-using Newtonsoft.Json;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram;
+namespace Navigator.Old;
 
 public static class NavigatorRouteProviderConfigurationExtensions
 {

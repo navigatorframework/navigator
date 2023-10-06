@@ -2,7 +2,7 @@ using Navigator.Context;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Providers.Telegram;
+namespace Navigator.Old;
 
 /// <summary>
 /// Useful extensions for Navigator Context.

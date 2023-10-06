@@ -1,7 +1,7 @@
-using Navigator.Actions;
+using Navigator.Old;
 using Telegram.Bot.Types;
 
-namespace Navigator.Providers.Telegram;
+namespace Navigator.Actions.Telegram;
 
 public static class ActionHandlerExtensions
 {
