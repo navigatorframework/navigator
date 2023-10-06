@@ -6,22 +6,39 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents a user.
 /// </summary>
-public abstract class User
+public class User
 {
-    protected User()
-    {
-    }
-    
-    protected User(string input)
-    {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());
-    }
-        
     /// <summary>
-    /// Id of the user.
+    /// Telegram identifier for the user.
+    /// </summary>
+    public long Id { get; init; }
+
+    /// <summary>
+    /// Username of the user, if any.
     /// <remarks>
-    ///     Generally a deterministic Guid based on some kind of input.
+    ///     Optional.
     /// </remarks>
     /// </summary>
-    public Guid Id { get; init; }
+    public string? Username { get; init; }
+
+    /// <summary>
+    /// First name of the user.
+    /// </summary>
+    public string FirstName { get; init; }
+    
+    /// <summary>
+    /// Last name of the user.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public string? LastName { get; init; }
+
+    /// <summary>
+    /// Language code of the user.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public string? LanguageCode { get; init; }
 }
