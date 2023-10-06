@@ -6,29 +6,16 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents an interaction between a user and chat.
 /// </summary>
-public abstract class Conversation
+public class Conversation
 {
-    protected Conversation()
+    public Conversation(User user, Chat? chat = default)
     {
-    }
-    
-    protected Conversation(User user, Chat? chat)
-    {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes($"{user.Id}+{chat?.Id}")).Take(16).ToArray());
-
+        Id = Guid.NewGuid();
         User = user;
         Chat = chat;
     }
-
-    public Guid Id { get; set; }
-
-    /// <summary>
-    /// User
-    /// </summary>
-    public User User { get; set; }
-
-    /// <summary>
-    /// Chat
-    /// </summary>
-    public Chat? Chat { get; set; }
+    
+    public Guid Id { get; } 
+    public User User { get; }
+    public Chat? Chat { get; }
 }
