@@ -7,11 +7,6 @@ public interface INavigatorContext
     /// <summary>
     /// 
     /// </summary>
-    INavigatorProvider Provider { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
     Bot BotProfile { get; }
 
     /// <summary>

@@ -17,13 +17,36 @@ public static class NavigatorOptionsCollectionExtensions
 
     }
 
-    public static string? GetWebHookBaseUrl(this NavigatorOptions navigatorOptions)
+    public static string? GetWebHookBaseUrl(this INavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<string>(WebHookBaseUrlKey);
     }
         
     #endregion
         
+    #region WebHookEndpoint
+
+    private const string WebHookEndpointKey = "_navigator.options.webhook_endpoint";
+
+    public static void SetWebHookEndpoint(this NavigatorOptions navigatorOptions, string webHookEndpoint)
+    {
+        navigatorOptions.TryRegisterOption(WebHookEndpointKey, webHookEndpoint);
+    }
+
+    public static string GetWebHookEndpointOrDefault(this INavigatorOptions navigatorOptions)
+    {
+        var webHookEndpoint = navigatorOptions.RetrieveOption<string>(WebHookEndpointKey);
+
+        if (webHookEndpoint is null)
+        {
+            navigatorOptions.TryRegisterOption(WebHookEndpointKey,$"telegram/bot/{Guid.NewGuid()}");
+        }
+            
+        return navigatorOptions.RetrieveOption<string>(WebHookEndpointKey)!;
+    }
+
+    #endregion
+    
     #region MultipleActions
 
     private const string MultipleActionsKey = "_navigator.options.multiple_actions";
@@ -33,7 +56,7 @@ public static class NavigatorOptionsCollectionExtensions
         navigatorOptions.TryRegisterOption(MultipleActionsKey, true);
     }
 
-    public static bool MultipleActionsUsageIsEnabled(this NavigatorOptions navigatorOptions)
+    public static bool MultipleActionsUsageIsEnabled(this INavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<bool>(MultipleActionsKey);
     }
@@ -61,10 +84,28 @@ public static class NavigatorOptionsCollectionExtensions
         }
     }
 
-    public static Assembly[] GetActionsAssemblies(this NavigatorOptions navigatorOptions)
+    public static Assembly[] GetActionsAssemblies(this INavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<Assembly[]>(ActionsAssembliesKey) ?? new[] { Assembly.GetCallingAssembly()};
     }
 
     #endregion
+    
+    #region TelegramToken
+
+    private const string TelegramTokenKey = "_navigator.options.telegram_token";
+
+    public static void SetTelegramToken(this NavigatorOptions navigatorOptions, string telegramToken)
+    {
+        navigatorOptions.TryRegisterOption(TelegramTokenKey, telegramToken);
+
+    }
+
+    public static string? GetTelegramToken(this INavigatorOptions navigatorOptions)
+    {
+        return navigatorOptions.RetrieveOption<string>(TelegramTokenKey);
+    }
+        
+    #endregion
+        
 }

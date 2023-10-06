@@ -4,16 +4,16 @@ namespace Navigator.Context;
 
 internal class NavigatorContext : INavigatorContext
 {
-    public INavigatorProvider Provider { get; }
+    public INavigatorClient NavigatorClient { get; }
     public Bot BotProfile { get; }
     public Dictionary<string, object?> Extensions { get; }
     public Dictionary<string, string> Items { get; }
     public string ActionType { get; }
     public Conversation Conversation { get; }
 
-    public NavigatorContext(INavigatorProvider provider, Bot botProfile, string actionType, Conversation conversation)
+    public NavigatorContext(INavigatorClient navigatorClient, Bot botProfile, string actionType, Conversation conversation)
     {
-        Provider = provider;
+        NavigatorClient = navigatorClient;
         BotProfile = botProfile;
         ActionType = actionType;
         Conversation = conversation;

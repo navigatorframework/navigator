@@ -1,20 +1,53 @@
-using System.Security.Cryptography;
-using System.Text;
+using Navigator.Context;
 
 namespace Navigator.Entities;
 
-public abstract class Bot
+public class Bot
 {
-    protected Bot(string input)
-    {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());
-    }
+    /// <summary>
+    /// Telegram identifier for the bot.
+    /// </summary>
+    public long Id { get; init; }
     
     /// <summary>
-    /// Id of the bot.
+    /// Username of the bot.
+    /// </summary>
+    public string Username { get; init; }
+
+    /// <summary>
+    /// First name of the bot.
+    /// </summary>
+    public string FirstName { get; init; }
+    
+    /// <summary>
+    /// Last name of the bot.
     /// <remarks>
-    ///     Generally a deterministic Guid based on some kind of input.
+    ///     Optional.
     /// </remarks>
     /// </summary>
-    public Guid Id { get; init; }
+    public string? LastName { get; init; }
+    
+    /// <summary>
+    /// Whether the bot can join groups or not.
+    /// <remarks>
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
+    /// </remarks>
+    /// </summary>
+    public bool? CanJoinGroups { get; set; }
+
+    /// <summary>
+    /// Whether the bot can read all group messages or not.
+    /// <remarks>
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
+    /// </remarks>
+    /// </summary>
+    public bool? CanReadAllGroupMessages { get; set; }
+
+    /// <summary>
+    /// Whether the bot supports inline queries or not.
+    /// <remarks>
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
+    /// </remarks>
+    /// </summary>
+    public bool? SupportsInlineQueries { get; set; }
 }

@@ -1,6 +1,3 @@
-using System.Security.Cryptography;
-using System.Text;
-
 namespace Navigator.Entities;
 
 /// <summary>
@@ -8,20 +5,33 @@ namespace Navigator.Entities;
 /// </summary>
 public abstract class Chat
 {
-    protected Chat()
-    {
-    }
-    
-    protected Chat(string input)
-    {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());
-    }
+    /// <summary>
+    /// Telegram identifier for the chat.
+    /// </summary>
+    public long Id { get; init; }
+
+    /// <summary>
+    /// Title of the chat, if any.
+    /// </summary>
+    public string? Title { get; init; }
     
     /// <summary>
-    /// Id of the chat.
-    /// <remarks>
-    ///     Generally a deterministic Guid based on some kind of input.
-    /// </remarks>
+    /// Type of the chat, can be any of <see cref="ChatType"/>.
     /// </summary>
-    public Guid Id { get; init; }
+    public ChatType Type { get; init; }
+    
+    /// <summary>
+    /// If the supergroup chat is a forum (has topics enabled).
+    /// </summary>
+    public bool? IsForum { get; set; }
+
+}
+
+public enum ChatType
+{
+    Private,
+    Group,
+    Channel, 
+    Supergroup, 
+    Sender
 }
