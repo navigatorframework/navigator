@@ -1,4 +1,4 @@
-namespace Navigator.Context;
+namespace Navigator.Context.Accessor;
 
 internal class NavigatorContextAccessor : INavigatorContextAccessor
 {

@@ -1,5 +1,6 @@
 using MediatR;
 using Navigator.Context;
+using Navigator.Context.Accessor;
 
 namespace Navigator.Actions;
 

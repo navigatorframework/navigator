@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Configuration;
 using Navigator.Context;
+using Navigator.Context.Accessor;
 using Navigator.Context.Extensions;
 using Navigator.Context.Extensions.Bundled.OriginalEvent;
 using Scrutor;

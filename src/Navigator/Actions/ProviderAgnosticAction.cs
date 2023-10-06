@@ -1,5 +1,6 @@
 using Navigator.Actions.Attributes;
 using Navigator.Context;
+using Navigator.Context.Accessor;
 
 namespace Navigator.Actions;
 
