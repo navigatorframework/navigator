@@ -2,7 +2,7 @@ using Navigator.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Chat = Telegram.Bot.Types.Chat;
-using User = Navigator.Entities.User;
+using User = Telegram.Bot.Types.User;
 
 namespace Navigator.Telegram;
 
@@ -70,7 +70,7 @@ internal static class TelegramUpdateExtensions
             throw new NavigatorException("No conversation could be built, user not found.");
         }
 
-        var user = new User
+        var user = new Entities.User
         {
             Username = rawUser.Username,
             FirstName = rawUser.FirstName,
@@ -78,13 +78,15 @@ internal static class TelegramUpdateExtensions
             LanguageCode = rawUser.LanguageCode
         };
 
-        var chat = default(Chat);
+        var chat = default(Entities.Chat);
 
         if (rawChat is not null)
         {
-            chat = new Chat
+            chat = new Entities.Chat
             {
+                Id = rawChat.Id,
                 Title = rawChat.Title,
+                Type = (Entities.ChatType) rawChat.Type
             };
         }
 
