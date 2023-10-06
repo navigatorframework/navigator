@@ -1,7 +1,6 @@
 using Navigator.Context;
 using Navigator.Context.Builder;
 using Navigator.Entities;
-using Navigator.Providers.Telegram.Extensions;
 using Telegram.Bot.Types;
 
 namespace Navigator.Providers.Telegram;

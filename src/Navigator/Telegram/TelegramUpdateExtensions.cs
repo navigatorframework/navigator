@@ -1,10 +1,10 @@
-using Navigator.Providers.Telegram.Entities;
+using Navigator.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Chat = Telegram.Bot.Types.Chat;
-using User = Telegram.Bot.Types.User;
+using User = Navigator.Entities.User;
 
-namespace Navigator.Providers.Telegram.Extensions;
+namespace Navigator.Telegram;
 
 internal static class TelegramUpdateExtensions
 {
@@ -60,7 +60,7 @@ internal static class TelegramUpdateExtensions
         };
     }
 
-    public static TelegramConversation GetConversation(this Update update)
+    public static Conversation GetConversation(this Update update)
     {
         var rawUser = update.GetUserOrDefault();
         var rawChat = update.GetChatOrDefault();
@@ -70,7 +70,7 @@ internal static class TelegramUpdateExtensions
             throw new NavigatorException("No conversation could be built, user not found.");
         }
 
-        var user = new TelegramUser(rawUser.Id)
+        var user = new User
         {
             Username = rawUser.Username,
             FirstName = rawUser.FirstName,
@@ -78,16 +78,16 @@ internal static class TelegramUpdateExtensions
             LanguageCode = rawUser.LanguageCode
         };
 
-        var chat = default(TelegramChat);
+        var chat = default(Chat);
 
         if (rawChat is not null)
         {
-            chat = new TelegramChat(rawChat.Id)
+            chat = new Chat
             {
-                Title = rawChat.Title
+                Title = rawChat.Title,
             };
         }
 
-        return new TelegramConversation(user, chat);
+        return new Conversation(user, chat);
     }
 }

@@ -3,7 +3,6 @@ using Navigator.Context;
 using Navigator.Context.Accessor;
 using Navigator.Providers.Telegram.Actions.Messages;
 using Navigator.Providers.Telegram.Entities;
-using Navigator.Providers.Telegram.Extensions;
 
 namespace Navigator.Providers.Telegram.Actions.Bundled;
 
