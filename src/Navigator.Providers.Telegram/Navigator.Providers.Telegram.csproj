@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -14,7 +14,7 @@
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2022</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2023</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
