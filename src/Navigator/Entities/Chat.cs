@@ -3,7 +3,7 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents a chat.
 /// </summary>
-public abstract class Chat
+public class Chat
 {
     /// <summary>
     /// Telegram identifier for the chat.
@@ -29,9 +29,9 @@ public abstract class Chat
 
 public enum ChatType
 {
-    Private,
-    Group,
-    Channel, 
-    Supergroup, 
-    Sender
+    Private = 1,
+    Group = 2,
+    Channel = 3, 
+    Supergroup = 4, 
+    Sender = 5
 }
