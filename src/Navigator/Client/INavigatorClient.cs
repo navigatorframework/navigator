@@ -1,6 +1,6 @@
 using Navigator.Entities;
 
-namespace Navigator;
+namespace Navigator.Client;
 
 public interface INavigatorClient
 {

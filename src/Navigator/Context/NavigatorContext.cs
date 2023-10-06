@@ -1,4 +1,5 @@
-﻿using Navigator.Entities;
+﻿using Navigator.Client;
+using Navigator.Entities;
 
 namespace Navigator.Context;
 

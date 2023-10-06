@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Context;
+using Navigator.Context.Builder.Options.Extensions;
 using Navigator.Providers.Telegram.Actions;
 using Navigator.Providers.Telegram.Actions.Bundled;
 using Navigator.Providers.Telegram.Actions.Messages;

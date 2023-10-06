@@ -1,4 +1,5 @@
 using Navigator.Context;
+using Navigator.Context.Builder.Options;
 using Navigator.Context.Extensions;
 
 namespace Navigator.Extensions.Store.Bundled;

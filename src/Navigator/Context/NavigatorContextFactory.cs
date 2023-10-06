@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Logging;
+using Navigator.Context.Builder;
+using Navigator.Context.Builder.Options;
 
 namespace Navigator.Context;
 

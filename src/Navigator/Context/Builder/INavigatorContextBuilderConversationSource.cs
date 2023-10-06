@@ -1,6 +1,6 @@
 using Navigator.Entities;
 
-namespace Navigator.Context;
+namespace Navigator.Context.Builder;
 
 /// <summary>
 /// Defines a <see cref="GetConversationAsync"/> source for <see cref="INavigatorContextBuilder"/> to use

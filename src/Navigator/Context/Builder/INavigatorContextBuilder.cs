@@ -1,4 +1,6 @@
-namespace Navigator.Context;
+using Navigator.Context.Builder.Options;
+
+namespace Navigator.Context.Builder;
 
 public interface INavigatorContextBuilder
 {

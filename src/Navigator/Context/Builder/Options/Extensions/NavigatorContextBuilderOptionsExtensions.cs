@@ -1,4 +1,4 @@
-namespace Navigator.Context;
+namespace Navigator.Context.Builder.Options.Extensions;
 
 public static class NavigatorContextBuilderOptionsExtensions
 {

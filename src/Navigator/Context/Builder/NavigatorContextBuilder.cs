@@ -1,7 +1,10 @@
 using Microsoft.Extensions.Logging;
+using Navigator.Client;
+using Navigator.Context.Builder.Options;
+using Navigator.Context.Builder.Options.Extensions;
 using Navigator.Context.Extensions;
 
-namespace Navigator.Context;
+namespace Navigator.Context.Builder;
 
 internal class NavigatorContextBuilder : INavigatorContextBuilder
 {
