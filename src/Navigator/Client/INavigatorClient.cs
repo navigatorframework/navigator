@@ -1,8 +1,9 @@
 using Navigator.Entities;
+using Telegram.Bot;
 
 namespace Navigator.Client;
 
-public interface INavigatorClient
+public interface INavigatorClient : ITelegramBotClient
 {
     /// <summary>
     /// Retrieves the bot user information.

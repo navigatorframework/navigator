@@ -36,7 +36,6 @@ public class TelegramMiddleware
             
         await _navigatorContextFactory.Supply(builder =>
         {
-            builder.SetProvider<TelegramNavigatorProvider>();
             builder.SetActionType(actionType);
             builder.SetOriginalEvent(update);
         });

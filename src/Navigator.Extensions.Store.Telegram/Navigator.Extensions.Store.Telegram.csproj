@@ -19,7 +19,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
-      <ProjectReference Include="..\Navigator.Providers.Telegram\Navigator.Providers.Telegram.csproj" />
     </ItemGroup>
 
 </Project>

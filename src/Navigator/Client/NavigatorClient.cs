@@ -9,6 +9,7 @@ namespace Navigator.Client;
 /// </summary>
 public class NavigatorClient : TelegramBotClient, INavigatorClient
 {
+
     /// <summary>
     /// Builds a <see cref="NavigatorClient"/>.
     /// </summary>
