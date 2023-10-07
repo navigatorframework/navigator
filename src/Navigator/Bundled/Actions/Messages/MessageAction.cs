@@ -23,6 +23,11 @@ public abstract class MessageAction : BaseAction
     public readonly long ChatId;
 
     /// <summary>
+    /// Timestamp of the message creation.
+    /// </summary>
+    public readonly DateTime Timestamp;
+    
+    /// <summary>
     /// Determines if this message is a reply to another message.
     /// </summary>
     public readonly bool IsReply;
@@ -39,6 +44,7 @@ public abstract class MessageAction : BaseAction
         
         Message = update.Message!;
         ChatId = Context.Conversation.Chat!.Id;
+        Timestamp = Message.Date;
         IsReply = update.Message!.ReplyToMessage is not null;
         IsForwarded = update.Message.ForwardDate is not null;
     }
