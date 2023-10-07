@@ -15,24 +15,30 @@ public abstract class MessageAction : BaseAction
     /// <summary>
     /// The original Message.
     /// </summary>
-    public Message Message { get; protected set; }
+    public readonly Message Message;
+
+    /// <summary>
+    /// Id of the current chat.
+    /// </summary>
+    public readonly long ChatId;
 
     /// <summary>
     /// Determines if this message is a reply to another message.
     /// </summary>
-    public bool IsReply { get; protected set; }
+    public readonly bool IsReply;
 
     /// <summary>
     /// Determines if this message is a forwarded message.
     /// </summary>
-    public bool IsForwarded { get; protected set; }
+    public readonly bool IsForwarded;
 
     /// <inheritdoc />
     protected MessageAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
         var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent();
-
+        
         Message = update.Message!;
+        ChatId = Context.Conversation.Chat!.Id;
         IsReply = update.Message!.ReplyToMessage is not null;
         IsForwarded = update.Message.ForwardDate is not null;
     }

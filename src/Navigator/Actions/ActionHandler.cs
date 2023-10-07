@@ -6,7 +6,7 @@ namespace Navigator.Actions;
 
 public abstract class ActionHandler<TAction> : IRequestHandler<TAction, Status> where TAction : IAction
 {
-    public INavigatorContext Context;
+    public readonly INavigatorContext Context;
 
     protected ActionHandler(INavigatorContextAccessor navigatorContextAccessor)
     {

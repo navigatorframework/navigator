@@ -14,7 +14,7 @@ public class EchoActionHandler : ActionHandler<EchoAction>
 
     public override async Task<Status> Handle(EchoAction action, CancellationToken cancellationToken)
     {
-        await Context.Client.SendTextMessageAsync(Context.Conversation.Chat.Id, action.Message.Text, cancellationToken: cancellationToken);
+        await Context.Client.SendTextMessageAsync(action.ChatId, action.Message.Text, cancellationToken: cancellationToken);
 
         return Success();
     }

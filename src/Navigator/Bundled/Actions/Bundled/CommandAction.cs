@@ -14,7 +14,7 @@ public abstract class CommandAction : MessageAction
     /// <summary>
     /// Command.
     /// </summary>
-    public readonly string? Command;
+    public readonly string Command;
 
     /// <summary>
     /// Any arguments passed with the command. If no arguments were passed, it will be null.
@@ -26,7 +26,7 @@ public abstract class CommandAction : MessageAction
     {
         var botProfile = Context.BotProfile;
 
-        Command = Message.ExtractCommand(botProfile.Username);
+        Command = Message.ExtractCommand(botProfile.Username)!;
         Arguments = Message.ExtractArguments();
     }
 }
