@@ -1,7 +1,8 @@
+using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context.Accessor;
 
-namespace Navigator.Actions.Telegram.Updates;
+namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
 /// TODO

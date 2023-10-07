@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
-using Navigator.Actions.Telegram;
-using Navigator.Actions.Telegram.Bundled;
-using Navigator.Actions.Telegram.Messages;
-using Navigator.Actions.Telegram.Updates;
+using Navigator.Bundled.Actions;
+using Navigator.Bundled.Actions.Bundled;
+using Navigator.Bundled.Actions.Messages;
+using Navigator.Bundled.Actions.Updates;
 using Navigator.Context;
 using Navigator.Context.Builder.Options.Extensions;
 using Telegram.Bot.Types;

@@ -1,8 +1,8 @@
 using Navigator.Actions.Attributes;
-using Navigator.Actions.Telegram.Messages;
+using Navigator.Bundled.Actions.Messages;
 using Navigator.Context.Accessor;
 
-namespace Navigator.Actions.Telegram.Bundled;
+namespace Navigator.Bundled.Actions.Bundled;
 
 /// <summary>
 /// Command based action.

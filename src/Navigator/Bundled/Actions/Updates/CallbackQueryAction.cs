@@ -1,8 +1,9 @@
+using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context.Accessor;
 using Telegram.Bot.Types;
 
-namespace Navigator.Actions.Telegram.Updates;
+namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
 /// A callback query based action.
