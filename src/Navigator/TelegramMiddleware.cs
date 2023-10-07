@@ -52,7 +52,7 @@ public class TelegramMiddleware
             UpdateType.Message => update.Message?.Type switch
             {
                 MessageType.Unknown => nameof(UnknownAction),
-                // MessageType.Text => expr,
+                MessageType.Text => nameof(TextAction),
                 // MessageType.Photo => expr,
                 // MessageType.Audio => expr,
                 // MessageType.Video => expr,
