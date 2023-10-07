@@ -30,10 +30,10 @@ public abstract class ChosenInlineResultAction : BaseAction
     /// <inheritdoc />
     protected ChosenInlineResultAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
 
-        ChosenInlineResult = update.ChosenInlineResult;
-        ResultId = update.ChosenInlineResult.ResultId;
+        ChosenInlineResult = update.ChosenInlineResult!;
+        ResultId = update.ChosenInlineResult!.ResultId;
         Query = update.ChosenInlineResult.Query;
     }
 }

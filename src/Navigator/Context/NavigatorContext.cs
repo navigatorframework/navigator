@@ -5,7 +5,7 @@ namespace Navigator.Context;
 
 internal class NavigatorContext : INavigatorContext
 {
-    public INavigatorClient NavigatorClient { get; }
+    public INavigatorClient Client { get; }
     public Bot BotProfile { get; }
     public Dictionary<string, object?> Extensions { get; }
     public Dictionary<string, string> Items { get; }
@@ -14,7 +14,7 @@ internal class NavigatorContext : INavigatorContext
 
     public NavigatorContext(INavigatorClient navigatorClient, Bot botProfile, string actionType, Conversation conversation)
     {
-        NavigatorClient = navigatorClient;
+        Client = navigatorClient;
         BotProfile = botProfile;
         ActionType = actionType;
         Conversation = conversation;

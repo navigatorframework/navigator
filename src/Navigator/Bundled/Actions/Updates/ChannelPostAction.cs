@@ -20,7 +20,7 @@ public abstract class ChannelPostAction : BaseAction
     /// <inheritdoc />
     protected ChannelPostAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
 
         ChannelPost = update.ChannelPost!;
     }

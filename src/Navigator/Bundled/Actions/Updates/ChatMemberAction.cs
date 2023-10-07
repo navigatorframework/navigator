@@ -20,7 +20,7 @@ public abstract class ChatMemberAction : BaseAction
     /// <inheritdoc />
     protected ChatMemberAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
 
         ChatMemberUpdated = update.ChatMember!;
     }

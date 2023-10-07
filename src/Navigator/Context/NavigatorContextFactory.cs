@@ -20,13 +20,13 @@ internal class NavigatorContextFactory : INavigatorContextFactory
     {
         try
         {
-            _logger.LogTrace("Building a new NavigatorContext");
+            _logger.LogTrace("Building a new Context");
                 
             NavigatorContext = await _navigatorContextBuilder.Build(action);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Unhandled exception building NavigatorContext");
+            _logger.LogError(e, "Unhandled exception building Context");
             throw;
         }
     }

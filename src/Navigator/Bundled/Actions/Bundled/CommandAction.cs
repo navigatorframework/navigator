@@ -24,7 +24,7 @@ public abstract class CommandAction : MessageAction
     /// <inheritdoc />
     protected CommandAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var botProfile = NavigatorContextAccessor.NavigatorContext.BotProfile;
+        var botProfile = Context.BotProfile;
 
         Command = Message.ExtractCommand(botProfile.Username);
         Arguments = Message.ExtractArguments();

@@ -30,7 +30,7 @@ public abstract class InlineQueryAction : BaseAction
     /// <inheritdoc />
     protected InlineQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
             
         InlineQuery = update.InlineQuery!;
         Query = update.InlineQuery!.Query;

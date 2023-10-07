@@ -20,7 +20,7 @@ public abstract class ChatJoinRequestAction : BaseAction
     /// <inheritdoc />
     protected ChatJoinRequestAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
 
         Request = update.ChatJoinRequest!;
     }

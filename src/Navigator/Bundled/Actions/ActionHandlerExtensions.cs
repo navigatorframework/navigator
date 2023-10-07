@@ -7,11 +7,11 @@
 // {
 //     public static NavigatorTelegramClient GetTelegramClient<T>(this ActionHandler<T> actionHandler) where T : IAction
 //     {
-//         return actionHandler.NavigatorContext.Provider.GetTelegramClient();
+//         return actionHandler.Context.Provider.GetTelegramClient();
 //     }
 //     
 //     public static Chat GetTelegramChat<T>(this ActionHandler<T> actionHandler) where T : IAction
 //     {
-//         return actionHandler.NavigatorContext.GetTelegramChat();
+//         return actionHandler.Context.GetTelegramChat();
 //     }
 // }

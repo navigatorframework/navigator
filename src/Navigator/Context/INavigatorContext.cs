@@ -5,7 +5,7 @@ namespace Navigator.Context;
 
 public interface INavigatorContext
 {
-    public INavigatorClient NavigatorClient { get; }
+    public INavigatorClient Client { get; }
     Bot BotProfile { get; }
     Dictionary<string, object?> Extensions { get; }
     Dictionary<string, string> Items { get; }

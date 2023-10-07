@@ -35,7 +35,7 @@ public abstract class CallbackQueryAction : BaseAction
     /// <inheritdoc />
     protected CallbackQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = Context.GetOriginalEvent();
 
         CallbackQuery = update.CallbackQuery!;
         OriginalMessage = CallbackQuery.Message;
