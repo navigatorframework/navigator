@@ -18,7 +18,6 @@ public static class NavigatorExtensionConfigurationExtensions
         
         return extensionConfiguration.Extension(configuration =>
         {
-            
             configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
             configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();

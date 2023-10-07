@@ -10,7 +10,6 @@ public abstract class NavigatorStoreModelExtensionInfo : DbContextOptionsExtensi
 
     public override int GetServiceProviderHashCode()
     {
-        
         var hashCode = new HashCode();
         
         return hashCode.ToHashCode();

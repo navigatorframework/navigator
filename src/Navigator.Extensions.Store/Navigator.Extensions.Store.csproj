@@ -29,4 +29,8 @@
       <ProjectReference Include="..\Navigator\Navigator.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Extractors\" />
+    </ItemGroup>
+
 </Project>
