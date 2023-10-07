@@ -4,7 +4,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace Sample.Actions;
 
-public class EchoAction : MessageAction
+public class EchoAction : TextAction
 {
     public EchoAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
@@ -12,6 +12,6 @@ public class EchoAction : MessageAction
 
     public override bool CanHandleCurrentContext()
     {
-        return Message.Type == MessageType.Text;
+        return !string.IsNullOrWhiteSpace(Text);
     }
 }
