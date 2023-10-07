@@ -18,7 +18,7 @@ public abstract class CallbackQueryAction : BaseAction
     public CallbackQuery CallbackQuery { get; protected set; }
 
     /// <summary>
-    /// The message that originated the callback query. Iy may be null if the message is too old.
+    /// The message that originated the callback query. Iy may be unavailable if the message is too old.
     /// </summary>
     public Message? OriginalMessage { get; protected set; }
 
