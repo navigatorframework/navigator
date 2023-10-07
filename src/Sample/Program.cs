@@ -1,3 +1,6 @@
+using System;
+using Incremental.Common.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Navigator;
 using Navigator.Configuration;
 
@@ -9,6 +12,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Configuration.AddCommonConfiguration();
+        
         builder.Services.AddNavigator(options =>
         {
             options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
