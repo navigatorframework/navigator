@@ -23,7 +23,9 @@ public static class ServiceCollectionExtensions
         var navigatorBuilder = new NavigatorConfiguration(options, services);
 
         services.AddNavigatorContextServices();
-
+        
+        services.AddScoped<TelegramMiddleware>();
+        
         services.AddScoped<INavigatorContextExtension, OriginalEventContextExtension>();
 
         services.AddScoped<IActionLauncher, ActionLauncher>();
