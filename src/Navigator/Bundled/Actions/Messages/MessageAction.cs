@@ -1,6 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context.Accessor;
+using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Messages;
@@ -29,7 +30,7 @@ public abstract class MessageAction : BaseAction
     /// <inheritdoc />
     protected MessageAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
+        var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent();
 
         Message = update.Message!;
         IsReply = update.Message!.ReplyToMessage is not null;

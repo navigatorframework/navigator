@@ -1,6 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context.Accessor;
+using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
@@ -19,7 +20,7 @@ public abstract class MyChatMemberAction : BaseAction
     /// <inheritdoc />
     protected MyChatMemberAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
+        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
 
         ChatMemberUpdated = update.MyChatMember!;
     }

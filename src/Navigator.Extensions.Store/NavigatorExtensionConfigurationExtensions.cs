@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
-using Navigator.Configuration.Extension;
+using Navigator.Configuration.Extensions;
 using Navigator.Extensions.Store.Bundled;
 using Navigator.Extensions.Store.Context;
 using Navigator.Extensions.Store.Context.Extension;

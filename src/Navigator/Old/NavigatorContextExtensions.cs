@@ -82,11 +82,11 @@
 //     {
 //         return ctx.GetOriginalEventOrDefault<Update>()?.Type switch
 //         {
-//             UpdateType.CallbackQuery => ctx.GetOriginalEvent<Update>().CallbackQuery?.Message?.Chat,
-//             UpdateType.Message => ctx.GetOriginalEvent<Update>().Message?.Chat,
-//             UpdateType.EditedMessage => ctx.GetOriginalEvent<Update>().EditedMessage?.Chat,
-//             UpdateType.ChannelPost => ctx.GetOriginalEvent<Update>().ChannelPost?.Chat,
-//             UpdateType.EditedChannelPost => ctx.GetOriginalEvent<Update>().EditedChannelPost?.Chat,
+//             UpdateType.CallbackQuery => ctx.GetOriginalEvent().CallbackQuery?.Message?.Chat,
+//             UpdateType.Message => ctx.GetOriginalEvent().Message?.Chat,
+//             UpdateType.EditedMessage => ctx.GetOriginalEvent().EditedMessage?.Chat,
+//             UpdateType.ChannelPost => ctx.GetOriginalEvent().ChannelPost?.Chat,
+//             UpdateType.EditedChannelPost => ctx.GetOriginalEvent().EditedChannelPost?.Chat,
 //             _ => default
 //         };
 //     }

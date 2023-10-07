@@ -1,6 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
 using Navigator.Context.Accessor;
+using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
@@ -29,7 +30,7 @@ public abstract class ChosenInlineResultAction : BaseAction
     /// <inheritdoc />
     protected ChosenInlineResultAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent<Update>();
+        var update = NavigatorContextAccessor.NavigatorContext.GetOriginalEvent();
 
         ChosenInlineResult = update.ChosenInlineResult;
         ResultId = update.ChosenInlineResult.ResultId;

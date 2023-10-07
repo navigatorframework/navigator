@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
-using Navigator.Configuration.Extension;
+using Navigator.Configuration.Extensions;
 using Navigator.Extensions.Store.Extractors;
 using Navigator.Extensions.Store.Telegram.Extractors;
 
