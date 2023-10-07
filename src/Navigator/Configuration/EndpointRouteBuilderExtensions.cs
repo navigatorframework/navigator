@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Telegram.Bot.Types;
 
 namespace Navigator.Configuration;
@@ -32,27 +33,23 @@ public static class EndpointRouteBuilderExtensions
             return;
         }
 
-        var telegramUpdate = await ParseTelegramUpdate(context.Request.Body);
+        var telegramUpdate = await ParseTelegramUpdate(context.Request);
 
-        if (telegramUpdate is not null)
-        {
-            var navigatorMiddleware = context.RequestServices.GetRequiredService<TelegramMiddleware>();
+        var navigatorMiddleware = context.RequestServices.GetRequiredService<TelegramMiddleware>();
 
-            await navigatorMiddleware.Process(telegramUpdate);
-        }
+        await navigatorMiddleware.Process(telegramUpdate);
     }
         
-    private static async Task<Update?> ParseTelegramUpdate(Stream stream)
+    private static async Task<Update> ParseTelegramUpdate(HttpRequest request)
     {
         try
         {
-            var update = await JsonSerializer.DeserializeAsync<Update>(stream);
-
-            return update?.Id == default ? default : update;
+            var reader = new StreamReader(request.Body);
+            return JsonConvert.DeserializeObject<Update>(await reader.ReadToEndAsync()) ?? throw new InvalidOperationException();
         }
-        catch
+        catch (Exception e)
         {
-            return default;
+            throw new NavigatorException("Cannot parse telegram update", e);
         }
     }
 }

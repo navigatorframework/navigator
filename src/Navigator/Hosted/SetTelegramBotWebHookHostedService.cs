@@ -40,17 +40,19 @@ public class SetTelegramBotWebHookHostedService : BackgroundService
     /// <inheritdoc />
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        _logger.LogTrace("Starting with setup of webhook");
-        _logger.LogTrace("Using webHook url {WebHookUrl}", _webHookUrl);
+        _logger.LogTrace("Starting webhook setup for Navigator Telegram Bot");
+        _logger.LogTrace("Using webhook url {WebHookUrl}", _webHookUrl);
             
         using var scope = _serviceScopeFactory.CreateScope();
             
         var navigatorClient = scope.ServiceProvider.GetRequiredService<INavigatorClient>();
             
         await navigatorClient.SetWebhookAsync(_webHookUrl, cancellationToken: stoppingToken);
-            
+        
+        _logger.LogTrace("Webhook configured successfully");
+        
         var me = await navigatorClient.GetProfile(stoppingToken);
 
-        _logger.LogInformation("Telegram Bot Client is receiving updates for bot: @{Username} at the url: {WebHookUrl}", me.Username, _webHookUrl);
+        _logger.LogInformation("Navigator is receiving updates for bot: @{Username} at the url: {WebHookUrl}", me.Username, _webHookUrl);
     }
 }

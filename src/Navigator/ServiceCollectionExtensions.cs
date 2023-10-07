@@ -1,12 +1,14 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
+using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Context;
 using Navigator.Context.Accessor;
 using Navigator.Context.Builder;
 using Navigator.Extensions;
 using Navigator.Extensions.Bundled.OriginalEvent;
+using Navigator.Hosted;
 using Scrutor;
 
 namespace Navigator;
@@ -25,10 +27,14 @@ public static class ServiceCollectionExtensions
         services.AddNavigatorContextServices();
         
         services.AddScoped<TelegramMiddleware>();
+
+        services.AddScoped<INavigatorClient, NavigatorClient>();
         
         services.AddScoped<INavigatorContextExtension, OriginalEventContextExtension>();
 
         services.AddScoped<IActionLauncher, ActionLauncher>();
+
+        services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
         services.AddMediatR(navigatorBuilder.Options.GetActionsAssemblies());
 

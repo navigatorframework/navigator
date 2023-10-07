@@ -97,7 +97,7 @@ public class TelegramMiddleware
                 // MessageType.WriteAccessAllowed => expr,
                 // MessageType.UserShared => expr,
                 // MessageType.ChatShared => expr,
-                _ => default
+                _ => nameof(MessageAction)
             },
             UpdateType.InlineQuery => nameof(InlineQueryAction),
             UpdateType.ChosenInlineResult => nameof(ChosenInlineResultAction),
