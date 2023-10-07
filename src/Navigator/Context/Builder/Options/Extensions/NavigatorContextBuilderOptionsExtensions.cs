@@ -1,3 +1,5 @@
+using Telegram.Bot.Types;
+
 namespace Navigator.Context.Builder.Options.Extensions;
 
 public static class NavigatorContextBuilderOptionsExtensions
@@ -23,15 +25,15 @@ public static class NavigatorContextBuilderOptionsExtensions
 
     private const string OriginalEventKey = "_navigator.context.options.original_event";
 
-    public static void SetOriginalEvent(this INavigatorContextBuilderOptions contextBuilderOptions, object originalUpdate)
+    public static void SetOriginalEvent(this INavigatorContextBuilderOptions contextBuilderOptions, Update originalUpdate)
     {
         contextBuilderOptions.TryRegisterOption(OriginalEventKey, originalUpdate);
 
     }
 
-    public static object? GetOriginalEventOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
+    public static Update? GetOriginalEventOrDefault(this INavigatorContextBuilderOptions contextBuilderOptions)
     {
-        return contextBuilderOptions.RetrieveOption<object>(OriginalEventKey);
+        return contextBuilderOptions.RetrieveOption<Update>(OriginalEventKey);
     }
         
     #endregion
