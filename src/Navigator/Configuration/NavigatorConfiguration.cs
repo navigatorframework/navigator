@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Navigator.Configuration.Extension;
+using Navigator.Configuration.Extensions;
 using Navigator.Configuration.Provider;
 
 namespace Navigator.Configuration;

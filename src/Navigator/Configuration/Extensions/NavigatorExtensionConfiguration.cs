@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Navigator.Configuration.Extension;
+namespace Navigator.Configuration.Extensions;
 
 /// <summary>
 /// Provides a entry point for configuring new extensions for Navigator.
