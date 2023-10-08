@@ -6,12 +6,12 @@ namespace Navigator.Entities;
 /// <summary>
 /// Represents a user.
 /// </summary>
-public class User
+public record User(long Id, string FirstName)
 {
     /// <summary>
     /// Telegram identifier for the user.
     /// </summary>
-    public long Id { get; init; }
+    public long Id { get; init; } = Id;
 
     /// <summary>
     /// Username of the user, if any.
@@ -24,8 +24,8 @@ public class User
     /// <summary>
     /// First name of the user.
     /// </summary>
-    public string FirstName { get; init; }
-    
+    public string FirstName { get; init; } = FirstName;
+
     /// <summary>
     /// Last name of the user.
     /// <remarks>
@@ -41,4 +41,20 @@ public class User
     /// </remarks>
     /// </summary>
     public string? LanguageCode { get; init; }
+
+    /// <summary>
+    /// True if the user is premium.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public bool? IsPremium { get; init; }
+
+    /// <summary>
+    /// True if the user has added the bot to the attachment menu.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
+    public bool? HasBotInAttachmentMenu { get; init; }
 }

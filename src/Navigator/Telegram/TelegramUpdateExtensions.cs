@@ -70,26 +70,39 @@ internal static class TelegramUpdateExtensions
             throw new NavigatorException("No conversation could be built, user not found.");
         }
 
-        var user = new Entities.User
-        {
-            Username = rawUser.Username,
-            FirstName = rawUser.FirstName,
-            LastName = rawUser.LastName,
-            LanguageCode = rawUser.LanguageCode
-        };
+        var user = rawUser.IsBot
+            ? new Entities.Bot(rawUser.Id, rawUser.Username!, rawUser.FirstName)
+            {
+                LastName = rawUser.LastName,
+                LanguageCode = rawUser.LanguageCode,
+                CanJoinGroups = rawUser.CanJoinGroups,
+                CanReadAllGroupMessages = rawUser.CanReadAllGroupMessages,
+                SupportsInlineQueries = rawUser.SupportsInlineQueries
+                
+            }
+            : new Entities.User(rawUser.Id, rawUser.FirstName)
+            {
+                Username = rawUser.Username,
+                LastName = rawUser.LastName,
+                LanguageCode = rawUser.LanguageCode,
+                IsPremium = rawUser.IsPremium,
+                HasBotInAttachmentMenu = rawUser.AddedToAttachmentMenu
+            };
 
         var chat = default(Entities.Chat);
 
         if (rawChat is not null)
         {
-            chat = new Entities.Chat
+            chat = new Entities.Chat(rawChat.Id, (Entities.Chat.ChatType)rawChat.Type)
             {
-                Id = rawChat.Id,
                 Title = rawChat.Title,
-                Type = (Entities.ChatType) rawChat.Type
+                IsForum = rawChat.IsForum
             };
         }
 
-        return new Conversation(user, chat);
+        return new Conversation(user)
+        {
+            Chat = chat
+        };
     }
 }

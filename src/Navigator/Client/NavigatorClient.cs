@@ -9,13 +9,12 @@ namespace Navigator.Client;
 /// </summary>
 public class NavigatorClient : TelegramBotClient, INavigatorClient
 {
-
     /// <summary>
     /// Builds a <see cref="NavigatorClient"/>.
     /// </summary>
     /// <param name="options"><see cref="INavigatorOptions"/></param>
-    public NavigatorClient(INavigatorOptions options) 
-        : base(options.GetTelegramToken() ?? throw new ArgumentNullException())
+    /// <exception cref="ArgumentNullException">If telegram token is null</exception>
+    public NavigatorClient(INavigatorOptions options) : base(options.GetTelegramToken() ?? throw new ArgumentNullException())
     {
     }
 
@@ -24,11 +23,8 @@ public class NavigatorClient : TelegramBotClient, INavigatorClient
     {
         var bot = await this.GetMeAsync(cancellationToken);
 
-        return new Bot()
+        return new Bot(bot.Id, bot.Username!, bot.FirstName)
         {
-            Id = bot.Id,
-            Username = bot.Username!,
-            FirstName = bot.FirstName,
             LastName = bot.LastName,
             CanJoinGroups = bot.CanJoinGroups,
             CanReadAllGroupMessages = bot.CanReadAllGroupMessages,
