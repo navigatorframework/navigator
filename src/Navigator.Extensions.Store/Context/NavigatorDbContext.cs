@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Navigator.Extensions.Store.Context.Configuration;
-using Chat = Navigator.Extensions.Store.Entities.Chat;
-using Conversation = Navigator.Extensions.Store.Entities.Conversation;
-using User = Navigator.Extensions.Store.Entities.User;
+using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Context;
 
@@ -22,6 +20,7 @@ public class NavigatorDbContext : DbContext
     {
     }
 
+    public required DbSet<Bot> Bots { get; set; }
     public required DbSet<User> Users { get; set; }
     public required DbSet<Chat> Chats { get; set; }
     public required DbSet<Conversation> Conversations { get; set; }
@@ -31,8 +30,9 @@ public class NavigatorDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new BotEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
     }
 }

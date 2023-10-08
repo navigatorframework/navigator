@@ -27,7 +27,7 @@ public static class NavigatorExtensionConfigurationExtensions
         {
             configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
-            configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationNavigatorContextExtension>();
+            configuration.Services.AddScoped<INavigatorContextExtension, StoreNavigatorContextExtension>();
         });
     }
 }

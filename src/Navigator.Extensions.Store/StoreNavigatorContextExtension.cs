@@ -7,14 +7,14 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store;
 
-internal class StoreConversationNavigatorContextExtension : INavigatorContextExtension
+internal class StoreNavigatorContextExtension : INavigatorContextExtension
 {
-    public const string UniversalConversation = "_navigator.extensions.store.source";
+    public const string StoreDbContext = "_navigator.extensions.store.dbcontext";
 
     private readonly NavigatorDbContext _dbContext;
     private readonly IMemoryCache _memoryCache;
 
-    public StoreConversationNavigatorContextExtension(NavigatorDbContext dbContext, IMemoryCache memoryCache)
+    public StoreNavigatorContextExtension(NavigatorDbContext dbContext, IMemoryCache memoryCache)
     {
         _dbContext = dbContext;
         _memoryCache = memoryCache;
