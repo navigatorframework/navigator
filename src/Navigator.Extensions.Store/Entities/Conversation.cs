@@ -1,25 +1,33 @@
 namespace Navigator.Extensions.Store.Entities;
 
-public class Conversation : Navigator.Entities.Conversation
+public class Conversation
 {
-    public Conversation()
+    /// <summary>
+    /// Internal constructor.
+    /// </summary>
+    protected Conversation()
     {
-        Data = new Dictionary<string, string>();
-        FirstInteractionAt = DateTime.UtcNow;
     }
-    public Conversation(User user, Chat chat) : base(user, chat)
+    
+    /// <summary>
+    /// Conversation constructor.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <param name="chat"></param>
+    public Conversation(User user, Chat chat)
     {
-        Data = new Dictionary<string, string>();
         FirstInteractionAt = DateTime.UtcNow;
     }
 
-    // public new Guid Id { get; set; }
+    /// <summary>
+    /// User.
+    /// </summary>
+    public User User { get; set; } = null!;
 
-    public new Chat Chat { get; set; }
-    
-    public new User User { get; set; }
-    
-    public IDictionary<string, string> Data { get; set; }
+    /// <summary>
+    /// Chat.
+    /// </summary>
+    public Chat? Chat { get; set; }
 
     /// <summary>
     /// Date of first interaction for this chat.
