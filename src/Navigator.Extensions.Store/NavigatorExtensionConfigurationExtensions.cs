@@ -2,14 +2,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Configuration;
 using Navigator.Configuration.Extensions;
-using Navigator.Extensions.Store.Bundled;
 using Navigator.Extensions.Store.Context;
-using Navigator.Extensions.Store.Context.Extension;
 
 namespace Navigator.Extensions.Store;
 
+/// <summary>
+/// Extensions for configuring the store in Navigator.
+/// </summary>
 public static class NavigatorExtensionConfigurationExtensions
 {
+    /// <summary>
+    /// Configure the navigator store.
+    /// </summary>
+    /// <param name="extensionConfiguration"></param>
+    /// <param name="dbContextOptions"></param>
+    /// <returns></returns>
     public static NavigatorConfiguration Store(this NavigatorExtensionConfiguration extensionConfiguration, Action<DbContextOptionsBuilder>? dbContextOptions = default)
     {
         var temporal = new DbContextOptionsBuilder();
@@ -20,15 +27,7 @@ public static class NavigatorExtensionConfigurationExtensions
         {
             configuration.Services.AddDbContext<NavigatorDbContext>(dbContextOptions);
 
-            configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationContextExtension>();
-            configuration.Services.AddScoped<INavigatorContextExtension, StoreContextExtension>();
-
-            configuration.Services.AddScoped<INavigatorStore, NavigatorStore>();
-            
-            foreach (var extension in temporal.Options.Extensions.OfType<NavigatorStoreModelExtension>())
-            {
-                extension.ExtensionServices?.Invoke(configuration.Services);
-            }
+            configuration.Services.AddScoped<INavigatorContextExtension, StoreConversationNavigatorContextExtension>();
         });
     }
 }

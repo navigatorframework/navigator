@@ -14,7 +14,7 @@ public class Conversation
     /// </summary>
     /// <param name="user"></param>
     /// <param name="chat"></param>
-    public Conversation(User user, Chat chat)
+    public Conversation(User user, Chat? chat)
     {
         FirstInteractionAt = DateTime.UtcNow;
     }

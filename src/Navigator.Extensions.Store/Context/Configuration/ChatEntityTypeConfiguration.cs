@@ -6,7 +6,7 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Context.Configuration;
 
-public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<Chat>
+internal class ChatEntityTypeConfiguration : IEntityTypeConfiguration<Chat>
 {
     public void Configure(EntityTypeBuilder<Chat> builder)
     {        
@@ -20,13 +20,6 @@ public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<Chat>
                 e=> e.HasOne(e => e.Chat)
                     .WithMany(e => e.Conversations));
 
-        builder.Property(e => e.Data)
-            .HasConversion<string>(
-                dictionary => JsonSerializer.Serialize(dictionary, default(JsonSerializerOptions)),
-                json => JsonSerializer.Deserialize<Dictionary<string, string>>(json, default(JsonSerializerOptions))
-                        ?? new Dictionary<string, string>(),
-                ValueComparer.CreateDefault(typeof(IDictionary<string, string>), false));
-        
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();
     }

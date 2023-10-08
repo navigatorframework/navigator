@@ -1,34 +1,32 @@
 using Microsoft.EntityFrameworkCore;
 using Navigator.Extensions.Store.Context.Configuration;
-using Navigator.Extensions.Store.Context.Extension;
 using Chat = Navigator.Extensions.Store.Entities.Chat;
 using Conversation = Navigator.Extensions.Store.Entities.Conversation;
 using User = Navigator.Extensions.Store.Entities.User;
 
 namespace Navigator.Extensions.Store.Context;
 
+/// <summary>
+/// Navigator Store Context
+/// </summary>
 public class NavigatorDbContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Chat> Chats { get; set; }
-    public DbSet<Conversation> Conversations { get; set; }
 
+    /// <inheritdoc />
     protected NavigatorDbContext()
     {
     }
 
-    private readonly IList<Action<ModelBuilder>> _entityTypeConfigurations = new List<Action<ModelBuilder>>();
-
+    /// <inheritdoc />
     public NavigatorDbContext(DbContextOptions options) : base(options)
     {
-        foreach (var extension in options.Extensions
-                     .OfType<NavigatorStoreModelExtension>()
-                     .Select(e => e.Extension))
-        {
-            if (extension is not null) _entityTypeConfigurations.Add(extension);
-        }
     }
 
+    public required DbSet<User> Users { get; set; }
+    public required DbSet<Chat> Chats { get; set; }
+    public required DbSet<Conversation> Conversations { get; set; }
+    
+    /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -36,10 +34,5 @@ public class NavigatorDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ChatEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ConversationEntityTypeConfiguration());
-
-        foreach (var entityTypeConfiguration in _entityTypeConfigurations)
-        {
-            entityTypeConfiguration.Invoke(modelBuilder);
-        }
     }
 }

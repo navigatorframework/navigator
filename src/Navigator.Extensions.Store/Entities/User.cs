@@ -18,7 +18,7 @@ public class User
     /// User constructor from <see cref="Navigator.Entities.User"/>
     /// </summary>
     /// <param name="user"><see cref="Navigator.Entities.User"/></param>
-    protected User(Navigator.Entities.User user)
+    public User(Navigator.Entities.User user)
     {
         Id = user.Id;
         Username = user.Username;
