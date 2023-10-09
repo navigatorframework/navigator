@@ -60,7 +60,7 @@ public class TelegramMiddleware
                 MessageType.Document => nameof(DocumentAction),
                 MessageType.Sticker => nameof(StickerAction),
                 MessageType.Location => nameof(LocationAction),
-                // MessageType.Contact => expr,
+                MessageType.Contact => nameof(ContactAction),
                 // MessageType.Venue => expr,
                 // MessageType.Game => expr,
                 // MessageType.VideoNote => expr,
