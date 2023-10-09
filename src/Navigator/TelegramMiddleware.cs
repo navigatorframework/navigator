@@ -58,7 +58,7 @@ public class TelegramMiddleware
                 MessageType.Video => nameof(VideoAction),
                 MessageType.Voice => nameof(VoiceAction),
                 MessageType.Document => nameof(DocumentAction),
-                // MessageType.Sticker => expr,
+                MessageType.Sticker => nameof(StickerAction),
                 // MessageType.Location => expr,
                 // MessageType.Contact => expr,
                 // MessageType.Venue => expr,
