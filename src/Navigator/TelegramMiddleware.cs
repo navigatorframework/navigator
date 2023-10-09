@@ -84,7 +84,7 @@ public class TelegramMiddleware
                 MessageType.ProximityAlertTriggered => nameof(ProximityAlertTriggeredAction),
                 MessageType.WebAppData => nameof(WebAppDataAction),
                 MessageType.VideoChatScheduled => nameof(VideoChatScheduledAction),
-                // MessageType.VideoChatStarted => expr,
+                MessageType.VideoChatStarted => nameof(VideoChatStartedAction),
                 // MessageType.VideoChatEnded => expr,
                 // MessageType.VideoChatParticipantsInvited => expr,
                 // MessageType.Animation => expr,
