@@ -22,6 +22,8 @@ internal class StoreNavigatorContextExtension : INavigatorContextExtension
 
     public async Task<INavigatorContext> Extend(INavigatorContext navigatorContext, INavigatorContextBuilderOptions builderOptions)
     {
+        navigatorContext.Extensions.TryAdd(StoreDbContext, _dbContext);
+
         if (_memoryCache.Get(navigatorContext.Conversation.GetHashCode()) is not null)
         {
             return navigatorContext;
@@ -29,7 +31,7 @@ internal class StoreNavigatorContextExtension : INavigatorContextExtension
 
         if (await _dbContext.Conversations
                 .Where(e => e.User.Id == navigatorContext.Conversation.User.Id)
-                .Where(e => navigatorContext.Conversation.Chat != null && e.Chat != null &&
+                .Where(e => navigatorContext.Conversation.Chat != null &&
                             e.Chat.Id == navigatorContext.Conversation.Chat.Id)
                 .AnyAsync())
         {
@@ -79,6 +81,9 @@ internal class StoreNavigatorContextExtension : INavigatorContextExtension
     {
         if (user is null || chat is null) return;
 
+        user.Chats.Add(chat);
+        chat.Users.Add(user);
+        
         var conversation = new Conversation(user, chat);
 
         await _dbContext.Conversations.AddAsync(conversation);

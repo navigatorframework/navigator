@@ -14,20 +14,26 @@ public class Conversation
     /// </summary>
     /// <param name="user"></param>
     /// <param name="chat"></param>
-    public Conversation(User user, Chat? chat)
+    public Conversation(User user, Chat chat)
     {
+        UserId = user.Id;
+        ChatId = chat.Id;
         FirstInteractionAt = DateTime.UtcNow;
     }
-
+    
+    public long UserId { get; set; }
+    
     /// <summary>
     /// User.
     /// </summary>
     public User User { get; set; } = null!;
 
+    public long ChatId { get; set; }
+    
     /// <summary>
     /// Chat.
     /// </summary>
-    public Chat? Chat { get; set; }
+    public Chat Chat { get; set; } = null!;
 
     /// <summary>
     /// Date of first interaction for this chat.

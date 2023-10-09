@@ -16,7 +16,7 @@ public class NavigatorDbContext : DbContext
     }
 
     /// <inheritdoc />
-    public NavigatorDbContext(DbContextOptions options) : base(options)
+    public NavigatorDbContext(DbContextOptions<NavigatorDbContext> options) : base(options)
     {
     }
 

@@ -22,9 +22,12 @@ internal class ChatEntityTypeConfiguration : IEntityTypeConfiguration<Chat>
         builder.HasMany(e => e.Users)
             .WithMany(e => e.Chats)
             .UsingEntity<Conversation>(
-                e => e.HasOne(e => e.User)
-                    .WithMany(e => e.Conversations),
-                e => e.HasOne(e => e.Chat)
-                    .WithMany(e => e.Conversations));
+                r => r.HasOne(e => e.User)
+                    .WithMany(e => e.Conversations).HasForeignKey(e=> e.UserId),
+                l => l.HasOne(e => e.Chat)
+                    .WithMany(e => e.Conversations).HasForeignKey(e=> e.ChatId));
+        // builder.HasMany(e => e.Users)
+        //     .WithMany(e => e.Chats)
+        //     .UsingEntity<Conversation>();
     }
 }

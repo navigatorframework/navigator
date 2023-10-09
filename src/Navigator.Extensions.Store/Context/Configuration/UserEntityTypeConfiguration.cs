@@ -22,12 +22,12 @@ internal class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();
 
-        builder.HasMany(e => e.Chats)
-            .WithMany(e => e.Users)
-            .UsingEntity<Conversation>(
-                e => e.HasOne(e => e.Chat)
-                    .WithMany(e => e.Conversations),
-                e => e.HasOne(e => e.User)
-                    .WithMany(e => e.Conversations));
+        // builder.HasMany(e => e.Chats)
+        //     .WithMany(e => e.Users)
+        //     .UsingEntity<Conversation>(
+        //         r => r.HasOne(e => e.Chat)
+        //             .WithMany(e => e.Conversations),
+        //         l => l.HasOne(e => e.User)
+        //             .WithMany(e => e.Conversations));
     }
 }
