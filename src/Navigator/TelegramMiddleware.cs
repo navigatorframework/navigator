@@ -72,7 +72,7 @@ public class TelegramMiddleware
                 MessageType.ChatTitleChanged => nameof(ChatTitleChangedAction),
                 MessageType.ChatPhotoChanged => nameof(ChatPhotoChangedAction),
                 MessageType.MessagePinned => nameof(MessagePinnedAction),
-                // MessageType.ChatPhotoDeleted => expr,
+                MessageType.ChatPhotoDeleted => nameof(ChatPhotoDeletedAction),
                 // MessageType.GroupCreated => expr,
                 MessageType.SupergroupCreated => nameof(SupergroupCreatedAction),
                 MessageType.ChannelCreated => nameof(ChannelCreatedAction),
