@@ -1,7 +1,9 @@
 name: Build & Publish - Navigator
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
   release:
     types:
       - published
