@@ -65,7 +65,7 @@ public class TelegramMiddleware
                 MessageType.Game => nameof(GameAction),
                 MessageType.VideoNote => nameof(VideoNoteAction),
                 MessageType.Invoice => nameof(InvoiceAction),
-                // MessageType.SuccessfulPayment => expr,
+                MessageType.SuccessfulPayment => nameof(SuccessfulPaymentAction),
                 // MessageType.WebsiteConnected => expr,
                 // MessageType.ChatMembersAdded => expr,
                 // MessageType.ChatMemberLeft => expr,
