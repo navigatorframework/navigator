@@ -13,11 +13,11 @@ public abstract class VideoAction : MessageAction
     /// <summary>
     /// Video information.
     /// </summary>
-    public readonly Video Audio;
+    public readonly Video Video;
 
     /// <inheritdoc />
     protected VideoAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        Audio = Message.Video!;
+        Video = Message.Video!;
     }
 }
