@@ -79,7 +79,7 @@ public class TelegramMiddleware
                 MessageType.MigratedToSupergroup => nameof(MigratedToSupergroupAction),
                 MessageType.MigratedFromGroup => nameof(MigratedFromGroupAction),
                 MessageType.Poll => nameof(PollMessageAction),
-                // MessageType.Dice => expr,
+                MessageType.Dice => nameof(DiceAction),
                 // MessageType.MessageAutoDeleteTimerChanged => expr,
                 // MessageType.ProximityAlertTriggered => expr,
                 // MessageType.WebAppData => expr,
