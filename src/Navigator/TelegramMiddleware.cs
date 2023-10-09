@@ -63,7 +63,7 @@ public class TelegramMiddleware
                 MessageType.Contact => nameof(ContactAction),
                 MessageType.Venue => nameof(VenueAction),
                 MessageType.Game => nameof(GameAction),
-                // MessageType.VideoNote => expr,
+                MessageType.VideoNote => nameof(VideoNoteAction),
                 // MessageType.Invoice => expr,
                 // MessageType.SuccessfulPayment => expr,
                 // MessageType.WebsiteConnected => expr,
