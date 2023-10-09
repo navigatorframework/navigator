@@ -80,7 +80,7 @@ public class TelegramMiddleware
                 MessageType.MigratedFromGroup => nameof(MigratedFromGroupAction),
                 MessageType.Poll => nameof(PollMessageAction),
                 MessageType.Dice => nameof(DiceAction),
-                // MessageType.MessageAutoDeleteTimerChanged => expr,
+                MessageType.MessageAutoDeleteTimerChanged => nameof(MessageAutoDeleteTimerChangedAction),
                 // MessageType.ProximityAlertTriggered => expr,
                 // MessageType.WebAppData => expr,
                 // MessageType.VideoChatScheduled => expr,
