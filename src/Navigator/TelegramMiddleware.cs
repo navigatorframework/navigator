@@ -81,7 +81,7 @@ public class TelegramMiddleware
                 MessageType.Poll => nameof(PollMessageAction),
                 MessageType.Dice => nameof(DiceAction),
                 MessageType.MessageAutoDeleteTimerChanged => nameof(MessageAutoDeleteTimerChangedAction),
-                // MessageType.ProximityAlertTriggered => expr,
+                MessageType.ProximityAlertTriggered => nameof(ProximityAlertTriggeredAction),
                 // MessageType.WebAppData => expr,
                 // MessageType.VideoChatScheduled => expr,
                 // MessageType.VideoChatStarted => expr,
