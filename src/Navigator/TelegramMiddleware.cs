@@ -69,7 +69,7 @@ public class TelegramMiddleware
                 MessageType.WebsiteConnected => nameof(WebsiteConnectedAction),
                 MessageType.ChatMembersAdded => nameof(ChatMembersAddedAction),
                 MessageType.ChatMemberLeft => nameof(ChatMemberLeftAction),
-                // MessageType.ChatTitleChanged => expr,
+                MessageType.ChatTitleChanged => nameof(ChatTitleChangedAction),
                 // MessageType.ChatPhotoChanged => expr,
                 // MessageType.MessagePinned => expr,
                 // MessageType.ChatPhotoDeleted => expr,
