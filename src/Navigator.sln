@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Testing", "Sample.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Store", "Sample.Store\Sample.Store.csproj", "{05843F22-918E-43BB-B6E9-BE112A6B180F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution-items", ".solution-items", "{731D9036-DAE1-4300-825D-37C6F25C4F60}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\package.navigator.yml = ..\.github\workflows\package.navigator.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

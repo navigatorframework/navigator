@@ -14,17 +14,13 @@ env:
   PROJECT_NAME: Navigator
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest ]
+    runs-on: ubuntu-latest
     steps:
+
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0.x'
+        uses: actions/setup-dotnet@v3
       - name: Restore
         working-directory: ./src
         run: dotnet restore
@@ -35,7 +31,6 @@ jobs:
         working-directory: ./src
         run: dotnet test -c Release
       - name: Pack
-        if: matrix.os == 'ubuntu-latest'
         run: dotnet pack -v normal -c Release --no-restore --include-symbols --include-source -p:PackageVersion=$GITHUB_RUN_ID src/$PROJECT_NAME.sln
       # - name: Upload Artifact
       #   if: matrix.os == 'ubuntu-latest'
@@ -59,10 +54,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0.x'
-      - name: Create Release NuGet package
+        uses: actions/setup-dotnet@v3
+      - name: Create release NuGet package
         run: |
           arrTag=(${GITHUB_REF//\// })
           VERSION="${arrTag[2]}"
