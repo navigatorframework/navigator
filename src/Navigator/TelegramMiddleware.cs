@@ -82,7 +82,7 @@ public class TelegramMiddleware
                 MessageType.Dice => nameof(DiceAction),
                 MessageType.MessageAutoDeleteTimerChanged => nameof(MessageAutoDeleteTimerChangedAction),
                 MessageType.ProximityAlertTriggered => nameof(ProximityAlertTriggeredAction),
-                // MessageType.WebAppData => expr,
+                MessageType.WebAppData => nameof(WebAppDataAction),
                 // MessageType.VideoChatScheduled => expr,
                 // MessageType.VideoChatStarted => expr,
                 // MessageType.VideoChatEnded => expr,
