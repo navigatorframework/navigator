@@ -1,33 +1,14 @@
+using Navigator.Client;
 using Navigator.Entities;
 
 namespace Navigator.Context;
 
 public interface INavigatorContext
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    INavigatorProvider Provider { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
+    public INavigatorClient Client { get; }
     Bot BotProfile { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
     Dictionary<string, object?> Extensions { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
     Dictionary<string, string> Items { get; }
-        
-    /// <summary>
-    /// 
-    /// </summary>
     public string ActionType { get; }
-        
     public Conversation Conversation { get; }
 }

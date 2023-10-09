@@ -1,15 +1,16 @@
 using MediatR;
 using Navigator.Context;
+using Navigator.Context.Accessor;
 
 namespace Navigator.Actions;
 
 public abstract class ActionHandler<TAction> : IRequestHandler<TAction, Status> where TAction : IAction
 {
-    public INavigatorContext NavigatorContext;
+    public readonly INavigatorContext Context;
 
     protected ActionHandler(INavigatorContextAccessor navigatorContextAccessor)
     {
-        NavigatorContext = navigatorContextAccessor.NavigatorContext;
+        Context = navigatorContextAccessor.NavigatorContext;
     }
 
     public abstract Task<Status> Handle(TAction action, CancellationToken cancellationToken);

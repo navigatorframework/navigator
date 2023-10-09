@@ -6,28 +6,28 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Context.Configuration;
 
-public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
+internal class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(e => e.Id);
 
-        builder.HasMany(e => e.Chats)
-            .WithMany(e => e.Users)
-            .UsingEntity<Conversation>(
-                e => e.HasOne(e => e.Chat)
-                    .WithMany(e => e.Conversations),
-                e=> e.HasOne(e => e.User)
-                    .WithMany(e => e.Conversations));
+        builder.Property(e => e.Username);
+        builder.Property(e => e.FirstName);
+        builder.Property(e => e.LastName);
+        builder.Property(e => e.LanguageCode);
+        builder.Property(e => e.IsPremium);
+        builder.Property(e => e.HasBotInAttachmentMenu);
 
-        builder.Property(e => e.Data)
-            .HasConversion<string>(
-                dictionary => JsonSerializer.Serialize(dictionary, default(JsonSerializerOptions)),
-                json => JsonSerializer.Deserialize<Dictionary<string, string>>(json, default(JsonSerializerOptions))
-                        ?? new Dictionary<string, string>(),
-                ValueComparer.CreateDefault(typeof(IDictionary<string, string>), false));
-        
         builder.Property(e => e.FirstInteractionAt)
             .IsRequired();
+
+        // builder.HasMany(e => e.Chats)
+        //     .WithMany(e => e.Users)
+        //     .UsingEntity<Conversation>(
+        //         r => r.HasOne(e => e.Chat)
+        //             .WithMany(e => e.Conversations),
+        //         l => l.HasOne(e => e.User)
+        //             .WithMany(e => e.Conversations));
     }
 }

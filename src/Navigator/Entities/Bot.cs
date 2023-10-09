@@ -1,20 +1,33 @@
-using System.Security.Cryptography;
-using System.Text;
+using Navigator.Context;
 
 namespace Navigator.Entities;
 
-public abstract class Bot
+/// <summary>
+/// Bot.
+/// </summary>
+public record Bot(long Id, string Username, string FirstName) : User(Id, FirstName)
 {
-    protected Bot(string input)
-    {
-        Id = new Guid(SHA256.HashData(Encoding.UTF8.GetBytes(input)).Take(16).ToArray());
-    }
-    
     /// <summary>
-    /// Id of the bot.
+    /// Whether the bot can join groups or not.
     /// <remarks>
-    ///     Generally a deterministic Guid based on some kind of input.
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
     /// </remarks>
     /// </summary>
-    public Guid Id { get; init; }
+    public bool? CanJoinGroups { get; init; }
+
+    /// <summary>
+    /// Whether the bot can read all group messages or not.
+    /// <remarks>
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
+    /// </remarks>
+    /// </summary>
+    public bool? CanReadAllGroupMessages { get; init; }
+
+    /// <summary>
+    /// Whether the bot supports inline queries or not.
+    /// <remarks>
+    ///     Optional. Only available on <see cref="NavigatorContext.BotProfile"/>
+    /// </remarks>
+    /// </summary>
+    public bool? SupportsInlineQueries { get; init; }
 }

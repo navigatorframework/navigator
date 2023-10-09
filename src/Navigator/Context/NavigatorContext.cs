@@ -1,19 +1,20 @@
-﻿using Navigator.Entities;
+﻿using Navigator.Client;
+using Navigator.Entities;
 
 namespace Navigator.Context;
 
 internal class NavigatorContext : INavigatorContext
 {
-    public INavigatorProvider Provider { get; }
+    public INavigatorClient Client { get; }
     public Bot BotProfile { get; }
     public Dictionary<string, object?> Extensions { get; }
     public Dictionary<string, string> Items { get; }
     public string ActionType { get; }
     public Conversation Conversation { get; }
 
-    public NavigatorContext(INavigatorProvider provider, Bot botProfile, string actionType, Conversation conversation)
+    public NavigatorContext(INavigatorClient navigatorClient, Bot botProfile, string actionType, Conversation conversation)
     {
-        Provider = provider;
+        Client = navigatorClient;
         BotProfile = botProfile;
         ActionType = actionType;
         Conversation = conversation;
