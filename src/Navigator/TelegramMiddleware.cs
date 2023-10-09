@@ -53,7 +53,7 @@ public class TelegramMiddleware
             {
                 MessageType.Unknown => nameof(UnknownAction),
                 MessageType.Text => nameof(TextAction),
-                // MessageType.Photo => expr,
+                MessageType.Photo => nameof(PhotoAction),
                 // MessageType.Audio => expr,
                 // MessageType.Video => expr,
                 // MessageType.Voice => expr,
