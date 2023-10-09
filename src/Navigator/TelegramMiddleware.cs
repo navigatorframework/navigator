@@ -70,7 +70,7 @@ public class TelegramMiddleware
                 MessageType.ChatMembersAdded => nameof(ChatMembersAddedAction),
                 MessageType.ChatMemberLeft => nameof(ChatMemberLeftAction),
                 MessageType.ChatTitleChanged => nameof(ChatTitleChangedAction),
-                // MessageType.ChatPhotoChanged => expr,
+                MessageType.ChatPhotoChanged => nameof(ChatPhotoChangedAction),
                 // MessageType.MessagePinned => expr,
                 // MessageType.ChatPhotoDeleted => expr,
                 // MessageType.GroupCreated => expr,
