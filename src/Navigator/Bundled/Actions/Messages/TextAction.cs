@@ -6,7 +6,7 @@ using Navigator.Telegram;
 namespace Navigator.Bundled.Actions.Messages;
 
 /// <summary>
-/// Command based action.
+/// Action triggered by a text message.
 /// </summary>
 [ActionType(nameof(TextAction))]
 public abstract class TextAction : MessageAction

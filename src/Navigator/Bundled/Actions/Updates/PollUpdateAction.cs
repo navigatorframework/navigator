@@ -9,8 +9,8 @@ namespace Navigator.Bundled.Actions.Updates;
 /// <summary>
 /// TODO
 /// </summary>
-[ActionType(nameof(PollAction))]
-public abstract class PollAction : BaseAction
+[ActionType(nameof(PollUpdateAction))]
+public abstract class PollUpdateAction : BaseAction
 {
     /// <summary>
     /// The original Poll.
@@ -18,7 +18,7 @@ public abstract class PollAction : BaseAction
     public Poll Poll { get; protected set; }
 
     /// <inheritdoc />
-    protected PollAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
+    protected PollUpdateAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
         var update = Context.GetOriginalEvent();
 
