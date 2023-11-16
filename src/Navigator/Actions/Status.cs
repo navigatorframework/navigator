@@ -1,6 +1,6 @@
 namespace Navigator.Actions;
 
-public struct Status
+public readonly struct Status
 {
     private readonly bool _isSuccess;
 
