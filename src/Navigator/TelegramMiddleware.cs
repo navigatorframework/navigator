@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Bundled.Actions;
-using Navigator.Bundled.Actions.Bundled;
 using Navigator.Bundled.Actions.Messages;
 using Navigator.Bundled.Actions.Updates;
 using Navigator.Context;

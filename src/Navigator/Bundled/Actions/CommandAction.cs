@@ -3,7 +3,7 @@ using Navigator.Bundled.Actions.Messages;
 using Navigator.Context.Accessor;
 using Navigator.Telegram;
 
-namespace Navigator.Bundled.Actions.Bundled;
+namespace Navigator.Bundled.Actions;
 
 /// <summary>
 /// Command based action.
