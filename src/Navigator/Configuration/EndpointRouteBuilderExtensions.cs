@@ -8,6 +8,9 @@ using Telegram.Bot.Types;
 
 namespace Navigator.Configuration;
 
+/// <summary>
+/// Navigator extensions for <see cref="IEndpointRouteBuilder"/>.
+/// </summary>
 public static class EndpointRouteBuilderExtensions
 {
     /// <summary>

@@ -13,8 +13,18 @@ using Scrutor;
 
 namespace Navigator;
 
+/// <summary>
+/// Extensions for configuring Navigator.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// Adds Navigator.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
     {
         if (options == null)
