@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Navigator.Configuration.Extensions;
-using Navigator.Configuration.Provider;
 
 namespace Navigator.Configuration;
 
@@ -10,8 +9,6 @@ namespace Navigator.Configuration;
 /// </summary>
 public class NavigatorConfiguration
 {
-    public NavigatorProviderConfiguration WithProvider { get; internal set; }
-        
     public NavigatorExtensionConfiguration WithExtension { get; internal set; }
 
     /// <summary>
@@ -43,8 +40,7 @@ public class NavigatorConfiguration
         Services = services;
 
         services.AddSingleton(Options);
-            
-        WithProvider = new NavigatorProviderConfiguration(this);
+        
         WithExtension = new NavigatorExtensionConfiguration(this);
     }
         
