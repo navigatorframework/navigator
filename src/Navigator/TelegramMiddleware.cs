@@ -85,7 +85,7 @@ public class TelegramMiddleware
                 MessageType.WebAppData => nameof(WebAppDataAction),
                 MessageType.VideoChatScheduled => nameof(VideoChatScheduledAction),
                 MessageType.VideoChatStarted => nameof(VideoChatStartedAction),
-                // MessageType.VideoChatEnded => expr,
+                MessageType.VideoChatEnded => nameof(VideoChatEndedAction),
                 // MessageType.VideoChatParticipantsInvited => expr,
                 // MessageType.Animation => expr,
                 // MessageType.ForumTopicCreated => expr,
