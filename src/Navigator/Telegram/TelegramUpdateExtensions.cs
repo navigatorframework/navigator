@@ -71,8 +71,9 @@ internal static class TelegramUpdateExtensions
         }
 
         var user = rawUser.IsBot
-            ? new Entities.Bot(rawUser.Id, rawUser.Username!, rawUser.FirstName)
+            ? new Entities.Bot(rawUser.Id, rawUser.FirstName)
             {
+                Username = rawUser.Username!,
                 LastName = rawUser.LastName,
                 LanguageCode = rawUser.LanguageCode,
                 CanJoinGroups = rawUser.CanJoinGroups,
