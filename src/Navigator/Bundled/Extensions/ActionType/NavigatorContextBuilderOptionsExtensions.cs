@@ -15,7 +15,7 @@ internal static class NavigatorContextBuilderOptionsExtensions
 
     }
 
-    public static string? GetAcitonType(this INavigatorContextBuilderOptions contextBuilderOptions)
+    public static string? GetActionType(this INavigatorContextBuilderOptions contextBuilderOptions)
     {
         return contextBuilderOptions.RetrieveOption<string>(ActionTypeKey);
     }

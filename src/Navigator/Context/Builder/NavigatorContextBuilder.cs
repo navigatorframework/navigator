@@ -29,7 +29,7 @@ internal class NavigatorContextBuilder : INavigatorContextBuilder
     public async Task<INavigatorContext> Build(Action<INavigatorContextBuilderOptions> optionsAction)
     {
         optionsAction.Invoke(_options);
-        var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
+        var actionType = _options.GetActionType() ?? throw new InvalidOperationException();
 
         var conversation = _options.GetUpdateOrDefault()?.GetConversation() ?? throw new NavigationException(nameof(Conversation));
             
