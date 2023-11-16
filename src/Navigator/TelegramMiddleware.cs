@@ -92,7 +92,7 @@ public class TelegramMiddleware
                 MessageType.ForumTopicClosed => nameof(ForumTopicClosedAction),
                 MessageType.ForumTopicReopened => nameof(ForumTopicReopenedAction),
                 MessageType.ForumTopicEdited => nameof(ForumTopicEditedAction),
-                // MessageType.GeneralForumTopicHidden => expr,
+                MessageType.GeneralForumTopicHidden => nameof(GeneralForumTopicHiddenAction),
                 // MessageType.GeneralForumTopicUnhidden => expr,
                 // MessageType.WriteAccessAllowed => expr,
                 // MessageType.UserShared => expr,
