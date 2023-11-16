@@ -3,7 +3,7 @@ using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Extensions.ActionType;
 
-public static class NavigatorContextBuilderOptionsExtensions
+internal static class NavigatorContextBuilderOptionsExtensions
 {
     #region ActionType
 

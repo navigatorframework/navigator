@@ -1,13 +1,12 @@
 using Navigator.Context;
-using Navigator.Extensions.Bundled.OriginalEvent;
 using Telegram.Bot.Types;
 
-namespace Navigator.Extensions.Bundled;
+namespace Navigator.Bundled.Extensions.Update;
 
 /// <summary>
 /// Bundled extensions to <see cref="NavigatorContext"/>.
 /// </summary>
-public static class BundledNavigatorContextExtensions
+public static class NavigatorContextExtensions
 {
     /// <summary>
     /// Returns the <see cref="Update"/>. Throws an exception if not found.
@@ -15,7 +14,7 @@ public static class BundledNavigatorContextExtensions
     /// <param name="navigatorContext"></param>
     /// <returns></returns>
     /// <exception cref="NavigatorException"></exception>
-    public static Update GetUpdate(this INavigatorContext navigatorContext)
+    public static global::Telegram.Bot.Types.Update GetUpdate(this INavigatorContext navigatorContext)
     {
         var update = navigatorContext.GetUpdateOrDefault();
 
@@ -27,11 +26,11 @@ public static class BundledNavigatorContextExtensions
     /// </summary>
     /// <param name="navigatorContext"></param>
     /// <returns></returns>
-    public static Update? GetUpdateOrDefault(this INavigatorContext navigatorContext)
+    public static global::Telegram.Bot.Types.Update? GetUpdateOrDefault(this INavigatorContext navigatorContext)
     {
-        var @event = navigatorContext.Extensions.GetValueOrDefault(OriginalEventContextExtension.OriginalEventKey);
+        var @event = navigatorContext.Extensions.GetValueOrDefault(UpdateNavigatorContextExtension.UpdateKey);
 
-        if (@event is Update update)
+        if (@event is global::Telegram.Bot.Types.Update update)
         {
             return update;
         }

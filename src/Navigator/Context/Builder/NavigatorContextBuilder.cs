@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
 using Navigator.Bundled.Extensions.ActionType;
-using Navigator.Bundled.Extensions.OriginalEvent;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Client;
 using Navigator.Context.Builder.Options;
 using Navigator.Entities;

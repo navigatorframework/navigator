@@ -4,7 +4,7 @@ using Navigator.Bundled.Actions;
 using Navigator.Bundled.Actions.Messages;
 using Navigator.Bundled.Actions.Updates;
 using Navigator.Bundled.Extensions.ActionType;
-using Navigator.Bundled.Extensions.OriginalEvent;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;

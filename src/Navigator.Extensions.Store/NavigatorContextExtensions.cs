@@ -1,7 +1,5 @@
 using Navigator.Context;
-using Navigator.Extensions.Bundled.OriginalEvent;
 using Navigator.Extensions.Store.Context;
-using Telegram.Bot.Types;
 
 namespace Navigator.Extensions.Store;
 

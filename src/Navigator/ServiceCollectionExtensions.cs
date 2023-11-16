@@ -1,13 +1,13 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Context;
 using Navigator.Context.Accessor;
 using Navigator.Context.Builder;
 using Navigator.Extensions;
-using Navigator.Extensions.Bundled.OriginalEvent;
 using Navigator.Hosted;
 using Scrutor;
 
@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<INavigatorClient, NavigatorClient>();
         
-        services.AddScoped<INavigatorContextExtension, OriginalEventContextExtension>();
+        services.AddScoped<INavigatorContextExtension, UpdateNavigatorContextExtension>();
 
         services.AddScoped<IActionLauncher, ActionLauncher>();
 
