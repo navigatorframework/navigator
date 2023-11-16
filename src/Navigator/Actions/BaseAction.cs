@@ -17,6 +17,9 @@ public abstract class BaseAction : IAction
     /// </summary>
     protected INavigatorContext Context => _navigatorContextAccessor.NavigatorContext;
 
+    /// <summary>
+    /// Priority of the request.
+    /// </summary>
     public virtual ushort Priority { get; protected set; } = Actions.Priority.Default;
         
     /// <summary>
