@@ -86,7 +86,7 @@ public class TelegramMiddleware
                 MessageType.VideoChatScheduled => nameof(VideoChatScheduledAction),
                 MessageType.VideoChatStarted => nameof(VideoChatStartedAction),
                 MessageType.VideoChatEnded => nameof(VideoChatEndedAction),
-                // MessageType.VideoChatParticipantsInvited => expr,
+                MessageType.VideoChatParticipantsInvited => nameof(VideoChatParticipantsInvitedAction),
                 // MessageType.Animation => expr,
                 // MessageType.ForumTopicCreated => expr,
                 // MessageType.ForumTopicClosed => expr,
