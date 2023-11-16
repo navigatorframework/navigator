@@ -90,7 +90,7 @@ public class TelegramMiddleware
                 MessageType.Animation => nameof(AnimationAction),
                 MessageType.ForumTopicCreated => nameof(ForumTopicCreatedAction),
                 MessageType.ForumTopicClosed => nameof(ForumTopicClosedAction),
-                // MessageType.ForumTopicReopened => expr,
+                MessageType.ForumTopicReopened => nameof(ForumTopicReopenedAction),
                 // MessageType.ForumTopicEdited => expr,
                 // MessageType.GeneralForumTopicHidden => expr,
                 // MessageType.GeneralForumTopicUnhidden => expr,
