@@ -25,7 +25,7 @@ public abstract class EditedMessageAction : BaseAction
     /// <inheritdoc />
     protected EditedMessageAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
 
         OriginalMessage = update.Message!;
         EditedMessage = update.EditedMessage!;

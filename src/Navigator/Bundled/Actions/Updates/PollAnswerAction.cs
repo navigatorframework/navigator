@@ -17,7 +17,7 @@ public abstract class PollAnswerAction : BaseAction
     /// <inheritdoc />
     protected PollAnswerAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
 
         Answer = update.PollAnswer!;
     }
