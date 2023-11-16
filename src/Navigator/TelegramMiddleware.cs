@@ -88,7 +88,7 @@ public class TelegramMiddleware
                 MessageType.VideoChatEnded => nameof(VideoChatEndedAction),
                 MessageType.VideoChatParticipantsInvited => nameof(VideoChatParticipantsInvitedAction),
                 MessageType.Animation => nameof(AnimationAction),
-                // MessageType.ForumTopicCreated => expr,
+                MessageType.ForumTopicCreated => nameof(ForumTopicCreatedAction),
                 // MessageType.ForumTopicClosed => expr,
                 // MessageType.ForumTopicReopened => expr,
                 // MessageType.ForumTopicEdited => expr,
