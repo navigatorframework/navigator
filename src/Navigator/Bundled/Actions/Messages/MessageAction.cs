@@ -40,7 +40,7 @@ public abstract class MessageAction : BaseAction
     /// <inheritdoc />
     protected MessageAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = navigatorContextAccessor.NavigatorContext.GetUpdate();
         
         Message = update.Message!;
         ChatId = Context.Conversation.Chat!.Id;
