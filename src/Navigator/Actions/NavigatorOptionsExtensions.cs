@@ -4,6 +4,9 @@ using Navigator.Configuration;
 
 namespace Navigator.Actions;
 
+/// <summary>
+/// Extensions for <see cref="NavigatorOptions"/>.
+/// </summary>
 public static class NavigatorOptionsExtensions
 {
     #region NavigatorActionTypeCollection
