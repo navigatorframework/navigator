@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+using Navigator.Bundled.Extensions.ActionType;
+using Navigator.Bundled.Extensions.OriginalEvent;
 using Navigator.Client;
 using Navigator.Context.Builder.Options;
-using Navigator.Context.Builder.Options.Extensions;
 using Navigator.Entities;
 using Navigator.Extensions;
 using Navigator.Telegram;
@@ -30,7 +31,7 @@ internal class NavigatorContextBuilder : INavigatorContextBuilder
         optionsAction.Invoke(_options);
         var actionType = _options.GetAcitonType() ?? throw new InvalidOperationException();
 
-        var conversation = _options.GetOriginalEventOrDefault()?.GetConversation() ?? throw new NavigationException(nameof(Conversation));
+        var conversation = _options.GetUpdateOrDefault()?.GetConversation() ?? throw new NavigationException(nameof(Conversation));
             
         INavigatorContext context = new NavigatorContext(_navigatorClient, await _navigatorClient.GetProfile(), actionType, conversation);
 

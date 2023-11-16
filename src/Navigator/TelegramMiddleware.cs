@@ -3,8 +3,9 @@ using Navigator.Actions;
 using Navigator.Bundled.Actions;
 using Navigator.Bundled.Actions.Messages;
 using Navigator.Bundled.Actions.Updates;
+using Navigator.Bundled.Extensions.ActionType;
+using Navigator.Bundled.Extensions.OriginalEvent;
 using Navigator.Context;
-using Navigator.Context.Builder.Options.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
@@ -36,7 +37,7 @@ public class TelegramMiddleware
         await _navigatorContextFactory.Supply(builder =>
         {
             builder.SetActionType(actionType);
-            builder.SetOriginalEvent(update);
+            builder.GetUpdate(update);
         });
 
         await _actionLauncher.Launch();
