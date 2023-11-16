@@ -95,7 +95,7 @@ public class TelegramMiddleware
                 MessageType.GeneralForumTopicHidden => nameof(GeneralForumTopicHiddenAction),
                 MessageType.GeneralForumTopicUnhidden => nameof(GeneralForumTopicUnhiddenAction),
                 MessageType.WriteAccessAllowed => nameof(WriteAccessAllowedAction),
-                // MessageType.UserShared => expr,
+                MessageType.UserShared => nameof(UserSharedAction),
                 // MessageType.ChatShared => expr,
                 _ => nameof(MessageAction)
             },
