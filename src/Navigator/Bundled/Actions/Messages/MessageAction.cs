@@ -25,7 +25,7 @@ public abstract class MessageAction : BaseAction
     /// <summary>
     /// Timestamp of the message creation.
     /// </summary>
-    public readonly DateTime Timestamp;
+    public new readonly DateTime Timestamp;
     
     /// <summary>
     /// Determines if this message is a reply to another message.
