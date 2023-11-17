@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered when a chat member has been updated.
 /// </summary>
 [ActionType(nameof(ChatMemberAction))]
 public abstract class ChatMemberAction : BaseAction

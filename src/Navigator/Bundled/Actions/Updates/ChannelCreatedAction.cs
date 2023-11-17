@@ -5,7 +5,7 @@ using Navigator.Context.Accessor;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a Channel being created.
 /// </summary>
 [ActionType(nameof(ChannelCreatedAction))]
 public abstract class ChannelCreatedAction : BaseAction

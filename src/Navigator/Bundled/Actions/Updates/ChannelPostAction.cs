@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a post being sent to a channel.
 /// </summary>
 [ActionType(nameof(ChannelPostAction))]
 public abstract class ChannelPostAction : BaseAction

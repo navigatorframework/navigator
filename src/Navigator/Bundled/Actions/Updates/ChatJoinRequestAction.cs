@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a request to join a channel.
 /// </summary>
 [ActionType(nameof(ChatJoinRequestAction))]
 public abstract class ChatJoinRequestAction : BaseAction
