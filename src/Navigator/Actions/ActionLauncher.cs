@@ -39,7 +39,10 @@ internal class ActionLauncher : IActionLauncher
         {
             try
             {
-                await _navigatorContextAccessor.NavigatorContext.Client.SendChatActionAsync(chatId, ChatAction.Typing);
+                if (_navigatorOptions.TypingNotificationIsEnabled())
+                {
+                    await _navigatorContextAccessor.NavigatorContext.Client.SendChatActionAsync(chatId, ChatAction.Typing);
+                }
                 
                 await _sender.Send(action);
             }
