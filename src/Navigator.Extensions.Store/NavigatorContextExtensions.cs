@@ -3,6 +3,9 @@ using Navigator.Extensions.Store.Context;
 
 namespace Navigator.Extensions.Store;
 
+/// <summary>
+/// Extensions for <see cref="NavigatorContext"/>.
+/// </summary>
 public static class NavigatorContextExtensions
 {
     #region NavigatorStore
