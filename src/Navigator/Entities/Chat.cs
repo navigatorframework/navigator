@@ -31,12 +31,34 @@ public record Chat(long Id, Chat.ChatType Type)
     /// </summary>
     public bool? IsForum { get; init; }
     
+    /// <summary>
+    /// Type of Chat.
+    /// </summary>
     public enum ChatType
     {
+        /// <summary>
+        /// Private.
+        /// </summary>
         Private = 1,
+        
+        /// <summary>
+        /// Group.
+        /// </summary>
         Group = 2,
+        
+        /// <summary>
+        /// Channel.
+        /// </summary>
         Channel = 3, 
+        
+        /// <summary>
+        /// Supergroup.
+        /// </summary>
         Supergroup = 4, 
+        
+        /// <summary>
+        /// Sender.
+        /// </summary>
         Sender = 5
     }
 }
