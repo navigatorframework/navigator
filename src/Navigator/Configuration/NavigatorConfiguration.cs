@@ -9,6 +9,9 @@ namespace Navigator.Configuration;
 /// </summary>
 public class NavigatorConfiguration
 {
+    /// <summary>
+    /// Configures an extension for Navigator.
+    /// </summary>
     public NavigatorExtensionConfiguration WithExtension { get; internal set; }
 
     /// <summary>
@@ -45,6 +48,9 @@ public class NavigatorConfiguration
     }
         
 
+    /// <summary>
+    /// Registers the <see cref="NavigatorOptions"/> or replaces it if already exists.
+    /// </summary>
     public void RegisterOrReplaceOptions()
     {
         Services.Replace(ServiceDescriptor.Singleton<INavigatorOptions, NavigatorOptions>(_ => Options));
