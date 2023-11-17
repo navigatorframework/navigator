@@ -3,6 +3,9 @@ using Navigator.Entities;
 
 namespace Navigator.Context;
 
+/// <summary>
+/// Navigator Context.
+/// </summary>
 public interface INavigatorContext
 {
     /// <summary>
