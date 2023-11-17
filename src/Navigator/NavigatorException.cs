@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace Navigator;
 
 /// <summary>
-/// TODO
+/// Navigator exception.
 /// </summary>
 public class NavigatorException : Exception
 {
