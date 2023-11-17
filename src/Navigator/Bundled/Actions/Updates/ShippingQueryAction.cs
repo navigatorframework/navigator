@@ -5,7 +5,7 @@ using Navigator.Context.Accessor;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// action triggered by a shipping query being sent.
 /// </summary>
 [ActionType(nameof(ShippingQueryAction))]
 public abstract class ShippingQueryAction : BaseAction
@@ -13,7 +13,6 @@ public abstract class ShippingQueryAction : BaseAction
     /// <inheritdoc />
     protected ShippingQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        //TODO
     }
 
 }

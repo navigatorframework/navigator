@@ -7,18 +7,21 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered when a message is edited.
+/// <remarks>
+///     Caution. Does not always works.
+/// </remarks>
 /// </summary>
 [ActionType(nameof(EditedMessageAction))]
 public abstract class EditedMessageAction : BaseAction
 {
     /// <summary>
-    /// TODO
+    /// Original <see cref="Message"/>.
     /// </summary>
     public Message OriginalMessage { get; protected set; }
         
     /// <summary>
-    /// TODO
+    /// Edited <see cref="Message"/>.
     /// </summary>
     public Message EditedMessage { get; protected set; }
 

@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a <see cref="Poll"/> being updated.
 /// </summary>
 [ActionType(nameof(PollUpdateAction))]
 public abstract class PollUpdateAction : BaseAction

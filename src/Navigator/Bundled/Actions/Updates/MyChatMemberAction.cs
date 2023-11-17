@@ -7,7 +7,8 @@ using Telegram.Bot.Types;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered when the bot’s chat member status was updated in a chat.
+/// For private chats, this update is received only when the bot is blocked or unblocked by the user.
 /// </summary>
 [ActionType(nameof(MyChatMemberAction))]
 public abstract class MyChatMemberAction : BaseAction
@@ -15,13 +16,13 @@ public abstract class MyChatMemberAction : BaseAction
     /// <summary>
     /// Chat member updated.
     /// </summary>
-    public ChatMemberUpdated ChatMemberUpdated { get; set; }
+    public ChatMemberUpdated MyChatMember { get; set; }
     
     /// <inheritdoc />
     protected MyChatMemberAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
         var update = Context.GetUpdate();
 
-        ChatMemberUpdated = update.MyChatMember!;
+        MyChatMember = update.MyChatMember!;
     }
 }
