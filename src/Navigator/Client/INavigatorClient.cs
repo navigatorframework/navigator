@@ -3,6 +3,9 @@ using Telegram.Bot;
 
 namespace Navigator.Client;
 
+/// <summary>
+/// Navigator Client.
+/// </summary>
 public interface INavigatorClient : ITelegramBotClient
 {
     /// <summary>

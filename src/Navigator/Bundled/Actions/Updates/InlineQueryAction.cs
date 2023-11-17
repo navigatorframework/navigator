@@ -1,7 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
@@ -30,7 +30,7 @@ public abstract class InlineQueryAction : BaseAction
     /// <inheritdoc />
     protected InlineQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
             
         InlineQuery = update.InlineQuery!;
         Query = update.InlineQuery!.Query;

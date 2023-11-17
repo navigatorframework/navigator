@@ -1,5 +1,8 @@
 namespace Navigator.Extensions.Store.Entities;
 
+/// <summary>
+/// Conversation.
+/// </summary>
 public class Conversation
 {
     /// <summary>
@@ -21,6 +24,9 @@ public class Conversation
         FirstInteractionAt = DateTime.UtcNow;
     }
     
+    /// <summary>
+    /// Id of the user.
+    /// </summary>
     public long UserId { get; set; }
     
     /// <summary>
@@ -28,6 +34,9 @@ public class Conversation
     /// </summary>
     public User User { get; set; } = null!;
 
+    /// <summary>
+    /// Id of the chat.
+    /// </summary>
     public long ChatId { get; set; }
     
     /// <summary>

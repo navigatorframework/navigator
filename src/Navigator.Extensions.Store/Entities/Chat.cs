@@ -1,3 +1,5 @@
+using Navigator.Entities;
+
 namespace Navigator.Extensions.Store.Entities;
 
 /// <summary>
@@ -32,10 +34,30 @@ public class Chat
     }
 
 
+    /// <summary>
+    /// Id of the chat.
+    /// </summary>
     public long Id { get; set; }
 
+    /// <summary>
+    /// Title of the chat.
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
     public string? Title { get; set; }
+    
+    /// <summary>
+    /// Type of the chat, can be any of <see cref="Navigator.Entities.Chat.ChatType"/>.
+    /// </summary>
     public Navigator.Entities.Chat.ChatType Type { get; set; }
+    
+    /// <summary>
+    /// If the supergroup chat is a forum (has topics enabled).
+    /// <remarks>
+    ///     Optional.
+    /// </remarks>
+    /// </summary>
     public bool? IsForum { get; set; }
 
     /// <summary>

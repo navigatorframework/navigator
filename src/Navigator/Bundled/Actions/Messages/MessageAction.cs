@@ -1,7 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Messages;
@@ -25,7 +25,7 @@ public abstract class MessageAction : BaseAction
     /// <summary>
     /// Timestamp of the message creation.
     /// </summary>
-    public readonly DateTime Timestamp;
+    public new readonly DateTime Timestamp;
     
     /// <summary>
     /// Determines if this message is a reply to another message.
@@ -40,7 +40,7 @@ public abstract class MessageAction : BaseAction
     /// <inheritdoc />
     protected MessageAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = navigatorContextAccessor.NavigatorContext.GetOriginalEvent();
+        var update = navigatorContextAccessor.NavigatorContext.GetUpdate();
         
         Message = update.Message!;
         ChatId = Context.Conversation.Chat!.Id;

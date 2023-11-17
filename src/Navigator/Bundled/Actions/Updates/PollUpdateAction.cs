@@ -1,13 +1,13 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a <see cref="Poll"/> being updated.
 /// </summary>
 [ActionType(nameof(PollUpdateAction))]
 public abstract class PollUpdateAction : BaseAction
@@ -20,7 +20,7 @@ public abstract class PollUpdateAction : BaseAction
     /// <inheritdoc />
     protected PollUpdateAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
 
         Poll = update.Poll!;
     }

@@ -1,10 +1,11 @@
 using Navigator.Context;
-using Navigator.Extensions.Bundled.OriginalEvent;
 using Navigator.Extensions.Store.Context;
-using Telegram.Bot.Types;
 
 namespace Navigator.Extensions.Store;
 
+/// <summary>
+/// Extensions for <see cref="NavigatorContext"/>.
+/// </summary>
 public static class NavigatorContextExtensions
 {
     #region NavigatorStore

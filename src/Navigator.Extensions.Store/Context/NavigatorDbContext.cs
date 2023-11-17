@@ -20,9 +20,24 @@ public class NavigatorDbContext : DbContext
     {
     }
 
+    /// <summary>
+    /// Bots.
+    /// </summary>
     public required DbSet<Bot> Bots { get; set; }
+    
+    /// <summary>
+    /// Users.
+    /// </summary>
     public required DbSet<User> Users { get; set; }
+    
+    /// <summary>
+    /// Chats.
+    /// </summary>
     public required DbSet<Chat> Chats { get; set; }
+    
+    /// <summary>
+    /// Conversations.
+    /// </summary>
     public required DbSet<Conversation> Conversations { get; set; }
     
     /// <inheritdoc />

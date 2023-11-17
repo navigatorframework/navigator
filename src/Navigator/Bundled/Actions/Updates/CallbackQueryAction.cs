@@ -1,7 +1,7 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
@@ -35,7 +35,7 @@ public abstract class CallbackQueryAction : BaseAction
     /// <inheritdoc />
     protected CallbackQueryAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
 
         CallbackQuery = update.CallbackQuery!;
         OriginalMessage = CallbackQuery.Message;

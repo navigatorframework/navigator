@@ -23,8 +23,9 @@ public class NavigatorClient : TelegramBotClient, INavigatorClient
     {
         var bot = await this.GetMeAsync(cancellationToken);
 
-        return new Bot(bot.Id, bot.Username!, bot.FirstName)
+        return new Bot(bot.Id, bot.FirstName)
         {
+            Username = bot.Username!,
             LastName = bot.LastName,
             CanJoinGroups = bot.CanJoinGroups,
             CanReadAllGroupMessages = bot.CanReadAllGroupMessages,

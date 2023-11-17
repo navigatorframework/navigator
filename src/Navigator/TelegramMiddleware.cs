@@ -1,23 +1,32 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Bundled.Actions;
-using Navigator.Bundled.Actions.Bundled;
 using Navigator.Bundled.Actions.Messages;
 using Navigator.Bundled.Actions.Updates;
+using Navigator.Bundled.Extensions.ActionType;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context;
-using Navigator.Context.Builder.Options.Extensions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
 
 namespace Navigator;
 
+/// <summary>
+/// Telegram Middleware.
+/// </summary>
 public class TelegramMiddleware
 {
     private readonly ILogger<TelegramMiddleware> _logger;
     private readonly INavigatorContextFactory _navigatorContextFactory;
     private readonly IActionLauncher _actionLauncher;
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="navigatorContextFactory"></param>
+    /// <param name="actionLauncher"></param>
     public TelegramMiddleware(ILogger<TelegramMiddleware> logger, INavigatorContextFactory navigatorContextFactory, IActionLauncher actionLauncher)
     {
         _logger = logger;
@@ -25,6 +34,10 @@ public class TelegramMiddleware
         _actionLauncher = actionLauncher;
     }
 
+    /// <summary>
+    /// Processes an <see cref="Update"/>.
+    /// </summary>
+    /// <param name="update"></param>
     public async Task Process(Update update)
     {
         var actionType = DefineActionType(update);
@@ -37,7 +50,7 @@ public class TelegramMiddleware
         await _navigatorContextFactory.Supply(builder =>
         {
             builder.SetActionType(actionType);
-            builder.SetOriginalEvent(update);
+            builder.GetUpdate(update);
         });
 
         await _actionLauncher.Launch();

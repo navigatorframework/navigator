@@ -7,7 +7,16 @@ namespace Navigator.Context;
 /// </summary>
 public interface INavigatorContextFactory
 {
+    /// <summary>
+    /// Supplies <see cref="INavigatorContextBuilderOptions"/> to the factory.
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
     Task Supply(Action<INavigatorContextBuilderOptions> action);
 
+    /// <summary>
+    /// Retrieves a finished <see cref="INavigatorContext"/>.
+    /// </summary>
+    /// <returns></returns>
     INavigatorContext Retrieve();
 }

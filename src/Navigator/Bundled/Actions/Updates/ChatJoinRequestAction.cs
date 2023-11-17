@@ -1,13 +1,13 @@
 using Navigator.Actions;
 using Navigator.Actions.Attributes;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Navigator.Extensions.Bundled;
 using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a request to join a channel.
 /// </summary>
 [ActionType(nameof(ChatJoinRequestAction))]
 public abstract class ChatJoinRequestAction : BaseAction
@@ -20,7 +20,7 @@ public abstract class ChatJoinRequestAction : BaseAction
     /// <inheritdoc />
     protected ChatJoinRequestAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        var update = Context.GetOriginalEvent();
+        var update = Context.GetUpdate();
 
         Request = update.ChatJoinRequest!;
     }

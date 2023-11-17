@@ -5,7 +5,7 @@ using Navigator.Context.Accessor;
 namespace Navigator.Bundled.Actions.Updates;
 
 /// <summary>
-/// TODO
+/// Action triggered by a supergroup being created.
 /// </summary>
 [ActionType(nameof(SupergroupCreatedAction))]
 public abstract class SupergroupCreatedAction : BaseAction
@@ -13,7 +13,7 @@ public abstract class SupergroupCreatedAction : BaseAction
     /// <inheritdoc />
     protected SupergroupCreatedAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
-        //TODO
+        
     }
 
 }

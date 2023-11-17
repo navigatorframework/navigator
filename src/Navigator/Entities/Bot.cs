@@ -5,7 +5,7 @@ namespace Navigator.Entities;
 /// <summary>
 /// Bot.
 /// </summary>
-public record Bot(long Id, string Username, string FirstName) : User(Id, FirstName)
+public record Bot(long Id, string FirstName) : User(Id, FirstName)
 {
     /// <summary>
     /// Whether the bot can join groups or not.
