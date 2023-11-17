@@ -3,7 +3,7 @@ using MediatR;
 namespace Navigator.Actions;
 
 /// <summary>
-/// TODO
+/// Interface to implement middleware for actions.
 /// </summary>
 /// <typeparam name="TAction"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
