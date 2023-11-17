@@ -3,8 +3,9 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Navigator.Configuration;
-using Navigator.Context;
 using Navigator.Context.Accessor;
+using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Actions;
 
@@ -32,11 +33,17 @@ internal class ActionLauncher : IActionLauncher
     public async Task Launch()
     {
         var actions = GetActions();
-            
+        var chatId = _navigatorContextAccessor.NavigatorContext.Conversation.Chat!.Id;
+
         foreach (var action in actions)
         {
             try
             {
+                if (_navigatorOptions.TypingNotificationIsEnabled())
+                {
+                    await _navigatorContextAccessor.NavigatorContext.Client.SendChatActionAsync(chatId, ChatAction.Typing);
+                }
+                
                 await _sender.Send(action);
             }
             catch (Exception e)

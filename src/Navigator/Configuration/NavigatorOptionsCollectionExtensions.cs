@@ -1,5 +1,6 @@
 using System.Reflection;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Configuration;
 
@@ -152,6 +153,31 @@ public static class NavigatorOptionsCollectionExtensions
     public static string? GetTelegramToken(this INavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<string>(TelegramTokenKey);
+    }
+
+    #endregion
+    
+    #region TypingNotification
+
+    private const string TypingNotificationKey = "_navigator.options.typing_notification";
+
+    /// <summary>
+    /// Enables the sending of <see cref="ChatAction.Typing"/>
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    public static void EnableTypingNotification(this NavigatorOptions navigatorOptions)
+    {
+        navigatorOptions.TryRegisterOption(TypingNotificationKey, true);
+    }
+
+    /// <summary>
+    /// Returns true if the sending of <see cref="ChatAction.Typing"/> is enabled.
+    /// </summary>
+    /// <param name="navigatorOptions"></param>
+    /// <returns></returns>
+    public static bool TypingNotificationIsEnabled(this INavigatorOptions navigatorOptions)
+    {
+        return navigatorOptions.RetrieveOption<bool>(TypingNotificationKey);
     }
 
     #endregion
