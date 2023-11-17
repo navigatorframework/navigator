@@ -6,6 +6,9 @@ using Telegram.Bot.Types;
 
 namespace Navigator.Bundled.Actions.Updates;
 
+/// <summary>
+/// Action triggered by a poll being answered.
+/// </summary>
 [ActionType(nameof(PollAnswerAction))]
 public abstract class PollAnswerAction : BaseAction
 {
