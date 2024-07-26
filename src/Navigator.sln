@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution-items", ".solution-items", "{731D9036-DAE1-4300-825D-37C6F25C4F60}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\package.navigator.yml = ..\.github\workflows\package.navigator.yml
+		global.json = global.json
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Global
