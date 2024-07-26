@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Telegram.Bot.Types;
 
 namespace Navigator.Configuration;
@@ -48,7 +47,7 @@ public static class EndpointRouteBuilderExtensions
         try
         {
             var reader = new StreamReader(request.Body);
-            return JsonConvert.DeserializeObject<Update>(await reader.ReadToEndAsync()) ?? throw new InvalidOperationException();
+            return JsonSerializer.Deserialize<Update>(await reader.ReadToEndAsync()) ?? throw new InvalidOperationException();
         }
         catch (Exception e)
         {
