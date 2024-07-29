@@ -1,17 +1,27 @@
-using Navigator.Bundled.Actions.Messages;
+using System.Threading;
+using System.Threading.Tasks;
+using Navigator.Actions;
+using Navigator.Bundled.Extensions.Update;
 using Navigator.Context.Accessor;
-using Telegram.Bot.Types.Enums;
+using Telegram.Bot;
 
 namespace Sample.Actions;
 
-public class EchoAction : TextAction
+public record EchoAction : Action
 {
     public EchoAction(INavigatorContextAccessor navigatorContextAccessor) : base(navigatorContextAccessor)
     {
     }
-
-    public override bool CanHandleCurrentContext()
+    
+    public override bool CanHandleCurrentContext(CancellationToken cancellationToken = default)
     {
-        return !string.IsNullOrWhiteSpace(Text);
+        return !string.IsNullOrWhiteSpace(Context.GetUpdate().Message!.Text);
+    }
+
+    public override async Task<Status> Handle(CancellationToken cancellationToken = default)
+    {
+        await Context.Client.SendTextMessageAsync(action.ChatId, action.Text, cancellationToken: cancellationToken);
+
+        return Success();
     }
 }

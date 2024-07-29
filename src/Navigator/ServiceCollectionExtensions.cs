@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Bundled.Extensions.Update;
@@ -10,6 +9,7 @@ using Navigator.Context.Builder;
 using Navigator.Extensions;
 using Navigator.Hosted;
 using Scrutor;
+using Action = Navigator.Actions.Action;
 
 namespace Navigator;
 
@@ -45,22 +45,20 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IActionLauncher, ActionLauncher>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
-
-        services.AddMediatR(navigatorBuilder.Options.GetActionsAssemblies());
-
+        
         services.Scan(scan => scan
             .FromAssemblies(navigatorBuilder.Options.GetActionsAssemblies())
-            .AddClasses(classes => classes.AssignableTo<IAction>())
+            .AddClasses(classes => classes.AssignableTo<Action>())
             .UsingRegistrationStrategy(RegistrationStrategy.Append)
             .AsSelf()
             .WithScopedLifetime());
 
         navigatorBuilder.Options.RegisterActionsCore(services
-            .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
+            .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(Action)) ?? false)
             .Select(descriptor => descriptor.ImplementationType!));
         
         navigatorBuilder.Options.RegisterActionsPriorityCore(services
-            .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(IAction)) ?? false)
+            .Where(descriptor => descriptor.ImplementationType?.IsAssignableTo(typeof(Action)) ?? false)
             .Select(descriptor => descriptor.ImplementationType!));
 
         navigatorBuilder.RegisterOrReplaceOptions();
