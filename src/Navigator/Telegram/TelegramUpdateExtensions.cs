@@ -8,7 +8,7 @@ namespace Navigator.Telegram;
 
 internal static class TelegramUpdateExtensions
 {
-    public static string? ExtractCommand(this Message message, string? botName)
+    public static string? ExtractCommand(this Message message, string? botName = default)
     {
         if (message.Entities?.First().Type != MessageEntityType.BotCommand) return default;
 
@@ -79,7 +79,6 @@ internal static class TelegramUpdateExtensions
                 CanJoinGroups = rawUser.CanJoinGroups,
                 CanReadAllGroupMessages = rawUser.CanReadAllGroupMessages,
                 SupportsInlineQueries = rawUser.SupportsInlineQueries
-                
             }
             : new Entities.User(rawUser.Id, rawUser.FirstName)
             {
