@@ -22,6 +22,8 @@ public class BotActionCatalogBuilder : IBotActionCatalogBuilder
         ConditionInputTypesByAction.Add(id, condition.Method.GetParameters().Select(a => a.ParameterType));
         HandlerInputTypesByAction.Add(id, handler.Method.GetParameters().Select(a => a.ParameterType));
 
+        ActionTypeByAction.Add(id, $"{typeof(UpdateType)}.{nameof(UpdateType.Unknown)}");
+        
         return new BotActionBuilder(action);
     }
 }
