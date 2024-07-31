@@ -1,7 +1,7 @@
 using Navigator.Context;
 using Telegram.Bot.Types;
 
-namespace Navigator.Configuration;
+namespace Navigator.Actions;
 
 public record BotAction
 {
