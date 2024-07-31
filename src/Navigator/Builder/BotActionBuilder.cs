@@ -9,8 +9,11 @@ public class BotActionBuilder : IBotActionBuilder
 {
     public BotAction BotAction { get; set; }
     
+    public BotActionBuilderOptions Options { get; }
+
     public BotActionBuilder(BotAction botAction)
     {
         BotAction = botAction;
+        Options = new BotActionBuilderOptions();
     }
 }
