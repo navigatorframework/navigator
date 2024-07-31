@@ -7,7 +7,7 @@ namespace Navigator.Builder;
 
 public class BotActionBuilder : IBotActionBuilder
 {
-    protected BotAction BotAction { get; set; }
+    public BotAction BotAction { get; set; }
     
     public BotActionBuilder(BotAction botAction)
     {
