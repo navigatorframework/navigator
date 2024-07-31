@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Navigator.Builder;
 using Action = Navigator.Actions.Action;
 
 namespace Navigator.Configuration;
@@ -8,9 +9,9 @@ namespace Navigator.Configuration;
 /// </summary>
 public static class ApplicationBuilderExtensions
 {
-    public static INavigatorBotBuilder GetBot(this IApplicationBuilder builder)
+    public static IBotActionCatalogBuilder GetBot(this IApplicationBuilder builder)
     {
-        return new NavigatorBotBuilder();
+        return new BotActionCatalogBuilder();
     }
 
 }
