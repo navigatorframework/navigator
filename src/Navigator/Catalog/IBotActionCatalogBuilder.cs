@@ -1,13 +1,12 @@
-using Navigator.Actions;
-using Navigator.Context;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
+using Navigator.Actions.Builder;
 
-namespace Navigator.Builder;
+namespace Navigator.Catalog;
 
 public interface IBotActionCatalogBuilder
 {
     public IBotActionBuilder OnUpdate(Delegate condition, Delegate handler);
+
+    public BotActionCatalog Build();
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Delegate handler);
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Action<INavigatorContext> handler);
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Func<INavigatorContext, Task> handler);
