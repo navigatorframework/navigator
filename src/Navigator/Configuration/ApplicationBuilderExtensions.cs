@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
-using Navigator.Builder;
-using Action = Navigator.Actions.Action;
+using Navigator.Catalog;
 
 namespace Navigator.Configuration;
 
