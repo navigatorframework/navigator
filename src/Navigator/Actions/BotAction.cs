@@ -5,17 +5,15 @@ namespace Navigator.Actions;
 
 public record BotAction
 {
-    // private Func<Update, Task<bool>>? ConditionAsync { get; } = default;
-    // private Func<Update, bool>? Condition { get; } = default;
-    //
-    // private Func<INavigatorContext, Task>? HandlerAsync { get; } = default;
-    // private Action<INavigatorContext>? Handler { get; } = default;
-    
-    private static Delegate Condition { get; set; }
-    private static Delegate Handler { get; set; }
+    public readonly Guid Id; 
+    public readonly BotActionInformation Information;
+    private static Delegate Condition;
+    private static Delegate Handler;
 
-    public BotAction(Delegate condition, Delegate handler)
+    public BotAction(Guid id, BotActionInformation information, Delegate condition, Delegate handler)
     {
+        Id = id;
+        Information = information;
         Condition = condition;
         Handler = handler;
     }
