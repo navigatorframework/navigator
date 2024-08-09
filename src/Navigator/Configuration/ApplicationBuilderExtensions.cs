@@ -8,9 +8,9 @@ namespace Navigator.Configuration;
 /// </summary>
 public static class ApplicationBuilderExtensions
 {
-    public static IBotActionCatalogBuilder GetBot(this IApplicationBuilder builder)
+    public static IBotActionCatalogFactory GetBot(this IApplicationBuilder builder)
     {
-        return new BotActionCatalogBuilder();
+        return new BotActionCatalogFactory();
     }
 
 }

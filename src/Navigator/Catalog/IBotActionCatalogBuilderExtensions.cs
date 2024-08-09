@@ -7,9 +7,9 @@ namespace Navigator.Catalog;
 
 public static class IBotActionCatalogBuilderExtensions
 {
-    public static IBotActionBuilder OnCommand(this IBotActionCatalogBuilder builder, string command, Delegate handler)
+    public static IBotActionBuilder OnCommand(this IBotActionCatalogFactory factory, string command, Delegate handler)
     {
-        var actionBuilder = builder.OnUpdate((Update update) => update.Message?.ExtractCommand() == command, handler);
+        var actionBuilder = factory.OnUpdate((Update update) => update.Message?.ExtractCommand() == command, handler);
 
         return actionBuilder;
     }

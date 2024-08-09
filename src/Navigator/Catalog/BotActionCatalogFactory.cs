@@ -4,7 +4,7 @@ using Navigator.Actions.Builder;
 
 namespace Navigator.Catalog;
 
-public class BotActionCatalogBuilder : IBotActionCatalogBuilder
+public class BotActionCatalogFactory : IBotActionCatalogFactory
 {
     public List<BotActionBuilder> Actions { get; } = [];
 
