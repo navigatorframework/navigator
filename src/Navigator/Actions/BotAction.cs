@@ -18,14 +18,17 @@ public record BotAction
         Handler = handler;
     }
     
-    public async Task ExecuteCondition(params object[] args)
+    public async Task<bool> ExecuteCondition(params object[] args)
     {
         var result = Handler.DynamicInvoke(args);
 
-        if (result is Task task)
+        if (result is Task<bool> task)
         {
-            await task;
+            return await task;
         }
+
+        //TODO: specify exception
+        throw new NavigatorException();
     }
 
     public async Task ExecuteHandler(params object[] args)

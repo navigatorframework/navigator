@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Bundled.Extensions.Update;
+using Navigator.Catalog;
 using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Context;
@@ -41,6 +42,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INavigatorClient, NavigatorClient>();
         
         services.AddScoped<INavigatorContextExtension, UpdateNavigatorContextExtension>();
+
+        services.AddSingleton<IBotActionCatalogFactory, BotActionCatalogFactory>();
 
         services.AddScoped<IActionLauncher, ActionLauncher>();
 

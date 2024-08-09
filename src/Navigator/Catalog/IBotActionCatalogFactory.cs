@@ -6,7 +6,7 @@ public interface IBotActionCatalogFactory
 {
     public IBotActionBuilder OnUpdate(Delegate condition, Delegate handler);
 
-    public BotActionCatalog Build();
+    public BotActionCatalog Retrieve();
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Delegate handler);
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Action<INavigatorContext> handler);
     // public IBotActionBuilder OnUpdate(Func<Update, Task<bool>> condition, Func<INavigatorContext, Task> handler);

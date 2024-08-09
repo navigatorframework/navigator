@@ -16,7 +16,8 @@ public record BotActionCatalog
             .ToDictionary(grouping => grouping.Key, grouping => grouping.Select(action => action.Id).ToArray());
     }
     
-    public IEnumerable<BotAction> Retrieve(string type, bool multiple = false)
+    //TODO: rework this into IAsyncEnumerable and yield
+    public IEnumerable<BotAction> Retrieve(string type)
     {
         if (ActionsByType.TryGetValue(type, out var filtered) is false)
         {
@@ -25,6 +26,6 @@ public record BotActionCatalog
 
         var actions = filtered.Select(id => Actions[id]).OrderBy(action => PriorityByAction[action.Id]);
 
-        return multiple is false ? actions.Take(1) : actions;
+        return actions;
     }
 }
