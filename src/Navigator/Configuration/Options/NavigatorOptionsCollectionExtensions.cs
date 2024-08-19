@@ -93,44 +93,6 @@ public static class NavigatorOptionsCollectionExtensions
 
     #endregion
 
-    #region ActionsAssemblies
-
-    private const string ActionsAssembliesKey = "_navigator.options.actions_assemblies";
-
-    /// <summary>
-    /// Registers assemblies on which actions are available.
-    /// </summary>
-    /// <param name="navigatorOptions"></param>
-    /// <param name="assemblies"></param>
-    public static void RegisterActionsFromAssemblies(this NavigatorOptions navigatorOptions, params Assembly[] assemblies)
-    {
-        var registeredAssemblies = navigatorOptions.RetrieveOption<Assembly[]>(ActionsAssembliesKey);
-
-        if (registeredAssemblies?.Length > 0)
-        {
-            var combinedAssemblies = new List<Assembly>(registeredAssemblies);
-            combinedAssemblies.AddRange(assemblies);
-
-            navigatorOptions.TryRegisterOption(ActionsAssembliesKey, combinedAssemblies);
-        }
-        else
-        {
-            navigatorOptions.TryRegisterOption(ActionsAssembliesKey, assemblies);
-        }
-    }
-
-    /// <summary>
-    /// Returns the registered assemblies.
-    /// </summary>
-    /// <param name="navigatorOptions"></param>
-    /// <returns></returns>
-    public static Assembly[] GetActionsAssemblies(this INavigatorOptions navigatorOptions)
-    {
-        return navigatorOptions.RetrieveOption<Assembly[]>(ActionsAssembliesKey) ?? new[] { Assembly.GetCallingAssembly() };
-    }
-
-    #endregion
-
     #region TelegramToken
 
     private const string TelegramTokenKey = "_navigator.options.telegram_token";

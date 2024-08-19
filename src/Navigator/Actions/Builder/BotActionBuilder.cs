@@ -29,7 +29,7 @@ public class BotActionBuilder : IBotActionBuilder
     {
         _id = Guid.NewGuid();
 
-        if (condition.Method.ReturnType != typeof(Task<bool>) || condition.Method.ReturnType != typeof(bool))
+        if (!(condition.Method.ReturnType != typeof(Task<bool>) || condition.Method.ReturnType != typeof(bool)))
         {
             throw new NavigatorException("The condition delegate must return Task<bool> or bool");
         }
