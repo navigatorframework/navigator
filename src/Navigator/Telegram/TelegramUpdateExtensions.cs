@@ -23,11 +23,11 @@ internal static class TelegramUpdateExtensions
         return command;
     }
 
-    public static string? ExtractArguments(this Message message)
+    public static string[] ExtractArguments(this Message message)
     {
         return message.Text is not null && message.Text.Contains(' ')
-            ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1)
-            : default;
+            ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1).Split(' ')
+            : [];
     }
 
     public static User? GetUserOrDefault(this Update update)
