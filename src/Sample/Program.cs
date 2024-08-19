@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 using Incremental.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Navigator;
+using Navigator.Catalog;
+using Navigator.Client;
 using Navigator.Configuration;
+using Navigator.Entities;
 using Telegram.Bot;
 
 namespace Sample;
@@ -20,7 +23,6 @@ public class Program
         builder.Services.AddNavigator(options =>
         {
             options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
-            options.RegisterActionsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
             options.EnableTypingNotification();
         });
@@ -29,20 +31,11 @@ public class Program
 
         var bot = app.GetBot();
 
-        // bot.OnCommand("join", async (ctx, parameters) =>
-        // {
-        //     var result = string.Join(' ', parameters);
-        //
-        //     await ctx.Client.SendTextMessageAsync(ctx.Conversation.Chat!.Id, result);
-        // } );
-
-        bot.OnUpdate((int a) =>
+        bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parameters) =>
         {
-            return a * 2;
-        }, async (int a) =>
-        {
-            await Task.Delay(2);
-            return a * 3;
+            var result = string.Join(' ', parameters);
+        
+            await client.SendTextMessageAsync(chat, result);
         });
         
         app.MapNavigator();
