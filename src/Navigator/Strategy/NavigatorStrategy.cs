@@ -46,6 +46,7 @@ public class NavigatorStrategy : INavigatorStrategy
 
             foreach (var inputType in action.Information.ConditionInputTypes)
             {
+                //TODO: extract method
                 arguments.Add(inputType switch
                 {
                     not null when inputType == typeof(Update)
@@ -77,12 +78,12 @@ public class NavigatorStrategy : INavigatorStrategy
         {
             arguments.Add(inputType switch
             {
-                not null when inputType == typeof(INavigatorContext) 
-                    => _serviceProvider.GetRequiredService<INavigatorContextAccessor>().NavigatorContext,
-                not null when inputType == typeof(INavigatorClient) 
-                    => _serviceProvider.GetRequiredService<INavigatorContextAccessor>().NavigatorContext.Client,
                 not null when inputType == typeof(Update)
                     => update,
+                not null when inputType == typeof(Conversation) 
+                    => update.GetConversation(),
+                not null when inputType == typeof(Bot) 
+                    => await _serviceProvider.GetRequiredService<INavigatorClient>().GetProfile(),
                 not null => _serviceProvider.GetRequiredService(inputType),
                 //TODO: this exception should never happen.
                 _ => throw new NavigatorException()
