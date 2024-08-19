@@ -50,17 +50,14 @@ public class NavigatorStrategy : INavigatorStrategy
 
         var relevantActions = _catalog.Retrieve(actionType);
 
-        foreach (var action in await FilterActionsThatCanHandleUpdate(relevantActions, update))
+        await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
             await ExecuteAction(action, update);
         }
     }
 
-    //TODO: rework this into IAsyncEnumerable and yield
-    private async Task<IEnumerable<BotAction>> FilterActionsThatCanHandleUpdate(IEnumerable<BotAction> actions, Update update)
+    private async IAsyncEnumerable<BotAction> FilterActionsThatCanHandleUpdate(IEnumerable<BotAction> actions, Update update)
     {
-        var successActions = new List<BotAction>();
-
         foreach (var action in actions)
         {
             var arguments = new List<object>();
@@ -73,11 +70,9 @@ public class NavigatorStrategy : INavigatorStrategy
 
             if (await action.ExecuteCondition(arguments))
             {
-                successActions.Add(action);
+                yield return action;
             }
         }
-
-        return successActions;
     }
 
     private async Task ExecuteAction(BotAction action, Update update)
