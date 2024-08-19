@@ -15,7 +15,7 @@ public class BotActionCatalogFactory : IBotActionCatalogFactory
         var id = Guid.NewGuid();
         var actionBuilder = new BotActionBuilder(condition, handler);
 
-        actionBuilder.SetType($"{typeof(UpdateType)}.{nameof(UpdateType.Unknown)}");
+        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
         
         Actions.Add(actionBuilder);
 

@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Incremental.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Navigator;
-using Navigator.Catalog;
+using Navigator.Catalog.Factory.Extensions;
 using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Entities;

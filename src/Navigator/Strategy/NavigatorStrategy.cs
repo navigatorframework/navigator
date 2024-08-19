@@ -107,7 +107,7 @@ public class NavigatorStrategy : INavigatorStrategy
                 => update.GetUserOrDefault()!,
             not null when inputType == typeof(Bot) 
                 => await _serviceProvider.GetRequiredService<INavigatorClient>().GetProfile(),
-            not null when inputType == typeof(string[]) && action.Information.ActionType == $"{typeof(MessageType)}.{nameof(MessageEntityType.BotCommand)}"
+            not null when inputType == typeof(string[]) && action.Information.Category.Subkind == nameof(MessageEntityType.BotCommand)
                 => update.Message!.ExtractArguments(),
             not null => _serviceProvider.GetRequiredService(inputType),
             //TODO: this exception should never happen.

@@ -1,3 +1,5 @@
+using Telegram.Bot.Types.Enums;
+
 namespace Navigator.Actions.Builder;
 
 public class BotActionBuilder : IBotActionBuilder
@@ -7,7 +9,7 @@ public class BotActionBuilder : IBotActionBuilder
     private readonly Delegate _handler;
     private readonly Type[] _conditionInputTypes;
     private readonly Type[] _handlerInputTypes;
-    private string _actionType { get; set; }
+    private UpdateCategory _category { get; set; }
     private ushort _priority { get; set; }
     private TimeSpan? _cooldown { get; set; } 
 
@@ -15,7 +17,7 @@ public class BotActionBuilder : IBotActionBuilder
     {
         var information = new BotActionInformation
         {
-            ActionType = _actionType,
+            Category = _category,
             ConditionInputTypes = _conditionInputTypes,
             HandlerInputTypes = _handlerInputTypes,
             Priority = _priority,
@@ -53,9 +55,9 @@ public class BotActionBuilder : IBotActionBuilder
         return this;
     }
 
-    public IBotActionBuilder SetType(string type)
+    public IBotActionBuilder SetType(UpdateCategory category)
     {
-        _actionType = type;
+        _category = category;
         return this;
     }
 }
