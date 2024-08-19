@@ -1,14 +1,11 @@
-using Navigator.Context;
-using Telegram.Bot.Types;
-
 namespace Navigator.Actions;
 
-public record BotAction
+public sealed record BotAction
 {
     public readonly Guid Id; 
     public readonly BotActionInformation Information;
-    private static Delegate Condition;
-    private static Delegate Handler;
+    private readonly Delegate Condition;
+    private readonly Delegate Handler;
 
     public BotAction(Guid id, BotActionInformation information, Delegate condition, Delegate handler)
     {
@@ -20,15 +17,16 @@ public record BotAction
     
     public async Task<bool> ExecuteCondition(params object[] args)
     {
-        var result = Handler.DynamicInvoke(args);
+        var result = Condition.DynamicInvoke(args);
 
-        if (result is Task<bool> task)
+        return result switch
         {
-            return await task;
-        }
+            Task<bool> task => await task,
+            bool b => b,
+            //TODO: specify exception
+            _ => throw new NavigatorException()
+        };
 
-        //TODO: specify exception
-        throw new NavigatorException();
     }
 
     public async Task ExecuteHandler(params object[] args)

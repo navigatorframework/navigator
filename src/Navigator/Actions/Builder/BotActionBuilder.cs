@@ -28,6 +28,12 @@ public class BotActionBuilder : IBotActionBuilder
     public BotActionBuilder(Delegate condition, Delegate handler)
     {
         _id = Guid.NewGuid();
+
+        if (condition.Method.ReturnType != typeof(Task<bool>) || condition.Method.ReturnType != typeof(bool))
+        {
+            throw new NavigatorException("The condition delegate must return Task<bool> or bool");
+        }
+        
         _condition = condition;
         _conditionInputTypes = condition.Method.GetParameters().Select(info => info.ParameterType).ToArray();
         _handler = handler;
