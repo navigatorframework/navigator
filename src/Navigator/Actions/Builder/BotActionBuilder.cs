@@ -16,7 +16,7 @@ public class BotActionBuilder : IBotActionBuilder
         var information = new BotActionInformation
         {
             ActionType = _actionType,
-            ConditiionInputTypes = _conditionInputTypes,
+            ConditionInputTypes = _conditionInputTypes,
             HandlerInputTypes = _handlerInputTypes,
             Priority = _priority,
             Cooldown = _cooldown

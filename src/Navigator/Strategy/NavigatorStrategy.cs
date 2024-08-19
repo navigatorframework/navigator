@@ -44,7 +44,7 @@ public class NavigatorStrategy : INavigatorStrategy
         {
             var arguments = new List<object>();
 
-            foreach (var inputType in action.Information.ConditiionInputTypes)
+            foreach (var inputType in action.Information.ConditionInputTypes)
             {
                 arguments.Add(inputType switch
                 {
