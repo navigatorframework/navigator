@@ -1,31 +1,26 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Navigator.Actions;
-using Navigator.Bundled.Extensions.Update;
 using Navigator.Catalog;
-using Navigator.Context;
-using Navigator.Context.Accessor;
+using Navigator.Client;
+using Navigator.Entities;
 using Navigator.Strategy.Classifier;
+using Navigator.Telegram;
 using Telegram.Bot.Types;
 
 namespace Navigator.Strategy;
 
 public class NavigatorStrategy : INavigatorStrategy
 {
-    private readonly ILogger<NavigatorStrategy> _logger;
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
     private readonly IServiceProvider _serviceProvider;
-    private readonly INavigatorContextAccessor _contextAccessor;
 
-    public NavigatorStrategy(ILogger<NavigatorStrategy> logger, IBotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
-        IServiceProvider serviceProvider, INavigatorContextAccessor contextAccessor)
+    public NavigatorStrategy(IBotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
+        IServiceProvider serviceProvider)
     {
-        _logger = logger;
         _catalog = catalogFactory.Retrieve();
         _classifier = classifier;
         _serviceProvider = serviceProvider;
-        _contextAccessor = contextAccessor;
     }
 
     public async Task Invoke(Update update)
@@ -34,14 +29,14 @@ public class NavigatorStrategy : INavigatorStrategy
 
         var relevantActions = _catalog.Retrieve(actionType);
 
-        foreach (var action in await FilterActionsThatCanHandleUpdate(relevantActions))
+        foreach (var action in await FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
-            await ExecuteAction(action);
+            await ExecuteAction(action, update);
         }
     }
 
     //TODO: rework this into IAsyncEnumerable and yield
-    private async Task<IEnumerable<BotAction>> FilterActionsThatCanHandleUpdate(IEnumerable<BotAction> actions)
+    private async Task<IEnumerable<BotAction>> FilterActionsThatCanHandleUpdate(IEnumerable<BotAction> actions, Update update)
     {
         var successActions = new List<BotAction>();
 
@@ -53,8 +48,12 @@ public class NavigatorStrategy : INavigatorStrategy
             {
                 arguments.Add(inputType switch
                 {
-                    not null when inputType == typeof(INavigatorContext) => _contextAccessor.NavigatorContext,
-                    not null when inputType == typeof(Update) => _contextAccessor.NavigatorContext.GetUpdate(),
+                    not null when inputType == typeof(Update)
+                        => update,
+                    not null when inputType == typeof(Conversation) 
+                        => update.GetConversation(),
+                    not null when inputType == typeof(Bot) 
+                        => await _serviceProvider.GetRequiredService<INavigatorClient>().GetProfile(),
                     not null => _serviceProvider.GetRequiredService(inputType),
                     //TODO: this exception should never happen.
                     _ => throw new NavigatorException()
@@ -70,7 +69,7 @@ public class NavigatorStrategy : INavigatorStrategy
         return successActions;
     }
 
-    private async Task ExecuteAction(BotAction action)
+    private async Task ExecuteAction(BotAction action, Update update)
     {
         var arguments = new List<object>();
 
@@ -78,8 +77,12 @@ public class NavigatorStrategy : INavigatorStrategy
         {
             arguments.Add(inputType switch
             {
-                not null when inputType == typeof(INavigatorContext) => _contextAccessor.NavigatorContext,
-                not null when inputType == typeof(Update) => _contextAccessor.NavigatorContext.GetUpdate(),
+                not null when inputType == typeof(INavigatorContext) 
+                    => _serviceProvider.GetRequiredService<INavigatorContextAccessor>().NavigatorContext,
+                not null when inputType == typeof(INavigatorClient) 
+                    => _serviceProvider.GetRequiredService<INavigatorContextAccessor>().NavigatorContext.Client,
+                not null when inputType == typeof(Update)
+                    => update,
                 not null => _serviceProvider.GetRequiredService(inputType),
                 //TODO: this exception should never happen.
                 _ => throw new NavigatorException()

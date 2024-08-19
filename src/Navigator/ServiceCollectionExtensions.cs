@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Actions;
 using Navigator.Bundled.Extensions.Update;
 using Navigator.Catalog;
 using Navigator.Client;
@@ -10,7 +9,6 @@ using Navigator.Context.Builder;
 using Navigator.Extensions;
 using Navigator.Hosted;
 using Scrutor;
-using Action = Navigator.Actions.Action;
 
 namespace Navigator;
 

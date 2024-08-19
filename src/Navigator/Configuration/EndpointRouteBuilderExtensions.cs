@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Navigator.Strategy;
 using Telegram.Bot.Types;
 
 namespace Navigator.Configuration;
@@ -37,9 +38,9 @@ public static class EndpointRouteBuilderExtensions
 
         var telegramUpdate = await ParseTelegramUpdate(context.Request);
 
-        var navigatorMiddleware = context.RequestServices.GetRequiredService<TelegramMiddleware>();
+        var strategy = context.RequestServices.GetRequiredService<INavigatorStrategy>();
 
-        await navigatorMiddleware.Process(telegramUpdate);
+        await strategy.Invoke(telegramUpdate);
     }
         
     private static async Task<Update> ParseTelegramUpdate(HttpRequest request)

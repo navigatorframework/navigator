@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Incremental.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Navigator;
@@ -34,6 +35,15 @@ public class Program
         //
         //     await ctx.Client.SendTextMessageAsync(ctx.Conversation.Chat!.Id, result);
         // } );
+
+        bot.OnUpdate((int a) =>
+        {
+            return a * 2;
+        }, async (int a) =>
+        {
+            await Task.Delay(2);
+            return a * 3;
+        });
         
         app.MapNavigator();
         

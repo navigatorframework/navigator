@@ -1,11 +1,10 @@
 using Navigator.Actions.Builder;
 using Navigator.Telegram;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Catalog;
 
-public static class IBotActionCatalogBuilderExtensions
+public static class BotActionCatalogExtensions
 {
     public static IBotActionBuilder OnCommand(this IBotActionCatalogFactory factory, string command, Delegate handler)
     {
