@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Navigator.Actions;
 using Navigator.Catalog;
 using Navigator.Catalog.Factory;
@@ -33,14 +32,15 @@ public class NavigatorStrategy : INavigatorStrategy
     /// </summary>
     /// <param name="catalogFactory">An instance of <see cref="BotActionCatalogFactory" />.</param>
     /// <param name="classifier">An instance of <see cref="IUpdateClassifier" />.</param>
+    /// <param name="options"></param>
     /// <param name="serviceProvider">An instance of <see cref="IServiceProvider" /></param>
     /// .
-    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier, IOptions<INavigatorOptions> options,
+    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier, INavigatorOptions options,
         IServiceProvider serviceProvider)
     {
         _catalog = catalogFactory.Retrieve();
         _classifier = classifier;
-        _options = options.Value;
+        _options = options;
         _serviceProvider = serviceProvider;
     }
 
@@ -84,7 +84,11 @@ public class NavigatorStrategy : INavigatorStrategy
                 arguments[i] = await GetArgument(inputType, update, action);
             }
 
-            if (await action.ExecuteCondition(arguments)) yield return action;
+            if (!await action.ExecuteCondition(arguments)) continue;
+
+            yield return action;
+
+            if (_options.MultipleActionsUsageIsEnabled() is false) break;
         }
     }
 
