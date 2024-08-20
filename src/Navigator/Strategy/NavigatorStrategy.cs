@@ -1,11 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Navigator.Actions;
 using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
+using Navigator.Configuration.Options;
 using Navigator.Entities;
 using Navigator.Strategy.Classifier;
 using Navigator.Telegram;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Chat = Navigator.Entities.Chat;
@@ -22,6 +25,7 @@ public class NavigatorStrategy : INavigatorStrategy
 {
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
+    private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
@@ -31,11 +35,12 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="classifier">An instance of <see cref="IUpdateClassifier" />.</param>
     /// <param name="serviceProvider">An instance of <see cref="IServiceProvider" /></param>
     /// .
-    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
+    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier, IOptions<INavigatorOptions> options,
         IServiceProvider serviceProvider)
     {
         _catalog = catalogFactory.Retrieve();
         _classifier = classifier;
+        _options = options.Value;
         _serviceProvider = serviceProvider;
     }
 
@@ -48,6 +53,11 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="update">The <see cref="Update" /> object to be processed.</param>
     public async Task Invoke(Update update)
     {
+        if (_options.TypingNotificationIsEnabled() && update.GetChatOrDefault() is { } chat)
+        {
+            await _serviceProvider.GetRequiredService<INavigatorClient>().SendChatActionAsync(chat, ChatAction.Typing);
+        }
+        
         var actionType = await _classifier.Process(update);
 
         var relevantActions = _catalog.Retrieve(actionType);
