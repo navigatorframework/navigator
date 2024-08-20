@@ -54,10 +54,8 @@ public class NavigatorStrategy : INavigatorStrategy
     public async Task Invoke(Update update)
     {
         if (_options.TypingNotificationIsEnabled() && update.GetChatOrDefault() is { } chat)
-        {
             await _serviceProvider.GetRequiredService<INavigatorClient>().SendChatActionAsync(chat, ChatAction.Typing);
-        }
-        
+
         var actionType = await _classifier.Process(update);
 
         var relevantActions = _catalog.Retrieve(actionType);
@@ -65,6 +63,14 @@ public class NavigatorStrategy : INavigatorStrategy
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update)) await ExecuteAction(action, update);
     }
 
+
+    /// <summary>
+    ///     Filters the given collection of <see cref="BotAction" /> by executing the condition of each action.
+    ///     If the condition returns true, the action is included in the resulting collection and returned to the caller.
+    /// </summary>
+    /// <param name="actions">The collection of <see cref="BotAction" /> to be filtered.</param>
+    /// <param name="update">The <see cref="Update" /> object that triggered the execution of the strategy.</param>
+    /// <returns>An <see cref="IAsyncEnumerable{T}" /> of <see cref="BotAction" /> that passes the condition check.</returns>
     private async IAsyncEnumerable<BotAction> FilterActionsThatCanHandleUpdate(IEnumerable<BotAction> actions, Update update)
     {
         foreach (var action in actions)
@@ -82,6 +88,13 @@ public class NavigatorStrategy : INavigatorStrategy
         }
     }
 
+    /// <summary>
+    ///     Executes the <see cref="BotAction.ExecuteHandler" /> method of a <see cref="BotAction" /> after
+    ///     retrieving the necessary input arguments. Arguments are retrieved by calling <see cref="GetArgument" /> for each
+    ///     input type specified in the <see cref="BotActionInformation" />.
+    /// </summary>
+    /// <param name="action">The <see cref="BotAction" /> to be executed.</param>
+    /// <param name="update">The <see cref="Update" /> object that triggered the execution of the <see cref="BotAction" />.</param>
     private async Task ExecuteAction(BotAction action, Update update)
     {
         var numberOfInputs = action.Information.HandlerInputTypes.Length;
