@@ -1,8 +1,7 @@
-using System.Reflection;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Configuration;
+namespace Navigator.Configuration.Options;
 
 /// <summary>
 /// Navigator Configuration Options.

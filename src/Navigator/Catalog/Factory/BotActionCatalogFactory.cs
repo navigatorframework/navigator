@@ -1,9 +1,8 @@
-using System.Collections.ObjectModel;
 using Navigator.Actions;
 using Navigator.Actions.Builder;
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Catalog;
+namespace Navigator.Catalog.Factory;
 
 public class BotActionCatalogFactory : IBotActionCatalogFactory
 {

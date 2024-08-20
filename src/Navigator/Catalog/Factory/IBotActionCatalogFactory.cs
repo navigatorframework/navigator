@@ -1,6 +1,6 @@
 using Navigator.Actions.Builder;
 
-namespace Navigator.Catalog;
+namespace Navigator.Catalog.Factory;
 
 public interface IBotActionCatalogFactory
 {

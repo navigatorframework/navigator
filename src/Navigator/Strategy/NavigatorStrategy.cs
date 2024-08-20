@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Catalog;
+using Navigator.Catalog.Factory;
 using Navigator.Client;
 using Navigator.Entities;
 using Navigator.Strategy.Classifier;

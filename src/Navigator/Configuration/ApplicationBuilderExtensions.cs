@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Catalog;
+using Navigator.Catalog.Factory;
 
 namespace Navigator.Configuration;
 

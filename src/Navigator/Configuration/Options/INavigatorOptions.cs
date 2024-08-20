@@ -1,4 +1,4 @@
-namespace Navigator.Configuration;
+namespace Navigator.Configuration.Options;
 
 /// <summary>
 /// Represents all the options you can use to configure Navigator.

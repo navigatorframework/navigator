@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Navigator.Configuration.Options;
 using Navigator.Strategy;
 using Telegram.Bot;
 using Telegram.Bot.Types;

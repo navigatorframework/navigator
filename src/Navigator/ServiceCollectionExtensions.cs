@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Catalog;
+using Navigator.Catalog.Factory;
 using Navigator.Client;
 using Navigator.Configuration;
+using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;

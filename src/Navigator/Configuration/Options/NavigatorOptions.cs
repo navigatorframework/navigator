@@ -1,4 +1,4 @@
-namespace Navigator.Configuration;
+namespace Navigator.Configuration.Options;
 
 /// <inheritdoc />
 public class NavigatorOptions : INavigatorOptions
