@@ -2,10 +2,10 @@ namespace Navigator.Actions;
 
 public sealed record BotAction
 {
-    public readonly Guid Id; 
-    public readonly BotActionInformation Information;
     private readonly Delegate Condition;
     private readonly Delegate Handler;
+    public readonly Guid Id;
+    public readonly BotActionInformation Information;
 
     public BotAction(Guid id, BotActionInformation information, Delegate condition, Delegate handler)
     {
@@ -14,10 +14,11 @@ public sealed record BotAction
         Condition = condition;
         Handler = handler;
     }
-    
-    public async Task<bool> ExecuteCondition(params object[] args)
+
+    public async Task<bool> ExecuteCondition(object?[] args)
     {
-        var result = Condition.DynamicInvoke(args);
+        // var result = Condition.DynamicInvoke(args.First());
+        var result = Condition.Method.Invoke(Condition.Target, args);
 
         return result switch
         {
@@ -26,16 +27,12 @@ public sealed record BotAction
             //TODO: specify exception
             _ => throw new NavigatorException()
         };
-
     }
 
-    public async Task ExecuteHandler(params object[] args)
+    public async Task ExecuteHandler(object?[] args)
     {
-        var result = Handler.DynamicInvoke(args);
+        var result = Handler.Method.Invoke(Handler.Target, args);
 
-        if (result is Task task)
-        {
-            await task;
-        }
+        if (result is Task task) await task;
     }
 }

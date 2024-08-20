@@ -14,6 +14,8 @@ internal static class TelegramUpdateExtensions
 
         var command = message.EntityValues?.First();
 
+        command = command?[(message.Entities.First().Offset + 1)..];
+
         if (command?.Contains('@') == false) return command;
 
         if (botName is not null && !command?.Contains(botName) == true) return default;
@@ -65,13 +67,10 @@ internal static class TelegramUpdateExtensions
         var rawUser = update.GetUserOrDefault();
         var rawChat = update.GetChatOrDefault();
 
-        if (rawUser is null)
-        {
-            throw new NavigatorException("No conversation could be built, user not found.");
-        }
+        if (rawUser is null) throw new NavigatorException("No conversation could be built, user not found.");
 
         var user = rawUser.IsBot
-            ? new Entities.Bot(rawUser.Id, rawUser.FirstName)
+            ? new Bot(rawUser.Id, rawUser.FirstName)
             {
                 Username = rawUser.Username!,
                 LastName = rawUser.LastName,
@@ -92,13 +91,11 @@ internal static class TelegramUpdateExtensions
         var chat = default(Entities.Chat);
 
         if (rawChat is not null)
-        {
             chat = new Entities.Chat(rawChat.Id, (Entities.Chat.ChatType)rawChat.Type)
             {
                 Title = rawChat.Title,
                 IsForum = rawChat.IsForum
             };
-        }
 
         return new Conversation(user)
         {
