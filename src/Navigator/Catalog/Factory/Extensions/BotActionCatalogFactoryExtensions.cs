@@ -49,17 +49,17 @@ public static class BotActionCatalogFactoryExtensions
     ///         of the text message. This enables a wide range of customizations beyond simple command matching.
     ///     </para>
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="command">The specific command string that this action should respond to.</param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
     /// <seealso cref="OnTextMessage" />
     /// <seealso cref="MessageEntityType" />
-    public static IBotActionBuilder OnCommand(this IBotActionCatalogFactory factory, string command, Delegate handler)
+    public static BotActionBuilder OnCommand(this BotActionCatalogFactory factory, string command, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate((Update update) => update.Message?.ExtractCommand() == command, handler);
 
@@ -72,7 +72,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to any <see cref="MessageType" /> event using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -81,10 +81,10 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
     /// <seealso cref="MessageType" />
-    public static IBotActionBuilder OnMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
@@ -97,7 +97,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to <see cref="MessageType.Text" /> events using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -106,9 +106,9 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
-    public static IBotActionBuilder OnTextMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnTextMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
@@ -121,7 +121,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to <see cref="MessageType.Photo" /> events using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -130,9 +130,9 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
-    public static IBotActionBuilder OnPhotoMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnPhotoMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
@@ -145,7 +145,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to <see cref="MessageType.Audio" /> events using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -154,9 +154,9 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
-    public static IBotActionBuilder OnAudioMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnAudioMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
@@ -169,7 +169,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to <see cref="MessageType.Video" /> events using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -178,9 +178,9 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
-    public static IBotActionBuilder OnVideoMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnVideoMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
@@ -193,7 +193,7 @@ public static class BotActionCatalogFactoryExtensions
     ///     Configures the bot action catalog to respond to <see cref="MessageType.Voice" /> events using the specified condition and handler
     ///     delegates.
     /// </summary>
-    /// <param name="factory">An instance of <see cref="IBotActionCatalogFactory" /></param>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
     /// <param name="condition">
     ///     A delegate representing the condition under which the handler should be invoked.
     ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
@@ -202,9 +202,9 @@ public static class BotActionCatalogFactoryExtensions
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
     /// <returns>
-    ///     A configured instance of <see cref="IBotActionBuilder" /> that allows further customization of the bot action.
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
     /// </returns>
-    public static IBotActionBuilder OnVoiceMessage(this IBotActionCatalogFactory factory, Delegate condition, Delegate handler)
+    public static BotActionBuilder OnVoiceMessage(this BotActionCatalogFactory factory, Delegate condition, Delegate handler)
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 

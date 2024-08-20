@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
 using Navigator.Configuration;
@@ -7,17 +6,16 @@ using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
-using Scrutor;
 
 namespace Navigator;
 
 /// <summary>
-/// Extensions for configuring Navigator.
+///     Extensions for configuring Navigator.
 /// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds Navigator.
+    ///     Adds Navigator.
     /// </summary>
     /// <param name="services"></param>
     /// <param name="options"></param>
@@ -26,19 +24,17 @@ public static class ServiceCollectionExtensions
     public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
     {
         if (options == null)
-        {
             throw new ArgumentNullException(nameof(options), "Navigator options are required for navigator framework to work.");
-        }
 
         var navigatorBuilder = new NavigatorConfiguration(options, services);
 
         services.AddScoped<INavigatorClient, NavigatorClient>();
 
-        services.AddSingleton<IBotActionCatalogFactory, BotActionCatalogFactory>();
+        services.AddSingleton<BotActionCatalogFactory>();
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
         services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
-        
+
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
         navigatorBuilder.RegisterOrReplaceOptions();

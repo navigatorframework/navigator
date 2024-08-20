@@ -4,18 +4,18 @@ using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Catalog.Factory;
 
-public class BotActionCatalogFactory : IBotActionCatalogFactory
+public class BotActionCatalogFactory
 {
     private List<BotActionBuilder> Actions { get; } = [];
     private BotActionCatalog? Catalog { get; set; }
 
-    public IBotActionBuilder OnUpdate(Delegate condition, Delegate handler)
+    public BotActionBuilder OnUpdate(Delegate condition, Delegate handler)
     {
         var id = Guid.NewGuid();
         var actionBuilder = new BotActionBuilder(condition, handler);
 
         actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
-        
+
         Actions.Add(actionBuilder);
 
         return actionBuilder;
@@ -23,10 +23,7 @@ public class BotActionCatalogFactory : IBotActionCatalogFactory
 
     public BotActionCatalog Retrieve()
     {
-        if (Catalog is null)
-        {
-            Build();
-        }
+        if (Catalog is null) Build();
 
         return Catalog!;
     }

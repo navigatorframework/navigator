@@ -27,11 +27,11 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <summary>
     ///     Initializes a new instance of <see cref="NavigatorStrategy" />.
     /// </summary>
-    /// <param name="catalogFactory">An instance of <see cref="IBotActionCatalogFactory" />.</param>
+    /// <param name="catalogFactory">An instance of <see cref="BotActionCatalogFactory" />.</param>
     /// <param name="classifier">An instance of <see cref="IUpdateClassifier" />.</param>
     /// <param name="serviceProvider">An instance of <see cref="IServiceProvider" /></param>
     /// .
-    public NavigatorStrategy(IBotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
+    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
         IServiceProvider serviceProvider)
     {
         _catalog = catalogFactory.Retrieve();
