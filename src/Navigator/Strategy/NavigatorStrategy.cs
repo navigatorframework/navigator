@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Catalog;
 using Navigator.Catalog.Factory;
@@ -25,6 +26,7 @@ public class NavigatorStrategy : INavigatorStrategy
     private readonly IMemoryCache _cache;
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
+    private readonly ILogger<INavigatorStrategy> _logger;
     private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
 
@@ -36,14 +38,16 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="classifier">The <see cref="IUpdateClassifier" /> instance.</param>
     /// <param name="options">The <see cref="INavigatorOptions" /> instance.</param>
     /// <param name="serviceProvider">The <see cref="IServiceProvider" /> instance.</param>
+    /// <param name="logger">The <see cref="ILogger{TCategoryName}" /> instance.</param>
     public NavigatorStrategy(IMemoryCache cache, BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
-        INavigatorOptions options, IServiceProvider serviceProvider)
+        INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
     {
         _cache = cache;
         _catalog = catalogFactory.Retrieve();
         _classifier = classifier;
         _options = options;
         _serviceProvider = serviceProvider;
+        _logger = logger;
     }
 
     /// <summary>
@@ -55,16 +59,32 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="update">The <see cref="Update" /> object to be processed.</param>
     public async Task Invoke(Update update)
     {
+        _logger.LogInformation("Processing update {UpdateId}", update.Id);
+
         if (_options.TypingNotificationIsEnabled() && update.GetChatOrDefault() is { } chat)
+        {
+            _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
+
             await _serviceProvider.GetRequiredService<INavigatorClient>().SendChatActionAsync(chat, ChatAction.Typing);
+        }
 
-        var actionType = await _classifier.Process(update);
+        var updateCategory = await _classifier.Process(update);
 
-        var relevantActions = _catalog.Retrieve(actionType);
+        _logger.LogInformation("Update {UpdateId} classified as {UpdateCategory}", update.Id,
+            updateCategory);
+
+        var relevantActions = _catalog.Retrieve(updateCategory);
+
+        _logger.LogInformation("Found {RelevantActionsCount} relevant actions for {UpdateId}", relevantActions.Count(), update.Id);
 
         relevantActions = relevantActions.Where(action => IsNotInCooldown(action, update));
 
-        await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update)) await ExecuteAction(action, update);
+        await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
+        {
+            _logger.LogInformation("Executing action {ActionId}", action.Id);
+
+            await ExecuteAction(action, update);
+        }
     }
 
     /// <summary>

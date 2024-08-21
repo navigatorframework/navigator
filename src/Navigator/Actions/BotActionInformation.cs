@@ -4,9 +4,9 @@ public record BotActionInformation
 {
     public required UpdateCategory Category;
     public required Type[] ConditionInputTypes;
+    public required TimeSpan? Cooldown;
     public required Type[] HandlerInputTypes;
     public required ushort Priority;
-    public required TimeSpan? Cooldown;
 }
 
 public sealed record UpdateCategory(string Kind, string? Subkind = default)
@@ -21,5 +21,13 @@ public sealed record UpdateCategory(string Kind, string? Subkind = default)
     public override int GetHashCode()
     {
         return HashCode.Combine(Kind, Subkind);
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return Subkind is null
+            ? Kind
+            : $"{Kind}.{Subkind}";
     }
 }
