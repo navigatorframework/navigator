@@ -14,7 +14,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
         <Copyright>Copyright © Lucas Maximiliano Marino 2023</Copyright>
     </PropertyGroup>
 

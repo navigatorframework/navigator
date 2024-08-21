@@ -2,7 +2,7 @@
 
 A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot).
 
-The only requirement is `Microsoft.AspNetCore.App (>= 8.0)`. 
+The only requirement is `Microsoft.AspNetCore.App (>= 8.0)`.
 
 The usage is very simple yet powerful:
 
@@ -39,12 +39,6 @@ app.MapNavigator();
 app.Run();
 ```
 
-## Packages
-
-| Package   | Last Stable                                                                                                             | Last Prerelease                                                                                                                |
-|-----------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Navigator | [![package.nav](https://img.shields.io/nuget/v/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) | [![package.nav.pre](https://img.shields.io/nuget/vpre/Navigator?style=flat-square)](https://www.nuget.org/packages/Navigator/) |
-
 # Examples
 
 Some examples can be found in the [samples](https://github.com/navigatorframework/navigator/src/) repository.
@@ -60,7 +54,7 @@ Navigator Framework
 Copyright (C) 2019-2024 Lucas Maximiliano Marino
 
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
+it under the terms of the GNU General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
@@ -69,5 +63,5 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Affero General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License
+You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.

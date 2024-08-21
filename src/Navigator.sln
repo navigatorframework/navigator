@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution-items", ".solutio
 		..\.github\workflows\package.navigator.yml = ..\.github\workflows\package.navigator.yml
 		global.json = global.json
 		nuget.config = nuget.config
+		..\LICENSE = ..\LICENSE
 	EndProjectSection
 EndProject
 Global
