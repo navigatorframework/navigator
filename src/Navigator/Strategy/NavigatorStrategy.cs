@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Actions;
 using Navigator.Catalog;
@@ -21,22 +22,24 @@ namespace Navigator.Strategy;
 /// </summary>
 public class NavigatorStrategy : INavigatorStrategy
 {
+    private readonly IMemoryCache _cache;
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
     private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
-    ///     Initializes a new instance of <see cref="NavigatorStrategy" />.
+    ///     Initializes a new instance of the <see cref="NavigatorStrategy" /> class.
     /// </summary>
-    /// <param name="catalogFactory">An instance of <see cref="BotActionCatalogFactory" />.</param>
-    /// <param name="classifier">An instance of <see cref="IUpdateClassifier" />.</param>
-    /// <param name="options"></param>
-    /// <param name="serviceProvider">An instance of <see cref="IServiceProvider" /></param>
-    /// .
-    public NavigatorStrategy(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier, INavigatorOptions options,
-        IServiceProvider serviceProvider)
+    /// <param name="cache">The <see cref="IMemoryCache" /> instance.</param>
+    /// <param name="catalogFactory">The <see cref="BotActionCatalog" /> instance.</param>
+    /// <param name="classifier">The <see cref="IUpdateClassifier" /> instance.</param>
+    /// <param name="options">The <see cref="INavigatorOptions" /> instance.</param>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider" /> instance.</param>
+    public NavigatorStrategy(IMemoryCache cache, BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
+        INavigatorOptions options, IServiceProvider serviceProvider)
     {
+        _cache = cache;
         _catalog = catalogFactory.Retrieve();
         _classifier = classifier;
         _options = options;
@@ -59,9 +62,32 @@ public class NavigatorStrategy : INavigatorStrategy
 
         var relevantActions = _catalog.Retrieve(actionType);
 
+        relevantActions = relevantActions.Where(action => IsNotInCooldown(action, update));
+
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update)) await ExecuteAction(action, update);
     }
 
+    /// <summary>
+    ///     Checks if the given <see cref="BotAction" /> is in cooldown.
+    /// </summary>
+    /// <param name="botAction">The <see cref="BotAction" /> object to be checked.</param>
+    /// <param name="update">The <see cref="Update" /> object that triggered the execution of the <see cref="BotAction" />.</param>
+    /// <returns><c>true</c> if the <see cref="BotAction" /> is in cooldown; otherwise, <c>false</c>.</returns>
+    private bool IsNotInCooldown(BotAction botAction, Update update)
+    {
+        return !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
+    }
+
+    /// <summary>
+    ///     Generates a cache key based on the <see cref="BotAction" /> and <see cref="Update" />. It ultimately uses the chat id, if available.
+    /// </summary>
+    /// <param name="botAction">The <see cref="BotAction" /> object to be used in the cache key.</param>
+    /// <param name="update">The <see cref="Update" /> object to be used in the cache key.</param>
+    /// <returns>A <see cref="string" /> representing the cache key.</returns>
+    private static string GenerateCacheKey(BotAction botAction, Update update)
+    {
+        return $"{botAction.Id}:{update.GetChatOrDefault()?.Id}";
+    }
 
     /// <summary>
     ///     Filters the given collection of <see cref="BotAction" /> by executing the condition of each action.
@@ -110,6 +136,8 @@ public class NavigatorStrategy : INavigatorStrategy
         }
 
         await action.ExecuteHandler(arguments);
+
+        if (action.Information.Cooldown.HasValue) _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
     }
 
     private async Task<object?> GetArgument(Type inputType, Update update, BotAction action)
@@ -122,10 +150,7 @@ public class NavigatorStrategy : INavigatorStrategy
         {
             argument = await provider.GetArgument(inputType, update, action);
 
-            if (argument is not null)
-            {
-                break;
-            }
+            if (argument is not null) break;
         }
 
         return argument ?? _serviceProvider.GetRequiredService(inputType);
