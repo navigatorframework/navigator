@@ -4,13 +4,12 @@ using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
 using Navigator.Configuration.Options;
-using Navigator.Entities;
 using Navigator.Strategy.Classifier;
+using Navigator.Strategy.TypeProvider;
 using Navigator.Telegram;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Chat = Navigator.Entities.Chat;
 
 namespace Navigator.Strategy;
 
@@ -115,24 +114,22 @@ public class NavigatorStrategy : INavigatorStrategy
 
     private async Task<object?> GetArgument(Type inputType, Update update, BotAction action)
     {
-        var argument = inputType switch
-        {
-            not null when inputType == typeof(Update)
-                => update,
-            not null when inputType == typeof(Conversation)
-                => update.GetConversation(),
-            not null when inputType == typeof(Chat)
-                => update.GetConversation().Chat,
-            not null when inputType == typeof(Conversation)
-                => update.GetConversation().User,
-            not null when inputType == typeof(Bot)
-                => await _serviceProvider.GetRequiredService<INavigatorClient>().GetProfile(),
-            not null when inputType == typeof(string[]) && action.Information.Category.Subkind == nameof(MessageEntityType.BotCommand)
-                => update.Message!.ExtractArguments(),
-            not null => _serviceProvider.GetRequiredService(inputType),
-            //TODO: this exception should never happen.
-            _ => throw new NavigatorException()
-        };
-        return argument;
+        var argument = default(object?);
+
+        var providers = _serviceProvider.GetServices<IArgumentTypeProvider>();
+
+        foreach (var provider in providers)
+            argument = await provider.GetArgument(inputType, update, action);
+
+        return argument ?? _serviceProvider.GetRequiredService(inputType);
+    }
+
+    private async ValueTask<object?> GetArgumentUsingProviders(Type inputType, Update update, BotAction action)
+    {
+        var providers = _serviceProvider.GetServices<IArgumentTypeProvider>();
+
+        foreach (var provider in providers) return await provider.GetArgument(inputType, update, action);
+
+        return default;
     }
 }
