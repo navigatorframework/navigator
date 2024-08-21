@@ -13,11 +13,6 @@ public class NavigatorException : Exception
     }
 
     /// <inheritdoc />
-    protected NavigatorException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
-
-    /// <inheritdoc />
     public NavigatorException(string? message) : base(message)
     {
     }

@@ -8,11 +8,13 @@ namespace Navigator.Telegram;
 
 internal static class TelegramUpdateExtensions
 {
-    public static string? ExtractCommand(this Message message, string? botName)
+    public static string? ExtractCommand(this Message message, string? botName = default)
     {
         if (message.Entities?.First().Type != MessageEntityType.BotCommand) return default;
 
         var command = message.EntityValues?.First();
+
+        command = command?[(message.Entities.First().Offset + 1)..];
 
         if (command?.Contains('@') == false) return command;
 
@@ -23,11 +25,11 @@ internal static class TelegramUpdateExtensions
         return command;
     }
 
-    public static string? ExtractArguments(this Message message)
+    public static string[] ExtractArguments(this Message message)
     {
         return message.Text is not null && message.Text.Contains(' ')
-            ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1)
-            : default;
+            ? message.Text.Remove(0, message.Text.IndexOf(' ') + 1).Split(' ')
+            : [];
     }
 
     public static User? GetUserOrDefault(this Update update)
@@ -65,13 +67,10 @@ internal static class TelegramUpdateExtensions
         var rawUser = update.GetUserOrDefault();
         var rawChat = update.GetChatOrDefault();
 
-        if (rawUser is null)
-        {
-            throw new NavigatorException("No conversation could be built, user not found.");
-        }
+        if (rawUser is null) throw new NavigatorException("No conversation could be built, user not found.");
 
         var user = rawUser.IsBot
-            ? new Entities.Bot(rawUser.Id, rawUser.FirstName)
+            ? new Bot(rawUser.Id, rawUser.FirstName)
             {
                 Username = rawUser.Username!,
                 LastName = rawUser.LastName,
@@ -79,7 +78,6 @@ internal static class TelegramUpdateExtensions
                 CanJoinGroups = rawUser.CanJoinGroups,
                 CanReadAllGroupMessages = rawUser.CanReadAllGroupMessages,
                 SupportsInlineQueries = rawUser.SupportsInlineQueries
-                
             }
             : new Entities.User(rawUser.Id, rawUser.FirstName)
             {
@@ -93,13 +91,11 @@ internal static class TelegramUpdateExtensions
         var chat = default(Entities.Chat);
 
         if (rawChat is not null)
-        {
             chat = new Entities.Chat(rawChat.Id, (Entities.Chat.ChatType)rawChat.Type)
             {
                 Title = rawChat.Title,
                 IsForum = rawChat.IsForum
             };
-        }
 
         return new Conversation(user)
         {

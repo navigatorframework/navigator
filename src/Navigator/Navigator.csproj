@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -14,25 +14,20 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+        <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
         <Copyright>Copyright © Lucas Maximiliano Marino 2023</Copyright>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <None Include="../../README.md" Pack="true" PackagePath="/" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <None Include="../../README.md" Pack="true" PackagePath="/"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-        <PackageReference Include="Scrutor" Version="4.2.2" />
-        <PackageReference Include="Telegram.Bot" Version="19.0.0" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot" Version="21.7.1"/>
     </ItemGroup>
 
 </Project>

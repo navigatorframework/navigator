@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Navigator.Client;
 using Navigator.Configuration;
+using Navigator.Configuration.Options;
 using Telegram.Bot;
 
 namespace Navigator.Hosted;

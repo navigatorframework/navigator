@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Navigator.Configuration.Extensions;
+using Navigator.Configuration.Options;
 
 namespace Navigator.Configuration;
 
@@ -9,11 +9,6 @@ namespace Navigator.Configuration;
 /// </summary>
 public class NavigatorConfiguration
 {
-    /// <summary>
-    /// Configures an extension for Navigator.
-    /// </summary>
-    public NavigatorExtensionConfiguration WithExtension { get; internal set; }
-
     /// <summary>
     /// Gets the <see cref="NavigatorOptions"/> that are being used.
     /// </summary>
@@ -43,11 +38,8 @@ public class NavigatorConfiguration
         Services = services;
 
         services.AddSingleton(Options);
-        
-        WithExtension = new NavigatorExtensionConfiguration(this);
     }
-        
-
+    
     /// <summary>
     /// Registers the <see cref="NavigatorOptions"/> or replaces it if already exists.
     /// </summary>
