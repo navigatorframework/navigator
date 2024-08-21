@@ -16,6 +16,7 @@ public class BotActionBuilder
         Priority = Actions.Priority.Default;
     }
 
+    private string? Name { get; set; }
     private Delegate? Condition { get; set; }
     private Type[] ConditionInputTypes { get; set; } = null!;
     private Delegate? Handler { get; set; }
@@ -48,7 +49,14 @@ public class BotActionBuilder
         if (Category is null)
             throw new NavigatorException("The category must be set");
 
-        return new BotAction(_id, information, Condition, Handler);
+        return new BotAction(_id, information, Name, Condition, Handler);
+    }
+
+    public BotActionBuilder WithName(string name)
+    {
+        Name = name;
+
+        return this;
     }
 
     /// <summary>
@@ -60,6 +68,7 @@ public class BotActionBuilder
     {
         Condition = condition;
         ConditionInputTypes = condition.Method.GetParameters().Select(info => info.ParameterType).ToArray();
+
         return this;
     }
 
@@ -72,6 +81,7 @@ public class BotActionBuilder
     {
         Handler = handler;
         HandlerInputTypes = handler.Method.GetParameters().Select(info => info.ParameterType).ToArray();
+
         return this;
     }
 

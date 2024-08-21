@@ -22,15 +22,21 @@ public sealed record BotAction
     public readonly BotActionInformation Information;
 
     /// <summary>
+    ///     The name of the <see cref="BotAction" />. If no name is set, the id is used.
+    /// </summary>
+    public readonly string Name;
+
+    /// <summary>
     ///     Initializes a new instance of the <see cref="BotAction" /> class.
     /// </summary>
     /// <param name="id">The id of the <see cref="BotAction" />.</param>
     /// <param name="information">The information about the <see cref="BotAction" />.</param>
     /// <param name="condition">The condition delegate.</param>
     /// <param name="handler">The handler delegate.</param>
-    public BotAction(Guid id, BotActionInformation information, Delegate condition, Delegate handler)
+    public BotAction(Guid id, BotActionInformation information, string? name, Delegate condition, Delegate handler)
     {
         Id = id;
+        Name = name ?? $"{Id}";
         Information = information;
         _condition = condition;
         _handler = handler;
