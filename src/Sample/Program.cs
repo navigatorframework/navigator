@@ -47,13 +47,6 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
     })
     .WithCooldown(TimeSpan.FromSeconds(30));
 
-// This action will be triggered if the user sends a message in the style of `/sad`.
-bot.OnCommand("sad",
-    async (INavigatorClient client, Chat chat) =>
-    {
-        await client.SendStickerAsync(chat, "CAACAgQAAxkBAAI5DF59uqkJYnqzc5LcnEC_bdp0rerIAAJsAwACmOejAAG_qYNUT_L_exgE");
-    });
-
 app.MapNavigator();
 
 app.Run();
