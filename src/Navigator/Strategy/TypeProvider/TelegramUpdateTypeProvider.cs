@@ -7,13 +7,6 @@ namespace Navigator.Strategy.TypeProvider;
 
 internal sealed record TelegramUpdateTypeProvider : IArgumentTypeProvider
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    public TelegramUpdateTypeProvider(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
     /// <inheritdoc />
     public ushort Priority => 10000;
 

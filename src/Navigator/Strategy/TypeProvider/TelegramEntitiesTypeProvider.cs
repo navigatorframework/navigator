@@ -6,13 +6,6 @@ namespace Navigator.Strategy.TypeProvider;
 
 internal sealed record TelegramEntitiesTypeProvider : IArgumentTypeProvider
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    public TelegramEntitiesTypeProvider(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
     /// <inheritdoc />
     public ushort Priority { get; } = 10000;
 
