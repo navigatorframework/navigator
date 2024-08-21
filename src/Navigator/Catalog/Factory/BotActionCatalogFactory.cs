@@ -22,12 +22,15 @@ public class BotActionCatalogFactory
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
-    public BotActionBuilder OnUpdate(Delegate condition, Delegate handler)
+    public BotActionBuilder OnUpdate(Delegate condition, Delegate? handler = default)
     {
         var id = Guid.NewGuid();
-        var actionBuilder = new BotActionBuilder(condition, handler);
+        var actionBuilder = new BotActionBuilder();
 
-        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
+        actionBuilder
+            .SetCondition(condition)
+            .SetHandler(handler ?? (Action)(() => { }))
+            .SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
 
         Actions.Add(actionBuilder);
 

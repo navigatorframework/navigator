@@ -5,36 +5,21 @@ namespace Navigator.Actions.Builder;
 /// </summary>
 public class BotActionBuilder
 {
-    private readonly Delegate _condition;
-    private readonly Type[] _conditionInputTypes;
-    private readonly Delegate _handler;
-    private readonly Type[] _handlerInputTypes;
     private readonly Guid _id;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="BotActionBuilder" /> class.
     /// </summary>
-    /// <param name="condition">
-    ///     A delegate representing the condition under which the handler should be invoked.
-    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />.
-    /// </param>
-    /// <param name="handler">
-    ///     A delegate representing the action to take when the condition is met.
-    /// </param>
-    public BotActionBuilder(Delegate condition, Delegate handler)
+    public BotActionBuilder()
     {
         _id = Guid.NewGuid();
-
-        if (!(condition.Method.ReturnType != typeof(Task<bool>) || condition.Method.ReturnType != typeof(bool)))
-            throw new NavigatorException("The condition delegate must return Task<bool> or bool");
-
-        _condition = condition;
-        _conditionInputTypes = condition.Method.GetParameters().Select(info => info.ParameterType).ToArray();
-        _handler = handler;
-        _handlerInputTypes = handler.Method.GetParameters().Select(info => info.ParameterType).ToArray();
         Priority = Actions.Priority.Default;
     }
 
+    private Delegate? Condition { get; set; }
+    private Type[] ConditionInputTypes { get; set; } = null!;
+    private Delegate? Handler { get; set; }
+    private Type[] HandlerInputTypes { get; set; } = null!;
     private UpdateCategory Category { get; set; } = null!;
     private ushort Priority { get; set; }
     private TimeSpan? Cooldown { get; set; }
@@ -48,13 +33,57 @@ public class BotActionBuilder
         var information = new BotActionInformation
         {
             Category = Category,
-            ConditionInputTypes = _conditionInputTypes,
-            HandlerInputTypes = _handlerInputTypes,
+            ConditionInputTypes = ConditionInputTypes,
+            HandlerInputTypes = HandlerInputTypes,
             Priority = Priority,
             Cooldown = Cooldown
         };
 
-        return new BotAction(_id, information, _condition, _handler);
+        if (Condition is null || Handler is null)
+            throw new NavigatorException("Both condition and handler must be set");
+
+        if (!(Condition.Method.ReturnType != typeof(Task<bool>) || Condition.Method.ReturnType != typeof(bool)))
+            throw new NavigatorException("The condition delegate must return Task<bool> or bool");
+
+        if (Category is null)
+            throw new NavigatorException("The category must be set");
+
+        return new BotAction(_id, information, Condition, Handler);
+    }
+
+    /// <summary>
+    ///     Sets the condition of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="condition">The condition to be set.</param>
+    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public BotActionBuilder SetCondition(Delegate condition)
+    {
+        Condition = condition;
+        ConditionInputTypes = condition.Method.GetParameters().Select(info => info.ParameterType).ToArray();
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the handler of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="handler">The handler to be set.</param>
+    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public BotActionBuilder SetHandler(Delegate handler)
+    {
+        Handler = handler;
+        HandlerInputTypes = handler.Method.GetParameters().Select(info => info.ParameterType).ToArray();
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="category">The <see cref="UpdateCategory" /> to be set.</param>
+    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public BotActionBuilder SetCategory(UpdateCategory category)
+    {
+        Category = category;
+        return this;
     }
 
     /// <summary>
@@ -76,17 +105,6 @@ public class BotActionBuilder
     public BotActionBuilder WithCooldown(TimeSpan cooldown)
     {
         Cooldown = cooldown;
-        return this;
-    }
-
-    /// <summary>
-    ///     Sets the <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
-    /// </summary>
-    /// <param name="category">The <see cref="UpdateCategory" /> to be set.</param>
-    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder SetCategory(UpdateCategory category)
-    {
-        Category = category;
         return this;
     }
 }
