@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Navigator.Actions;
 using Navigator.Actions.Builder;
 using Telegram.Bot.Types.Enums;
@@ -9,6 +10,17 @@ namespace Navigator.Catalog.Factory;
 /// </summary>
 public class BotActionCatalogFactory
 {
+    private readonly ILogger<BotActionCatalogFactory> _logger;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="BotActionCatalogFactory" /> class.
+    /// </summary>
+    /// <param name="logger">An instance of <see cref="ILogger{TCategoryName}" />.</param>
+    public BotActionCatalogFactory(ILogger<BotActionCatalogFactory> logger)
+    {
+        _logger = logger;
+    }
+
     private List<BotActionBuilder> Actions { get; } = [];
     private BotActionCatalog? Catalog { get; set; }
 
@@ -24,7 +36,6 @@ public class BotActionCatalogFactory
     /// </param>
     public BotActionBuilder OnUpdate(Delegate condition, Delegate? handler = default)
     {
-        var id = Guid.NewGuid();
         var actionBuilder = new BotActionBuilder();
 
         actionBuilder
@@ -53,9 +64,17 @@ public class BotActionCatalogFactory
     /// </summary>
     private void Build()
     {
-        var actions = Actions
-            .Select(actionBuilder => actionBuilder.Build())
-            .ToList();
+        _logger.LogInformation("Building BotActionCatalog with {ActionsCount} actions", Actions.Count);
+
+        var actions = new List<BotAction>();
+
+        foreach (var builtAction in Actions.Select(actionBuilder => actionBuilder.Build()))
+        {
+            _logger.LogDebug("Built action {ActionName} with priority {Priority} for category {Category}",
+                builtAction.Name, builtAction.Information.Priority, builtAction.Information.Category);
+            
+            actions.Add(builtAction);
+        }
 
         Catalog = new BotActionCatalog(actions);
     }
