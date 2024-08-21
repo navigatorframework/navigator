@@ -76,11 +76,17 @@ public class NavigatorStrategy : INavigatorStrategy
 
         _logger.LogInformation("Found {RelevantActionsCount} relevant actions for {UpdateId}", relevantActions.Count(), update.Id);
 
+        _logger.LogDebug("Actions relevant for update {UpdateId}: {ActionsFound}", update.Id,
+            string.Join(", ", relevantActions.Select(action => action.Name)));
+
         relevantActions = relevantActions.Where(action => IsNotInCooldown(action, update));
+
+        _logger.LogDebug("Actions relevant for update {UpdateId} which are not in cooldown: {ActionsFound}", update.Id,
+            string.Join(", ", relevantActions.Select(action => action.Name)));
 
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
-            _logger.LogInformation("Executing action {ActionId}", action.Id);
+            _logger.LogInformation("Executing action {ActionName}", action.Name);
 
             await ExecuteAction(action, update);
         }
@@ -94,7 +100,11 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <returns><c>true</c> if the <see cref="BotAction" /> is in cooldown; otherwise, <c>false</c>.</returns>
     private bool IsNotInCooldown(BotAction botAction, Update update)
     {
-        return !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
+        var isNotInCooldown = !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
+
+        if (isNotInCooldown is false) _logger.LogDebug("Discarding action {ActionName} because is in cooldown", botAction.Name);
+
+        return isNotInCooldown;
     }
 
     /// <summary>
@@ -128,11 +138,21 @@ public class NavigatorStrategy : INavigatorStrategy
                 arguments[i] = await GetArgument(inputType, update, action);
             }
 
-            if (!await action.ExecuteCondition(arguments)) continue;
+            if (!await action.ExecuteCondition(arguments))
+            {
+                _logger.LogDebug("Discarding action {ActionName} because condition is not met", action.Name);
+
+                continue;
+            }
 
             yield return action;
 
-            if (_options.MultipleActionsUsageIsEnabled() is false) break;
+            if (_options.MultipleActionsUsageIsEnabled() is false)
+            {
+                _logger.LogDebug("Discarding other actions because multiple actions usage is disabled");
+
+                break;
+            }
         }
     }
 
@@ -156,7 +176,13 @@ public class NavigatorStrategy : INavigatorStrategy
 
         await action.ExecuteHandler(arguments);
 
-        if (action.Information.Cooldown.HasValue) _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
+        if (action.Information.Cooldown.HasValue)
+        {
+            _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} seconds", action.Name,
+                action.Information.Cooldown.Value);
+
+            _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
+        }
     }
 
     private async Task<object?> GetArgument(Type inputType, Update update, BotAction action)
