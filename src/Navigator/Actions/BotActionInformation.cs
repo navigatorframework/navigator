@@ -1,14 +1,41 @@
 namespace Navigator.Actions;
 
+/// <summary>
+///     Information about a <see cref="BotAction" />.
+/// </summary>
 public record BotActionInformation
 {
+    /// <summary>
+    ///     The <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
+    /// </summary>
     public required UpdateCategory Category;
+
+    /// <summary>
+    ///     The input types of the condition delegate of the <see cref="BotAction" />.
+    /// </summary>
     public required Type[] ConditionInputTypes;
+
+    /// <summary>
+    ///     The cooldown of the <see cref="BotAction" />. Optional.
+    /// </summary>
     public required TimeSpan? Cooldown;
+
+    /// <summary>
+    ///     The input types of the handler delegate of the <see cref="BotAction" />.
+    /// </summary>
     public required Type[] HandlerInputTypes;
+
+    /// <summary>
+    ///     The priority of the <see cref="BotAction" />. Optional.
+    /// </summary>
     public required ushort Priority;
 }
 
+/// <summary>
+///     The <see cref="UpdateCategory" /> of the <see cref="BotAction" /> to which the action belongs.
+/// </summary>
+/// <param name="Kind">A string that represents the kind of the <see cref="UpdateCategory" />.</param>
+/// <param name="Subkind">A string that represents the subkind of the <see cref="UpdateCategory" />.</param>
 public sealed record UpdateCategory(string Kind, string? Subkind = default)
 {
     /// <inheritdoc />

@@ -71,7 +71,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate((Update update) => update.Message?.ExtractCommand() == command, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
 
         return actionBuilder;
     }
@@ -96,7 +96,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType)));
 
         return actionBuilder;
     }
@@ -120,7 +120,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Text)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Text)));
 
         return actionBuilder;
     }
@@ -144,7 +144,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Photo)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Photo)));
 
         return actionBuilder;
     }
@@ -168,7 +168,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Audio)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Audio)));
 
         return actionBuilder;
     }
@@ -192,7 +192,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Video)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Video)));
 
         return actionBuilder;
     }
@@ -216,7 +216,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Voice)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Voice)));
 
         return actionBuilder;
     }
@@ -240,7 +240,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Document)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Document)));
 
         return actionBuilder;
     }
@@ -264,7 +264,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Sticker)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Sticker)));
 
         return actionBuilder;
     }
@@ -288,7 +288,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Location)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Location)));
 
         return actionBuilder;
     }
@@ -312,7 +312,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Contact)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Contact)));
 
         return actionBuilder;
     }
@@ -336,7 +336,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Venue)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Venue)));
 
         return actionBuilder;
     }
@@ -360,7 +360,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Game)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Game)));
 
         return actionBuilder;
     }
@@ -384,7 +384,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoNote)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoNote)));
 
         return actionBuilder;
     }
@@ -408,7 +408,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Invoice)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Invoice)));
 
         return actionBuilder;
     }
@@ -432,7 +432,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuccessfulPayment)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuccessfulPayment)));
 
         return actionBuilder;
     }
@@ -456,7 +456,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ConnectedWebsite)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ConnectedWebsite)));
 
         return actionBuilder;
     }
@@ -480,7 +480,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatMembers)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatMembers)));
 
         return actionBuilder;
     }
@@ -504,7 +504,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.LeftChatMember)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.LeftChatMember)));
 
         return actionBuilder;
     }
@@ -528,7 +528,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatTitle)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatTitle)));
 
         return actionBuilder;
     }
@@ -552,7 +552,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatPhoto)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.NewChatPhoto)));
 
         return actionBuilder;
     }
@@ -576,7 +576,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.PinnedMessage)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.PinnedMessage)));
 
         return actionBuilder;
     }
@@ -600,7 +600,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.DeleteChatPhoto)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.DeleteChatPhoto)));
 
         return actionBuilder;
     }
@@ -624,7 +624,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GroupChatCreated)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GroupChatCreated)));
 
         return actionBuilder;
     }
@@ -649,7 +649,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.SupergroupChatCreated)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SupergroupChatCreated)));
 
         return actionBuilder;
     }
@@ -673,7 +673,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChannelChatCreated)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChannelChatCreated)));
 
         return actionBuilder;
     }
@@ -697,7 +697,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.MigrateFromChatId)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.MigrateFromChatId)));
 
         return actionBuilder;
     }
@@ -721,7 +721,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.MigrateToChatId)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.MigrateToChatId)));
 
         return actionBuilder;
     }
@@ -745,7 +745,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Poll)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Poll)));
 
         return actionBuilder;
     }
@@ -769,7 +769,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Dice)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Dice)));
 
         return actionBuilder;
     }
@@ -795,7 +795,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.MessageAutoDeleteTimerChanged)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.MessageAutoDeleteTimerChanged)));
 
         return actionBuilder;
     }
@@ -820,7 +820,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ProximityAlertTriggered)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ProximityAlertTriggered)));
 
         return actionBuilder;
     }
@@ -844,7 +844,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.WebAppData)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.WebAppData)));
 
         return actionBuilder;
     }
@@ -868,7 +868,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatScheduled)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatScheduled)));
 
         return actionBuilder;
     }
@@ -892,7 +892,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatStarted)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatStarted)));
 
         return actionBuilder;
     }
@@ -916,7 +916,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatEnded)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatEnded)));
 
         return actionBuilder;
     }
@@ -942,7 +942,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatParticipantsInvited)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.VideoChatParticipantsInvited)));
 
         return actionBuilder;
     }
@@ -966,7 +966,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Animation)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Animation)));
 
         return actionBuilder;
     }
@@ -990,7 +990,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicCreated)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicCreated)));
 
         return actionBuilder;
     }
@@ -1014,7 +1014,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicClosed)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicClosed)));
 
         return actionBuilder;
     }
@@ -1038,7 +1038,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicReopened)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicReopened)));
 
         return actionBuilder;
     }
@@ -1062,7 +1062,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicEdited)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ForumTopicEdited)));
 
         return actionBuilder;
     }
@@ -1086,7 +1086,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GeneralForumTopicHidden)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GeneralForumTopicHidden)));
 
         return actionBuilder;
     }
@@ -1110,7 +1110,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GeneralForumTopicUnhidden)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GeneralForumTopicUnhidden)));
 
         return actionBuilder;
     }
@@ -1134,7 +1134,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.WriteAccessAllowed)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.WriteAccessAllowed)));
 
         return actionBuilder;
     }
@@ -1158,7 +1158,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.UsersShared)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.UsersShared)));
 
         return actionBuilder;
     }
@@ -1182,7 +1182,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatShared)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatShared)));
 
         return actionBuilder;
     }
@@ -1206,7 +1206,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.PassportData)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.PassportData)));
 
         return actionBuilder;
     }
@@ -1230,7 +1230,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayCreated)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayCreated)));
 
         return actionBuilder;
     }
@@ -1254,7 +1254,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Giveaway)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Giveaway)));
 
         return actionBuilder;
     }
@@ -1278,7 +1278,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayWinners)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayWinners)));
 
         return actionBuilder;
     }
@@ -1302,7 +1302,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayCompleted)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiveawayCompleted)));
 
         return actionBuilder;
     }
@@ -1326,7 +1326,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.BoostAdded)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.BoostAdded)));
 
         return actionBuilder;
     }
@@ -1350,7 +1350,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatBackgroundSet)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatBackgroundSet)));
 
         return actionBuilder;
     }
@@ -1374,7 +1374,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.PaidMedia)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.PaidMedia)));
 
         return actionBuilder;
     }
@@ -1398,7 +1398,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.RefundedPayment)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.RefundedPayment)));
 
         return actionBuilder;
     }
@@ -1422,7 +1422,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(MessageType), nameof(MessageType.Unknown)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Unknown)));
 
         return actionBuilder;
     }
@@ -1445,7 +1445,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.InlineQuery)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.InlineQuery)));
 
         return actionBuilder;
     }
@@ -1468,7 +1468,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChosenInlineResult)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChosenInlineResult)));
 
         return actionBuilder;
     }
@@ -1491,7 +1491,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.CallbackQuery)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.CallbackQuery)));
 
         return actionBuilder;
     }
@@ -1515,7 +1515,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedMessage)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedMessage)));
 
         return actionBuilder;
     }
@@ -1539,7 +1539,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedChannelPost)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedChannelPost)));
 
         return actionBuilder;
     }
@@ -1563,7 +1563,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ShippingQuery)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ShippingQuery)));
 
         return actionBuilder;
     }
@@ -1587,7 +1587,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PreCheckoutQuery)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PreCheckoutQuery)));
 
         return actionBuilder;
     }
@@ -1610,7 +1610,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Poll)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Poll)));
 
         return actionBuilder;
     }
@@ -1633,7 +1633,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PollAnswer)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PollAnswer)));
 
         return actionBuilder;
     }
@@ -1657,7 +1657,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MyChatMember)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MyChatMember)));
 
         return actionBuilder;
     }
@@ -1680,7 +1680,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatMember)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatMember)));
 
         return actionBuilder;
     }
@@ -1704,7 +1704,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatJoinRequest)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatJoinRequest)));
 
         return actionBuilder;
     }
@@ -1728,7 +1728,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MessageReaction)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MessageReaction)));
 
         return actionBuilder;
     }
@@ -1752,7 +1752,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MessageReactionCount)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.MessageReactionCount)));
 
         return actionBuilder;
     }
@@ -1775,7 +1775,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatBoost)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChatBoost)));
 
         return actionBuilder;
     }
@@ -1799,7 +1799,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.RemovedChatBoost)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.RemovedChatBoost)));
 
         return actionBuilder;
     }
@@ -1823,7 +1823,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.BusinessConnection)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.BusinessConnection)));
 
         return actionBuilder;
     }
@@ -1847,7 +1847,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.BusinessMessage)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.BusinessMessage)));
 
         return actionBuilder;
     }
@@ -1871,7 +1871,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedBusinessMessage)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedBusinessMessage)));
 
         return actionBuilder;
     }
@@ -1895,7 +1895,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.DeletedBusinessMessages)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.DeletedBusinessMessages)));
 
         return actionBuilder;
     }
@@ -1919,7 +1919,7 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate(condition, handler);
 
-        actionBuilder.SetType(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown)));
 
         return actionBuilder;
     }
