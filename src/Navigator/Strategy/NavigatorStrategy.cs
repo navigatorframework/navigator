@@ -51,10 +51,9 @@ public class NavigatorStrategy : INavigatorStrategy
     }
 
     /// <summary>
-    ///     Processes an <see cref="Update" /> by determining the appropriate action type,
-    ///     retrieving relevant <see cref="BotAction" /> from the <see cref="BotActionCatalog" />,
-    ///     filtering those actions based on the <see cref="Update" />,
-    ///     and executing each filtered action asynchronously.
+    ///     Processes an <see cref="Update" /> by determining the appropriate action type, retrieving relevant <see cref="BotAction" /> from
+    ///     the<see cref="BotActionCatalog" />, filtering those actions based on the <see cref="Update" />, executing each filtered action
+    ///     asynchronously.
     /// </summary>
     /// <param name="update">The <see cref="Update" /> object to be processed.</param>
     public async Task Invoke(Update update)

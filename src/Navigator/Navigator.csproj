@@ -17,21 +17,17 @@
         <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
         <Copyright>Copyright © Lucas Maximiliano Marino 2023</Copyright>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <None Include="../../README.md" Pack="true" PackagePath="/" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <None Include="../../README.md" Pack="true" PackagePath="/"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-        <PackageReference Include="Scrutor" Version="4.2.2" />
-        <PackageReference Include="Telegram.Bot" Version="21.7.1" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot" Version="21.7.1"/>
     </ItemGroup>
 
 </Project>
