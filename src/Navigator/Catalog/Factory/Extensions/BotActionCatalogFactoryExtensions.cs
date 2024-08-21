@@ -49,7 +49,8 @@ public static class BotActionCatalogFactoryExtensions
     /// <summary>
     ///     <para>
     ///         Configures a new bot action to respond to any <see cref="MessageType" /> which includes one
-    ///         <see cref="MessageEntityType.BotCommand" /> event using the specified handler delegate.
+    ///         <see cref="MessageEntityType.BotCommand" /> event using the specified handler delegate. It also sets the action name to the
+    ///         command string starting with <c>/</c>.
     ///     </para>
     ///     <para>
     ///         Additionally, this method can be replaced with <see cref="OnText" /> or <see cref="OnMessage" /> for more advanced
@@ -72,7 +73,9 @@ public static class BotActionCatalogFactoryExtensions
     {
         var actionBuilder = factory.OnUpdate((Update update) => update.Message?.ExtractCommand() == command, handler);
 
-        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
+        actionBuilder
+            .WithName($"/{command}")
+            .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
 
         return actionBuilder;
     }
