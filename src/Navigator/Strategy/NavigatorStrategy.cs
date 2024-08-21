@@ -119,7 +119,14 @@ public class NavigatorStrategy : INavigatorStrategy
         var providers = _serviceProvider.GetServices<IArgumentTypeProvider>();
 
         foreach (var provider in providers)
+        {
             argument = await provider.GetArgument(inputType, update, action);
+
+            if (argument is not null)
+            {
+                break;
+            }
+        }
 
         return argument ?? _serviceProvider.GetRequiredService(inputType);
     }

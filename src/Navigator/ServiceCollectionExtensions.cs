@@ -6,6 +6,7 @@ using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
+using Navigator.Strategy.TypeProvider;
 
 namespace Navigator;
 
@@ -33,6 +34,12 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<BotActionCatalogFactory>();
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
+
+        services.AddScoped<IArgumentTypeProvider, NavigatorEntitiesTypeProvider>();
+        services.AddScoped<IArgumentTypeProvider, TelegramEntitiesTypeProvider>();
+        services.AddScoped<IArgumentTypeProvider, TelegramMessageTypeProvider>();
+        services.AddScoped<IArgumentTypeProvider, TelegramUpdateTypeProvider>();
+
         services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
