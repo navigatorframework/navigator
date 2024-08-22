@@ -65,7 +65,7 @@ public class NavigatorStrategy : INavigatorStrategy
 
         var chat = update.GetChatOrDefault();
 
-        if (_options.TypingNotificationIsEnabled() && chat is not null)
+        if (_options.ChatActionNotificationIsEnabled() && chat is not null)
         {
             _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
 
@@ -93,7 +93,7 @@ public class NavigatorStrategy : INavigatorStrategy
         {
             _logger.LogInformation("Executing action {ActionName}", action.Name);
 
-            if (_options.TypingNotificationIsEnabled() && chat is not null && action.ChatAction is not null)
+            if (_options.ChatActionNotificationIsEnabled() && chat is not null && action.ChatAction is not null)
                 await _client.SendChatActionAsync(chat, action.ChatAction.Value);
 
             await ExecuteAction(action, update);

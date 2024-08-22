@@ -118,27 +118,27 @@ public static class NavigatorOptionsCollectionExtensions
 
     #endregion
     
-    #region TypingNotification
+    #region ChatActionNotification
 
-    private const string TypingNotificationKey = "_navigator.options.typing_notification";
+    private const string ChatActionNotificationKey = "_navigator.options.chataction_notification";
 
     /// <summary>
-    /// Enables the sending of <see cref="ChatAction.Typing"/>
+    /// Enables the sending of <see cref="ChatAction"/>.
     /// </summary>
     /// <param name="navigatorOptions"></param>
-    public static void EnableTypingNotification(this NavigatorOptions navigatorOptions)
+    public static void EnableChatActionNotification(this NavigatorOptions navigatorOptions)
     {
-        navigatorOptions.TryRegisterOption(TypingNotificationKey, true);
+        navigatorOptions.TryRegisterOption(ChatActionNotificationKey, true);
     }
 
     /// <summary>
-    /// Returns true if the sending of <see cref="ChatAction.Typing"/> is enabled.
+    /// Returns true if the sending of <see cref="ChatAction"/> is enabled.
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static bool TypingNotificationIsEnabled(this INavigatorOptions navigatorOptions)
+    public static bool ChatActionNotificationIsEnabled(this INavigatorOptions navigatorOptions)
     {
-        return navigatorOptions.RetrieveOption<bool>(TypingNotificationKey);
+        return navigatorOptions.RetrieveOption<bool>(ChatActionNotificationKey);
     }
 
     #endregion

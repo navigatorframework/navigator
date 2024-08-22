@@ -21,7 +21,7 @@ builder.Services.AddNavigator(options =>
 {
     options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
     options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
-    options.EnableTypingNotification();
+    options.EnableChatActionNotification();
     options.EnableMultipleActionsUsage();
 });
 
