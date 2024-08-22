@@ -9,7 +9,7 @@ The usage is very simple yet powerful:
 ```csharp
 ...
 using Navigator;
-...
+... 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,14 +19,13 @@ builder.Services.AddNavigator(options =>
 {
     options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
     options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
-    options.EnableTypingNotification();
 });
 
 var app = builder.Build();
 
 var bot = app.GetBot();
 
-// This action will be triggered if the user sends a message in the style of `/join <text>`.
+// This action will be triggered if the user sends a message in the style of `/join <text> <text>`.
 bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parameters) =>
 {
     var result = string.Join(',', parameters);
@@ -38,6 +37,35 @@ app.MapNavigator();
 
 app.Run();
 ```
+
+# Getting Started
+
+After installing the [package](https://www.nuget.org/packages/Navigator/) you can start using it by first configuring Navigator:
+
+```csharp
+builder.Services.AddNavigator(options =>
+{
+    // Configuration here!
+});
+```
+
+Inside the AddNavigator method you can define the following options:
+
+- The WebHook base URL:`options.SetWebHookBaseUrl(string)`
+- The Telegram token: `options.SetTelegramToken(string)`
+- Optionally, the WebHook endpoint: `options.SetWebHookEndpoint(string)`
+- Optionally, allow multiple actions for the same update: `options.EnableMultipleActionsUsage()`
+- Optionally, enable the sending of chat actions (e.g. typing) notifications: `options.EnableChatActionNotification()`
+
+Continue by defining the actions of your bot using the different helper methods (see source code for more details). Here is a short example:
+
+Finally add the following line to map the endpoint to the navigator framework:
+
+```csharp
+app.MapNavigator();
+```
+
+This will start the server and will listen for incoming requests from Telegram. Your bot is good to go!
 
 # Examples
 
