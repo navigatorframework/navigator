@@ -9,7 +9,6 @@ using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Chat = Navigator.Entities.Chat;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +43,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
     var text = $"message received: {message.MessageId}";
 
     await client.SendTextMessageAsync(chat, text);
-}).WithCooldown(TimeSpan.FromSeconds(30));
+}).WithChances(0.5).WithCooldown(TimeSpan.FromSeconds(30));
 
 app.MapNavigator();
 
