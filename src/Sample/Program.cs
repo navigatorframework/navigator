@@ -35,7 +35,7 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
     var result = string.Join(',', parameters);
 
     await client.SendTextMessageAsync(chat, result);
-})
+});
 
 // This action will be triggered for every message sent to the chat. Additionally in this code example, this action will be triggered
 // only if NavigatorOptions.MultipleActionsUSageIsEnabled is set to true.
