@@ -177,7 +177,7 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="update">The <see cref="Update" /> object that triggered the execution of the <see cref="BotAction" />.</param>
     private async Task ExecuteAction(BotAction action, Update update)
     {
-        if (action.Information.Chances is not null && Random.Shared.NextDouble() < action.Information.Chances)
+        if (action.Information.Chances is not null && Random.Shared.NextDouble() > action.Information.Chances)
         {
             _logger.LogDebug("Discarding action {ActionName} because of configured chances ({Chances})", action.Information.Name,
                 action.Information.Chances);
