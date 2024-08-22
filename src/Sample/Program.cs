@@ -9,7 +9,6 @@ using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Chat = Navigator.Entities.Chat;
 
 var builder = WebApplication.CreateBuilder(args);
 
