@@ -26,6 +26,7 @@ public class NavigatorStrategy : INavigatorStrategy
     private readonly IMemoryCache _cache;
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
+    private readonly INavigatorClient _client;
     private readonly ILogger<INavigatorStrategy> _logger;
     private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
@@ -36,11 +37,12 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="cache">The <see cref="IMemoryCache" /> instance.</param>
     /// <param name="catalogFactory">The <see cref="BotActionCatalog" /> instance.</param>
     /// <param name="classifier">The <see cref="IUpdateClassifier" /> instance.</param>
+    /// <param name="client">The <see cref="INavigatorClient" /> instance.</param>
     /// <param name="options">The <see cref="INavigatorOptions" /> instance.</param>
     /// <param name="serviceProvider">The <see cref="IServiceProvider" /> instance.</param>
     /// <param name="logger">The <see cref="ILogger{TCategoryName}" /> instance.</param>
     public NavigatorStrategy(IMemoryCache cache, BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
-        INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
+        INavigatorClient client, INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
     {
         _cache = cache;
         _catalog = catalogFactory.Retrieve();
@@ -48,6 +50,7 @@ public class NavigatorStrategy : INavigatorStrategy
         _options = options;
         _serviceProvider = serviceProvider;
         _logger = logger;
+        _client = client;
     }
 
     /// <summary>
@@ -60,11 +63,13 @@ public class NavigatorStrategy : INavigatorStrategy
     {
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
-        if (_options.TypingNotificationIsEnabled() && update.GetChatOrDefault() is { } chat)
+        var chat = update.GetChatOrDefault();
+
+        if (_options.TypingNotificationIsEnabled() && chat is not null)
         {
             _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
 
-            await _serviceProvider.GetRequiredService<INavigatorClient>().SendChatActionAsync(chat, ChatAction.Typing);
+            await _client.SendChatActionAsync(chat, ChatAction.Typing);
         }
 
         var updateCategory = await _classifier.Process(update);
@@ -87,6 +92,9 @@ public class NavigatorStrategy : INavigatorStrategy
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
             _logger.LogInformation("Executing action {ActionName}", action.Name);
+
+            if (_options.TypingNotificationIsEnabled() && chat is not null && action.ChatAction is not null)
+                await _client.SendChatActionAsync(chat, action.ChatAction.Value);
 
             await ExecuteAction(action, update);
         }

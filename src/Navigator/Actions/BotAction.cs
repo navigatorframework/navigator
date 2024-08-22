@@ -1,7 +1,9 @@
+using Telegram.Bot.Types.Enums;
+
 namespace Navigator.Actions;
 
 /// <summary>
-///     A <see cref="BotAction" /> is a representation of an action that can be executed by a navigator bot. It is used to encapsulate a
+///     A <see cref="BotAction" /> is ah representation of an action that can be executed by a navigator bot. It is used to encapsulate a
 ///     condition and a handler. The condition is a delegate that is checked at runtime and if it evaluates to true, the handler is executed.
 ///     The condition delegate should return a boolean or a Task that resolves to a boolean. The handler delegate should return void or a Task
 ///     that resolves to void.
@@ -10,6 +12,11 @@ public sealed record BotAction
 {
     private readonly Delegate _condition;
     private readonly Delegate _handler;
+
+    /// <summary>
+    ///     The chat action that should be sent before the <see cref="BotAction" /> is executed. Optional.
+    /// </summary>
+    public readonly ChatAction? ChatAction;
 
     /// <summary>
     ///     The id of the <see cref="BotAction" />.
@@ -31,15 +38,19 @@ public sealed record BotAction
     /// </summary>
     /// <param name="id">The id of the <see cref="BotAction" />.</param>
     /// <param name="information">The information about the <see cref="BotAction" />.</param>
+    /// <param name="name">The name of the <see cref="BotAction" />.</param>
     /// <param name="condition">The condition delegate.</param>
     /// <param name="handler">The handler delegate.</param>
-    public BotAction(Guid id, BotActionInformation information, string? name, Delegate condition, Delegate handler)
+    /// <param name="chatAction">The <see cref="ChatAction" />.</param>
+    public BotAction(Guid id, BotActionInformation information, string? name, Delegate condition, Delegate handler,
+        ChatAction? chatAction = null)
     {
         Id = id;
         Name = name ?? $"{Id}";
         Information = information;
         _condition = condition;
         _handler = handler;
+        ChatAction = chatAction;
     }
 
     /// <summary>

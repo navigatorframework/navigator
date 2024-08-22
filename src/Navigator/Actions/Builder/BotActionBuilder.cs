@@ -1,3 +1,5 @@
+using Telegram.Bot.Types.Enums;
+
 namespace Navigator.Actions.Builder;
 
 /// <summary>
@@ -24,6 +26,7 @@ public class BotActionBuilder
     private UpdateCategory Category { get; set; } = null!;
     private ushort Priority { get; set; }
     private TimeSpan? Cooldown { get; set; }
+    private ChatAction? ChatAction { get; set; }
 
     /// <summary>
     ///     Builds the bot action.
@@ -49,7 +52,7 @@ public class BotActionBuilder
         if (Category is null)
             throw new NavigatorException("The category must be set");
 
-        return new BotAction(_id, information, Name, Condition, Handler);
+        return new BotAction(_id, information, Name, Condition, Handler, ChatAction);
     }
 
     public BotActionBuilder WithName(string name)
@@ -115,6 +118,18 @@ public class BotActionBuilder
     public BotActionBuilder WithCooldown(TimeSpan cooldown)
     {
         Cooldown = cooldown;
+        return this;
+    }
+
+    /// <summary>
+    ///     Sets the <see cref="ChatAction" /> of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="chatAction">The <see cref="ChatAction" /> to be set.</param>
+    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public BotActionBuilder WithChatAction(ChatAction chatAction)
+    {
+        ChatAction = chatAction;
+
         return this;
     }
 }
