@@ -1,7 +1,7 @@
 namespace Navigator.Actions;
 
 /// <summary>
-///     A <see cref="BotAction" /> is a representation of an action that can be executed by a navigator bot. It is used to encapsulate a
+///     A <see cref="BotAction" /> is ah representation of an action that can be executed by a navigator bot. It is used to encapsulate a
 ///     condition and a handler. The condition is a delegate that is checked at runtime and if it evaluates to true, the handler is executed.
 ///     The condition delegate should return a boolean or a Task that resolves to a boolean. The handler delegate should return void or a Task
 ///     that resolves to void.

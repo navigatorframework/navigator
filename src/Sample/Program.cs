@@ -21,7 +21,7 @@ builder.Services.AddNavigator(options =>
 {
     options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
     options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
-    options.EnableTypingNotification();
+    options.EnableChatActionNotification();
     options.EnableMultipleActionsUsage();
 });
 
@@ -40,12 +40,11 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
 // This action will be triggered for every message sent to the chat. Additionally in this code example, this action will be triggered
 // only if NavigatorOptions.MultipleActionsUSageIsEnabled is set to true.
 bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Message message) =>
-    {
-        var text = $"message received: {message.MessageId}";
+{
+    var text = $"message received: {message.MessageId}";
 
-        await client.SendTextMessageAsync(chat, text);
-    })
-    .WithCooldown(TimeSpan.FromSeconds(30));
+    await client.SendTextMessageAsync(chat, text);
+}).WithCooldown(TimeSpan.FromSeconds(30));
 
 app.MapNavigator();
 

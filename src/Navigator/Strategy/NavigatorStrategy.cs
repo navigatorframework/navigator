@@ -26,6 +26,7 @@ public class NavigatorStrategy : INavigatorStrategy
     private readonly IMemoryCache _cache;
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
+    private readonly INavigatorClient _client;
     private readonly ILogger<INavigatorStrategy> _logger;
     private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
@@ -36,11 +37,12 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="cache">The <see cref="IMemoryCache" /> instance.</param>
     /// <param name="catalogFactory">The <see cref="BotActionCatalog" /> instance.</param>
     /// <param name="classifier">The <see cref="IUpdateClassifier" /> instance.</param>
+    /// <param name="client">The <see cref="INavigatorClient" /> instance.</param>
     /// <param name="options">The <see cref="INavigatorOptions" /> instance.</param>
     /// <param name="serviceProvider">The <see cref="IServiceProvider" /> instance.</param>
     /// <param name="logger">The <see cref="ILogger{TCategoryName}" /> instance.</param>
     public NavigatorStrategy(IMemoryCache cache, BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
-        INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
+        INavigatorClient client, INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
     {
         _cache = cache;
         _catalog = catalogFactory.Retrieve();
@@ -48,6 +50,7 @@ public class NavigatorStrategy : INavigatorStrategy
         _options = options;
         _serviceProvider = serviceProvider;
         _logger = logger;
+        _client = client;
     }
 
     /// <summary>
@@ -60,11 +63,13 @@ public class NavigatorStrategy : INavigatorStrategy
     {
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
-        if (_options.TypingNotificationIsEnabled() && update.GetChatOrDefault() is { } chat)
+        var chat = update.GetChatOrDefault();
+
+        if (_options.ChatActionNotificationIsEnabled() && chat is not null)
         {
             _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
 
-            await _serviceProvider.GetRequiredService<INavigatorClient>().SendChatActionAsync(chat, ChatAction.Typing);
+            await _client.SendChatActionAsync(chat, ChatAction.Typing);
         }
 
         var updateCategory = await _classifier.Process(update);
@@ -76,11 +81,24 @@ public class NavigatorStrategy : INavigatorStrategy
 
         _logger.LogInformation("Found {RelevantActionsCount} relevant actions for {UpdateId}", relevantActions.Count(), update.Id);
 
+        _logger.LogDebug("Actions relevant for update {UpdateId}: {ActionsFound}", update.Id,
+            string.Join(", ", relevantActions.Select(action => action.Information.Name)));
+
         relevantActions = relevantActions.Where(action => IsNotInCooldown(action, update));
+
+        _logger.LogDebug("Actions relevant for update {UpdateId} which are not in cooldown: {ActionsFound}", update.Id,
+            string.Join(", ", relevantActions.Select(action => action.Information.Name)));
 
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
-            _logger.LogInformation("Executing action {ActionId}", action.Id);
+            _logger.LogInformation("Executing action {ActionName}", action.Information.Name);
+
+            if (_options.ChatActionNotificationIsEnabled() && chat is not null && action.Information.ChatAction is not null)
+            {
+                _logger.LogDebug("Sending {ChatAction} notification to chat {ChatId}", action.Information.ChatAction.Value, chat.Id);
+
+                await _client.SendChatActionAsync(chat, action.Information.ChatAction.Value);
+            }
 
             await ExecuteAction(action, update);
         }
@@ -94,7 +112,11 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <returns><c>true</c> if the <see cref="BotAction" /> is in cooldown; otherwise, <c>false</c>.</returns>
     private bool IsNotInCooldown(BotAction botAction, Update update)
     {
-        return !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
+        var isNotInCooldown = !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
+
+        if (isNotInCooldown is false) _logger.LogDebug("Discarding action {ActionName} because is in cooldown", botAction.Information.Name);
+
+        return isNotInCooldown;
     }
 
     /// <summary>
@@ -128,11 +150,21 @@ public class NavigatorStrategy : INavigatorStrategy
                 arguments[i] = await GetArgument(inputType, update, action);
             }
 
-            if (!await action.ExecuteCondition(arguments)) continue;
+            if (!await action.ExecuteCondition(arguments))
+            {
+                _logger.LogDebug("Discarding action {ActionName} because condition is not met", action.Information.Name);
+
+                continue;
+            }
 
             yield return action;
 
-            if (_options.MultipleActionsUsageIsEnabled() is false) break;
+            if (_options.MultipleActionsUsageIsEnabled() is false)
+            {
+                _logger.LogDebug("Discarding other actions because multiple actions usage is disabled");
+
+                break;
+            }
         }
     }
 
@@ -156,7 +188,13 @@ public class NavigatorStrategy : INavigatorStrategy
 
         await action.ExecuteHandler(arguments);
 
-        if (action.Information.Cooldown.HasValue) _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
+        if (action.Information.Cooldown.HasValue)
+        {
+            _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} minutes", action.Information.Name,
+                action.Information.Cooldown.Value.TotalMinutes);
+
+            _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
+        }
     }
 
     private async Task<object?> GetArgument(Type inputType, Update update, BotAction action)

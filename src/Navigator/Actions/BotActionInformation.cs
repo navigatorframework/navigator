@@ -1,3 +1,5 @@
+using Telegram.Bot.Types.Enums;
+
 namespace Navigator.Actions;
 
 /// <summary>
@@ -9,6 +11,11 @@ public record BotActionInformation
     ///     The <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
     /// </summary>
     public required UpdateCategory Category;
+
+    /// <summary>
+    ///     The <see cref="ChatAction" /> associtated with the <see cref="BotAction" />. Optional.
+    /// </summary>
+    public required ChatAction? ChatAction;
 
     /// <summary>
     ///     The input types of the condition delegate of the <see cref="BotAction" />.
@@ -24,6 +31,11 @@ public record BotActionInformation
     ///     The input types of the handler delegate of the <see cref="BotAction" />.
     /// </summary>
     public required Type[] HandlerInputTypes;
+
+    /// <summary>
+    ///     The name of the <see cref="BotAction" />. If no name is set, the id is used.
+    /// </summary>
+    public required string Name;
 
     /// <summary>
     ///     The priority of the <see cref="BotAction" />. Optional.
