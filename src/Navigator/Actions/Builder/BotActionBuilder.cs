@@ -36,9 +36,11 @@ public class BotActionBuilder
     {
         var information = new BotActionInformation
         {
+            ChatAction = ChatAction,
             Category = Category,
             ConditionInputTypes = ConditionInputTypes,
             HandlerInputTypes = HandlerInputTypes,
+            Name = Name ?? $"{_id}",
             Priority = Priority,
             Cooldown = Cooldown
         };
@@ -52,7 +54,7 @@ public class BotActionBuilder
         if (Category is null)
             throw new NavigatorException("The category must be set");
 
-        return new BotAction(_id, information, Name, Condition, Handler, ChatAction);
+        return new BotAction(_id, information, Condition, Handler);
     }
 
     public BotActionBuilder WithName(string name)

@@ -71,8 +71,8 @@ public class BotActionCatalogFactory
         foreach (var builtAction in Actions.Select(actionBuilder => actionBuilder.Build()))
         {
             _logger.LogDebug("Built action {ActionName} with priority {Priority} for category {Category}",
-                builtAction.Name, builtAction.Information.Priority, builtAction.Information.Category);
-            
+                builtAction.Information.Name, builtAction.Information.Priority, builtAction.Information.Category);
+
             actions.Add(builtAction);
         }
 

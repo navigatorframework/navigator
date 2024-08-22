@@ -82,19 +82,23 @@ public class NavigatorStrategy : INavigatorStrategy
         _logger.LogInformation("Found {RelevantActionsCount} relevant actions for {UpdateId}", relevantActions.Count(), update.Id);
 
         _logger.LogDebug("Actions relevant for update {UpdateId}: {ActionsFound}", update.Id,
-            string.Join(", ", relevantActions.Select(action => action.Name)));
+            string.Join(", ", relevantActions.Select(action => action.Information.Name)));
 
         relevantActions = relevantActions.Where(action => IsNotInCooldown(action, update));
 
         _logger.LogDebug("Actions relevant for update {UpdateId} which are not in cooldown: {ActionsFound}", update.Id,
-            string.Join(", ", relevantActions.Select(action => action.Name)));
+            string.Join(", ", relevantActions.Select(action => action.Information.Name)));
 
         await foreach (var action in FilterActionsThatCanHandleUpdate(relevantActions, update))
         {
-            _logger.LogInformation("Executing action {ActionName}", action.Name);
+            _logger.LogInformation("Executing action {ActionName}", action.Information.Name);
 
-            if (_options.ChatActionNotificationIsEnabled() && chat is not null && action.ChatAction is not null)
-                await _client.SendChatActionAsync(chat, action.ChatAction.Value);
+            if (_options.ChatActionNotificationIsEnabled() && chat is not null && action.Information.ChatAction is not null)
+            {
+                _logger.LogDebug("Sending {ChatAction} notification to chat {ChatId}", action.Information.ChatAction.Value, chat.Id);
+
+                await _client.SendChatActionAsync(chat, action.Information.ChatAction.Value);
+            }
 
             await ExecuteAction(action, update);
         }
@@ -110,7 +114,7 @@ public class NavigatorStrategy : INavigatorStrategy
     {
         var isNotInCooldown = !_cache.TryGetValue(GenerateCacheKey(botAction, update), out _);
 
-        if (isNotInCooldown is false) _logger.LogDebug("Discarding action {ActionName} because is in cooldown", botAction.Name);
+        if (isNotInCooldown is false) _logger.LogDebug("Discarding action {ActionName} because is in cooldown", botAction.Information.Name);
 
         return isNotInCooldown;
     }
@@ -148,7 +152,7 @@ public class NavigatorStrategy : INavigatorStrategy
 
             if (!await action.ExecuteCondition(arguments))
             {
-                _logger.LogDebug("Discarding action {ActionName} because condition is not met", action.Name);
+                _logger.LogDebug("Discarding action {ActionName} because condition is not met", action.Information.Name);
 
                 continue;
             }
@@ -186,8 +190,8 @@ public class NavigatorStrategy : INavigatorStrategy
 
         if (action.Information.Cooldown.HasValue)
         {
-            _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} seconds", action.Name,
-                action.Information.Cooldown.Value);
+            _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} minutes", action.Information.Name,
+                action.Information.Cooldown.Value.TotalMinutes);
 
             _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
         }
