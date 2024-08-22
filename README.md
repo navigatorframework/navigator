@@ -57,7 +57,7 @@ Inside the AddNavigator method you can define the following options:
 - Optionally, allow multiple actions for the same update: `options.EnableMultipleActionsUsage()`
 - Optionally, enable the sending of chat actions (e.g. typing) notifications: `options.EnableChatActionNotification()`
 
-Continue by defining the actions of your bot using the different helper methods (see source code for more details). Here is a short example:
+Continue by defining the actions of your bot using the different helper methods (see source code for more details).
 
 Finally add the following line to map the endpoint to the navigator framework:
 
@@ -89,7 +89,7 @@ by the Free Software Foundation, either version 3 of the License, or
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
+GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
