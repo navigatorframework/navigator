@@ -57,6 +57,11 @@ public class BotActionBuilder
         return new BotAction(_id, information, Condition, Handler);
     }
 
+    /// <summary>
+    ///     Sets the name of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="name">The name to be set.</param>
+    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
     public BotActionBuilder WithName(string name)
     {
         Name = name;
