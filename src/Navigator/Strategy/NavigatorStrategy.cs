@@ -11,7 +11,6 @@ using Navigator.Strategy.TypeProvider;
 using Navigator.Telegram;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Strategy;
 
@@ -65,12 +64,12 @@ public class NavigatorStrategy : INavigatorStrategy
 
         var chat = update.GetChatOrDefault();
 
-        if (_options.ChatActionNotificationIsEnabled() && chat is not null)
-        {
-            _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
-
-            await _client.SendChatActionAsync(chat, ChatAction.Typing);
-        }
+        // if (_options.ChatActionNotificationIsEnabled() && chat is not null)
+        // {
+        //     _logger.LogInformation("Sending typing notification to chat {ChatId}", chat.Id);
+        //
+        //     await _client.SendChatActionAsync(chat, ChatAction.Typing);
+        // }
 
         var updateCategory = await _classifier.Process(update);
 
@@ -100,7 +99,14 @@ public class NavigatorStrategy : INavigatorStrategy
                 await _client.SendChatActionAsync(chat, action.Information.ChatAction.Value);
             }
 
-            await ExecuteAction(action, update);
+            try
+            {
+                await ExecuteAction(action, update);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Failed to execute action {ActionName} for update {UpdateId}", action.Information.Name, update.Id);
+            }
         }
     }
 
