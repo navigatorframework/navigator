@@ -14,7 +14,7 @@ internal static class TelegramUpdateExtensions
 
         var command = message.EntityValues?.First();
 
-        command = command?[(message.Entities.First().Offset + 1)..];
+        command = command?[1..];
 
         if (command?.Contains('@') == false) return command;
 
