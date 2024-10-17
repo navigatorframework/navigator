@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Navigator.Configuration.Options;
 using Navigator.Strategy;
 using Telegram.Bot;
@@ -16,43 +17,26 @@ namespace Navigator.Configuration;
 public static class EndpointRouteBuilderExtensions
 {
     /// <summary>
-    ///     Configure navigator's provider's endpoints.
+    ///     Maps the Telegram web hook endpoint. This endpoint is used to receive updates from Telegran.
     /// </summary>
-    /// <param name="endpointRouteBuilder"></param>
-    /// <returns></returns>
-    public static void MapNavigator(this IEndpointRouteBuilder endpointRouteBuilder)
+    /// <param name="app">An instance of <see cref="WebApplication"/>.</param>
+    public static void MapNavigator(this WebApplication app)
     {
-        using var scope = endpointRouteBuilder.ServiceProvider.CreateScope();
+        var options = app.Services.GetRequiredService<NavigatorOptions>();
 
-        var options = scope.ServiceProvider.GetRequiredService<NavigatorOptions>();
-
-        endpointRouteBuilder.MapPost(options.GetWebHookEndpointOrDefault(), ProcessTelegramUpdate);
-    }
-
-    private static async Task ProcessTelegramUpdate(HttpContext context)
-    {
-        context.Response.StatusCode = 200;
-
-        if (context.Request.ContentType != "application/json") return;
-
-        var telegramUpdate = await ParseTelegramUpdate(context.Request);
-
-        var strategy = context.RequestServices.GetRequiredService<INavigatorStrategy>();
-
-        await strategy.Invoke(telegramUpdate);
-    }
-
-    private static async Task<Update> ParseTelegramUpdate(HttpRequest request)
-    {
-        try
-        {
-            var reader = new StreamReader(request.Body);
-            return JsonSerializer.Deserialize<Update>(await reader.ReadToEndAsync(), JsonBotAPI.Options) ??
-                   throw new InvalidOperationException();
-        }
-        catch (Exception e)
-        {
-            throw new NavigatorException("Cannot parse telegram update", e);
-        }
+        app.MapPost(options.GetWebHookEndpointOrDefault(),
+            async (Update update, INavigatorStrategy strategy, ILogger<WebApplication> logger) =>
+            {
+                try
+                {
+                    logger.LogDebug("Received update {UpdateId}", update.Id);
+                    await strategy.Invoke(update);
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e, "Unhandled error while processing update {UpdateId}", update.Id);
+                    logger.LogDebug("Update details: {@Update}", update);
+                }
+            });
     }
 }
