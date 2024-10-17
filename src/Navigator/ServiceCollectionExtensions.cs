@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
@@ -40,11 +41,13 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IArgumentTypeProvider, TelegramMessageTypeProvider>();
         services.AddScoped<IArgumentTypeProvider, TelegramUpdateTypeProvider>();
 
-        services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
+        services.AddTransient<INavigatorStrategy, NavigatorStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
         navigatorBuilder.RegisterOrReplaceOptions();
+
+        services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
 
         return navigatorBuilder;
     }

@@ -48,7 +48,7 @@ public class SetTelegramBotWebHookHostedService : BackgroundService
             
         var navigatorClient = scope.ServiceProvider.GetRequiredService<INavigatorClient>();
             
-        await navigatorClient.SetWebhookAsync(_webHookUrl, cancellationToken: stoppingToken);
+        await navigatorClient.SetWebhookAsync(_webHookUrl, maxConnections: 100, cancellationToken: stoppingToken);
         
         _logger.LogTrace("Webhook configured successfully");
         
