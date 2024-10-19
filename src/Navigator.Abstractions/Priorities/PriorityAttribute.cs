@@ -3,7 +3,7 @@ namespace Navigator.Abstractions.Priorities;
 /// <summary>
 ///     Attribute for setting the priority of something.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
 public class PriorityAttribute : Attribute
 {
     /// <summary>
