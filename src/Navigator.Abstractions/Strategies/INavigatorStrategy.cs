@@ -1,6 +1,6 @@
 using Telegram.Bot.Types;
 
-namespace Navigator.Strategy;
+namespace Navigator.Abstractions.Strategies;
 
 /// <summary>
 ///     Interface for a strategy implementation for dynamic decision-making based on incoming updates.
