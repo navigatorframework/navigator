@@ -29,6 +29,9 @@ public record NavigatorActionExecutionContext
     public readonly Update Update;
 
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="NavigatorActionExecutionContext" /> class.
+    /// </summary>
     public NavigatorActionExecutionContext(BotAction action, UpdateCategory category, Dictionary<object, object?> items, Update update)
     {
         Action = action;
