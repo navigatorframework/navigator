@@ -1,5 +1,5 @@
-using Navigator.Strategy.Context;
-using Navigator.Strategy.Pipelines.Abstractions;
+using Navigator.Abstractions.Pipelines;
+using Navigator.Abstractions.Pipelines.Context;
 
 namespace Navigator.Strategy.Pipelines.Bundled;
 
@@ -11,14 +11,14 @@ public interface INavigatorPipelineBuilder
     /// <summary>
     ///     Builds a navigator pipeline for resolving actions.
     /// </summary>
-    /// <param name="context">An instance of <see cref="NavigatorStrategyContext" />.</param>
+    /// <param name="context">An instance of <see cref="NavigatorActionResolutionContext" />.</param>
     /// <returns>A <see cref="PipelineStepHandlerDelegate" />.</returns>
-    PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorStrategyContext context);
+    PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorActionResolutionContext context);
 
     /// <summary>
     ///     Builds a navigator pipeline for executing actions.
     /// </summary>
-    /// <param name="context">An instance of <see cref="NavigatorStrategyContext" />.</param>
+    /// <param name="context">An instance of <see cref="NavigatorActionResolutionContext" />.</param>
     /// <returns>A <see cref="PipelineStepHandlerDelegate" />.</returns>
     PipelineStepHandlerDelegate BuildExecutionPipeline(NavigatorActionExecutionContext context);
 }

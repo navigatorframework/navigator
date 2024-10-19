@@ -1,8 +1,8 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Navigator.Abstractions.Pipelines;
+using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Priorities;
-using Navigator.Strategy.Context;
-using Navigator.Strategy.Pipelines.Abstractions;
 
 namespace Navigator.Strategy.Pipelines.Bundled;
 
@@ -24,7 +24,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     }
 
     /// <inheritdoc />
-    public PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorStrategyContext context)
+    public PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorActionResolutionContext context)
     {
         _logger.LogInformation("Building resolution pipeline for update {UpdateId}", context.Update.Id);
 
@@ -82,9 +82,9 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
         list.AddRange(steps
             .OfType<IActionResolutionPipelineStepBefore<IActionResolutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
-        
+
         list.Add(steps.OfType<IActionResolutionPipelineStep>().First());
-        
+
         list.AddRange(steps
             .OfType<IActionResolutionPipelineStepAfter<IActionResolutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
@@ -99,9 +99,9 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
         list.AddRange(steps
             .OfType<IActionExecutionPipelineStepBefore<IActionExecutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
-        
+
         list.Add(steps.OfType<IActionExecutionPipelineStep>().First());
-        
+
         list.AddRange(steps
             .OfType<IActionExecutionPipelineStepAfter<IActionExecutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));

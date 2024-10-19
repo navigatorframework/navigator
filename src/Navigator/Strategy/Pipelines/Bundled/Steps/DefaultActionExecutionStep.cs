@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions.Arguments;
-using Navigator.Strategy.Context;
-using Navigator.Strategy.Pipelines.Abstractions;
+using Navigator.Abstractions.Pipelines;
+using Navigator.Abstractions.Pipelines.Context;
 
 namespace Navigator.Strategy.Pipelines.Bundled.Steps;
 

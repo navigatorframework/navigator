@@ -1,4 +1,4 @@
-namespace Navigator.Strategy.Pipelines.Abstractions;
+namespace Navigator.Abstractions.Pipelines;
 
 /// <summary>
 ///     Delegate for a pipeline step.

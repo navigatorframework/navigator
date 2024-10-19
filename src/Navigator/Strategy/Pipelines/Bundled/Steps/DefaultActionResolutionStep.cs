@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Catalog;
+using Navigator.Abstractions.Pipelines;
+using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Catalog.Factory;
 using Navigator.Strategy.Classifier;
-using Navigator.Strategy.Context;
-using Navigator.Strategy.Pipelines.Abstractions;
 
 namespace Navigator.Strategy.Pipelines.Bundled.Steps;
 
@@ -28,7 +28,7 @@ public class DefaultActionResolutionStep : IActionResolutionPipelineStep
     }
 
     /// <inheritdoc />
-    public async Task InvokeAsync(NavigatorStrategyContext context, PipelineStepHandlerDelegate next)
+    public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
         _logger.LogInformation("Resolving actions for update {UpdateId}", context.Update.Id);
 

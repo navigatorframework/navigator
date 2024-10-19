@@ -1,13 +1,12 @@
 using Navigator.Abstractions.Actions;
-using Navigator.Strategy.Pipelines.Bundled;
 using Telegram.Bot.Types;
 
-namespace Navigator.Strategy.Context;
+namespace Navigator.Abstractions.Pipelines.Context;
 
 /// <summary>
 ///     Context around an <see cref="Update" /> for a <see cref="DefaultNavigatorPipelineBuilder" />.
 /// </summary>
-public record NavigatorStrategyContext
+public record NavigatorActionResolutionContext
 {
     /// <summary>
     ///     The list of <see cref="BotAction" /> objects that are relevant to the <see cref="Update" />.
@@ -28,7 +27,7 @@ public record NavigatorStrategyContext
     ///     Default constructor.
     /// </summary>
     /// <param name="update">An <see cref="Update" /> object.</param>
-    public NavigatorStrategyContext(Update update)
+    public NavigatorActionResolutionContext(Update update)
     {
         Update = update;
     }
@@ -40,17 +39,18 @@ public record NavigatorStrategyContext
 }
 
 /// <summary>
-///     Extension methods for <see cref="NavigatorStrategyContext" />.
+///     Extension methods for <see cref="NavigatorActionResolutionContext" />.
 /// </summary>
 public static class NavigatorStrategyContextExtensions
 {
     /// <summary>
-    ///     Get all <see cref="NavigatorActionExecutionContext" /> for the given <see cref="NavigatorStrategyContext" />.
+    ///     Get all <see cref="NavigatorActionExecutionContext" /> for the given <see cref="NavigatorActionResolutionContext" />.
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static IEnumerable<NavigatorActionExecutionContext> GetExecutionContexts(this NavigatorStrategyContext context)
+    public static IEnumerable<NavigatorActionExecutionContext> GetExecutionContexts(this NavigatorActionResolutionContext context)
     {
-        return context.Actions.Select(action => new NavigatorActionExecutionContext(action, context.UpdateCategory, context.Items, context.Update));
+        return context.Actions.Select(action =>
+            new NavigatorActionExecutionContext(action, context.UpdateCategory, context.Items, context.Update));
     }
 }

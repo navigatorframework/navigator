@@ -1,7 +1,7 @@
 using Navigator.Abstractions.Actions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Strategy.Context;
+namespace Navigator.Abstractions.Pipelines.Context;
 
 /// <summary>
 ///     Context around an <see cref="Update" /> and a specific <see cref="BotAction" /> for a <see cref="NavigatorActionExecutionContext" />.

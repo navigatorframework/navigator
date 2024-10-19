@@ -1,7 +1,6 @@
 using Navigator.Abstractions.Priorities;
-using Navigator.Strategy.Context;
 
-namespace Navigator.Strategy.Pipelines.Abstractions;
+namespace Navigator.Abstractions.Pipelines;
 
 /// <summary>
 ///     Interface for a pipeline step.
@@ -23,15 +22,3 @@ public interface INavigatorPipelineStep<in TContext> : INavigatorPipelineStep
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     Task InvokeAsync(TContext context, PipelineStepHandlerDelegate next);
 }
-
-public interface IActionResolutionPipelineStep : INavigatorPipelineStep<NavigatorStrategyContext>;
-
-public interface IActionResolutionPipelineStepBefore<T> : IActionResolutionPipelineStep;
-
-public interface IActionResolutionPipelineStepAfter<T> : IActionResolutionPipelineStep;
-
-public interface IActionExecutionPipelineStep : INavigatorPipelineStep<NavigatorActionExecutionContext>;
-
-public interface IActionExecutionPipelineStepBefore<T> : IActionExecutionPipelineStep;
-
-public interface IActionExecutionPipelineStepAfter<T> : IActionExecutionPipelineStep;
