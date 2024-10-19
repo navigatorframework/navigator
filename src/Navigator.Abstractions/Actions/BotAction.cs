@@ -1,4 +1,4 @@
-namespace Navigator.Actions;
+namespace Navigator.Abstractions.Actions;
 
 /// <summary>
 ///     A <see cref="BotAction" /> is ah representation of an action that can be executed by a navigator bot. It is used to encapsulate a

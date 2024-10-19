@@ -1,4 +1,4 @@
-namespace Navigator.Actions;
+namespace Navigator.Abstractions.Actions;
 
 /// <summary>
 /// Priority presets.

@@ -1,6 +1,6 @@
 using Telegram.Bot.Types.Enums;
 
-namespace Navigator.Actions;
+namespace Navigator.Abstractions.Actions;
 
 /// <summary>
 ///     Information about a <see cref="BotAction" />.
