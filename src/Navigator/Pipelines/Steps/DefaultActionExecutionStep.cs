@@ -25,15 +25,25 @@ public class DefaultActionExecutionStep : IActionExecutionPipelineStep
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
     {
-        _logger.LogInformation("Executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
-            context.Update.Id);
+        try
+        {
+            _logger.LogInformation("Executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
+                context.Update.Id);
 
-        var arguments = await _argumentProvider.GetArguments(context.Update, context.Action);
+            var arguments = await _argumentProvider.GetArguments(context.Update, context.Action);
 
-        await context.Action.ExecuteHandler(arguments);
-
-        _logger.LogInformation("Finished executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
-            context.Update.Id);
+            await context.Action.ExecuteHandler(arguments);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Failed to execute action {ActionName} for update {UpdateId}", context.Action.Information.Name,
+                context.Update.Id);
+        }
+        finally
+        {
+            _logger.LogInformation("Finished executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
+                context.Update.Id);
+        }
 
         await next();
     }
