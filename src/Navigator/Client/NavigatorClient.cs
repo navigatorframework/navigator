@@ -1,5 +1,5 @@
+using Navigator.Abstractions.Entities;
 using Navigator.Configuration.Options;
-using Navigator.Entities;
 using Telegram.Bot;
 
 namespace Navigator.Client;

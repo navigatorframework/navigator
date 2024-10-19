@@ -1,13 +1,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Actions.Arguments;
+using Navigator.Abstractions.Entities;
 using Navigator.Client;
-using Navigator.Entities;
 using Navigator.Telegram;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Chat = Navigator.Entities.Chat;
-using User = Navigator.Entities.User;
+using Chat = Navigator.Abstractions.Entities.Chat;
+using User = Navigator.Abstractions.Entities.User;
 
 namespace Navigator.Actions.Arguments.Resolvers;
 

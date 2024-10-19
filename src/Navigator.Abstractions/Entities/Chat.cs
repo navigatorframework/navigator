@@ -1,6 +1,6 @@
 using Telegram.Bot.Types;
 
-namespace Navigator.Entities;
+namespace Navigator.Abstractions.Entities;
 
 /// <summary>
 /// Represents a Navigator Chat.

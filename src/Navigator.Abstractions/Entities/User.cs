@@ -1,4 +1,4 @@
-namespace Navigator.Entities;
+namespace Navigator.Abstractions.Entities;
 
 /// <summary>
 /// Represents a user.
