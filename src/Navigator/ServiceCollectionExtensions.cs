@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Abstractions.Classifier;
 using Navigator.Abstractions.Client;
+using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Strategies;
 using Navigator.Actions.Arguments;
 using Navigator.Actions.Arguments.Resolvers;
@@ -11,6 +12,8 @@ using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Hosted;
+using Navigator.Pipelines.Steps;
+using Navigator.Pipelines.Steps.Bundled;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
 
@@ -48,6 +51,22 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
 
+        services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionStep>();
+        services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionStep>();
+
+        if (navigatorBuilder.Options.MultipleActionsUsageIsEnabled() == false)
+            services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
+
+        if (navigatorBuilder.Options.ChatActionNotificationIsEnabled())
+        {
+            services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
+        }
+        
+        services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
+        services.AddScoped<INavigatorPipelineStep, FilterByChancesInResolutionPipelineStep>();
+        services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
+        services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
+        
         services.AddTransient<INavigatorStrategy, NavigatorStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
