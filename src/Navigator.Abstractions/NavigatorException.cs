@@ -1,6 +1,4 @@
-using System.Runtime.Serialization;
-
-namespace Navigator;
+namespace Navigator.Abstractions;
 
 /// <summary>
 /// Navigator exception.
