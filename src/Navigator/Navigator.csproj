@@ -7,7 +7,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Title>Navigator</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>A highly opinionated universal bot framework for .NET</Description>
+        <Description>A highly opinionated telegram bot framework for .NET</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
@@ -15,7 +15,7 @@
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2023</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2024</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,11 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Telegram.Bot" Version="21.10.0" />
+      <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
