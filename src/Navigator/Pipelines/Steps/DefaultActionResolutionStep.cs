@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Catalog;
-using Navigator.Abstractions.Pipelines;
 using Navigator.Abstractions.Pipelines.Context;
+using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Catalog.Factory;
 using Navigator.Strategy.Classifier;
 
-namespace Navigator.Strategy.Pipelines.Bundled.Steps;
+namespace Navigator.Pipelines.Steps;
 
 /// <summary>
 ///     Default implementation of <see cref="IActionResolutionPipelineStep" />.

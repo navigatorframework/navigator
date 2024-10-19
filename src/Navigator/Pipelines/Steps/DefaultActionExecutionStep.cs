@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions.Arguments;
-using Navigator.Abstractions.Pipelines;
 using Navigator.Abstractions.Pipelines.Context;
+using Navigator.Abstractions.Pipelines.Steps;
 
-namespace Navigator.Strategy.Pipelines.Bundled.Steps;
+namespace Navigator.Pipelines.Steps;
 
 /// <summary>
 ///     Default implementation of <see cref="IActionExecutionPipelineStep" />.

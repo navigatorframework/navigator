@@ -1,10 +1,11 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using Navigator.Abstractions.Pipelines;
+using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Context;
+using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Priorities;
 
-namespace Navigator.Strategy.Pipelines.Bundled;
+namespace Navigator.Pipelines.Builder;
 
 /// <inheritdoc />
 public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
