@@ -1,6 +1,6 @@
 using Navigator.Abstractions.Priorities;
 
-namespace Navigator.Abstractions.Pipelines;
+namespace Navigator.Abstractions.Pipelines.Steps;
 
 /// <summary>
 ///     Interface for a pipeline step.
