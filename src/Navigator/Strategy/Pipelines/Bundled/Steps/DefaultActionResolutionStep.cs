@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Catalog;
-using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Strategy.Classifier;
 using Navigator.Strategy.Context;
@@ -20,9 +19,6 @@ public class DefaultActionResolutionStep : IActionResolutionPipelineStep
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultActionResolutionStep" /> class.
     /// </summary>
-    /// <param name="catalogFactory">A <see cref="BotActionCatalogFactory" />.</param>
-    /// <param name="logger">An instance of <see cref="ILogger" />.</param>
-    /// <param name="classifier">An instance of <see cref="IUpdateClassifier" />.</param>
     public DefaultActionResolutionStep(BotActionCatalogFactory catalogFactory, ILogger<DefaultActionResolutionStep> logger,
         IUpdateClassifier classifier)
     {
