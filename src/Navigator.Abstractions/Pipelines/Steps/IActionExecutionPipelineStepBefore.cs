@@ -1,3 +1,5 @@
 namespace Navigator.Abstractions.Pipelines.Steps;
 
 public interface IActionExecutionPipelineStepBefore<T> : IActionExecutionPipelineStep;
+
+public interface IActionExecutionPipelineStepBefore : IActionExecutionPipelineStepBefore<IActionExecutionPipelineStep>;
