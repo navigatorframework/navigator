@@ -4,5 +4,5 @@ namespace Navigator.Abstractions.Actions.Arguments;
 
 public interface IActionArgumentProvider
 {
-    public ValueTask<object?> GetArgument(Type type, Update update, BotAction action);
+    public ValueTask<object?[]> GetArguments(Update update, BotAction action);
 }

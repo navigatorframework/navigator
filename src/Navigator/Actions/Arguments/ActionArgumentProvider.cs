@@ -19,7 +19,26 @@ public class ActionArgumentProvider : IActionArgumentProvider
         _serviceProvider = serviceProvider;
     }
 
-    /// <inheritdoc />
+    public async ValueTask<object?[]> GetArguments(Update update, BotAction action)
+    {
+        _logger.LogDebug("Resolving arguments for action {ActionName} in update {UpdateId}", action.Information.Name,
+            update.Id);
+        
+        var numberOfInputs = action.Information.HandlerInputTypes.Length;
+        object?[] arguments = new object[numberOfInputs];
+
+        for (var i = 0; i < numberOfInputs; i++)
+        {
+            var inputType = action.Information.HandlerInputTypes[i];
+            arguments[i] = await GetArgument(inputType, update, action);
+        }
+
+        _logger.LogDebug("Resolved arguments for action {ActionName} in update {UpdateId}: {@Arguments}",
+            action.Information.Name, update.Id, arguments);
+        
+        return arguments;
+    }
+
     public async ValueTask<object?> GetArgument(Type inputType, Update update, BotAction action)
     {
         _logger.LogDebug("Resolving argument of type {InputType} for action {ActionName} in update {UpdateId}", inputType,
