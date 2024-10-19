@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Catalog;
 using Navigator.Actions.Builder;
 using Telegram.Bot.Types.Enums;
 
@@ -52,7 +53,7 @@ public class BotActionCatalogFactory
     ///     Retrieves the built <see cref="BotActionCatalog" />.
     /// </summary>
     /// <returns>The built <see cref="BotActionCatalog" />.</returns>
-    public BotActionCatalog Retrieve()
+    public IBotActionCatalog Retrieve()
     {
         if (Catalog is null) Build();
 
@@ -70,7 +71,7 @@ public class BotActionCatalogFactory
 
         foreach (var builtAction in Actions.Select(actionBuilder => actionBuilder.Build()))
         {
-            _logger.LogDebug("Built action {ActionName} with priority {Priority} for category {Category}",
+            _logger.LogDebug("Built action {ActionName} with priority {Priorities} for category {Category}",
                 builtAction.Information.Name, builtAction.Information.Priority, builtAction.Information.Category);
 
             actions.Add(builtAction);

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Navigator.Abstractions.Catalog;
 using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Strategy.Classifier;
@@ -12,7 +13,7 @@ namespace Navigator.Strategy.Pipelines.Bundled.Steps;
 /// </summary>
 public class DefaultActionResolutionStep : IActionResolutionPipelineStep
 {
-    private readonly BotActionCatalog _catalog;
+    private readonly IBotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
     private readonly ILogger<DefaultActionResolutionStep> _logger;
 
