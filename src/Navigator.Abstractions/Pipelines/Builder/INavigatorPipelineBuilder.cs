@@ -1,7 +1,6 @@
-using Navigator.Abstractions.Pipelines;
 using Navigator.Abstractions.Pipelines.Context;
 
-namespace Navigator.Strategy.Pipelines.Bundled;
+namespace Navigator.Abstractions.Pipelines.Builder;
 
 /// <summary>
 ///     Builder for a navigator pipeline.
