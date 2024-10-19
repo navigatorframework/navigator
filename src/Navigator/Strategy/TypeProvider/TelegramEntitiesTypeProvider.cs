@@ -1,5 +1,4 @@
 using Navigator.Abstractions.Actions;
-using Navigator.Actions;
 using Navigator.Telegram;
 using Telegram.Bot.Types;
 

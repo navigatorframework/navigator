@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using Telegram.Bot.Types;
 
 namespace Navigator.Abstractions.Actions.Arguments;

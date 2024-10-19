@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions;
-using Navigator.Actions;
 using Navigator.Client;
 using Navigator.Entities;
 using Navigator.Telegram;

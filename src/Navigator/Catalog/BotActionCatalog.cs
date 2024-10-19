@@ -1,4 +1,4 @@
-using Navigator.Actions;
+using Navigator.Abstractions.Actions;
 using Telegram.Bot.Types;
 
 namespace Navigator.Catalog;

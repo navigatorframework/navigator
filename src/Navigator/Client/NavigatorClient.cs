@@ -1,4 +1,3 @@
-using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Entities;
 using Telegram.Bot;

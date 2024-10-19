@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Navigator.Actions;
 using Navigator.Catalog;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
@@ -26,7 +25,7 @@ public class NavigatorStrategy : INavigatorStrategy
     private readonly BotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
     private readonly INavigatorClient _client;
-    private readonly ILogger<INavigatorStrategy> _logger;
+    private readonly ILogger<NavigatorStrategy> _logger;
     private readonly INavigatorOptions _options;
     private readonly IServiceProvider _serviceProvider;
 
@@ -41,7 +40,7 @@ public class NavigatorStrategy : INavigatorStrategy
     /// <param name="serviceProvider">The <see cref="IServiceProvider" /> instance.</param>
     /// <param name="logger">The <see cref="ILogger{TCategoryName}" /> instance.</param>
     public NavigatorStrategy(IMemoryCache cache, BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier,
-        INavigatorClient client, INavigatorOptions options, IServiceProvider serviceProvider, ILogger<INavigatorStrategy> logger)
+        INavigatorClient client, INavigatorOptions options, IServiceProvider serviceProvider, ILogger<NavigatorStrategy> logger)
     {
         _cache = cache;
         _catalog = catalogFactory.Retrieve();
@@ -210,6 +209,7 @@ public class NavigatorStrategy : INavigatorStrategy
             _cache.Set(GenerateCacheKey(action, update), true, action.Information.Cooldown.Value);
         }
     }
+
 
     private async Task<object?> GetArgument(Type inputType, Update update, BotAction action)
     {

@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Logging;
-using Navigator.Actions;
+using Navigator.Abstractions.Actions;
 using Navigator.Actions.Builder;
 using Telegram.Bot.Types.Enums;
 
