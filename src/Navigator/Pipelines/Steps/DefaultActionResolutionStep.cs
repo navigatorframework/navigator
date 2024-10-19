@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Catalog;
+using Navigator.Abstractions.Classifier;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Catalog.Factory;
-using Navigator.Strategy.Classifier;
 
 namespace Navigator.Pipelines.Steps;
 

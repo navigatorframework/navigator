@@ -1,4 +1,5 @@
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Classifier;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 

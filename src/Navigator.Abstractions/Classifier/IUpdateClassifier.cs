@@ -1,7 +1,7 @@
 using Navigator.Abstractions.Actions;
 using Telegram.Bot.Types;
 
-namespace Navigator.Strategy.Classifier;
+namespace Navigator.Abstractions.Classifier;
 
 /// <summary>
 ///     Defines the contract for classifying the <see cref="Update" /> from the Telegram Bot API.
