@@ -3,6 +3,7 @@ using Incremental.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator;
+using Navigator.Abstractions.Client;
 using Navigator.Catalog.Factory.Extensions;
 using Navigator.Client;
 using Navigator.Configuration;

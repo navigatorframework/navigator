@@ -1,3 +1,4 @@
+using Navigator.Abstractions.Client;
 using Navigator.Abstractions.Entities;
 using Navigator.Configuration.Options;
 using Telegram.Bot;

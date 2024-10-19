@@ -1,7 +1,7 @@
 using Navigator.Abstractions.Entities;
 using Telegram.Bot;
 
-namespace Navigator.Client;
+namespace Navigator.Abstractions.Client;
 
 /// <summary>
 /// Navigator Client.

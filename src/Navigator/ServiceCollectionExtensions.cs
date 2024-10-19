@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
+using Navigator.Abstractions.Client;
 using Navigator.Actions.Arguments;
 using Navigator.Actions.Arguments.Resolvers;
 using Navigator.Catalog.Factory;
