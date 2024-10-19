@@ -1,3 +1,4 @@
+using Navigator.Abstractions.Priorities;
 using Navigator.Strategy.Context;
 
 namespace Navigator.Strategy.Pipelines.Abstractions;
@@ -5,6 +6,7 @@ namespace Navigator.Strategy.Pipelines.Abstractions;
 /// <summary>
 ///     Interface for a pipeline step.
 /// </summary>
+[Priority(EPriority.Normal)]
 public interface INavigatorPipelineStep;
 
 /// <summary>

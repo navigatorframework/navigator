@@ -1,4 +1,6 @@
+using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Navigator.Abstractions.Priorities;
 using Navigator.Strategy.Context;
 using Navigator.Strategy.Pipelines.Abstractions;
 
@@ -77,9 +79,15 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     {
         var list = new List<IActionResolutionPipelineStep>();
 
-        list.AddRange(steps.OfType<IActionResolutionPipelineStepBefore<IActionResolutionPipelineStep>>());
+        list.AddRange(steps
+            .OfType<IActionResolutionPipelineStepBefore<IActionResolutionPipelineStep>>()
+            .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
+        
         list.Add(steps.OfType<IActionResolutionPipelineStep>().First());
-        list.AddRange(steps.OfType<IActionResolutionPipelineStepAfter<IActionResolutionPipelineStep>>());
+        
+        list.AddRange(steps
+            .OfType<IActionResolutionPipelineStepAfter<IActionResolutionPipelineStep>>()
+            .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
 
         return list;
     }
@@ -88,9 +96,15 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     {
         var list = new List<IActionExecutionPipelineStep>();
 
-        list.AddRange(steps.OfType<IActionExecutionPipelineStepBefore<IActionExecutionPipelineStep>>());
+        list.AddRange(steps
+            .OfType<IActionExecutionPipelineStepBefore<IActionExecutionPipelineStep>>()
+            .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
+        
         list.Add(steps.OfType<IActionExecutionPipelineStep>().First());
-        list.AddRange(steps.OfType<IActionExecutionPipelineStepAfter<IActionExecutionPipelineStep>>());
+        
+        list.AddRange(steps
+            .OfType<IActionExecutionPipelineStepAfter<IActionExecutionPipelineStep>>()
+            .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
 
         return list;
     }
