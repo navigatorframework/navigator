@@ -1,13 +1,14 @@
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Telegram;
 using Telegram.Bot.Types;
 
-namespace Navigator.Strategy.TypeProvider;
+namespace Navigator.Actions.Arguments.Resolvers;
 
-internal sealed record TelegramEntitiesTypeProvider : IArgumentTypeProvider
+internal sealed record TelegramEntitiesArgumentResolver : IArgumentResolver
 {
     /// <inheritdoc />
-    public ushort Priority { get; } = 10000;
+    public ushort Priority => 10000;
 
     public ValueTask<object?> GetArgument(Type type, Update update, BotAction action)
     {

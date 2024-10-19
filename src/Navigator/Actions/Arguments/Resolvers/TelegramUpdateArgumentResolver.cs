@@ -1,11 +1,12 @@
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Arguments;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
 
-namespace Navigator.Strategy.TypeProvider;
+namespace Navigator.Actions.Arguments.Resolvers;
 
-internal sealed record TelegramUpdateTypeProvider : IArgumentTypeProvider
+internal sealed record TelegramUpdateArgumentResolver : IArgumentResolver
 {
     /// <inheritdoc />
     public ushort Priority => 10000;

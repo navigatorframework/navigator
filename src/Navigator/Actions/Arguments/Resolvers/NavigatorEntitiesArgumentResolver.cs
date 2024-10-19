@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Client;
 using Navigator.Entities;
 using Navigator.Telegram;
@@ -8,19 +9,19 @@ using Telegram.Bot.Types.Enums;
 using Chat = Navigator.Entities.Chat;
 using User = Navigator.Entities.User;
 
-namespace Navigator.Strategy.TypeProvider;
+namespace Navigator.Actions.Arguments.Resolvers;
 
-internal sealed record NavigatorEntitiesTypeProvider : IArgumentTypeProvider
+internal sealed record NavigatorEntitiesArgumentResolver : IArgumentResolver
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public NavigatorEntitiesTypeProvider(IServiceProvider serviceProvider)
+    public NavigatorEntitiesArgumentResolver(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
 
     /// <inheritdoc />
-    public ushort Priority { get; } = 10000;
+    public ushort Priority => 10000;
 
 
     /// <inheritdoc />

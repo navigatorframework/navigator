@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Navigator.Abstractions.Actions.Arguments;
+using Navigator.Actions.Arguments;
+using Navigator.Actions.Arguments.Resolvers;
 using Navigator.Catalog.Factory;
 using Navigator.Client;
 using Navigator.Configuration;
@@ -7,7 +10,6 @@ using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
-using Navigator.Strategy.TypeProvider;
 
 namespace Navigator;
 
@@ -36,10 +38,12 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
 
-        services.AddScoped<IArgumentTypeProvider, NavigatorEntitiesTypeProvider>();
-        services.AddScoped<IArgumentTypeProvider, TelegramEntitiesTypeProvider>();
-        services.AddScoped<IArgumentTypeProvider, TelegramMessageTypeProvider>();
-        services.AddScoped<IArgumentTypeProvider, TelegramUpdateTypeProvider>();
+        services.AddScoped<IActionArgumentProvider, DefaultActionArgumentProvider>();
+
+        services.AddScoped<IArgumentResolver, NavigatorEntitiesArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramEntitiesArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
 
         services.AddTransient<INavigatorStrategy, NavigatorStrategy>();
 
