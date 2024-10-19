@@ -55,6 +55,11 @@ public record BotActionInformation
 /// <param name="Subkind">A string that represents the subkind of the <see cref="UpdateCategory" />.</param>
 public sealed record UpdateCategory(string Kind, string? Subkind = default)
 {
+    /// <summary>
+    ///     The unknown <see cref="UpdateCategory" />.
+    /// </summary>
+    public static UpdateCategory Unknown => new(nameof(UpdateType), nameof(UpdateType.Unknown));
+
     /// <inheritdoc />
     public bool Equals(UpdateCategory? other)
     {
