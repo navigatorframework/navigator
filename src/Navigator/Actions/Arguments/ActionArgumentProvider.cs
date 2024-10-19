@@ -5,13 +5,13 @@ using Telegram.Bot.Types;
 
 namespace Navigator.Actions.Arguments;
 
-public class DefaultActionArgumentProvider : IActionArgumentProvider
+public class ActionArgumentProvider : IActionArgumentProvider
 {
-    private readonly ILogger<DefaultActionArgumentProvider> _logger;
+    private readonly ILogger<ActionArgumentProvider> _logger;
     private readonly IArgumentResolver[] _resolvers;
     private readonly IServiceProvider _serviceProvider;
 
-    public DefaultActionArgumentProvider(ILogger<DefaultActionArgumentProvider> logger, IArgumentResolver[] resolvers,
+    public ActionArgumentProvider(ILogger<ActionArgumentProvider> logger, IArgumentResolver[] resolvers,
         IServiceProvider serviceProvider)
     {
         _logger = logger;

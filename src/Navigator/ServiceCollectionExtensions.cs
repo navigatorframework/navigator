@@ -38,7 +38,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
 
-        services.AddScoped<IActionArgumentProvider, DefaultActionArgumentProvider>();
+        services.AddScoped<IActionArgumentProvider, ActionArgumentProvider>();
 
         services.AddScoped<IArgumentResolver, NavigatorEntitiesArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramEntitiesArgumentResolver>();
