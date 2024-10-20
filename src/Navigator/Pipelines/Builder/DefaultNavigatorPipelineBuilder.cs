@@ -17,10 +17,10 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultNavigatorPipelineBuilder" /> class.
     /// </summary>
-    public DefaultNavigatorPipelineBuilder(ILogger<DefaultNavigatorPipelineBuilder> logger, INavigatorPipelineStep[] steps)
+    public DefaultNavigatorPipelineBuilder(ILogger<DefaultNavigatorPipelineBuilder> logger, IEnumerable<INavigatorPipelineStep> steps)
     {
         _logger = logger;
-        _steps = steps;
+        _steps = steps.ToArray();
     }
 
     /// <inheritdoc />

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Abstractions.Classifier;
 using Navigator.Abstractions.Client;
+using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Strategies;
 using Navigator.Actions.Arguments;
@@ -12,6 +13,7 @@ using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Hosted;
+using Navigator.Pipelines.Builder;
 using Navigator.Pipelines.Steps;
 using Navigator.Pipelines.Steps.Bundled;
 using Navigator.Strategy;
@@ -65,7 +67,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
 
-        services.AddTransient<INavigatorStrategy, NavigatorStrategy>();
+        services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
+
+        services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
 

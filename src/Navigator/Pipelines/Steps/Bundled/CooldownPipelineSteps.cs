@@ -56,9 +56,9 @@ internal class FilterByActionsInCooldownPipelineStep : IActionResolutionPipeline
         for (var i = context.Actions.Count - 1; i >= 0; i--)
             if (IsInCooldown(context.Actions[i], context.Update))
             {
-                context.Actions.RemoveAt(i);
-
                 _logger.LogDebug("Discarding action {ActionName} because is in cooldown", context.Actions[i].Information.Name);
+
+                context.Actions.RemoveAt(i);
             }
 
         await next();

@@ -38,5 +38,7 @@ public class ChatActionInExecutionPipelineStep : IActionExecutionPipelineStepBef
 
             await _client.SendChatActionAsync(chat, context.Action.Information.ChatAction.Value);
         }
+
+        await next();
     }
 }

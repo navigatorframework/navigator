@@ -30,7 +30,7 @@ public class DefaultActionExecutionMainStep : IActionExecutionMainStep
             _logger.LogInformation("Executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
                 context.Update.Id);
 
-            var arguments = await _argumentProvider.GetArguments(context.Update, context.Action);
+            var arguments = await _argumentProvider.GetHandlerArguments(context.Update, context.Action);
 
             await context.Action.ExecuteHandler(arguments);
         }

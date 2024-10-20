@@ -29,11 +29,11 @@ internal class FilterByChancesInResolutionPipelineStep : IActionResolutionPipeli
         for (var i = context.Actions.Count - 1; i >= 0; i--)
             if (context.Actions[i].Information.Chances is not null && Random.Shared.NextDouble() > context.Actions[i].Information.Chances)
             {
-                context.Actions.RemoveAt(i);
-
                 _logger.LogDebug("Discarding action {ActionName} because of configured chances ({Chances})",
                     context.Actions[i].Information.Name,
                     context.Actions[i].Information.Chances);
+
+                context.Actions.RemoveAt(i);
             }
 
         await next();

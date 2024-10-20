@@ -30,13 +30,13 @@ internal class FilterByConditionInResolutionPipelineStep : IActionResolutionPipe
 
         for (var i = context.Actions.Count - 1; i >= 0; i--)
         {
-            var arguments = await _argumentProvider.GetArguments(context.Update, context.Actions[i]);
+            var arguments = await _argumentProvider.GetConditionArguments(context.Update, context.Actions[i]);
 
             if (await context.Actions[i].ExecuteCondition(arguments)) continue;
 
-            context.Actions.RemoveAt(i);
-
             _logger.LogDebug("Discarding action {ActionName} because condition is not met", context.Actions[i].Information.Name);
+
+            context.Actions.RemoveAt(i);
         }
 
         await next();
