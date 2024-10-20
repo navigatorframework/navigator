@@ -13,9 +13,9 @@ public class NavigatorClient : TelegramBotClient, INavigatorClient
     /// <summary>
     /// Builds a <see cref="NavigatorClient"/>.
     /// </summary>
-    /// <param name="options"><see cref="INavigatorOptions"/></param>
+    /// <param name="options"><see cref="NavigatorOptions"/></param>
     /// <exception cref="ArgumentNullException">If telegram token is null</exception>
-    public NavigatorClient(INavigatorOptions options) : base(options.GetTelegramToken() ?? throw new ArgumentNullException())
+    public NavigatorClient(NavigatorOptions options) : base(options.GetTelegramToken() ?? throw new ArgumentNullException())
     {
     }
 
