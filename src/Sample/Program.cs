@@ -17,12 +17,12 @@ builder.Configuration.AddCommonConfiguration();
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddNavigator(options =>
+builder.Services.AddNavigator(configuration =>
 {
-    options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
-    options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
-    options.EnableChatActionNotification();
-    options.EnableMultipleActionsUsage();
+    configuration.Options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
+    configuration.Options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
+    configuration.Options.EnableChatActionNotification();
+    configuration.Options.EnableMultipleActionsUsage();
 });
 
 var app = builder.Build();
