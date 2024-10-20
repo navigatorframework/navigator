@@ -30,18 +30,17 @@ public static class ServiceCollectionExtensions
     ///     Adds Navigator.
     /// </summary>
     /// <param name="services"></param>
-    /// <param name="options"></param>
+    /// <param name="configuration"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
+    public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorConfiguration> configuration)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options), "Navigator options are required for navigator framework to work.");
+        ArgumentNullException.ThrowIfNull(configuration);
 
-        var navigatorBuilder = new NavigatorConfiguration(options, services);
+        var navigatorConfiguration = new NavigatorConfiguration();
+        configuration(navigatorConfiguration);
 
         services.AddScoped<INavigatorClient, NavigatorClient>();
-
         services.AddSingleton<BotActionCatalogFactory>();
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
@@ -56,14 +55,13 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
         services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
 
-        if (navigatorBuilder.Options.MultipleActionsUsageIsEnabled() == false)
+        if (navigatorConfiguration.Options.MultipleActionsUsageIsEnabled() == false)
             services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
 
-        if (navigatorBuilder.Options.ChatActionNotificationIsEnabled())
+        if (navigatorConfiguration.Options.ChatActionNotificationIsEnabled())
             services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
 
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, FilterByChancesInResolutionPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
 
@@ -73,10 +71,8 @@ public static class ServiceCollectionExtensions
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
-        navigatorBuilder.RegisterOrReplaceOptions();
-
         services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
 
-        return navigatorBuilder;
+        return navigatorConfiguration;
     }
 }
