@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution-items", ".solutio
 		..\LICENSE = ..\LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Testing.Unit", "Navigator.Testing.Unit\Navigator.Testing.Unit.csproj", "{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Testing", "Navigator.Testing\Navigator.Testing.csproj", "{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Abstractions", "Navigator.Abstractions\Navigator.Abstractions.csproj", "{3E7B4537-9FBB-42F8-9B28-DB6611385888}"
 EndProject
