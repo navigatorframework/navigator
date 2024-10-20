@@ -1,3 +1,4 @@
+using Navigator.Abstractions.Priorities;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Abstractions.Actions;
@@ -45,7 +46,7 @@ public record BotActionInformation
     /// <summary>
     ///     The priority of the <see cref="BotAction" />. Optional.
     /// </summary>
-    public required ushort Priority;
+    public required EPriority Priority;
 }
 
 /// <summary>

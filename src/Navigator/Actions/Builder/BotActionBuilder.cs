@@ -1,5 +1,6 @@
 using Navigator.Abstractions;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Priorities;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Actions.Builder;
@@ -17,7 +18,7 @@ public class BotActionBuilder
     public BotActionBuilder()
     {
         _id = Guid.NewGuid();
-        Priority = Abstractions.Actions.Priority.Default;
+        Priority = EPriority.Normal;
     }
 
     private string? Name { get; set; }
@@ -26,7 +27,7 @@ public class BotActionBuilder
     private Delegate? Handler { get; set; }
     private Type[] HandlerInputTypes { get; set; } = null!;
     private UpdateCategory Category { get; set; } = null!;
-    private ushort Priority { get; set; }
+    private EPriority Priority { get; set; }
     private TimeSpan? Cooldown { get; set; }
     private ChatAction? ChatAction { get; set; }
     private double? Chance { get; set; }
@@ -126,7 +127,7 @@ public class BotActionBuilder
     /// </summary>
     /// <param name="priority">The priority to be set.</param>
     /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder WithPriority(ushort priority)
+    public BotActionBuilder WithPriority(EPriority priority)
     {
         Priority = priority;
         return this;
