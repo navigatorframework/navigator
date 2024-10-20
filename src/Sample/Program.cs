@@ -44,7 +44,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
     var text = $"message received: {message.MessageId}";
 
     await client.SendTextMessageAsync(chat, text);
-}).WithChances(0.5).WithCooldown(TimeSpan.FromSeconds(30));
+}).WithCooldown(TimeSpan.FromSeconds(30));
 
 app.MapNavigator();
 

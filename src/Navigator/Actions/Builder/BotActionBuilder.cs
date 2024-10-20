@@ -32,7 +32,6 @@ public class BotActionBuilder : IBotActionBuilder
     private EPriority Priority { get; set; }
     private TimeSpan? Cooldown { get; set; }
     private ChatAction? ChatAction { get; set; }
-    private double? Chance { get; set; }
 
     /// <inheritdoc />
     public void Set(string key, object value)
@@ -53,7 +52,6 @@ public class BotActionBuilder : IBotActionBuilder
         {
             ChatAction = ChatAction,
             Category = Category,
-            Chances = Chance,
             ConditionInputTypes = ConditionInputTypes,
             HandlerInputTypes = HandlerInputTypes,
             Name = Name ?? $"{_id}",
@@ -120,17 +118,6 @@ public class BotActionBuilder : IBotActionBuilder
     public BotActionBuilder SetCategory(UpdateCategory category)
     {
         Category = category;
-        return this;
-    }
-
-    /// <summary>
-    ///     Sets the chance of the <see cref="BotAction" /> being executed.
-    /// </summary>
-    /// <param name="chance">The chance to be set.</param>
-    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder WithChances(double chance)
-    {
-        Chance = chance;
         return this;
     }
 

@@ -9,19 +9,9 @@ namespace Navigator.Abstractions.Actions;
 public record BotActionInformation
 {
     /// <summary>
-    ///     The options of the <see cref="BotAction" />.
-    /// </summary>
-    public required Dictionary<string, object> Options;
-
-    /// <summary>
     ///     The <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
     /// </summary>
     public required UpdateCategory Category;
-
-    /// <summary>
-    ///     The chance of the <see cref="BotAction" /> being executed. Optional.
-    /// </summary>
-    public required double? Chances;
 
     /// <summary>
     ///     The <see cref="ChatAction" /> associtated with the <see cref="BotAction" />. Optional.
@@ -47,6 +37,11 @@ public record BotActionInformation
     ///     The name of the <see cref="BotAction" />. If no name is set, the id is used.
     /// </summary>
     public required string Name;
+
+    /// <summary>
+    ///     The options of the <see cref="BotAction" />.
+    /// </summary>
+    public required Dictionary<string, object> Options;
 
     /// <summary>
     ///     The priority of the <see cref="BotAction" />. Optional.
