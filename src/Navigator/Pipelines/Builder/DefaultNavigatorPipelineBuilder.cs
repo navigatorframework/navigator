@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Navigator.Abstractions.Pipelines;
 using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
@@ -16,16 +17,14 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultNavigatorPipelineBuilder" /> class.
     /// </summary>
-    /// <param name="steps">The steps to build the pipeline from.</param>
-    /// <param name="logger">An instance of <see cref="ILogger" />.</param>
-    public DefaultNavigatorPipelineBuilder(INavigatorPipelineStep[] steps, ILogger<DefaultNavigatorPipelineBuilder> logger)
+    public DefaultNavigatorPipelineBuilder( ILogger<DefaultNavigatorPipelineBuilder> logger, INavigatorPipelineStep[] steps)
     {
         _logger = logger;
         _steps = steps;
     }
 
     /// <inheritdoc />
-    public PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorActionResolutionContext context)
+    public Pipeline BuildResolutionPipeline(NavigatorActionResolutionContext context)
     {
         _logger.LogInformation("Building resolution pipeline for update {UpdateId}", context.Update.Id);
 
@@ -46,11 +45,11 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
 
         _logger.LogInformation("Finished building resolution pipeline for update {UpdateId}", context.Update.Id);
 
-        return nextStep;
+        return new Pipeline(nextStep, steps);
     }
 
     /// <inheritdoc />
-    public PipelineStepHandlerDelegate BuildExecutionPipeline(NavigatorActionExecutionContext context)
+    public Pipeline BuildExecutionPipeline(NavigatorActionExecutionContext context)
     {
         _logger.LogInformation("Building execution pipeline for update {UpdateId} and action {ActionName}", context.Update.Id,
             context.Action.Information.Name);
@@ -73,7 +72,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
         _logger.LogInformation("Finished building resolution pipeline for update {UpdateId} and action {ActionName}", context.Update.Id,
             context.Action.Information.Name);
 
-        return nextStep;
+        return new Pipeline(nextStep, steps);
     }
 
     private static List<IActionResolutionPipelineStep> OrderResolutionSteps(INavigatorPipelineStep[] steps)

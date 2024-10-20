@@ -13,12 +13,12 @@ public interface INavigatorPipelineBuilder
     /// </summary>
     /// <param name="context">An instance of <see cref="NavigatorActionResolutionContext" />.</param>
     /// <returns>A <see cref="PipelineStepHandlerDelegate" />.</returns>
-    PipelineStepHandlerDelegate BuildResolutionPipeline(NavigatorActionResolutionContext context);
+    Pipeline BuildResolutionPipeline(NavigatorActionResolutionContext context);
 
     /// <summary>
     ///     Builds a navigator pipeline for executing actions.
     /// </summary>
     /// <param name="context">An instance of <see cref="NavigatorActionResolutionContext" />.</param>
     /// <returns>A <see cref="PipelineStepHandlerDelegate" />.</returns>
-    PipelineStepHandlerDelegate BuildExecutionPipeline(NavigatorActionExecutionContext context);
+    Pipeline BuildExecutionPipeline(NavigatorActionExecutionContext context);
 }
