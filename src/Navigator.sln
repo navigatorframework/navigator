@@ -1,7 +1,7 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator", "Navigator\Navigator.csproj", "{6DBAD041-6623-4903-9939-254FDC4EBD60}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{24315212-C904-4479-BFA0-F1C830C32D82}"
 EndProject
@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution-items", ".solutio
 		nuget.config = nuget.config
 		..\LICENSE = ..\LICENSE
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Testing", "Navigator.Testing\Navigator.Testing.csproj", "{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Abstractions", "Navigator.Abstractions\Navigator.Abstractions.csproj", "{3E7B4537-9FBB-42F8-9B28-DB6611385888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +33,19 @@ Global
 		{3954357B-17C7-4091-9A9E-A1FC7E7B680D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3954357B-17C7-4091-9A9E-A1FC7E7B680D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3954357B-17C7-4091-9A9E-A1FC7E7B680D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F20DFE-B9DE-4361-BAF0-6C55983D12E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7B4537-9FBB-42F8-9B28-DB6611385888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7B4537-9FBB-42F8-9B28-DB6611385888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7B4537-9FBB-42F8-9B28-DB6611385888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7B4537-9FBB-42F8-9B28-DB6611385888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6DBAD041-6623-4903-9939-254FDC4EBD60} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 		{3954357B-17C7-4091-9A9E-A1FC7E7B680D} = {24315212-C904-4479-BFA0-F1C830C32D82}
+		{15F20DFE-B9DE-4361-BAF0-6C55983D12E3} = {24315212-C904-4479-BFA0-F1C830C32D82}
+		{3E7B4537-9FBB-42F8-9B28-DB6611385888} = {A6DF6F5F-F784-4EF1-97D1-C3DDD2E66B5E}
 	EndGlobalSection
 EndGlobal

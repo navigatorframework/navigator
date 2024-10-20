@@ -1,4 +1,5 @@
-using Navigator.Entities;
+using Navigator.Abstractions;
+using Navigator.Abstractions.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Chat = Telegram.Bot.Types.Chat;
@@ -79,7 +80,7 @@ internal static class TelegramUpdateExtensions
                 CanReadAllGroupMessages = rawUser.CanReadAllGroupMessages,
                 SupportsInlineQueries = rawUser.SupportsInlineQueries
             }
-            : new Entities.User(rawUser.Id, rawUser.FirstName)
+            : new Abstractions.Entities.User(rawUser.Id, rawUser.FirstName)
             {
                 Username = rawUser.Username,
                 LastName = rawUser.LastName,
@@ -88,10 +89,10 @@ internal static class TelegramUpdateExtensions
                 HasBotInAttachmentMenu = rawUser.AddedToAttachmentMenu
             };
 
-        var chat = default(Entities.Chat);
+        var chat = default(Abstractions.Entities.Chat);
 
         if (rawChat is not null)
-            chat = new Entities.Chat(rawChat.Id, (Entities.Chat.ChatType)rawChat.Type)
+            chat = new Abstractions.Entities.Chat(rawChat.Id, (Abstractions.Entities.Chat.ChatType)rawChat.Type)
             {
                 Title = rawChat.Title,
                 IsForum = rawChat.IsForum

@@ -5,9 +5,9 @@
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Title>Navigator</Title>
+        <Title>Navigator.Abstractions</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>A highly opinionated telegram bot framework for .NET</Description>
+        <Description>Abstractions for Navigator, a highly opinionated telegram bot framework for .NET</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
@@ -23,7 +23,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Telegram.Bot" Version="21.10.0"/>
+    </ItemGroup>
+    
 </Project>

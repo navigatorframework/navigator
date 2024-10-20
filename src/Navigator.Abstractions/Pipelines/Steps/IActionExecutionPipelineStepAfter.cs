@@ -1,0 +1,5 @@
+namespace Navigator.Abstractions.Pipelines.Steps;
+
+public interface IActionExecutionPipelineStepAfter<T> : IActionExecutionPipelineStep;
+
+public interface IActionExecutionPipelineStepAfter : IActionExecutionPipelineStepAfter<IActionExecutionPipelineStep>;

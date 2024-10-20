@@ -1,3 +1,5 @@
+using Navigator.Abstractions;
+using Navigator.Abstractions.Actions;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Actions.Builder;
@@ -15,7 +17,7 @@ public class BotActionBuilder
     public BotActionBuilder()
     {
         _id = Guid.NewGuid();
-        Priority = Actions.Priority.Default;
+        Priority = Abstractions.Actions.Priority.Default;
     }
 
     private string? Name { get; set; }
