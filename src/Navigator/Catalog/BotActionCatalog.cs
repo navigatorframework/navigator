@@ -1,5 +1,6 @@
 using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Catalog;
+using Navigator.Abstractions.Priorities;
 
 namespace Navigator.Catalog;
 
@@ -7,7 +8,7 @@ namespace Navigator.Catalog;
 public sealed record BotActionCatalog : IBotActionCatalog
 {
     private readonly Dictionary<Guid, BotAction> _actions;
-    private readonly Dictionary<Guid, ushort> _priorityByAction;
+    private readonly Dictionary<Guid, EPriority> _priorityByAction;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="BotActionCatalog" /> class.
