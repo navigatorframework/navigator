@@ -6,17 +6,17 @@ using Navigator.Abstractions.Pipelines.Steps;
 namespace Navigator.Pipelines.Steps;
 
 /// <summary>
-///     Default implementation of <see cref="IActionExecutionPipelineStep" />.
+///     Default implementation of <see cref="IActionExecutionMainStep" />.
 /// </summary>
-public class DefaultActionExecutionStep : IActionExecutionPipelineStep
+public class DefaultActionExecutionMainStep : IActionExecutionMainStep
 {
     private readonly IActionArgumentProvider _argumentProvider;
-    private readonly ILogger<DefaultActionExecutionStep> _logger;
+    private readonly ILogger<DefaultActionExecutionMainStep> _logger;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="DefaultActionExecutionStep" /> class.
+    ///     Initializes a new instance of the <see cref="DefaultActionExecutionMainStep" /> class.
     /// </summary>
-    public DefaultActionExecutionStep(IActionArgumentProvider argumentProvider, ILogger<DefaultActionExecutionStep> logger)
+    public DefaultActionExecutionMainStep(IActionArgumentProvider argumentProvider, ILogger<DefaultActionExecutionMainStep> logger)
     {
         _argumentProvider = argumentProvider;
         _logger = logger;

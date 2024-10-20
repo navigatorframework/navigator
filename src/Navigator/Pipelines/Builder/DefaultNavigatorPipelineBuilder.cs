@@ -17,7 +17,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultNavigatorPipelineBuilder" /> class.
     /// </summary>
-    public DefaultNavigatorPipelineBuilder( ILogger<DefaultNavigatorPipelineBuilder> logger, INavigatorPipelineStep[] steps)
+    public DefaultNavigatorPipelineBuilder(ILogger<DefaultNavigatorPipelineBuilder> logger, INavigatorPipelineStep[] steps)
     {
         _logger = logger;
         _steps = steps;
@@ -83,7 +83,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
             .OfType<IActionResolutionPipelineStepBefore<IActionResolutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
 
-        list.Add(steps.OfType<IActionResolutionPipelineStep>().First());
+        list.Add(steps.OfType<IActionResolutionMainStep>().First());
 
         list.AddRange(steps
             .OfType<IActionResolutionPipelineStepAfter<IActionResolutionPipelineStep>>()
@@ -100,7 +100,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
             .OfType<IActionExecutionPipelineStepBefore<IActionExecutionPipelineStep>>()
             .OrderBy(step => step.GetType().GetCustomAttribute<PriorityAttribute>()?.Level ?? EPriority.Normal));
 
-        list.Add(steps.OfType<IActionExecutionPipelineStep>().First());
+        list.Add(steps.OfType<IActionExecutionMainStep>().First());
 
         list.AddRange(steps
             .OfType<IActionExecutionPipelineStepAfter<IActionExecutionPipelineStep>>()

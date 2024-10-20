@@ -51,22 +51,20 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
 
-        services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionStep>();
-        services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionStep>();
+        services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
+        services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
 
         if (navigatorBuilder.Options.MultipleActionsUsageIsEnabled() == false)
             services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
 
         if (navigatorBuilder.Options.ChatActionNotificationIsEnabled())
-        {
             services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
-        }
-        
+
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, FilterByChancesInResolutionPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
         services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
-        
+
         services.AddTransient<INavigatorStrategy, NavigatorStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();

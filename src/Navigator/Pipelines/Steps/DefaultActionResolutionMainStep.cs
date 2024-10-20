@@ -8,18 +8,18 @@ using Navigator.Catalog.Factory;
 namespace Navigator.Pipelines.Steps;
 
 /// <summary>
-///     Default implementation of <see cref="IActionResolutionPipelineStep" />.
+///     Default implementation of <see cref="IActionResolutionMainStep" />.
 /// </summary>
-public class DefaultActionResolutionStep : IActionResolutionPipelineStep
+public class DefaultActionResolutionMainStep : IActionResolutionMainStep
 {
     private readonly IBotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
-    private readonly ILogger<DefaultActionResolutionStep> _logger;
+    private readonly ILogger<DefaultActionResolutionMainStep> _logger;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="DefaultActionResolutionStep" /> class.
+    ///     Initializes a new instance of the <see cref="DefaultActionResolutionMainStep" /> class.
     /// </summary>
-    public DefaultActionResolutionStep(BotActionCatalogFactory catalogFactory, ILogger<DefaultActionResolutionStep> logger,
+    public DefaultActionResolutionMainStep(BotActionCatalogFactory catalogFactory, ILogger<DefaultActionResolutionMainStep> logger,
         IUpdateClassifier classifier)
     {
         _catalog = catalogFactory.Retrieve();

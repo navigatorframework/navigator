@@ -34,7 +34,7 @@ public class NavigatorStrategy : INavigatorStrategy
 
         _logger.LogInformation("Executing resolution pipeline for update {UpdateId}", update.Id);
 
-        await resolutionPipeline();
+        await resolutionPipeline.InvokeAsync();
 
         foreach (var executionContext in context.GetExecutionContexts())
         {
@@ -43,7 +43,7 @@ public class NavigatorStrategy : INavigatorStrategy
             _logger.LogInformation("Executing execution pipeline for update {UpdateId} and action {ActionName}",
                 update.Id, executionContext.Action.Information.Name);
 
-            await executionPipeline();
+            await executionPipeline.InvokeAsync();
         }
 
         _logger.LogInformation("Finished processing update {UpdateId}", update.Id);
