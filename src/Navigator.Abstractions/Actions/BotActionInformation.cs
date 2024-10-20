@@ -9,6 +9,11 @@ namespace Navigator.Abstractions.Actions;
 public record BotActionInformation
 {
     /// <summary>
+    ///     The options of the <see cref="BotAction" />.
+    /// </summary>
+    public required Dictionary<string, object> Options;
+
+    /// <summary>
     ///     The <see cref="UpdateCategory" /> of the <see cref="BotAction" />.
     /// </summary>
     public required UpdateCategory Category;

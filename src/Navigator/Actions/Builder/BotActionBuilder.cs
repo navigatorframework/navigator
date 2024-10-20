@@ -1,5 +1,6 @@
 using Navigator.Abstractions;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Builder;
 using Navigator.Abstractions.Priorities;
 using Telegram.Bot.Types.Enums;
 
@@ -8,9 +9,10 @@ namespace Navigator.Actions.Builder;
 /// <summary>
 ///     Builder for <see cref="BotAction" />.
 /// </summary>
-public class BotActionBuilder
+public class BotActionBuilder : IBotActionBuilder
 {
     private readonly Guid _id;
+    private readonly Dictionary<string, object> _options = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="BotActionBuilder" /> class.
@@ -32,10 +34,19 @@ public class BotActionBuilder
     private ChatAction? ChatAction { get; set; }
     private double? Chance { get; set; }
 
-    /// <summary>
-    ///     Builds the bot action.
-    /// </summary>
-    /// <returns>An instance of <see cref="BotAction" /></returns>
+    /// <inheritdoc />
+    public void Set(string key, object value)
+    {
+        _options.TryAdd(key, value);
+    }
+
+    /// <inheritdoc />
+    public TValue? Get<TValue>(string key)
+    {
+        return _options.TryGetValue(key, out var value) && value is TValue result ? result : default;
+    }
+
+    /// <inheritdoc />
     public BotAction Build()
     {
         var information = new BotActionInformation
@@ -47,7 +58,8 @@ public class BotActionBuilder
             HandlerInputTypes = HandlerInputTypes,
             Name = Name ?? $"{_id}",
             Priority = Priority,
-            Cooldown = Cooldown
+            Cooldown = Cooldown,
+            Options = _options
         };
 
         if (Condition is null || Handler is null)
