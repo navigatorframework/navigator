@@ -27,15 +27,18 @@ public class FilterByProbabilitiesStep : IActionResolutionPipelineStepAfter
         if (context.Actions.Count == 0) await next();
 
         for (var i = context.Actions.Count - 1; i >= 0; i--)
-            if (context.Actions[i].Information.GetProbabilities() is not null &&
-                Random.Shared.NextDouble() > context.Actions[i].Information.GetProbabilities())
+        {
+            var probabilities = context.Actions[i].Information.GetProbabilities();
+            
+            if (probabilities is not null && Random.Shared.NextDouble() > probabilities)
             {
                 _logger.LogDebug("Discarding action {ActionName} because of configured probabilities ({Probabilities})",
                     context.Actions[i].Information.Name,
-                    context.Actions[i].Information.GetProbabilities());
+                    probabilities);
 
                 context.Actions.RemoveAt(i);
             }
+        }
 
         await next();
     }

@@ -5,7 +5,7 @@ namespace Navigator.Extensions.Probabilities;
 
 public static class BotActionExtensions
 {
-    internal const string ProbabilitiesKey = "extensions.probabilities";
+    private const string ProbabilitiesKey = "extensions.probabilities";
 
     public static IBotActionBuilder WithProbabilities(this IBotActionBuilder builder, double probabilities)
     {
@@ -16,7 +16,7 @@ public static class BotActionExtensions
 
     public static double? GetProbabilities(this BotActionInformation information)
     {
-        if (information.Options.TryGetValue(ProbabilitiesKey, out var value) && value is double result) return result;
+        if (information.Options.GetValueOrDefault(ProbabilitiesKey) is double result) return result;
 
         return null;
     }
