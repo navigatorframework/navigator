@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Abstractions.Classifier;
@@ -35,37 +36,16 @@ public static class ServiceCollectionExtensions
     /// <exception cref="ArgumentNullException"></exception>
     public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorConfiguration> configuration)
     {
-        ArgumentNullException.ThrowIfNull(configuration);
-
-        var navigatorConfiguration = new NavigatorConfiguration();
-        configuration(navigatorConfiguration);
+        var navigatorConfiguration = BuildConfiguration(configuration);
 
         services.AddScoped<INavigatorClient, NavigatorClient>();
         services.AddSingleton<BotActionCatalogFactory>();
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
 
-        services.AddScoped<IActionArgumentProvider, ActionArgumentProvider>();
-
-        services.AddScoped<IArgumentResolver, NavigatorEntitiesArgumentResolver>();
-        services.AddScoped<IArgumentResolver, TelegramEntitiesArgumentResolver>();
-        services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
-        services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
-
-        services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
-        services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
-
-        if (navigatorConfiguration.Options.MultipleActionsUsageIsEnabled() == false)
-            services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
-
-        if (navigatorConfiguration.Options.ChatActionNotificationIsEnabled())
-            services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
-
-        services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
-
-        services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
+        services.AddArgumentProvider();
+        
+        services.AddNavigatorPipeline(navigatorConfiguration);
 
         services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
 
@@ -74,5 +54,43 @@ public static class ServiceCollectionExtensions
         services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
 
         return navigatorConfiguration;
+    }
+
+    private static NavigatorConfiguration BuildConfiguration(Action<NavigatorConfiguration> configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+        
+        var configuration = new NavigatorConfiguration();
+        configurationBuilder(configuration);
+
+        return configuration;
+    }
+
+    private static void AddArgumentProvider(this IServiceCollection services)
+    {
+        services.AddScoped<IActionArgumentProvider, ActionArgumentProvider>();
+
+        services.AddScoped<IArgumentResolver, NavigatorEntitiesArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramEntitiesArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
+        services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
+    }
+
+    private static void AddNavigatorPipeline(this IServiceCollection services, NavigatorConfiguration configuration)
+    {
+        services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
+        services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
+
+        if (configuration.Options.MultipleActionsUsageIsEnabled() == false)
+            services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
+
+        if (configuration.Options.ChatActionNotificationIsEnabled())
+            services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
+
+        services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
+        services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
+        services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
+
+        services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
     }
 }
