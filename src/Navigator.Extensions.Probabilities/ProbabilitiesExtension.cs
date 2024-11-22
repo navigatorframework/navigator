@@ -5,7 +5,7 @@ using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Configuration.Options;
 using Navigator.Extensions.Probabilities.Step;
 
-namespace Navigator.Extensions.Probabilities.Configuration;
+namespace Navigator.Extensions.Probabilities;
 
 /// <summary>
 ///     Extension for adding probabilities of being executed to a <see cref="BotAction" />.
