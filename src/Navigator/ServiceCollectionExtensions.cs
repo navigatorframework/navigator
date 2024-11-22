@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http.Json;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Abstractions.Classifier;
@@ -16,7 +15,6 @@ using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Pipelines.Builder;
 using Navigator.Pipelines.Steps;
-using Navigator.Pipelines.Steps.Bundled;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
 
@@ -88,8 +86,6 @@ public static class ServiceCollectionExtensions
             services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
 
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
 
         services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
     }
