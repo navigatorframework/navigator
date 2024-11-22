@@ -1,6 +1,6 @@
 using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Actions.Arguments;
-using Navigator.Telegram;
+using Navigator.Abstractions.Telegram;
 using Telegram.Bot.Types;
 
 namespace Navigator.Actions.Arguments.Resolvers;

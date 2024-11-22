@@ -1,13 +1,12 @@
-using Navigator.Abstractions;
 using Navigator.Abstractions.Entities;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Chat = Telegram.Bot.Types.Chat;
 using User = Telegram.Bot.Types.User;
 
-namespace Navigator.Telegram;
+namespace Navigator.Abstractions.Telegram;
 
-internal static class TelegramUpdateExtensions
+public static class TelegramUpdateExtensions
 {
     public static string? ExtractCommand(this Message message, string? botName = default)
     {

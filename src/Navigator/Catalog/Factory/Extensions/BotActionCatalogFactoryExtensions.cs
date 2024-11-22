@@ -1,6 +1,6 @@
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Telegram;
 using Navigator.Actions.Builder;
-using Navigator.Telegram;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Passport;
