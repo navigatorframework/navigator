@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Title>Navigator.Extensions.Cooldown</Title>
+        <Authors>Lucas Maximiliano Marino</Authors>
+        <Description>Easily configure the cooldown of an action.</Description>
+        <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>Telegram, Bot, Framework, Navigator, Cooldown</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2024</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj"/>
+    </ItemGroup>
+
+</Project>
