@@ -5,9 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator;
 using Navigator.Abstractions.Client;
 using Navigator.Catalog.Factory.Extensions;
-using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
+using Navigator.Extensions.Cooldown;
+using Navigator.Extensions.Cooldown.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -23,6 +24,8 @@ builder.Services.AddNavigator(configuration =>
     configuration.Options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
     configuration.Options.EnableChatActionNotification();
     configuration.Options.EnableMultipleActionsUsage();
+    
+    configuration.WithExtension<CooldownExtension>();
 });
 
 var app = builder.Build();
