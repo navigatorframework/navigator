@@ -19,6 +19,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj"/>
     </ItemGroup>
 
