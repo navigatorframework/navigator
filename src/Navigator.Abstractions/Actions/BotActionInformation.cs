@@ -24,11 +24,6 @@ public record BotActionInformation
     public required Type[] ConditionInputTypes;
 
     /// <summary>
-    ///     The cooldown of the <see cref="BotAction" />. Optional.
-    /// </summary>
-    public required TimeSpan? Cooldown;
-
-    /// <summary>
     ///     The input types of the handler delegate of the <see cref="BotAction" />.
     /// </summary>
     public required Type[] HandlerInputTypes;

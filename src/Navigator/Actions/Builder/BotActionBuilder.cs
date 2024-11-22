@@ -30,7 +30,6 @@ public class BotActionBuilder : IBotActionBuilder
     private Type[] HandlerInputTypes { get; set; } = null!;
     private UpdateCategory Category { get; set; } = null!;
     private EPriority Priority { get; set; }
-    private TimeSpan? Cooldown { get; set; }
     private ChatAction? ChatAction { get; set; }
 
     /// <inheritdoc />
@@ -56,7 +55,6 @@ public class BotActionBuilder : IBotActionBuilder
             HandlerInputTypes = HandlerInputTypes,
             Name = Name ?? $"{_id}",
             Priority = Priority,
-            Cooldown = Cooldown,
             Options = _options
         };
 
@@ -129,17 +127,6 @@ public class BotActionBuilder : IBotActionBuilder
     public BotActionBuilder WithPriority(EPriority priority)
     {
         Priority = priority;
-        return this;
-    }
-
-    /// <summary>
-    ///     Sets the cooldown of the <see cref="BotAction" />.
-    /// </summary>
-    /// <param name="cooldown">The cooldown to be set.</param>
-    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder WithCooldown(TimeSpan cooldown)
-    {
-        Cooldown = cooldown;
         return this;
     }
 

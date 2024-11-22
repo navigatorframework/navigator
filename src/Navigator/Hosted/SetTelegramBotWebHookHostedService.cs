@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Navigator.Abstractions.Client;
 using Navigator.Client;
 using Navigator.Configuration.Options;
@@ -25,17 +26,19 @@ public class SetTelegramBotWebHookHostedService : BackgroundService
     /// <param name="navigatorOptions"></param>
     /// <exception cref="ArgumentNullException"></exception>
     public SetTelegramBotWebHookHostedService(ILogger<SetTelegramBotWebHookHostedService> logger, IServiceScopeFactory serviceScopeFactory,
-        NavigatorOptions navigatorOptions)
+        IOptions<NavigatorOptions> navigatorOptions)
     {
         _logger = logger;
         _serviceScopeFactory = serviceScopeFactory;
+        
+        var options = navigatorOptions.Value;
 
-        if (string.IsNullOrWhiteSpace(navigatorOptions.GetWebHookBaseUrl()))
+        if (string.IsNullOrWhiteSpace(options.GetWebHookBaseUrl()))
         {
-            throw new ArgumentNullException(nameof(navigatorOptions), "An URL for WebHook is required.");
+            throw new ArgumentNullException(nameof(options), "An URL for WebHook is required.");
         }
             
-        _webHookUrl = $"{navigatorOptions.GetWebHookBaseUrl()}/{navigatorOptions.GetWebHookEndpointOrDefault()}";
+        _webHookUrl = $"{options.GetWebHookBaseUrl()}/{options.GetWebHookEndpointOrDefault()}";
     }
 
     /// <inheritdoc />

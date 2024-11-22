@@ -22,7 +22,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.High,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "High",
                 Options = []
@@ -34,7 +33,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.Normal,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "Normal",
                 Options = []
@@ -46,7 +44,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.Low,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "Low",
                 Options = []
@@ -75,7 +72,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.High,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "High",
                 Options = []
@@ -87,7 +83,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.Normal,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "Normal",
                 Options = []
@@ -99,7 +94,6 @@ public class BotActionCatalogTest
                 Priority = EPriority.Low,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
                 Name = "Low",
                 Options = []

@@ -4,6 +4,7 @@ using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Telegram;
+using Navigator.Extensions.Cooldown.Extensions;
 using Telegram.Bot.Types;
 
 namespace Navigator.Extensions.Cooldown.Step;
@@ -21,12 +22,12 @@ internal class SetCooldownForActionPipelineStep : IActionExecutionPipelineStepAf
 
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
     {
-        if (context.Action.Information.Cooldown.HasValue)
+        if (context.Action.Information.GetCooldown() != TimeSpan.Zero)
         {
             _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} minutes", context.Action.Information.Name,
-                context.Action.Information.Cooldown.Value.TotalMinutes);
+                context.Action.Information.GetCooldown().TotalMinutes);
 
-            _cache.Set(GenerateCacheKey(context.Action, context.Update), true, context.Action.Information.Cooldown.Value);
+            _cache.Set(GenerateCacheKey(context.Action, context.Update), true, context.Action.Information.GetCooldown());
         }
 
         await next();
