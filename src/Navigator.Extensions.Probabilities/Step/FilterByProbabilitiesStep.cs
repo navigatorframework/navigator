@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Priorities;
+using Navigator.Extensions.Probabilities.Extensions;
 
 namespace Navigator.Extensions.Probabilities.Step;
 

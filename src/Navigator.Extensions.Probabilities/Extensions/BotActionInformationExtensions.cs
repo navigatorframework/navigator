@@ -1,7 +1,7 @@
 using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Actions.Builder;
 
-namespace Navigator.Extensions.Probabilities;
+namespace Navigator.Extensions.Probabilities.Extensions;
 
 /// <summary>
 ///     Extensions for Navigator.Extensions.Probabilities .
