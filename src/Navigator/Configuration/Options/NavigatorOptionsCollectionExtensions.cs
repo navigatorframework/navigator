@@ -27,7 +27,7 @@ public static class NavigatorOptionsCollectionExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static string? GetWebHookBaseUrl(this INavigatorOptions navigatorOptions)
+    public static string? GetWebHookBaseUrl(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<string>(WebHookBaseUrlKey);
     }
@@ -53,7 +53,7 @@ public static class NavigatorOptionsCollectionExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static string GetWebHookEndpointOrDefault(this INavigatorOptions navigatorOptions)
+    public static string GetWebHookEndpointOrDefault(this NavigatorOptions navigatorOptions)
     {
         var webHookEndpoint = navigatorOptions.RetrieveOption<string>(WebHookEndpointKey);
 
@@ -85,7 +85,7 @@ public static class NavigatorOptionsCollectionExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static bool MultipleActionsUsageIsEnabled(this INavigatorOptions navigatorOptions)
+    public static bool MultipleActionsUsageIsEnabled(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<bool>(MultipleActionsKey);
     }
@@ -111,7 +111,7 @@ public static class NavigatorOptionsCollectionExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static string? GetTelegramToken(this INavigatorOptions navigatorOptions)
+    public static string? GetTelegramToken(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<string>(TelegramTokenKey);
     }
@@ -136,7 +136,7 @@ public static class NavigatorOptionsCollectionExtensions
     /// </summary>
     /// <param name="navigatorOptions"></param>
     /// <returns></returns>
-    public static bool ChatActionNotificationIsEnabled(this INavigatorOptions navigatorOptions)
+    public static bool ChatActionNotificationIsEnabled(this NavigatorOptions navigatorOptions)
     {
         return navigatorOptions.RetrieveOption<bool>(ChatActionNotificationKey);
     }

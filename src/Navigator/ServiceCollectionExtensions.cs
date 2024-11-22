@@ -15,7 +15,6 @@ using Navigator.Configuration.Options;
 using Navigator.Hosted;
 using Navigator.Pipelines.Builder;
 using Navigator.Pipelines.Steps;
-using Navigator.Pipelines.Steps.Bundled;
 using Navigator.Strategy;
 using Navigator.Strategy.Classifier;
 
@@ -30,53 +29,69 @@ public static class ServiceCollectionExtensions
     ///     Adds Navigator.
     /// </summary>
     /// <param name="services"></param>
-    /// <param name="options"></param>
+    /// <param name="configuration"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorOptions> options)
+    public static NavigatorConfiguration AddNavigator(this IServiceCollection services, Action<NavigatorConfiguration> configuration)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options), "Navigator options are required for navigator framework to work.");
-
-        var navigatorBuilder = new NavigatorConfiguration(options, services);
+        var navigatorConfiguration = BuildConfiguration(configuration);
 
         services.AddScoped<INavigatorClient, NavigatorClient>();
-
         services.AddSingleton<BotActionCatalogFactory>();
 
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
 
+        services.AddArgumentProvider();
+        
+        services.AddNavigatorPipeline(navigatorConfiguration);
+
+        services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
+
+        services.AddHostedService<SetTelegramBotWebHookHostedService>();
+
+        services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
+
+        navigatorConfiguration.Configure(services);
+        
+        services.AddOptions<NavigatorOptions>()
+            .Configure(options => options.Import(navigatorConfiguration.Options.RetrieveAllOptions()));
+
+        return navigatorConfiguration;
+    }
+
+    private static NavigatorConfiguration BuildConfiguration(Action<NavigatorConfiguration> configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+        
+        var configuration = new NavigatorConfiguration();
+        configurationBuilder(configuration);
+
+        return configuration;
+    }
+
+    private static void AddArgumentProvider(this IServiceCollection services)
+    {
         services.AddScoped<IActionArgumentProvider, ActionArgumentProvider>();
 
         services.AddScoped<IArgumentResolver, NavigatorEntitiesArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramEntitiesArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramMessageArgumentResolver>();
         services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
+    }
 
+    private static void AddNavigatorPipeline(this IServiceCollection services, NavigatorConfiguration configuration)
+    {
         services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
         services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
 
-        if (navigatorBuilder.Options.MultipleActionsUsageIsEnabled() == false)
+        if (configuration.Options.MultipleActionsUsageIsEnabled() == false)
             services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
 
-        if (navigatorBuilder.Options.ChatActionNotificationIsEnabled())
+        if (configuration.Options.ChatActionNotificationIsEnabled())
             services.AddScoped<INavigatorPipelineStep, ChatActionInExecutionPipelineStep>();
 
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, FilterByChancesInResolutionPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
-        services.AddScoped<INavigatorPipelineStep, SetCooldownForActionPipelineStep>();
 
         services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
-
-        services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
-
-        services.AddHostedService<SetTelegramBotWebHookHostedService>();
-
-        navigatorBuilder.RegisterOrReplaceOptions();
-
-        services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
-
-        return navigatorBuilder;
     }
 }

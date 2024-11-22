@@ -4,7 +4,7 @@ using Navigator.Abstractions.Client;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Priorities;
-using Navigator.Telegram;
+using Navigator.Abstractions.Telegram;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 

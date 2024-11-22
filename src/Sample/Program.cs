@@ -5,9 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator;
 using Navigator.Abstractions.Client;
 using Navigator.Catalog.Factory.Extensions;
-using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
+using Navigator.Extensions.Cooldown;
+using Navigator.Extensions.Cooldown.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -17,12 +18,14 @@ builder.Configuration.AddCommonConfiguration();
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddNavigator(options =>
+builder.Services.AddNavigator(configuration =>
 {
-    options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
-    options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
-    options.EnableChatActionNotification();
-    options.EnableMultipleActionsUsage();
+    configuration.Options.SetWebHookBaseUrl(builder.Configuration["BASE_WEBHOOK_URL"]!);
+    configuration.Options.SetTelegramToken(builder.Configuration["TELEGRAM_TOKEN"]!);
+    configuration.Options.EnableChatActionNotification();
+    configuration.Options.EnableMultipleActionsUsage();
+    
+    configuration.WithExtension<CooldownExtension>();
 });
 
 var app = builder.Build();
@@ -44,7 +47,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
     var text = $"message received: {message.MessageId}";
 
     await client.SendTextMessageAsync(chat, text);
-}).WithChances(0.5).WithCooldown(TimeSpan.FromSeconds(30));
+}).WithCooldown(TimeSpan.FromSeconds(30));
 
 app.MapNavigator();
 

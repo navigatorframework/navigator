@@ -1,5 +1,6 @@
 using Navigator.Abstractions;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Builder;
 using Navigator.Abstractions.Priorities;
 using Telegram.Bot.Types.Enums;
 
@@ -8,9 +9,10 @@ namespace Navigator.Actions.Builder;
 /// <summary>
 ///     Builder for <see cref="BotAction" />.
 /// </summary>
-public class BotActionBuilder
+public class BotActionBuilder : IBotActionBuilder
 {
     private readonly Guid _id;
+    private readonly Dictionary<string, object> _options = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="BotActionBuilder" /> class.
@@ -28,26 +30,32 @@ public class BotActionBuilder
     private Type[] HandlerInputTypes { get; set; } = null!;
     private UpdateCategory Category { get; set; } = null!;
     private EPriority Priority { get; set; }
-    private TimeSpan? Cooldown { get; set; }
     private ChatAction? ChatAction { get; set; }
-    private double? Chance { get; set; }
 
-    /// <summary>
-    ///     Builds the bot action.
-    /// </summary>
-    /// <returns>An instance of <see cref="BotAction" /></returns>
+    /// <inheritdoc />
+    public void Set(string key, object value)
+    {
+        _options.TryAdd(key, value);
+    }
+
+    /// <inheritdoc />
+    public TValue? Get<TValue>(string key)
+    {
+        return _options.TryGetValue(key, out var value) && value is TValue result ? result : default;
+    }
+
+    /// <inheritdoc />
     public BotAction Build()
     {
         var information = new BotActionInformation
         {
             ChatAction = ChatAction,
             Category = Category,
-            Chances = Chance,
             ConditionInputTypes = ConditionInputTypes,
             HandlerInputTypes = HandlerInputTypes,
             Name = Name ?? $"{_id}",
             Priority = Priority,
-            Cooldown = Cooldown
+            Options = _options
         };
 
         if (Condition is null || Handler is null)
@@ -112,17 +120,6 @@ public class BotActionBuilder
     }
 
     /// <summary>
-    ///     Sets the chance of the <see cref="BotAction" /> being executed.
-    /// </summary>
-    /// <param name="chance">The chance to be set.</param>
-    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder WithChances(double chance)
-    {
-        Chance = chance;
-        return this;
-    }
-
-    /// <summary>
     ///     Sets the priority of the <see cref="BotAction" />.
     /// </summary>
     /// <param name="priority">The priority to be set.</param>
@@ -130,17 +127,6 @@ public class BotActionBuilder
     public BotActionBuilder WithPriority(EPriority priority)
     {
         Priority = priority;
-        return this;
-    }
-
-    /// <summary>
-    ///     Sets the cooldown of the <see cref="BotAction" />.
-    /// </summary>
-    /// <param name="cooldown">The cooldown to be set.</param>
-    /// <returns>An instance of <see cref="BotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
-    public BotActionBuilder WithCooldown(TimeSpan cooldown)
-    {
-        Cooldown = cooldown;
         return this;
     }
 

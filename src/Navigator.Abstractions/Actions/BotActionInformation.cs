@@ -14,11 +14,6 @@ public record BotActionInformation
     public required UpdateCategory Category;
 
     /// <summary>
-    ///     The chance of the <see cref="BotAction" /> being executed. Optional.
-    /// </summary>
-    public required double? Chances;
-
-    /// <summary>
     ///     The <see cref="ChatAction" /> associtated with the <see cref="BotAction" />. Optional.
     /// </summary>
     public required ChatAction? ChatAction;
@@ -29,11 +24,6 @@ public record BotActionInformation
     public required Type[] ConditionInputTypes;
 
     /// <summary>
-    ///     The cooldown of the <see cref="BotAction" />. Optional.
-    /// </summary>
-    public required TimeSpan? Cooldown;
-
-    /// <summary>
     ///     The input types of the handler delegate of the <see cref="BotAction" />.
     /// </summary>
     public required Type[] HandlerInputTypes;
@@ -42,6 +32,11 @@ public record BotActionInformation
     ///     The name of the <see cref="BotAction" />. If no name is set, the id is used.
     /// </summary>
     public required string Name;
+
+    /// <summary>
+    ///     The options of the <see cref="BotAction" />.
+    /// </summary>
+    public required Dictionary<string, object> Options;
 
     /// <summary>
     ///     The priority of the <see cref="BotAction" />. Optional.

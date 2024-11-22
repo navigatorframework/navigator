@@ -20,36 +20,33 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Other"),
                 Priority = EPriority.High,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "High"
+                Name = "High",
+                Options = []
             }, () => true, () => Task.CompletedTask);
         var action2 = new BotAction(Guid.NewGuid(),
             new BotActionInformation
             {
                 Category = category,
                 Priority = EPriority.Normal,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "Normal"
+                Name = "Normal",
+                Options = []
             }, () => true, () => Task.CompletedTask);
         var action3 = new BotAction(Guid.NewGuid(),
             new BotActionInformation
             {
                 Category = category,
                 Priority = EPriority.Low,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "Low"
+                Name = "Low",
+                Options = []
             }, () => true, () => Task.CompletedTask);
 
         #endregion
@@ -73,36 +70,33 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.High,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "High"
+                Name = "High",
+                Options = []
             }, () => true, () => Task.CompletedTask);
         var normalPriorityAction = new BotAction(Guid.NewGuid(),
             new BotActionInformation
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.Normal,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "Normal"
+                Name = "Normal",
+                Options = []
             }, () => true, () => Task.CompletedTask);
         var lowPriorityAction = new BotAction(Guid.NewGuid(),
             new BotActionInformation
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.Low,
-                Chances = null,
                 ChatAction = null,
                 ConditionInputTypes = [],
-                Cooldown = null,
                 HandlerInputTypes = [],
-                Name = "Low"
+                Name = "Low",
+                Options = []
             }, () => true, () => Task.CompletedTask);
 
         #endregion

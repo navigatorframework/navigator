@@ -38,7 +38,7 @@ app.MapNavigator();
 app.Run();
 ```
 
-# Getting Started
+## Getting Started
 
 After installing the [package](https://www.nuget.org/packages/Navigator/) you can start using it by first configuring Navigator:
 
@@ -67,7 +67,15 @@ app.MapNavigator();
 
 This will start the server and will listen for incoming requests from Telegram. Your bot is good to go!
 
-# Examples
+## Extensions
+
+Navigator comes with a few extensions:
+- Navigator.Extensions.Probabilities: Easily configure the probabilities of a bot action being executed.
+- Navigator.Extensions.Cooldown: Easily configure the cooldown of an action.
+
+You can find them in nuget by searching for `Navigator.Extensions.`.
+
+## Examples
 
 Some examples can be found in the [samples](https://github.com/navigatorframework/navigator/src/) repository.
 
@@ -76,7 +84,7 @@ Also checkout some bots made with `Navigator`:
 - [@ThankiesBot](https://t.me/thankiesbot), check out it's [source code](https://github.com/elementh/thankies).
 - [@FOSCBot](https://t.me/foscbot), check out it's [source code](https://github.com/elementh/foscbot).
 
-# License
+## License
 
 Navigator Framework
 Copyright (C) 2019-2024 Lucas Maximiliano Marino
