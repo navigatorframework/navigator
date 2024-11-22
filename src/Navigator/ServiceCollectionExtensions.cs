@@ -51,6 +51,11 @@ public static class ServiceCollectionExtensions
 
         services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
 
+        navigatorConfiguration.Configure(services);
+        
+        services.AddOptions<NavigatorOptions>()
+            .Configure(options => options.Import(navigatorConfiguration.Options.RetrieveAllOptions()));
+
         return navigatorConfiguration;
     }
 

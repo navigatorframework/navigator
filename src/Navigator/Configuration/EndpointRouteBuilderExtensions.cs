@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Navigator.Abstractions.Strategies;
 using Navigator.Configuration.Options;
 using Navigator.Strategy;
@@ -20,7 +21,7 @@ public static class EndpointRouteBuilderExtensions
     /// <param name="app">An instance of <see cref="WebApplication"/>.</param>
     public static void MapNavigator(this WebApplication app)
     {
-        var options = app.Services.GetRequiredService<NavigatorOptions>();
+        var options = app.Services.GetRequiredService<IOptions<NavigatorOptions>>().Value;
 
         app.MapPost(options.GetWebHookEndpointOrDefault(),
             async (Update update, INavigatorStrategy strategy, ILogger<WebApplication> logger) =>

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Extensions;
 using Navigator.Configuration.Options;
 
@@ -27,5 +28,16 @@ public class NavigatorConfiguration
         where TExtension : INavigatorExtension
     {
         _extensions.Add((typeof(TExtension), options));
+    }
+
+    internal void Configure(IServiceCollection services)
+    {
+        foreach (var (extensionType, options) in _extensions)
+        {
+            if (Activator.CreateInstance(extensionType) is INavigatorExtension extension)
+            {
+                extension.Configure(services, Options);
+            }
+        }
     }
 }
