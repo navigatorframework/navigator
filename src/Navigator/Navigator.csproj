@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -15,7 +15,7 @@
         <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2024</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2025</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
