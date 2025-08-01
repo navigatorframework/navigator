@@ -16,8 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
-        <ProjectReference Include="..\Navigator\Navigator.csproj"/>
+        <ProjectReference Include="..\..\Navigator.Extensions.Store\Navigator.Extensions.Store.csproj" />
+        <ProjectReference Include="..\..\Navigator\Navigator.csproj"/>
     </ItemGroup>
 
 </Project>
