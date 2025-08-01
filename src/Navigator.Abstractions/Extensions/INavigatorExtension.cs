@@ -7,3 +7,8 @@ public interface INavigatorExtension
 {
     void Configure(IServiceCollection services, NavigatorOptions options);
 }
+
+public interface INavigatorExtension<in TOptions> where TOptions : INavigatorExtensionOptions
+{
+    void Configure(IServiceCollection services, NavigatorOptions navigatorOptions, TOptions extensionOptions);
+}
