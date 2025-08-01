@@ -36,7 +36,7 @@ public class ChatActionInExecutionPipelineStep : IActionExecutionPipelineStepBef
         {
             _logger.LogDebug("Sending {ChatAction} notification to chat {ChatId}", context.Action.Information.ChatAction.Value, chat.Id);
 
-            await _client.SendChatActionAsync(chat, context.Action.Information.ChatAction.Value);
+            await _client.SendChatAction(chat, context.Action.Information.ChatAction.Value);
         }
 
         await next();

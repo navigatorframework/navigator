@@ -3,6 +3,7 @@ using Navigator.Abstractions.Client;
 using Navigator.Abstractions.Entities;
 using Navigator.Configuration.Options;
 using Telegram.Bot;
+using Telegram.Bot.Requests;
 
 namespace Navigator.Client;
 
@@ -23,7 +24,7 @@ public class NavigatorClient : TelegramBotClient, INavigatorClient
     /// <inheritdoc />
     public async Task<Bot> GetProfile(CancellationToken cancellationToken = default)
     {
-        var bot = await this.GetMeAsync(cancellationToken);
+        var bot = await this.GetMe(cancellationToken);
 
         return new Bot(bot.Id, bot.FirstName)
         {
