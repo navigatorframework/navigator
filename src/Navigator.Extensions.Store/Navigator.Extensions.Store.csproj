@@ -5,25 +5,25 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Title>Navigator.Extensions.Cooldown</Title>
+        <Title>Navigator.Extensions.Store</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>Easily configure the cooldown of an action.</Description>
+        <Description>Easily manage and store users and chats in Navigator.</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageTags>Telegram, Bot, Framework, Navigator, Cooldown</PackageTags>
+        <PackageTags>Telegram, Bot, Framework, Navigator, Store</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
         <Copyright>Copyright © Lucas Maximiliano Marino 2025</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../../README.md" Pack="true" PackagePath="/"/>
+      <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj"/>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
     </ItemGroup>
 
 </Project>

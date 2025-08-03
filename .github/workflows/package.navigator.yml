@@ -21,7 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
       - name: Restore
         working-directory: ./src
         run: dotnet restore
@@ -47,7 +49,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
       - name: Create release NuGet package
         run: |
           arrTag=(${GITHUB_REF//\// })

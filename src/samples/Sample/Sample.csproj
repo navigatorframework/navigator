@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj" />
-        <ProjectReference Include="..\Navigator\Navigator.csproj"/>
+        <ProjectReference Include="..\..\Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj" />
+        <ProjectReference Include="..\..\Navigator\Navigator.csproj"/>
     </ItemGroup>
 </Project>
