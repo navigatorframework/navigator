@@ -53,11 +53,6 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
             _dbContext.Users.Add(user);
             _logger.LogInformation("Created new user with external Id: {ExternalId}", telegramUser.Id);
         }
-        else
-        {
-            user.LastActiveAt = now;
-            _logger.LogDebug("Updated LastActiveAt for user with external Id: {ExternalId}", telegramUser.Id);
-        }
 
         return user;
     }
@@ -75,11 +70,6 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
             chat = new Chat(telegramChat.Id);
             _dbContext.Chats.Add(chat);
             _logger.LogDebug("Created new chat with external ID {ExternalId}", telegramChat.Id);
-        }
-        else
-        {
-            chat.LastActiveAt = now;
-            _logger.LogDebug("Updated LastActiveAt for chat with external ID {ExternalId}", telegramChat.Id);
         }
 
         return chat;
@@ -100,12 +90,6 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
             _dbContext.Conversations.Add(conversation);
             _logger.LogDebug("Created new conversation for user {UserId} and chat {ChatId}", user.ExternalId,
                 chat?.ExternalId);
-        }
-        else
-        {
-            conversation.LastActiveAt = now;
-            _logger.LogDebug("Updated LastActiveAt for conversation between user {UserId} and chat {ChatId}",
-                user.ExternalId, chat?.ExternalId);
         }
     }
 }
