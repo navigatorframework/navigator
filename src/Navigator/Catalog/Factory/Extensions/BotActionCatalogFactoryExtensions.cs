@@ -63,7 +63,7 @@ public static class BotActionCatalogFactoryExtensions
     /// <param name="command">The specific command string that this action should respond to.</param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -92,7 +92,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -118,7 +118,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -143,7 +143,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -168,7 +168,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -193,7 +193,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -218,7 +218,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -243,7 +243,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -268,7 +268,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -293,7 +293,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -318,7 +318,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -343,7 +343,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -368,7 +368,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -393,7 +393,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -418,7 +418,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -443,7 +443,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -469,7 +469,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -494,7 +494,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -519,7 +519,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -544,7 +544,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -569,7 +569,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -594,7 +594,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -619,7 +619,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -644,7 +644,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -669,7 +669,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -695,7 +695,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -721,7 +721,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -747,7 +747,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -772,7 +772,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -797,7 +797,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -823,7 +823,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -849,7 +849,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -875,7 +875,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -900,7 +900,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -926,7 +926,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -951,7 +951,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -977,7 +977,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1003,7 +1003,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1028,7 +1028,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1054,7 +1054,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1079,7 +1079,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1105,7 +1105,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1130,7 +1130,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1156,7 +1156,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1182,7 +1182,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1208,7 +1208,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1233,7 +1233,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1258,7 +1258,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1283,7 +1283,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1308,7 +1308,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1333,7 +1333,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1358,7 +1358,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1384,7 +1384,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1409,7 +1409,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1435,7 +1435,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1460,7 +1460,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1485,7 +1485,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1509,7 +1509,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1533,7 +1533,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1558,7 +1558,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1583,7 +1583,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1608,7 +1608,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1634,7 +1634,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1659,7 +1659,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1683,7 +1683,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1707,7 +1707,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1732,7 +1732,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1756,7 +1756,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1781,7 +1781,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1806,7 +1806,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1831,7 +1831,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1856,7 +1856,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1881,7 +1881,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1906,7 +1906,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1932,7 +1932,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1957,7 +1957,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -1983,7 +1983,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
@@ -2009,7 +2009,7 @@ public static class BotActionCatalogFactoryExtensions
     /// </param>
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
-    ///     <see cref="BotActionBuilder.SetHandler" />.
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
     /// </param>
     /// <returns>
     ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
