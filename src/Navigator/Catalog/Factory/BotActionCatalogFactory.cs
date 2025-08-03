@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Catalog;
 using Navigator.Actions.Builder;
+using Navigator.Actions.Builder.Extensions;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Catalog.Factory;
