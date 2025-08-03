@@ -20,6 +20,9 @@ public class NavigatorConfiguration
     /// </value>
     public readonly NavigatorOptions Options;
 
+    /// <summary>
+    ///     Default constructor.
+    /// </summary>
     public NavigatorConfiguration()
     {
         Options = new NavigatorOptions();
