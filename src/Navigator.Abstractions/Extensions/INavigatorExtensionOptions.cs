@@ -35,6 +35,13 @@ public interface INavigatorExtensionOptions
 /// </summary>
 public static class NavigatorOptionsExtensionExtensions
 {
+    /// <summary>
+    ///     Retrieves the specific options of an extension.
+    /// </summary>
+    /// <param name="navigatorOptions">The global navigator options</param>
+    /// <typeparam name="TExtension">The extension type</typeparam>
+    /// <typeparam name="TOptions">The options type</typeparam>
+    /// <returns></returns>
     public static TOptions? GetExtensionOptions<TExtension, TOptions>(this NavigatorOptions navigatorOptions)
         where TExtension : INavigatorExtension<TOptions>
         where TOptions : INavigatorExtensionOptions
@@ -43,6 +50,13 @@ public static class NavigatorOptionsExtensionExtensions
         return navigatorOptions.RetrieveOption<TOptions>(key);
     }
     
+    /// <summary>
+    ///     Sets the specific options of an extension.
+    /// </summary>
+    /// <param name="navigatorOptions">The global navigator options</param>
+    /// <param name="options">The options</param>
+    /// <typeparam name="TExtension">The extension type</typeparam>
+    /// <typeparam name="TOptions">The options type</typeparam>
     public static void SetExtensionOptions<TExtension, TOptions>(this NavigatorOptions navigatorOptions, TOptions options)
         where TExtension : INavigatorExtension<TOptions>
         where TOptions : INavigatorExtensionOptions
