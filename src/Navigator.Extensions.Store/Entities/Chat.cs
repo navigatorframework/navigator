@@ -1,3 +1,5 @@
+using Telegram.Bot.Types;
+
 namespace Navigator.Extensions.Store.Entities;
 
 public class Chat
@@ -14,5 +16,9 @@ public class Chat
     public List<Conversation> Conversations { get; set; } = [];
     
     public DateTimeOffset FirstActiveAt { get; set; } = TimeProvider.System.GetUtcNow();
-    public DateTimeOffset LastActiveAt { get; set; } = TimeProvider.System.GetUtcNow();
+    
+    public static implicit operator ChatId(Chat chat)
+    {
+        return new ChatId(chat.ExternalId);
+    }
 }

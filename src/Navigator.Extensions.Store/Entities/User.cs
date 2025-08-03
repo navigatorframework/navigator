@@ -14,5 +14,4 @@ public class User
     public List<Conversation> Conversations { get; set; } = [];
 
     public DateTimeOffset FirstActiveAt { get; set; } = TimeProvider.System.GetUtcNow();
-    public DateTimeOffset LastActiveAt { get; set; } = TimeProvider.System.GetUtcNow();
 }
