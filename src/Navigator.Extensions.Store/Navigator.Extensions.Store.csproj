@@ -19,11 +19,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
+        <None Include="../../README.md" Pack="true" PackagePath="/"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7"/>
     </ItemGroup>
 
 </Project>
