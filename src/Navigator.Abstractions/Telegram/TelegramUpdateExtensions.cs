@@ -6,8 +6,21 @@ using User = Telegram.Bot.Types.User;
 
 namespace Navigator.Abstractions.Telegram;
 
+/// <summary>
+///     Extensions for working with <see cref="Update" /> more fluently.
+/// </summary>
 public static class TelegramUpdateExtensions
 {
+    /// <summary>
+    ///     Extracts the command name from a Telegram message that contains a bot command entity.
+    ///     Removes the leading slash and optionally validates against a specific bot name.
+    /// </summary>
+    /// <param name="message">The Telegram message to extract the command from.</param>
+    /// <param name="botName">
+    ///     Optional bot name to validate against. If provided, only commands directed to this bot will be
+    ///     returned.
+    /// </param>
+    /// <returns>The command name without the leading slash, or <c>null</c> if no valid command is found.</returns>
     public static string? ExtractCommand(this Message message, string? botName = default)
     {
         if (message.Entities?.First().Type != MessageEntityType.BotCommand) return default;
@@ -25,6 +38,12 @@ public static class TelegramUpdateExtensions
         return command;
     }
 
+    /// <summary>
+    ///     Extracts command arguments from a Telegram message by parsing the text after the first space.
+    ///     Used primarily for bot commands to get the parameters passed to the command.
+    /// </summary>
+    /// <param name="message">The Telegram message to extract arguments from.</param>
+    /// <returns>An array of argument strings split by spaces, or an empty array if no arguments are found.</returns>
     public static string[] ExtractArguments(this Message message)
     {
         return message.Text is not null && message.Text.Contains(' ')
@@ -32,6 +51,12 @@ public static class TelegramUpdateExtensions
             : [];
     }
 
+    /// <summary>
+    ///     Safely extracts the user information from various types of Telegram updates.
+    ///     Supports multiple update types including messages, inline queries, callback queries, and more.
+    /// </summary>
+    /// <param name="update">The Telegram update to extract the user from.</param>
+    /// <returns>The <see cref="User" /> if found, or <c>null</c> if the update type doesn't contain user information.</returns>
     public static User? GetUserOrDefault(this Update update)
     {
         return update.Type switch
@@ -49,6 +74,12 @@ public static class TelegramUpdateExtensions
         };
     }
 
+    /// <summary>
+    ///     Safely extracts the chat information from various types of Telegram updates.
+    ///     Supports message-based updates including regular messages, edited messages, and channel posts.
+    /// </summary>
+    /// <param name="update">The Telegram update to extract the chat from.</param>
+    /// <returns>The <see cref="Chat" /> if found, or <c>null</c> if the update type doesn't contain chat information.</returns>
     public static Chat? GetChatOrDefault(this Update update)
     {
         return update.Type switch
@@ -62,6 +93,13 @@ public static class TelegramUpdateExtensions
         };
     }
 
+    /// <summary>
+    ///     Creates a Navigator <see cref="Conversation" /> entity from a Telegram update by extracting and converting
+    ///     the user and chat information to Navigator's internal entity types.
+    /// </summary>
+    /// <param name="update">The Telegram update to create the conversation from.</param>
+    /// <returns>A <see cref="Conversation" /> containing the converted user and optional chat information.</returns>
+    /// <exception cref="NavigatorException">Thrown when no user information can be extracted from the update.</exception>
     public static Conversation GetConversation(this Update update)
     {
         var rawUser = update.GetUserOrDefault();
