@@ -17,7 +17,7 @@ public interface INavigatorPipelineStep<in TContext> : INavigatorPipelineStep
     /// <summary>
     ///     Invokes the pipeline step.
     /// </summary>
-    /// <param name="context">The <see cref="NavigatorStrategyContext" /> object.</param>
+    /// <param name="context">The context object.</param>
     /// <param name="next">The next step in the process.</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     Task InvokeAsync(TContext context, PipelineStepHandlerDelegate next);

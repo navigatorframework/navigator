@@ -1,10 +1,11 @@
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Strategies;
 using Telegram.Bot.Types;
 
 namespace Navigator.Abstractions.Pipelines.Context;
 
 /// <summary>
-///     Context around an <see cref="Update" /> for a <see cref="DefaultNavigatorPipelineBuilder" />.
+///     Context around an <see cref="Update" /> for a <see cref="INavigatorStrategy" />.
 /// </summary>
 public record NavigatorActionResolutionContext
 {
@@ -19,7 +20,7 @@ public record NavigatorActionResolutionContext
     public readonly Dictionary<object, object?> Items = [];
 
     /// <summary>
-    ///     The <see cref="Update" /> object that triggered the execution of the <see cref="DefaultNavigatorPipelineBuilder" />.
+    ///     The <see cref="Update" /> object that triggered the execution of the <see cref="INavigatorStrategy" />.
     /// </summary>
     public readonly Update Update;
 
