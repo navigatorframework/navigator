@@ -17,8 +17,7 @@ namespace SampleWithStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ExternalId = table.Column<long>(type: "bigint", nullable: false),
-                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +30,7 @@ namespace SampleWithStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ExternalId = table.Column<long>(type: "bigint", nullable: false),
-                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,8 +44,7 @@ namespace SampleWithStore.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ChatId = table.Column<Guid>(type: "uuid", nullable: true),
-                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    LastActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    FirstActiveAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

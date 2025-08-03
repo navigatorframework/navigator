@@ -34,9 +34,6 @@ namespace SampleWithStore.Migrations
                     b.Property<DateTimeOffset>("FirstActiveAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset>("LastActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExternalId")
@@ -55,9 +52,6 @@ namespace SampleWithStore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("FirstActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("LastActiveAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserId")
@@ -82,9 +76,6 @@ namespace SampleWithStore.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("FirstActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("LastActiveAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

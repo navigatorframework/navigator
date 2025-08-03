@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SampleWithStore.Migrations
 {
     [DbContext(typeof(NavigatorStoreDbContext))]
-    [Migration("20250801115604_Initial")]
+    [Migration("20250803152501_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -37,9 +37,6 @@ namespace SampleWithStore.Migrations
                     b.Property<DateTimeOffset>("FirstActiveAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset>("LastActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ExternalId")
@@ -58,9 +55,6 @@ namespace SampleWithStore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("FirstActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("LastActiveAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserId")
@@ -85,9 +79,6 @@ namespace SampleWithStore.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("FirstActiveAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("LastActiveAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

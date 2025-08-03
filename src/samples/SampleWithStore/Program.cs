@@ -7,14 +7,18 @@ using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Extensions.Store;
 using Navigator.Extensions.Store.Persistence.Context;
+using Navigator.Extensions.Store.Services;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Chat = Navigator.Extensions.Store.Entities.Chat;
+using User = Navigator.Extensions.Store.Entities.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddCommonConfiguration();
 
 builder.Services.AddMemoryCache();
+builder.Services.AddHybridCache();
 
 builder.Services.AddNavigator(configuration =>
 {
@@ -51,9 +55,9 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
 
 // This action will be triggered for every message sent to the chat. Additionally in this code example, this action will be triggered
 // only if NavigatorOptions.MultipleActionsUSageIsEnabled is set to true.
-bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Message message) =>
+bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Chat chat, INavigatorStore store) =>
 {
-    var text = $"message received: {message.MessageId}";
+    var text = $"User with external Id: {user.ExternalId} was first seen at {user.FirstActiveAt}.";
 
     await client.SendMessage(chat, text);
 });
