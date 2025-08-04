@@ -101,7 +101,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The name or null if not set.</returns>
     internal static string? GetName(this IBotActionBuilder builder)
     {
-        return builder.Get<string>(NameKey);
+        return builder.Get<string?>(NameKey);
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The condition or null if not set.</returns>
     internal static Delegate? GetCondition(this IBotActionBuilder builder)
     {
-        return builder.Get<Delegate>(ConditionKey);
+        return builder.Get<Delegate?>(ConditionKey);
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The condition input types or null if not set.</returns>
     internal static Type[]? GetConditionInputTypes(this IBotActionBuilder builder)
     {
-        return builder.Get<Type[]>(ConditionInputTypesKey);
+        return builder.Get<Type[]?>(ConditionInputTypesKey);
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The handler or null if not set.</returns>
     internal static Delegate? GetHandler(this IBotActionBuilder builder)
     {
-        return builder.Get<Delegate>(HandlerKey);
+        return builder.Get<Delegate?>(HandlerKey);
     }
 
     /// <summary>
@@ -141,7 +141,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The handler input types or null if not set.</returns>
     internal static Type[]? GetHandlerInputTypes(this IBotActionBuilder builder)
     {
-        return builder.Get<Type[]>(HandlerInputTypesKey);
+        return builder.Get<Type[]?>(HandlerInputTypesKey);
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ public static class BotActionBuilderExtensions
     /// <returns>The category or null if not set.</returns>
     internal static UpdateCategory? GetCategory(this IBotActionBuilder builder)
     {
-        return builder.Get<UpdateCategory>(CategoryKey);
+        return builder.Get<UpdateCategory?>(CategoryKey);
     }
 
     /// <summary>
@@ -171,6 +171,6 @@ public static class BotActionBuilderExtensions
     /// <returns>The chat action or null if not set.</returns>
     internal static ChatAction? GetChatAction(this IBotActionBuilder builder)
     {
-        return builder.Get<ChatAction>(ChatActionKey);
+        return builder.Get<ChatAction?>(ChatActionKey);
     }
 }
