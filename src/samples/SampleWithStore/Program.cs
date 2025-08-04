@@ -2,6 +2,7 @@ using Incremental.Common.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Navigator;
 using Navigator.Abstractions.Client;
+using Navigator.Actions.Builder.Extensions;
 using Navigator.Catalog.Factory.Extensions;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
@@ -10,6 +11,7 @@ using Navigator.Extensions.Store.Persistence.Context;
 using Navigator.Extensions.Store.Services;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using Chat = Navigator.Extensions.Store.Entities.Chat;
 using User = Navigator.Extensions.Store.Entities.User;
 
@@ -60,7 +62,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Cha
     var text = $"User with external Id: {user.ExternalId} was first seen at {user.FirstActiveAt}.";
 
     await client.SendMessage(chat, text);
-});
+}).WithChatAction(ChatAction.Typing);
 
 app.MapNavigator();
 
