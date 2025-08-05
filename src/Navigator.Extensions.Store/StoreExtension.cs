@@ -11,7 +11,5 @@ public class StoreExtension : INavigatorExtension<StoreOptions>
     public void Configure(IServiceCollection services, NavigatorOptions navigatorOptions, StoreOptions extensionOptions)
     {
         extensionOptions.RunDbContextConfiguration(services);
-        
-        services.AddScoped<INavigatorPipelineStep, RegisterConversationStep>();
     }
 }
