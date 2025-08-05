@@ -55,8 +55,6 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
     await client.SendMessage(chat, result);
 });
 
-// This action will be triggered for every message sent to the chat. Additionally in this code example, this action will be triggered
-// only if NavigatorOptions.MultipleActionsUSageIsEnabled is set to true.
 bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Chat chat, INavigatorStore store) =>
 {
     var text = $"User with external Id: {user.ExternalId} was first seen at {user.FirstActiveAt}.";

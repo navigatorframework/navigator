@@ -11,6 +11,7 @@ using Navigator.Extensions.Store.Persistence.Context;
 using Navigator.Extensions.Store.Services;
 using SampleWithCustomStore.Context;
 using SampleWithCustomStore.Entities;
+using SampleWithCustomStore.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -57,15 +58,10 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
     await client.SendMessage(chat, result);
 });
 
-// This action will be triggered for every message sent to the chat. Additionally in this code example, this action will be triggered
-// only if NavigatorOptions.MultipleActionsUSageIsEnabled is set to true.
 bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Chat chat, 
     INavigatorStore<SampleCustomDbContext> store) =>
 {
-    var messageCount = await store.Context.MessageCounts
-        .Where(mc => mc.User.ExternalId == user.ExternalId)
-        .FirstOrDefaultAsync()
-        ?? new MessageCount(user);
+    var messageCount = await store.GetOrCreateMessageCountAsync(user.ExternalId);
     
     messageCount.Count++;
     
