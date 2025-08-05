@@ -14,9 +14,9 @@ public interface INavigatorStore<out TDbContext> where TDbContext : NavigatorSto
 {
     public TDbContext Context { get; }
     
-    public Task<User?> GetUserAsync(long externalId);
-    public Task<Chat?> GetChatAsync(long externalId);
-    public Task<Conversation?> GetConversationAsync(long userExternalId, long? chatExternalId);
+    public Task<User?> GetUserAsync(long externalId, bool asTrackedEntity = false);
+    public Task<Chat?> GetChatAsync(long externalId, bool asTrackedEntity = false);
+    public Task<Conversation?> GetConversationAsync(long userExternalId, long? chatExternalId, bool asTrackedEntity = false);
 }
 public class NavigatorStore<TDbContext> : INavigatorStore<TDbContext> where TDbContext : NavigatorStoreDbContext
 {
@@ -35,7 +35,7 @@ public class NavigatorStore<TDbContext> : INavigatorStore<TDbContext> where TDbC
 
     public TDbContext Context { get; }
     
-    public async Task<User?> GetUserAsync(long externalId)
+    public async Task<User?> GetUserAsync(long externalId, bool asTrackedEntity = false)
     {
         return await _cache.GetOrCreateAsync<User?>($"navigator.extensions.store.user:{externalId}", async _ =>
         {
@@ -44,7 +44,7 @@ public class NavigatorStore<TDbContext> : INavigatorStore<TDbContext> where TDbC
         }, _cacheEntryOptions);
     }
 
-    public async Task<Chat?> GetChatAsync(long externalId)
+    public async Task<Chat?> GetChatAsync(long externalId, bool asTrackedEntity = false)
     {
         return await _cache.GetOrCreateAsync<Chat?>($"navigator.extensions.store.chat:{externalId}", async _ =>
         {
@@ -53,7 +53,7 @@ public class NavigatorStore<TDbContext> : INavigatorStore<TDbContext> where TDbC
         }, _cacheEntryOptions);
     }
 
-    public async Task<Conversation?> GetConversationAsync(long userExternalId, long? chatExternalId)
+    public async Task<Conversation?> GetConversationAsync(long userExternalId, long? chatExternalId, bool asTrackedEntity = false)
     {
         return await _cache.GetOrCreateAsync<Conversation?>($"navigator.extensions.store.conversation:{userExternalId}-{chatExternalId}", async _ =>
         {
@@ -62,26 +62,36 @@ public class NavigatorStore<TDbContext> : INavigatorStore<TDbContext> where TDbC
         }, _cacheEntryOptions);
     }
 
-    private async Task<User?> GetUserFromDatabase(long externalId)
+    private async Task<User?> GetUserFromDatabase(long externalId, bool asTrackedEntity = false)
     {
-        return await Context.Users.AsNoTracking()
-            .FirstOrDefaultAsync(u => u.ExternalId == externalId);
+        var query = asTrackedEntity
+            ? Context.Users
+            : Context.Users.AsNoTracking();
+        
+        return await query.FirstOrDefaultAsync(u => u.ExternalId == externalId);
     }
     
-    private async Task<Chat?> GetChatFromDatabase(long externalId)
+    private async Task<Chat?> GetChatFromDatabase(long externalId, bool asTrackedEntity = false)
     {
-        return await Context.Chats.AsNoTracking()
-            .FirstOrDefaultAsync(c => c.ExternalId == externalId);
+        var query = asTrackedEntity
+            ? Context.Chats
+            : Context.Chats.AsNoTracking();
+        
+        return await query.FirstOrDefaultAsync(c => c.ExternalId == externalId);
     }
 
-    private async Task<Conversation?> GetConversationFromDatabase(long userExternalId, long? chatExternalId)
+    private async Task<Conversation?> GetConversationFromDatabase(long userExternalId, long? chatExternalId, bool asTrackedEntity = false)
     {
+        var query = asTrackedEntity
+            ? Context.Conversations
+            : Context.Conversations.AsNoTracking();
+        
         return chatExternalId is null
-            ? await Context.Conversations
+            ? await query
                 .Where(c => c.User.ExternalId == userExternalId)
                 .Where(c => c.Chat == null)
                 .FirstOrDefaultAsync()
-            : await Context.Conversations
+            : await query
                 .Where(c => c.User.ExternalId == userExternalId)
                 .Where(c => c.Chat!.ExternalId == chatExternalId)
                 .FirstOrDefaultAsync();
