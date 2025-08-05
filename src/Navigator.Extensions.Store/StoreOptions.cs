@@ -31,7 +31,7 @@ public class StoreOptions : INavigatorExtensionOptions
         ConfigureDbContext = serviceCollection =>
         {
             serviceCollection.AddDbContext<TDbContext>(options); 
-            serviceCollection.AddScoped<INavigatorPipelineStep, RegisterConversationStep<TDbContext>>();
+            serviceCollection.AddScoped<INavigatorPipelineStep, StoreHandleIncomingUpdateStep<TDbContext>>();
         
             serviceCollection.AddScoped<IArgumentResolver, StoreArgumentResolver<TDbContext>>();
             
