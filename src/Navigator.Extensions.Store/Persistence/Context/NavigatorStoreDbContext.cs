@@ -4,7 +4,7 @@ using Navigator.Extensions.Store.Persistence.Configurations;
 
 namespace Navigator.Extensions.Store.Persistence.Context;
 
-public class NavigatorStoreDbContext(DbContextOptions<NavigatorStoreDbContext> options) : DbContext(options)
+public class NavigatorStoreDbContext(DbContextOptions options) : DbContext(options)
 {
     public required DbSet<User> Users { get; set; }
     public required DbSet<Chat> Chats { get; set; }
