@@ -5,22 +5,48 @@ using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Telegram;
 using Navigator.Extensions.Store.Entities;
 using Navigator.Extensions.Store.Persistence.Context;
+using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Extensions.Store.Steps;
 
-internal class RegisterConversationStep<TDbContext> : IActionExecutionPipelineStepBefore 
+internal class StoreHandleIncomingUpdateStep<TDbContext> : IActionExecutionPipelineStepBefore 
     where TDbContext : NavigatorStoreDbContext
 {
     private readonly TDbContext _dbContext;
-    private readonly ILogger<RegisterConversationStep<TDbContext>> _logger;
+    private readonly ILogger<StoreHandleIncomingUpdateStep<TDbContext>> _logger;
 
-    public RegisterConversationStep(TDbContext dbContext, ILogger<RegisterConversationStep<TDbContext>> logger)
+    public StoreHandleIncomingUpdateStep(TDbContext dbContext, ILogger<StoreHandleIncomingUpdateStep<TDbContext>> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
     }
 
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
+    {
+        switch (context.Update.Type)
+        {
+            case UpdateType.Message when context.Update.Message is { Type: MessageType.MigrateToChatId } message:
+                await HandleMigrateToChatId(message.Chat.Id, message.MigrateToChatId!.Value);
+                break;
+            default:
+                await TryRegisterEntities(context);
+                break;
+        }
+        
+        await next();
+    }
+
+    private async Task HandleMigrateToChatId(long currentChatId, long newChatId)
+    {
+        var currentChat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ExternalId == currentChatId);
+        if (currentChat == null) return;
+        
+        currentChat.ExternalId = newChatId;
+
+        await _dbContext.SaveChangesAsync();
+    }
+
+    private async Task TryRegisterEntities(NavigatorActionExecutionContext context)
     {
         var telegramUser = context.Update.GetUserOrDefault();
         var telegramChat = context.Update.GetChatOrDefault();
@@ -29,7 +55,6 @@ internal class RegisterConversationStep<TDbContext> : IActionExecutionPipelineSt
         {
             _logger.LogWarning("No user found in update {UpdateId}, skipping conversation registration",
                 context.Update.Id);
-            await next();
             return;
         }
         
@@ -38,7 +63,6 @@ internal class RegisterConversationStep<TDbContext> : IActionExecutionPipelineSt
         await HandleConversationEntityAsync(user, chat);
 
         await _dbContext.SaveChangesAsync();
-        await next();
     }
 
     private async Task<User> HandleUserEntityAsync(Telegram.Bot.Types.User telegramUser)
