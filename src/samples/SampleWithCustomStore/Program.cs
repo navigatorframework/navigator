@@ -9,6 +9,9 @@ using Navigator.Configuration.Options;
 using Navigator.Extensions.Store;
 using Navigator.Extensions.Store.Persistence.Context;
 using Navigator.Extensions.Store.Services;
+using SampleWithCustomStore.Context;
+using SampleWithCustomStore.Entities;
+using SampleWithCustomStore.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -33,7 +36,7 @@ builder.Services.AddNavigator(configuration =>
     {
         var connectionString = builder.Configuration.GetConnectionString("NavigatorStoreDb");
 
-        options.ConfigureStore(contextOptionsBuilder =>
+        options.ConfigureStore<SampleCustomDbContext>(contextOptionsBuilder =>
         {
             contextOptionsBuilder.UseNpgsql(connectionString, optionsBuilder =>
             {
@@ -55,16 +58,25 @@ bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parame
     await client.SendMessage(chat, result);
 });
 
-bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Chat chat, INavigatorStore store) =>
+bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Chat chat, 
+    INavigatorStore<SampleCustomDbContext> store) =>
 {
-    var text = $"User with external Id: {user.ExternalId} was first seen at {user.FirstActiveAt}.";
+    var messageCount = await store.GetOrCreateMessageCountAsync(user.ExternalId);
+    
+    messageCount.Count++;
+    
+    var text = $"User with external Id: {user.ExternalId} was first seen at {user.FirstActiveAt} " +
+               $"and has sent {messageCount.Count} messages.";
 
     await client.SendMessage(chat, text);
+    
+    store.Context.MessageCounts.Update(messageCount);
+    await store.Context.SaveChangesAsync();
 }).WithChatAction(ChatAction.Typing);
 
 app.MapNavigator();
 
 using var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
-serviceScope?.ServiceProvider.GetRequiredService<NavigatorStoreDbContext>().Database.Migrate();
+serviceScope?.ServiceProvider.GetRequiredService<SampleCustomDbContext>().Database.Migrate();
 
 app.Run();

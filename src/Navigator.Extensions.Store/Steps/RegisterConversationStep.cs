@@ -8,12 +8,13 @@ using Navigator.Extensions.Store.Persistence.Context;
 
 namespace Navigator.Extensions.Store.Steps;
 
-public class RegisterConversationStep : IActionExecutionPipelineStepBefore
+internal class RegisterConversationStep<TDbContext> : IActionExecutionPipelineStepBefore 
+    where TDbContext : NavigatorStoreDbContext
 {
-    private readonly NavigatorStoreDbContext _dbContext;
-    private readonly ILogger<RegisterConversationStep> _logger;
+    private readonly TDbContext _dbContext;
+    private readonly ILogger<RegisterConversationStep<TDbContext>> _logger;
 
-    public RegisterConversationStep(NavigatorStoreDbContext dbContext, ILogger<RegisterConversationStep> logger)
+    public RegisterConversationStep(TDbContext dbContext, ILogger<RegisterConversationStep<TDbContext>> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
@@ -31,18 +32,16 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
             await next();
             return;
         }
-
-        var now = TimeProvider.System.GetUtcNow();
-
-        var user = await HandleUserEntityAsync(telegramUser, now);
-        var chat = await HandleChatEntityAsync(telegramChat, now);
-        await HandleConversationEntityAsync(user, chat, now);
+        
+        var user = await HandleUserEntityAsync(telegramUser);
+        var chat = await HandleChatEntityAsync(telegramChat);
+        await HandleConversationEntityAsync(user, chat);
 
         await _dbContext.SaveChangesAsync();
         await next();
     }
 
-    private async Task<User> HandleUserEntityAsync(Telegram.Bot.Types.User telegramUser, DateTimeOffset now)
+    private async Task<User> HandleUserEntityAsync(Telegram.Bot.Types.User telegramUser)
     {
         var user = await _dbContext.Users
             .FirstOrDefaultAsync(u => u.ExternalId == telegramUser.Id);
@@ -57,7 +56,7 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
         return user;
     }
 
-    private async Task<Chat?> HandleChatEntityAsync(Telegram.Bot.Types.Chat? telegramChat, DateTimeOffset now)
+    private async Task<Chat?> HandleChatEntityAsync(Telegram.Bot.Types.Chat? telegramChat)
     {
         if (telegramChat == null)
             return null;
@@ -75,11 +74,11 @@ public class RegisterConversationStep : IActionExecutionPipelineStepBefore
         return chat;
     }
 
-    private async Task HandleConversationEntityAsync(User user, Chat? chat, DateTimeOffset now)
+    private async Task HandleConversationEntityAsync(User user, Chat? chat)
     {
         var conversation = chat is null
             ? await _dbContext.Conversations.FirstOrDefaultAsync(c => c.User.Id == user.Id && c.Chat == null)
-            : await _dbContext.Conversations.FirstOrDefaultAsync(c => c.User.Id == user.Id && c.Chat!.Id == chat!.Id);
+            : await _dbContext.Conversations.FirstOrDefaultAsync(c => c.User.Id == user.Id && c.Chat!.Id == chat.Id);
 
         if (conversation == null)
         {
