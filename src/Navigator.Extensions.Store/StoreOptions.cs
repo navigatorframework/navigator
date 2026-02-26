@@ -11,6 +11,9 @@ using Navigator.Extensions.Store.Steps;
 
 namespace Navigator.Extensions.Store;
 
+/// <summary>
+///     Configuration options for the <see cref="StoreExtension"/>.
+/// </summary>
 public class StoreOptions : INavigatorExtensionOptions
 {
     private Action<IServiceCollection>? ConfigureDbContext { get; set; }
@@ -20,11 +23,20 @@ public class StoreOptions : INavigatorExtensionOptions
         LocalCacheExpiration = TimeSpan.FromMinutes(30)
     };
 
+    /// <summary>
+    ///     Configures the store to use the default <see cref="NavigatorStoreDbContext"/>.
+    /// </summary>
+    /// <param name="options">Action to configure the <see cref="DbContextOptionsBuilder"/>.</param>
     public void ConfigureStore(Action<DbContextOptionsBuilder> options)
     {
         ConfigureStore<NavigatorStoreDbContext>(options);
     }
     
+    /// <summary>
+    ///     Configures the store to use a custom <see cref="NavigatorStoreDbContext"/> subclass.
+    /// </summary>
+    /// <typeparam name="TDbContext">The database context type.</typeparam>
+    /// <param name="options">Action to configure the <see cref="DbContextOptionsBuilder"/>.</param>
     public void ConfigureStore<TDbContext>(Action<DbContextOptionsBuilder> options) 
         where TDbContext : NavigatorStoreDbContext
     {
@@ -44,6 +56,10 @@ public class StoreOptions : INavigatorExtensionOptions
         };
     }
 
+    /// <summary>
+    ///     Configures the hybrid cache entry options used for caching store entities.
+    /// </summary>
+    /// <param name="cacheEntryOptions">Action to configure the <see cref="HybridCacheEntryOptions"/>.</param>
     public void ConfigureHybridCache(Action<HybridCacheEntryOptions> cacheEntryOptions)
     {
         cacheEntryOptions(HybridCacheEntryOptions);

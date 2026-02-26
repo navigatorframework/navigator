@@ -10,15 +10,25 @@ using User = Navigator.Extensions.Store.Entities.User;
 
 namespace Navigator.Extensions.Store.Resolvers;
 
+/// <summary>
+///     Resolves store entities (<see cref="User"/>, <see cref="Chat"/>, <see cref="Conversation"/>)
+///     as action method arguments from the current Telegram update.
+/// </summary>
+/// <typeparam name="TDbContext">The database context type.</typeparam>
 public class StoreArgumentResolver<TDbContext> : IArgumentResolver where TDbContext : NavigatorStoreDbContext
 {
     private readonly INavigatorStore<TDbContext> _store;
 
+    /// <summary>
+    ///     Creates a new <see cref="StoreArgumentResolver{TDbContext}"/>.
+    /// </summary>
+    /// <param name="store">The Navigator store service.</param>
     public StoreArgumentResolver(INavigatorStore<TDbContext> store)
     {
         _store = store;
     }
 
+    /// <inheritdoc />
     public async ValueTask<object?> GetArgument(Type type, Update update, BotAction action)
     {
         return type switch

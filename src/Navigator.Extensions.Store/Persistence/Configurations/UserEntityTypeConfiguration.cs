@@ -4,8 +4,12 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Persistence.Configurations;
 
+/// <summary>
+///     EF Core entity type configuration for <see cref="User"/>.
+/// </summary>
 public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
+    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(e => e.Id);

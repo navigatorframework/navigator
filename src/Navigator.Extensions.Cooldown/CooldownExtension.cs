@@ -12,6 +12,7 @@ namespace Navigator.Extensions.Cooldown;
 /// </summary>
 public class CooldownExtension : INavigatorExtension
 {
+    /// <inheritdoc />
     public void Configure(IServiceCollection services, NavigatorOptions options)
     {
         services.AddScoped<INavigatorPipelineStep, FilterByActionsInCooldownPipelineStep>();
