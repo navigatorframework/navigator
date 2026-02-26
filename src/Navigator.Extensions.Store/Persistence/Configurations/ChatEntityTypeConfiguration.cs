@@ -4,8 +4,12 @@ using Navigator.Extensions.Store.Entities;
 
 namespace Navigator.Extensions.Store.Persistence.Configurations;
 
+/// <summary>
+///     EF Core entity type configuration for <see cref="Chat"/>.
+/// </summary>
 public class ChatEntityTypeConfiguration : IEntityTypeConfiguration<Chat>
 {
+    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Chat> builder)
     {
         builder.HasKey(e => e.Id);
