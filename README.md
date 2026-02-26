@@ -2,7 +2,7 @@
 
 A highly opinionated telegram bot framework, mainly based on [Telegram.Bot](https://github.com/TelegramBots/Telegram.Bot).
 
-The only requirement is `Microsoft.AspNetCore.App (>= 8.0)`.
+The only requirement is `Microsoft.AspNetCore.App (>= 10.0)`.
 
 The usage is very simple yet powerful:
 
@@ -87,7 +87,7 @@ Also checkout some bots made with `Navigator`:
 ## License
 
 Navigator Framework
-Copyright (C) 2019-2024 Lucas Maximiliano Marino
+Copyright (C) 2019-2026 Lucas Maximiliano Marino
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published
