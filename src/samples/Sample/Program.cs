@@ -9,6 +9,7 @@ using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Cooldown.Extensions;
+using Sample;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -48,6 +49,8 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
 
     await client.SendMessage(chat, text);
 }).WithCooldown(TimeSpan.FromSeconds(30));
+
+bot.RegisterBotExtensionExamples();
 
 app.MapNavigator();
 
