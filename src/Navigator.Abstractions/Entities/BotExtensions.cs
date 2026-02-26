@@ -95,7 +95,7 @@ public static class BotExtensions
             UpdateType.EditedMessage => update.EditedMessage,
             UpdateType.ChannelPost => update.ChannelPost,
             UpdateType.EditedChannelPost => update.EditedChannelPost,
-            UpdateType.CallbackQuery => update.CallbackQuery?.Message as Message,
+            UpdateType.CallbackQuery => update.CallbackQuery?.Message,
             _ => null
         };
     }
