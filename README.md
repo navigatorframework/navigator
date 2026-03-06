@@ -133,7 +133,39 @@ bot.OnCommandPattern("^happy.*")
     .SendText("I am happy, partial, pattern match!");
 ```
 
-Builder helpers like `.SendText(...)`, `.SendPhoto(...)`, `.SendSticker(...)`, `.WithChatAction(...)`, `.WithCooldown(...)`, and `.WithPriority(...)` let you configure action behavior without writing a full handler.
+Builder helpers like `.SendText(...)`, `.SendPhoto(...)`, `.SendSticker(...)`, `.WithChatAction(...)`, `.WithCooldown(...)`, `.WithPriority(...)`, `.SetExclusivityLevel(...)`, `.AsExclusive()`, and `.AsNotExclusive()` let you configure action behavior without writing a full handler.
+
+## Exclusivity
+
+When `EnableMultipleActionsUsage()` is enabled and multiple actions match a single update, exclusivity levels control which of those actions actually execute. Each action has an `EExclusivityLevel` that determines how it interacts with other matched actions:
+
+| Level      | Behavior                                                                                                                                                   |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `None`     | No exclusivity. The action always runs if matched. This is the default for most registration methods.                                                      |
+| `Category` | Among matched actions in the same category (e.g. BotCommand), only the highest-priority exclusive action runs. Actions in other categories are unaffected. |
+| `Global`   | If this action is the highest-priority matched action overall, all other actions are discarded.                                                            |
+
+`OnCommand` and `OnCommandPattern` default to `Category`-level exclusivity, so only one command handler runs per update even when multiple commands match. All other registration methods default to `None`.
+
+### Builder Methods
+
+Use the builder API to set or override exclusivity on any action:
+
+```csharp
+// Set an explicit exclusivity level.
+bot.OnMessage((Update _) => true, handler)
+    .SetExclusivityLevel(EExclusivityLevel.Category);
+
+// Shorthand for Global exclusivity.
+bot.OnMessage((Update _) => true, handler)
+    .AsExclusive();
+
+// Remove exclusivity set by a registration helper (e.g. OnCommand defaults to Category).
+bot.OnCommand("ping", handler)
+    .AsNotExclusive();
+```
+
+> **Note:** exclusivity filtering only takes effect when `EnableMultipleActionsUsage()` is enabled. Without it, Navigator executes at most one action per update regardless of exclusivity settings.
 
 ## Handler Parameters
 
