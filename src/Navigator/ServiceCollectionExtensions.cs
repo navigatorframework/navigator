@@ -90,7 +90,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
         services.AddScoped<INavigatorPipelineStep, DefaultActionExecutionMainStep>();
 
-        if (configuration.Options.MultipleActionsUsageIsEnabled() == false)
+        if (configuration.Options.MultipleActionsUsageIsEnabled())
+            services.AddScoped<INavigatorPipelineStep, FilterExclusiveActionsPipelineStep>();
+        else
             services.AddScoped<INavigatorPipelineStep, FilterByMultipleActionsPipelineStep>();
 
         if (configuration.Options.ChatActionNotificationIsEnabled())

@@ -19,6 +19,7 @@ public static class BotActionBuilderExtensions
     private const string CategoryKey = "builder.category";
     private const string PriorityKey = "builder.priority";
     private const string ChatActionKey = "builder.chat_action";
+    private const string ExclusivityLevelKey = "builder.exclusivity_level";
 
     /// <summary>
     ///     Sets the name of the <see cref="BotAction" />.
@@ -92,6 +93,40 @@ public static class BotActionBuilderExtensions
     {
         builder.Set(ChatActionKey, chatAction);
         return builder;
+    }
+
+    /// <summary>
+    ///     Sets the <see cref="EExclusivityLevel" /> of the <see cref="BotAction" />.
+    /// </summary>
+    /// <param name="builder">The builder instance.</param>
+    /// <param name="level">The exclusivity level to be set.</param>
+    /// <returns>An instance of <see cref="IBotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public static IBotActionBuilder SetExclusivityLevel(this IBotActionBuilder builder, EExclusivityLevel level)
+    {
+        builder.Set(ExclusivityLevelKey, level);
+        return builder;
+    }
+
+    /// <summary>
+    ///     Convenience method. Sets the exclusivity level to <see cref="EExclusivityLevel.Global" />.
+    ///     If this action is the highest-priority matched action overall, all other actions are discarded.
+    /// </summary>
+    /// <param name="builder">The builder instance.</param>
+    /// <returns>An instance of <see cref="IBotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public static IBotActionBuilder AsExclusive(this IBotActionBuilder builder)
+    {
+        return builder.SetExclusivityLevel(EExclusivityLevel.Global);
+    }
+
+    /// <summary>
+    ///     Convenience method. Sets the exclusivity level to <see cref="EExclusivityLevel.None" />,
+    ///     overriding any default exclusivity set by registration helpers such as <c>OnCommand</c> or <c>OnCommandPattern</c>.
+    /// </summary>
+    /// <param name="builder">The builder instance.</param>
+    /// <returns>An instance of <see cref="IBotActionBuilder" /> to be able to continue configuring the <see cref="BotAction" />.</returns>
+    public static IBotActionBuilder AsNotExclusive(this IBotActionBuilder builder)
+    {
+        return builder.SetExclusivityLevel(EExclusivityLevel.None);
     }
 
     /// <summary>
@@ -172,5 +207,15 @@ public static class BotActionBuilderExtensions
     internal static ChatAction? GetChatAction(this IBotActionBuilder builder)
     {
         return builder.Get<ChatAction?>(ChatActionKey);
+    }
+
+    /// <summary>
+    ///     Gets the exclusivity level from the builder dictionary.
+    /// </summary>
+    /// <param name="builder">The builder instance.</param>
+    /// <returns>The exclusivity level or <see cref="EExclusivityLevel.None" /> if not set.</returns>
+    internal static EExclusivityLevel GetExclusivityLevel(this IBotActionBuilder builder)
+    {
+        return builder.Get<EExclusivityLevel?>(ExclusivityLevelKey) ?? EExclusivityLevel.None;
     }
 }

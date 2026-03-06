@@ -78,7 +78,8 @@ public static class BotActionCatalogFactoryExtensions
 
         actionBuilder
             .WithName($"/{command}")
-            .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
+            .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)))
+            .SetExclusivityLevel(EExclusivityLevel.Category);
 
         return actionBuilder;
     }
@@ -131,7 +132,8 @@ public static class BotActionCatalogFactoryExtensions
         actionBuilder
             .WithName($"/pattern:{pattern}")
             .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)))
-            .WithPriority(EPriority.BelowNormal);
+            .WithPriority(EPriority.BelowNormal)
+            .SetExclusivityLevel(EExclusivityLevel.Category);
 
         return actionBuilder;
     }
