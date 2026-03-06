@@ -8,17 +8,17 @@ using Telegram.Bot.Types;
 namespace Navigator.Strategy;
 
 /// <summary>
-///     Navigator Strategy. Resolves <see cref="Update" /> and executes <see cref="BotAction" />.
+///     Default navigator strategy. Resolves <see cref="Update" /> and executes <see cref="BotAction" /> sequentially.
 /// </summary>
-public class NavigatorStrategy : INavigatorStrategy
+public class DefaultNavigationStrategy : INavigatorStrategy
 {
-    private readonly ILogger<NavigatorStrategy> _logger;
+    private readonly ILogger<DefaultNavigationStrategy> _logger;
     private readonly INavigatorPipelineBuilder _pipelineBuilder;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="NavigatorStrategy" /> class.
+    ///     Initializes a new instance of the <see cref="DefaultNavigationStrategy" /> class.
     /// </summary>
-    public NavigatorStrategy(INavigatorPipelineBuilder pipelineBuilder, ILogger<NavigatorStrategy> logger)
+    public DefaultNavigationStrategy(INavigatorPipelineBuilder pipelineBuilder, ILogger<DefaultNavigationStrategy> logger)
     {
         _pipelineBuilder = pipelineBuilder;
         _logger = logger;
