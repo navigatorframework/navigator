@@ -22,25 +22,26 @@ public static class TelegramUpdateQueueExtensions
     public static string GetQueueKey(this Update update)
     {
         var chat = update.GetChatOrDefault();
+        
         if (chat is not null)
             return $"chat:{chat.Id}";
 
-        if (update.Type == UpdateType.BusinessConnection && update.BusinessConnection is { } bc)
+        if (update is { Type: UpdateType.BusinessConnection, BusinessConnection: { } bc })
             return $"user:{bc.UserChatId}";
 
-        if (update.Type == UpdateType.CallbackQuery && update.CallbackQuery is { ChatInstance: { } chatInstance })
+        if (update is { Type: UpdateType.CallbackQuery, CallbackQuery.ChatInstance: { } chatInstance })
             return $"callback-instance:{chatInstance}";
 
         var user = update.GetUserOrDefault();
         if (user is not null)
             return $"user:{user.Id}";
 
-        if (update.Type == UpdateType.Poll && update.Poll is { } poll)
+        if (update is { Type: UpdateType.Poll, Poll: { } poll })
             return $"poll:{poll.Id}";
 
-        if (update.Type == UpdateType.PollAnswer && update.PollAnswer is { } pollAnswer)
+        if (update is { Type: UpdateType.PollAnswer, PollAnswer: { } pollAnswer })
             return $"poll:{pollAnswer.PollId}";
 
-        return "default_queue";
+        return "default-queue";
     }
 }
