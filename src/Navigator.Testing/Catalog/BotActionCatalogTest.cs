@@ -20,6 +20,7 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Other"),
                 Priority = EPriority.High,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
@@ -31,6 +32,7 @@ public class BotActionCatalogTest
             {
                 Category = category,
                 Priority = EPriority.Normal,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
@@ -42,6 +44,7 @@ public class BotActionCatalogTest
             {
                 Category = category,
                 Priority = EPriority.Low,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
@@ -70,6 +73,7 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.High,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
@@ -81,6 +85,7 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.Normal,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
@@ -92,6 +97,7 @@ public class BotActionCatalogTest
             {
                 Category = new UpdateCategory("Test"),
                 Priority = EPriority.Low,
+                ExclusivityLevel = EExclusivityLevel.None,
                 ChatAction = null,
                 ConditionInputTypes = [],
                 HandlerInputTypes = [],
