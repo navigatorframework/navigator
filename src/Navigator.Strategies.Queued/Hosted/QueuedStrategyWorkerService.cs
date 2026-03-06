@@ -1,3 +1,4 @@
+using System.Threading.Channels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ namespace Navigator.Strategies.Queued.Hosted;
 /// </summary>
 public sealed class QueuedStrategyWorkerService : BackgroundService
 {
+    private readonly Dictionary<string, Task> _activeWorkers;
     private readonly IQueueManager _queueManager;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<QueuedStrategyWorkerService> _logger;
@@ -29,6 +31,7 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
         IServiceScopeFactory scopeFactory,
         ILogger<QueuedStrategyWorkerService> logger)
     {
+        _activeWorkers = new Dictionary<string, Task>();
         _queueManager = queueManager;
         _scopeFactory = scopeFactory;
         _logger = logger;
@@ -37,59 +40,48 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
     /// <inheritdoc />
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var workerTasks = new List<Task>();
-
         try
         {
-            var reader = _queueManager.NewQueues;
+            var reader = _queueManager.NewQueuesReader;
 
-            while (await reader.WaitToReadAsync(stoppingToken))
+            await foreach (var queueKey in reader.ReadAllAsync(stoppingToken))
             {
-                while (reader.TryRead(out var queue))
+                if (_activeWorkers.ContainsKey(queueKey))
                 {
-                    _logger.LogDebug("Starting worker for queue {QueueKey}", queue.Key);
-                    workerTasks.Add(RunWorkerAsync(queue, stoppingToken));
+                    continue;
+                }
+
+                _logger.LogDebug("Starting worker for queue {QueueKey}", queueKey);
+                
+                var queue = _queueManager.GetQueueReader(queueKey);
+                if (queue is not null)
+                {
+                    _activeWorkers[queueKey] = RunWorkerAsync(queueKey, queue, stoppingToken);
                 }
             }
         }
         catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
         {
-            _logger.LogDebug("Queue worker service stopping");
-        }
-        finally
-        {
-            _queueManager.CompleteAll();
-
-            if (workerTasks.Count > 0)
-                await Task.WhenAll(workerTasks);
+            _logger.LogInformation("Queue worker service stopping");
         }
     }
 
-    private async Task RunWorkerAsync(UpdateQueue queue, CancellationToken cancellationToken)
+    private async Task RunWorkerAsync(string queueKey, ChannelReader<Update> queueReader, CancellationToken cancellationToken)
     {
-        var reader = queue.Channel.Reader;
-
         try
         {
-            while (await reader.WaitToReadAsync(cancellationToken))
+            await foreach (var update in queueReader.ReadAllAsync(cancellationToken))
             {
-                while (reader.TryRead(out var update))
-                {
-                    await ProcessUpdateAsync(queue.Key, update);
-                }
+                await ProcessUpdateAsync(update);
             }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            _logger.LogDebug("Worker for queue {QueueKey} cancelled", queue.Key);
-        }
-        finally
-        {
-            _queueManager.RemoveQueue(queue.Key);
+            _logger.LogInformation("Worker for queue {QueueKey} cancelled", queueKey);
         }
     }
 
-    private async Task ProcessUpdateAsync(string queueKey, Update update)
+    private async Task ProcessUpdateAsync(Update update)
     {
         try
         {
@@ -97,11 +89,9 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
             var strategy = scope.ServiceProvider.GetRequiredService<DefaultNavigationStrategy>();
             await strategy.Invoke(update);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            _logger.LogError(ex,
-                "Error processing update {UpdateId} in queue {QueueKey}",
-                update.Id, queueKey);
+            _logger.LogError(e, "Error processing update {UpdateId}", update.Id);
         }
     }
 }

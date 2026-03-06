@@ -10,29 +10,21 @@ namespace Navigator.Strategies.Queued.Queues;
 public interface IQueueManager
 {
     /// <summary>
-    ///     Reader for the control channel that emits newly created queues.
-    ///     The hosted service reads from this to start workers.
-    /// </summary>
-    ChannelReader<UpdateQueue> NewQueues { get; }
-
-    /// <summary>
-    ///     Gets or creates the queue for the given key, enqueues the update,
-    ///     and notifies the hosted service if a new queue was just created.
+    ///     Returns the writer for the queue with the given key.
     /// </summary>
     /// <param name="queueKey">The partition key identifying which queue to use.</param>
-    /// <param name="update">The Telegram update to enqueue.</param>
-    /// <param name="cancellationToken">Token to cancel the operation.</param>
-    Task EnqueueAsync(string queueKey, Update update, CancellationToken cancellationToken);
-
+    /// <returns>A <see cref="ChannelWriter{Update}" /> for the queue.</returns>
+    ChannelWriter<Update> GetQueueWriter(string queueKey);
+    
     /// <summary>
-    ///     Removes a queue from the dictionary. Called by the worker when a queue's channel completes.
+    ///     Returns the reader for the queue with the given key.
     /// </summary>
-    /// <param name="queueKey">The partition key of the queue to remove.</param>
-    void RemoveQueue(string queueKey);
-
+    /// <param name="queueKey">The partition key identifying which queue to use.</param>
+    /// <returns>A <see cref="ChannelReader{Update}" /> for the queue, or <c>null</c> if the queue does not exist.</returns>
+    ChannelReader<Update>? GetQueueReader(string queueKey);
+    
     /// <summary>
-    ///     Completes all queue channels and the control channel.
-    ///     Called during shutdown.
+    ///     Returns a reader for the control channel that emits newly created queues for worker orchestration.
     /// </summary>
-    void CompleteAll();
+    ChannelReader<string> NewQueuesReader { get; }
 }

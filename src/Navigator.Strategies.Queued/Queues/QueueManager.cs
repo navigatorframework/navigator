@@ -12,9 +12,8 @@ namespace Navigator.Strategies.Queued.Queues;
 /// </summary>
 public sealed partial class QueueManager : IQueueManager
 {
-    private readonly ConcurrentDictionary<string, UpdateQueue> _queues = new();
-    private readonly Channel<UpdateQueue> _newQueues = Channel.CreateUnbounded<UpdateQueue>(
-        new UnboundedChannelOptions { SingleReader = true, SingleWriter = false });
+    private readonly ConcurrentDictionary<string, UpdateQueue> _queues;
+    private readonly Channel<string> _newQueues;
     private readonly QueuedStrategyOptions _options;
     private readonly ILogger<QueueManager> _logger;
 
@@ -25,60 +24,45 @@ public sealed partial class QueueManager : IQueueManager
     /// <param name="logger">Logger instance.</param>
     public QueueManager(IOptions<QueuedStrategyOptions> options, ILogger<QueueManager> logger)
     {
+        _queues = new ConcurrentDictionary<string, UpdateQueue>();
+        _newQueues = Channel.CreateUnbounded<string>(
+            new UnboundedChannelOptions
+            {
+                SingleReader = true, 
+                SingleWriter = false
+            });
         _options = options.Value;
         _logger = logger;
     }
 
     /// <inheritdoc />
-    public ChannelReader<UpdateQueue> NewQueues => _newQueues.Reader;
-
-    /// <inheritdoc />
-    public async Task EnqueueAsync(string queueKey, Update update, CancellationToken cancellationToken)
+    public ChannelWriter<Update> GetQueueWriter(string queueKey)
     {
-        var isNew = false;
-        var queue = _queues.GetOrAdd(queueKey, _ =>
-        {
-            isNew = true;
-            return new UpdateQueue(queueKey, CreateChannel());
-        });
+        var queue = _queues.GetOrAdd(queueKey, QueueValueFactory);
+        
+        return queue.Channel.Writer;
 
-        if (isNew)
+        UpdateQueue QueueValueFactory(string _)
         {
-            LogCreatedQueueForKeyQueueKey(queueKey);
-            await _newQueues.Writer.WriteAsync(queue, cancellationToken);
-        }
-
-        while (await queue.Channel.Writer.WaitToWriteAsync(cancellationToken))
-        {
-            if (queue.Channel.Writer.TryWrite(update))
-            {
-                LogEnqueuedUpdateUpdateIdIntoQueue(update.Id, queueKey);
-                return;
-            }
+            LogCreatingQueueForKey(queueKey);
+            return new UpdateQueue(queueKey, CreateChannel(queueKey));
         }
     }
 
     /// <inheritdoc />
-    public void RemoveQueue(string queueKey)
+    public ChannelReader<Update>? GetQueueReader(string queueKey)
     {
-        if (_queues.TryRemove(queueKey, out _))
-            LogRemovedQueue(queueKey);
-        else
-            GenerateReportSummary(queueKey);
+        var queue = _queues.GetValueOrDefault(queueKey);
+        
+        return queue?.Channel.Reader;
     }
 
     /// <inheritdoc />
-    public void CompleteAll()
-    {
-        _newQueues.Writer.TryComplete();
+    public ChannelReader<string> NewQueuesReader => _newQueues.Reader;
 
-        foreach (var queue in _queues.Values)
-            queue.Channel.Writer.TryComplete();
-    }
-
-    private Channel<Update> CreateChannel()
+    private Channel<Update> CreateChannel(string queueKey)
     {
-        return _options.MaxMessagesPerQueue > 0
+        var channel = _options.MaxMessagesPerQueue > 0
             ? Channel.CreateBounded<Update>(new BoundedChannelOptions(_options.MaxMessagesPerQueue)
             {
                 FullMode = BoundedChannelFullMode.Wait,
@@ -90,17 +74,20 @@ public sealed partial class QueueManager : IQueueManager
                 SingleReader = true,
                 SingleWriter = false
             });
+
+        var result = _newQueues.Writer.TryWrite(queueKey);
+
+        if (!result)
+        {
+            LogFailedToWriteToNewQueuesChannelForKey(queueKey);
+        }
+        
+        return channel;
     }
 
-    [LoggerMessage(LogLevel.Debug, "Created queue for key {queueKey}")]
-    partial void LogCreatedQueueForKeyQueueKey(string queueKey);
+    [LoggerMessage(LogLevel.Debug, "Creating queue for key {key}")]
+    partial void LogCreatingQueueForKey(string key);
 
-    [LoggerMessage(LogLevel.Debug, "Enqueued update {updateId} into queue {queueKey}")]
-    partial void LogEnqueuedUpdateUpdateIdIntoQueue(int updateId, string queueKey);
-
-    [LoggerMessage(LogLevel.Debug, "Removed queue {queueKey}")]
-    partial void LogRemovedQueue(string queueKey);
-
-    [LoggerMessage(LogLevel.Warning, "Attempted to remove queue {queueKey} but it was not found")]
-    partial void GenerateReportSummary(string queueKey);
+    [LoggerMessage(LogLevel.Warning, "Failed to write to new queues channel for key {QueueKey}")]
+    partial void LogFailedToWriteToNewQueuesChannelForKey(string QueueKey);
 }
