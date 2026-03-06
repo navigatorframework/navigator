@@ -30,7 +30,7 @@ public class DefaultActionResolutionMainStep : IActionResolutionMainStep
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
-        _logger.LogInformation("Resolving actions for update {UpdateId}", context.Update.Id);
+        _logger.LogDebug("Resolving actions for update {UpdateId}", context.Update.Id);
 
         _logger.LogDebug("Classifying update {UpdateId}", context.Update.Id);
 
@@ -48,7 +48,7 @@ public class DefaultActionResolutionMainStep : IActionResolutionMainStep
 
         context.Actions.AddRange(relevantActions);
 
-        _logger.LogInformation("Finished resolving actions for update {UpdateId}", context.Update.Id);
+        _logger.LogDebug("Finished resolving actions for update {UpdateId}", context.Update.Id);
 
         await next();
     }

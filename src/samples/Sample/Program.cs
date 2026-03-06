@@ -51,6 +51,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
 }).WithCooldown(TimeSpan.FromSeconds(30));
 
 bot.RegisterBotExtensionExamples();
+bot.RegisterBotCommandPatternExamples();
 
 app.MapNavigator();
 
