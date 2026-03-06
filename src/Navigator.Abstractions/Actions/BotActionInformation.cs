@@ -42,6 +42,11 @@ public record BotActionInformation
     ///     The priority of the <see cref="BotAction" />. Optional.
     /// </summary>
     public required EPriority Priority;
+
+    /// <summary>
+    ///     The exclusivity level of the <see cref="BotAction" />.
+    /// </summary>
+    public required EExclusivityLevel ExclusivityLevel;
 }
 
 /// <summary>
