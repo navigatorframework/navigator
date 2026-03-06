@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Title>Navigator.Strategies.Queued</Title>
+        <Authors>Lucas Maximiliano Marino</Authors>
+        <Description>Queued navigation strategy for Navigator. Partitions updates by chat and processes different chats in parallel.</Description>
+        <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
+        <PackageTags>Telegram, Bot, Framework, Navigator, Strategy, Queue</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2025</Copyright>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Navigator\Navigator.csproj"/>
+    </ItemGroup>
+
+</Project>
