@@ -47,6 +47,7 @@ public class BotActionBuilder : IBotActionBuilder
         var handlerInputTypes = this.GetHandlerInputTypes() ?? [];
         var category = this.GetCategory();
         var priority = this.GetPriority();
+        var exclusivityLevel = this.GetExclusivityLevel();
         var chatAction = this.GetChatAction();
 
         if (condition is null || handler is null)
@@ -66,6 +67,7 @@ public class BotActionBuilder : IBotActionBuilder
             HandlerInputTypes = handlerInputTypes,
             Name = name ?? $"{_id}",
             Priority = priority,
+            ExclusivityLevel = exclusivityLevel,
             Options = _options
         };
 
