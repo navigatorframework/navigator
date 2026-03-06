@@ -45,14 +45,20 @@ public static class ServiceCollectionExtensions
         
         services.AddNavigatorPipeline(navigatorConfiguration);
 
-        services.AddScoped<INavigatorStrategy, NavigatorStrategy>();
+        services.AddScoped<DefaultNavigationStrategy>();
 
         services.AddHostedService<SetTelegramBotWebHookHostedService>();
 
         services.ConfigureTelegramBot<JsonOptions>(opt => opt.SerializerOptions);
 
         navigatorConfiguration.Configure(services);
-        
+
+        if (!navigatorConfiguration.HasStrategy)
+        {
+            services.AddScoped<INavigatorStrategy>(sp =>
+                sp.GetRequiredService<DefaultNavigationStrategy>());
+        }
+
         services.AddOptions<NavigatorOptions>()
             .Configure(options => options.Import(navigatorConfiguration.Options.RetrieveAllOptions()));
 
