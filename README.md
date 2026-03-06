@@ -113,7 +113,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
 });
 ```
 
-Available registration methods include `OnCommand`, `OnMessage`, `OnCallbackQuery`, `OnInlineQuery`, `OnMessageReaction`, and many more specialized variants for specific Telegram message types. Each returns a `BotActionBuilder` that supports chaining:
+Available registration methods include `OnCommand`, `OnCommandPattern`, `OnMessage`, `OnCallbackQuery`, `OnInlineQuery`, `OnMessageReaction`, and many more specialized variants for specific Telegram message types. Each returns a `BotActionBuilder` that supports chaining:
 
 ```csharp
 bot.OnMessage((Bot self, Message message) => self.IsRepliedTo(message))
@@ -121,6 +121,16 @@ bot.OnMessage((Bot self, Message message) => self.IsRepliedTo(message))
 
 bot.OnMessage((Bot self, Message message) => self.IsMentioned(message))
     .SendText("Thanks for the mention!");
+```
+
+`OnCommandPattern` accepts a regular expression instead of an exact string, enabling partial matches, optional parameters, or multi-word commands. Pattern-based actions default to `BelowNormal` priority so exact `OnCommand` matches take precedence:
+
+```csharp
+bot.OnCommand("happy")
+    .SendText("I am happy, exact, concrete match!");
+
+bot.OnCommandPattern("^happy.*")
+    .SendText("I am happy, partial, pattern match!");
 ```
 
 Builder helpers like `.SendText(...)`, `.SendPhoto(...)`, `.SendSticker(...)`, `.WithChatAction(...)`, `.WithCooldown(...)`, and `.WithPriority(...)` let you configure action behavior without writing a full handler.
