@@ -1,4 +1,6 @@
+using System.Text.RegularExpressions;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Priorities;
 using Navigator.Abstractions.Telegram;
 using Navigator.Actions.Builder;
 using Navigator.Actions.Builder.Extensions;
@@ -77,6 +79,59 @@ public static class BotActionCatalogFactoryExtensions
         actionBuilder
             .WithName($"/{command}")
             .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     <para>
+    ///         Configures a new bot action to respond to any <see cref="MessageType" /> that includes
+    ///         a <see cref="MessageEntityType.BotCommand" /> event matching the specified regular expression pattern.
+    ///     </para>
+    ///     <para>
+    ///         The action uses the defined pattern to identify commands within incoming updates, enabling more flexible
+    ///         command matching compared to exact string matches. This allows for partial matches, optional parameters,
+    ///         or more advanced scenarios such as multi-word commands.
+    ///     </para>
+    ///     <para>
+    ///         By default, command pattern actions are set with priority <see cref="EPriority.BelowNormal" />.
+    ///     </para> 
+    /// </summary>
+    /// <param name="factory">
+    ///     An instance of <see cref="BotActionCatalogFactory" /> for adding and managing the bot action.
+    /// </param>
+    /// <param name="pattern">
+    ///     A regular expression pattern that defines the criteria for matching commands.
+    ///     The pattern is used to filter and identify the bot commands from incoming updates.
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to be executed when the regular expression pattern is matched.
+    ///     Optional if it will be specified later using <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization and configuration of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnCommandPattern(this BotActionCatalogFactory factory, string pattern,
+        Delegate? handler = default)
+    {
+        var regex = new Regex(pattern, RegexOptions.Compiled);
+        
+        var actionBuilder = factory.OnUpdate((Update update) =>
+        {
+            var command = update.Message?.ExtractCommand();
+
+            if (string.IsNullOrEmpty(command))
+            {
+                return false;
+            }
+            
+            return regex.IsMatch(command);
+        }, handler);
+
+        actionBuilder
+            .WithName($"/pattern:{pattern}")
+            .SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageEntityType.BotCommand)))
+            .WithPriority(EPriority.BelowNormal);
 
         return actionBuilder;
     }
