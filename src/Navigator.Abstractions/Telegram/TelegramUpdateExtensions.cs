@@ -89,6 +89,16 @@ public static class TelegramUpdateExtensions
             UpdateType.EditedMessage => update.EditedMessage?.Chat,
             UpdateType.ChannelPost => update.ChannelPost?.Chat,
             UpdateType.EditedChannelPost => update.EditedChannelPost?.Chat,
+            UpdateType.MyChatMember => update.MyChatMember?.Chat,
+            UpdateType.ChatMember => update.ChatMember?.Chat,
+            UpdateType.ChatJoinRequest => update.ChatJoinRequest?.Chat,
+            UpdateType.MessageReaction => update.MessageReaction?.Chat,
+            UpdateType.MessageReactionCount => update.MessageReactionCount?.Chat,
+            UpdateType.ChatBoost => update.ChatBoost?.Chat,
+            UpdateType.RemovedChatBoost => update.RemovedChatBoost?.Chat,
+            UpdateType.BusinessMessage => update.BusinessMessage?.Chat,
+            UpdateType.EditedBusinessMessage => update.EditedBusinessMessage?.Chat,
+            UpdateType.DeletedBusinessMessages => update.DeletedBusinessMessages?.Chat,
             _ => default
         };
     }
