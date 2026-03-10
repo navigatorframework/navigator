@@ -30,25 +30,25 @@ public class DefaultActionResolutionMainStep : IActionResolutionMainStep
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
-        _logger.LogDebug("Resolving actions for update {UpdateId}", context.Update.Id);
+        _logger.LogDebug("Resolving actions for update {UpdateId}", context.UpdateContext.Update.Id);
 
-        _logger.LogDebug("Classifying update {UpdateId}", context.Update.Id);
+        _logger.LogDebug("Classifying update {UpdateId}", context.UpdateContext.Update.Id);
 
-        context.UpdateCategory = await _classifier.Process(context.Update);
+        context.UpdateCategory = await _classifier.Process(context.UpdateContext.Update);
 
-        _logger.LogInformation("Update {UpdateId} classified as {UpdateCategory}", context.Update.Id, context.UpdateCategory);
+        _logger.LogInformation("Update {UpdateId} classified as {UpdateCategory}", context.UpdateContext.Update.Id, context.UpdateCategory);
 
         var relevantActions = _catalog.Retrieve(context.UpdateCategory).ToArray();
 
-        _logger.LogInformation("Found {RelevantActionsCount} relevant actions for update {UpdateId}", relevantActions.Count(),
-            context.Update.Id);
+        _logger.LogInformation("Found {RelevantActionsCount} relevant actions for update {UpdateId}", relevantActions.Length,
+            context.UpdateContext.Update.Id);
 
-        _logger.LogDebug("Actions relevant for update {UpdateId}: {ActionsFound}", context.Update.Id,
+        _logger.LogDebug("Actions relevant for update {UpdateId}: {ActionsFound}", context.UpdateContext.Update.Id,
             string.Join(", ", relevantActions.Select(action => action.Information.Name)));
 
         context.Actions.AddRange(relevantActions);
 
-        _logger.LogDebug("Finished resolving actions for update {UpdateId}", context.Update.Id);
+        _logger.LogDebug("Finished resolving actions for update {UpdateId}", context.UpdateContext.Update.Id);
 
         await next();
     }

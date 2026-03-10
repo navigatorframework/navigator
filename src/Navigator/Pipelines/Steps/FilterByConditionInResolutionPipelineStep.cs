@@ -30,7 +30,7 @@ internal class FilterByConditionInResolutionPipelineStep : IActionResolutionPipe
 
         for (var i = context.Actions.Count - 1; i >= 0; i--)
         {
-            var arguments = await _argumentProvider.GetConditionArguments(context.Update, context.Actions[i]);
+            var arguments = await _argumentProvider.GetConditionArguments(context.UpdateContext.Update, context.Actions[i]);
 
             if (await context.Actions[i].ExecuteCondition(arguments)) continue;
 

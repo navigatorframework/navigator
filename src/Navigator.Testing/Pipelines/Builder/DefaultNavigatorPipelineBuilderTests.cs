@@ -27,7 +27,7 @@ public class DefaultNavigatorPipelineBuilderTests
     {
         var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
         var pipeline = builder.BuildResolutionPipeline(context);
 
@@ -43,7 +43,7 @@ public class DefaultNavigatorPipelineBuilderTests
     {
         var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
 
         var executionContext = context.GetExecutionContexts().First();
@@ -62,7 +62,7 @@ public class DefaultNavigatorPipelineBuilderTests
     {
         var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
         var pipeline = builder.BuildResolutionPipeline(context);
         
@@ -76,7 +76,7 @@ public class DefaultNavigatorPipelineBuilderTests
     {
         var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
 
         var executionContext = context.GetExecutionContexts().First();

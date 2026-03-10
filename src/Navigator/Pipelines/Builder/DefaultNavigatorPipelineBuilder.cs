@@ -26,7 +26,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     /// <inheritdoc />
     public Pipeline BuildResolutionPipeline(NavigatorActionResolutionContext context)
     {
-        _logger.LogInformation("Building resolution pipeline for update {UpdateId}", context.Update.Id);
+        _logger.LogInformation("Building resolution pipeline for update {UpdateId}", context.UpdateContext.Update.Id);
 
         var steps = OrderResolutionSteps(_steps);
 
@@ -43,7 +43,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
             nextStep = next;
         }
 
-        _logger.LogInformation("Finished building resolution pipeline for update {UpdateId}", context.Update.Id);
+        _logger.LogInformation("Finished building resolution pipeline for update {UpdateId}", context.UpdateContext.Update.Id);
 
         return new Pipeline(nextStep, steps);
     }
@@ -51,7 +51,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
     /// <inheritdoc />
     public Pipeline BuildExecutionPipeline(NavigatorActionExecutionContext context)
     {
-        _logger.LogInformation("Building execution pipeline for update {UpdateId} and action {ActionName}", context.Update.Id,
+        _logger.LogInformation("Building execution pipeline for update {UpdateId} and action {ActionName}", context.UpdateContext.Update.Id,
             context.Action.Information.Name);
 
         var steps = OrderExecutionSteps(_steps);
@@ -69,7 +69,7 @@ public class DefaultNavigatorPipelineBuilder : INavigatorPipelineBuilder
             nextStep = next;
         }
 
-        _logger.LogInformation("Finished building resolution pipeline for update {UpdateId} and action {ActionName}", context.Update.Id,
+        _logger.LogInformation("Finished building resolution pipeline for update {UpdateId} and action {ActionName}", context.UpdateContext.Update.Id,
             context.Action.Information.Name);
 
         return new Pipeline(nextStep, steps);

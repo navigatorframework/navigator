@@ -12,15 +12,17 @@ namespace Navigator.Strategy;
 /// </summary>
 public class DefaultNavigationStrategy : INavigatorStrategy
 {
-    private readonly ILogger<DefaultNavigationStrategy> _logger;
     private readonly INavigatorPipelineBuilder _pipelineBuilder;
+    private readonly INavigatorUpdateContextBuilder _contextBuilder;
+    private readonly ILogger<DefaultNavigationStrategy> _logger;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultNavigationStrategy" /> class.
     /// </summary>
-    public DefaultNavigationStrategy(INavigatorPipelineBuilder pipelineBuilder, ILogger<DefaultNavigationStrategy> logger)
+    public DefaultNavigationStrategy(INavigatorPipelineBuilder pipelineBuilder, INavigatorUpdateContextBuilder contextBuilder, ILogger<DefaultNavigationStrategy> logger)
     {
         _pipelineBuilder = pipelineBuilder;
+        _contextBuilder = contextBuilder;
         _logger = logger;
     }
 
@@ -29,15 +31,17 @@ public class DefaultNavigationStrategy : INavigatorStrategy
     {
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
-        var context = new NavigatorActionResolutionContext(update);
+        var updateContext = await _contextBuilder.Build(update);
+        
+        var resolutionContext = new NavigatorActionResolutionContext(updateContext);
 
-        var resolutionPipeline = _pipelineBuilder.BuildResolutionPipeline(context);
+        var resolutionPipeline = _pipelineBuilder.BuildResolutionPipeline(resolutionContext);
 
         _logger.LogInformation("Executing resolution pipeline for update {UpdateId}", update.Id);
 
         await resolutionPipeline.InvokeAsync();
 
-        foreach (var executionContext in context.GetExecutionContexts())
+        foreach (var executionContext in resolutionContext.GetExecutionContexts())
         {
             var executionPipeline = _pipelineBuilder.BuildExecutionPipeline(executionContext);
 

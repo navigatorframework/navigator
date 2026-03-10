@@ -28,21 +28,21 @@ public class DefaultActionExecutionMainStep : IActionExecutionMainStep
         try
         {
             _logger.LogInformation("Executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
-                context.Update.Id);
+                context.UpdateContext.Update.Id);
 
-            var arguments = await _argumentProvider.GetHandlerArguments(context.Update, context.Action);
+            var arguments = await _argumentProvider.GetHandlerArguments(context.UpdateContext.Update, context.Action);
 
             await context.Action.ExecuteHandler(arguments);
         }
         catch (Exception e)
         {
             _logger.LogError(e, "Failed to execute action {ActionName} for update {UpdateId}", context.Action.Information.Name,
-                context.Update.Id);
+                context.UpdateContext.Update.Id);
         }
         finally
         {
             _logger.LogInformation("Finished executing action {ActionName} for update {UpdateId}", context.Action.Information.Name,
-                context.Update.Id);
+                context.UpdateContext.Update.Id);
         }
 
         await next();

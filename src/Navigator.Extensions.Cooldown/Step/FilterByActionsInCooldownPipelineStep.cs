@@ -23,7 +23,7 @@ internal class FilterByActionsInCooldownPipelineStep : IActionResolutionPipeline
     public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
         for (var i = context.Actions.Count - 1; i >= 0; i--)
-            if (IsInCooldown(context.Actions[i], context.Update))
+            if (IsInCooldown(context.Actions[i], context.UpdateContext.Update))
             {
                 _logger.LogDebug("Discarding action {ActionName} because is in cooldown", context.Actions[i].Information.Name);
 

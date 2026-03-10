@@ -27,7 +27,7 @@ internal class SetCooldownForActionPipelineStep : IActionExecutionPipelineStepAf
             _logger.LogDebug("Setting action {ActionName} to cooldown for {Cooldown} minutes", context.Action.Information.Name,
                 context.Action.Information.GetCooldown().TotalMinutes);
 
-            _cache.Set(GenerateCacheKey(context.Action, context.Update), true, context.Action.Information.GetCooldown());
+            _cache.Set(GenerateCacheKey(context.Action, context.UpdateContext.Update), true, context.Action.Information.GetCooldown());
         }
 
         await next();

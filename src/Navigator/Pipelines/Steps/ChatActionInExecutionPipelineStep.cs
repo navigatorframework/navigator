@@ -31,7 +31,7 @@ public class ChatActionInExecutionPipelineStep : IActionExecutionPipelineStepBef
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
     {
-        var chat = context.Update.GetChatOrDefault();
+        var chat = context.UpdateContext.Update.GetChatOrDefault();
         if (chat is not null && context.Action.Information.ChatAction.HasValue)
         {
             _logger.LogDebug("Sending {ChatAction} notification to chat {ChatId}", context.Action.Information.ChatAction.Value, chat.Id);
