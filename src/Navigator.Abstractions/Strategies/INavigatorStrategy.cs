@@ -11,6 +11,7 @@ public interface INavigatorStrategy
     ///     Invokes the strategy for the given <see cref="Update" />.
     /// </summary>
     /// <param name="update">The update that triggered the strategy.</param>
+    /// <param name="identifier">The unique identifier for the request.</param>
     /// <returns></returns>
-    public Task Invoke(Update update);
+    public Task Invoke(Update update, string identifier);
 }

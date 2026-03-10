@@ -27,7 +27,7 @@ public class DefaultNavigationStrategy : INavigatorStrategy
     }
 
     /// <inheritdoc />
-    public async Task Invoke(Update update)
+    public async Task Invoke(Update update, string identifier)
     {
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
