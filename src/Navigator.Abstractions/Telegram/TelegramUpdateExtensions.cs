@@ -104,6 +104,35 @@ public static class TelegramUpdateExtensions
     }
 
     /// <summary>
+    ///     Safely extracts the date from various types of Telegram updates.
+    ///     For most update types, this returns the primary date associated with the event.
+    /// </summary>
+    /// <param name="update">The Telegram update to extract the date from.</param>
+    /// <returns>The <see cref="DateTime" /> if found, or <c>null</c> if the update type doesn't contain date information.</returns>
+    public static DateTime? GetDateOrDefault(this Update update)
+    {
+        return update.Type switch
+        {
+            UpdateType.Message => update.Message?.Date,
+            UpdateType.EditedMessage => update.EditedMessage?.Date,
+            UpdateType.ChannelPost => update.ChannelPost?.Date,
+            UpdateType.EditedChannelPost => update.EditedChannelPost?.Date,
+            UpdateType.CallbackQuery => update.CallbackQuery?.Message?.Date,
+            UpdateType.BusinessConnection => update.BusinessConnection?.Date,
+            UpdateType.BusinessMessage => update.BusinessMessage?.Date,
+            UpdateType.EditedBusinessMessage => update.EditedBusinessMessage?.Date,
+            UpdateType.MessageReaction => update.MessageReaction?.Date,
+            UpdateType.MessageReactionCount => update.MessageReactionCount?.Date,
+            UpdateType.MyChatMember => update.MyChatMember?.Date,
+            UpdateType.ChatMember => update.ChatMember?.Date,
+            UpdateType.ChatJoinRequest => update.ChatJoinRequest?.Date,
+            UpdateType.ChatBoost => update.ChatBoost?.Boost.AddDate,
+            UpdateType.RemovedChatBoost => update.RemovedChatBoost?.RemoveDate,
+            _ => default
+        };
+    }
+
+    /// <summary>
     ///     Creates a Navigator <see cref="Conversation" /> entity from a Telegram update by extracting and converting
     ///     the user and chat information to Navigator's internal entity types.
     /// </summary>
