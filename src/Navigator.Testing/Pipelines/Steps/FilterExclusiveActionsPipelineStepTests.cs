@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Pipelines.Steps;
 using NSubstitute;
@@ -11,8 +12,18 @@ namespace Navigator.Testing.Pipelines.Steps;
 
 public class FilterExclusiveActionsPipelineStepTests
 {
-    private readonly FilterExclusiveActionsPipelineStep _step = new(
-        Substitute.For<ILogger<FilterExclusiveActionsPipelineStep>>());
+    private readonly FilterExclusiveActionsPipelineStep _step;
+
+    public FilterExclusiveActionsPipelineStepTests()
+    {
+        var tracer = Substitute.For<INavigatorTracer>();
+        var tracerFactory = Substitute.For<INavigatorTracerFactory<FilterExclusiveActionsPipelineStep>>();
+        tracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+
+        _step = new FilterExclusiveActionsPipelineStep(
+            Substitute.For<ILogger<FilterExclusiveActionsPipelineStep>>(),
+            tracerFactory);
+    }
 
     private static BotAction MakeAction(string kind, string? subkind, EExclusivityLevel level)
     {

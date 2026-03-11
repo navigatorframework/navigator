@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Priorities;
@@ -15,18 +16,23 @@ namespace Navigator.Pipelines.Steps;
 public class FilterExclusiveActionsPipelineStep : IActionResolutionPipelineStepAfter
 {
     private readonly ILogger<FilterExclusiveActionsPipelineStep> _logger;
+    private readonly INavigatorTracerFactory<FilterExclusiveActionsPipelineStep> _tracerFactory;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="FilterExclusiveActionsPipelineStep" /> class.
     /// </summary>
-    public FilterExclusiveActionsPipelineStep(ILogger<FilterExclusiveActionsPipelineStep> logger)
+    public FilterExclusiveActionsPipelineStep(ILogger<FilterExclusiveActionsPipelineStep> logger,
+        INavigatorTracerFactory<FilterExclusiveActionsPipelineStep> tracerFactory)
     {
         _logger = logger;
+        _tracerFactory = tracerFactory;
     }
 
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
+        await using var tracer = _tracerFactory.Get();
+
         if (context.Actions.Count > 1)
         {
             if (context.Actions[0].Information.ExclusivityLevel == EExclusivityLevel.Global)
@@ -38,7 +44,7 @@ public class FilterExclusiveActionsPipelineStep : IActionResolutionPipelineStepA
                 FilterByCategory(context);
             }
         }
-
+        
         await next();
     }
 
