@@ -32,6 +32,7 @@ public class DefaultActionExecutionMainStep : IActionExecutionMainStep
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
     {
         await using var tracer = _tracerFactory.Get();
+        tracer.AddTag(NavigatorTraceKeys.ActionName, context.Action.Information.Name);
 
         try
         {
@@ -46,6 +47,7 @@ public class DefaultActionExecutionMainStep : IActionExecutionMainStep
         {
             _logger.LogError(e, "Failed to execute action {ActionName} for update {UpdateId}", context.Action.Information.Name,
                 context.UpdateContext.Update.Id);
+            tracer.SetError(e);
         }
         finally
         {

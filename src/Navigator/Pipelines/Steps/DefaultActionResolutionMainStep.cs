@@ -39,6 +39,7 @@ public class DefaultActionResolutionMainStep : IActionResolutionMainStep
         _logger.LogDebug("Classifying update {UpdateId}", context.UpdateContext.Update.Id);
 
         context.UpdateCategory = await _classifier.Process(context.UpdateContext.Update);
+        tracer.AddTag(NavigatorTraceKeys.UpdateCategory, context.UpdateCategory.ToString());
 
         _logger.LogInformation("Update {UpdateId} classified as {UpdateCategory}", context.UpdateContext.Update.Id, context.UpdateCategory);
 
