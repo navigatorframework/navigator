@@ -52,6 +52,7 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
 
 bot.RegisterBotExtensionExamples();
 bot.RegisterBotCommandPatternExamples();
+bot.RegisterBotTraceExamples();
 
 app.MapNavigator();
 
