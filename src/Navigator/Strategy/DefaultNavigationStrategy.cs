@@ -34,27 +34,37 @@ public class DefaultNavigationStrategy : INavigatorStrategy
     public async Task Invoke(Update update, string identifier)
     {
         await using var tracer = _navigatorTracerFactory.Get(identifier);
+        
+        tracer.AddTag(NavigatorTraceKeys.UpdateId, $"{update.Id}");
 
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
-        var updateContext = await _contextBuilder.Build(update);
-        
-        var resolutionContext = new NavigatorActionResolutionContext(updateContext);
-
-        var resolutionPipeline = _pipelineBuilder.BuildResolutionPipeline(resolutionContext);
-
-        _logger.LogInformation("Executing resolution pipeline for update {UpdateId}", update.Id);
-
-        await resolutionPipeline.InvokeAsync();
-
-        foreach (var executionContext in resolutionContext.GetExecutionContexts())
+        try
         {
-            var executionPipeline = _pipelineBuilder.BuildExecutionPipeline(executionContext);
+            var updateContext = await _contextBuilder.Build(update);
+        
+            var resolutionContext = new NavigatorActionResolutionContext(updateContext);
 
-            _logger.LogInformation("Executing execution pipeline for update {UpdateId} and action {ActionName}",
-                update.Id, executionContext.Action.Information.Name);
+            var resolutionPipeline = _pipelineBuilder.BuildResolutionPipeline(resolutionContext);
 
-            await executionPipeline.InvokeAsync();
+            _logger.LogInformation("Executing resolution pipeline for update {UpdateId}", update.Id);
+
+            await resolutionPipeline.InvokeAsync();
+
+            foreach (var executionContext in resolutionContext.GetExecutionContexts())
+            {
+                var executionPipeline = _pipelineBuilder.BuildExecutionPipeline(executionContext);
+
+                _logger.LogInformation("Executing execution pipeline for update {UpdateId} and action {ActionName}",
+                    update.Id, executionContext.Action.Information.Name);
+
+                await executionPipeline.InvokeAsync();
+            }
+        }
+        catch (Exception e)
+        {
+            tracer.SetError(e);
+            throw;
         }
 
         _logger.LogInformation("Finished processing update {UpdateId}", update.Id);
