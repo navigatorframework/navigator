@@ -11,9 +11,10 @@ using Xunit;
 
 namespace Navigator.Testing.Pipelines.Builder;
 
-public class DefaultNavigatorPipelineBuilderTests
+public class NavigatorPipelineBuilderTests
 {
-    private readonly INavigatorTracerFactory<DefaultNavigatorPipelineBuilder> _tracerFactory;
+    private readonly INavigatorTracerFactory<DefaultNavigatorResolutionPipelineBuilder> _resolutionTracerFactory;
+    private readonly INavigatorTracerFactory<DefaultNavigatorExecutionPipelineBuilder> _executionTracerFactory;
 
     public readonly INavigatorPipelineStep[] Steps =
     [
@@ -25,17 +26,24 @@ public class DefaultNavigatorPipelineBuilderTests
         new ShouldGoThird()
     ];
 
-    public DefaultNavigatorPipelineBuilderTests()
+    public NavigatorPipelineBuilderTests()
     {
         var tracer = Substitute.For<INavigatorTracer>();
-        _tracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorPipelineBuilder>>();
-        _tracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+
+        _resolutionTracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorResolutionPipelineBuilder>>();
+        _resolutionTracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+
+        _executionTracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorExecutionPipelineBuilder>>();
+        _executionTracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
     }
 
     [Fact]
     public async Task ShouldBuildResolutionPipelineInOrder()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
+        var builder = new DefaultNavigatorResolutionPipelineBuilder(
+            Substitute.For<ILogger<DefaultNavigatorResolutionPipelineBuilder>>(),
+            _resolutionTracerFactory,
+            Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
@@ -49,9 +57,29 @@ public class DefaultNavigatorPipelineBuilderTests
     }
 
     [Fact]
+    public async Task ShouldExecuteAllStepsInResolutionPipeline()
+    {
+        var builder = new DefaultNavigatorResolutionPipelineBuilder(
+            Substitute.For<ILogger<DefaultNavigatorResolutionPipelineBuilder>>(),
+            _resolutionTracerFactory,
+            Steps);
+
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
+
+        var pipeline = await builder.BuildResolutionPipeline(context);
+
+        await pipeline.InvokeAsync();
+
+        context.Items.Should().HaveCount(3);
+    }
+
+    [Fact]
     public async Task ShouldBuildExecutionPipelineInOrder()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
+        var builder = new DefaultNavigatorExecutionPipelineBuilder(
+            Substitute.For<ILogger<DefaultNavigatorExecutionPipelineBuilder>>(),
+            _executionTracerFactory,
+            Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
@@ -68,23 +96,12 @@ public class DefaultNavigatorPipelineBuilderTests
     }
 
     [Fact]
-    public async Task ShouldExecuteAllStepsInResolutionPipeline()
-    {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
-
-        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
-
-        var pipeline = await builder.BuildResolutionPipeline(context);
-        
-        await pipeline.InvokeAsync();
-
-        context.Items.Should().HaveCount(3);
-    }
-    
-    [Fact]
     public async Task ShouldExecuteAllStepsInExecutionPipeline()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
+        var builder = new DefaultNavigatorExecutionPipelineBuilder(
+            Substitute.For<ILogger<DefaultNavigatorExecutionPipelineBuilder>>(),
+            _executionTracerFactory,
+            Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
@@ -92,9 +109,9 @@ public class DefaultNavigatorPipelineBuilderTests
         var executionContext = context.GetExecutionContexts().First();
 
         var pipeline = await builder.BuildExecutionPipeline(executionContext);
-        
+
         await pipeline.InvokeAsync();
-        
+
         executionContext.Items.Should().HaveCount(3);
     }
 }
