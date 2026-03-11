@@ -114,7 +114,8 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
 
-        services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
+        services.AddScoped<INavigatorResolutionPipelineBuilder, DefaultNavigatorResolutionPipelineBuilder>();
+        services.AddScoped<INavigatorExecutionPipelineBuilder, DefaultNavigatorExecutionPipelineBuilder>();
         
         services.AddScoped<INavigatorUpdateContextBuilder, DefaultNavigatorUpdateContextBuilder>();
     }
