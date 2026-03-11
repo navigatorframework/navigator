@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Telegram;
@@ -13,16 +14,23 @@ internal class StoreHandleIncomingUpdateStep<TDbContext> : IActionExecutionPipel
     where TDbContext : NavigatorStoreDbContext
 {
     private readonly TDbContext _dbContext;
+    private readonly INavigatorTracerFactory<StoreHandleIncomingUpdateStep<TDbContext>> _tracerFactory;
     private readonly ILogger<StoreHandleIncomingUpdateStep<TDbContext>> _logger;
 
-    public StoreHandleIncomingUpdateStep(TDbContext dbContext, ILogger<StoreHandleIncomingUpdateStep<TDbContext>> logger)
+    public StoreHandleIncomingUpdateStep(
+        TDbContext dbContext,
+        INavigatorTracerFactory<StoreHandleIncomingUpdateStep<TDbContext>> tracerFactory,
+        ILogger<StoreHandleIncomingUpdateStep<TDbContext>> logger)
     {
         _dbContext = dbContext;
+        _tracerFactory = tracerFactory;
         _logger = logger;
     }
 
     public async Task InvokeAsync(NavigatorActionExecutionContext context, PipelineStepHandlerDelegate next)
     {
+        await using var tracer = _tracerFactory.Get();
+
         switch (context.UpdateContext.Update.Type)
         {
             case UpdateType.Message when context.UpdateContext.Update.Message is { Type: MessageType.MigrateToChatId } message:
