@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Pipelines.Builder;
@@ -12,6 +13,8 @@ namespace Navigator.Testing.Pipelines.Builder;
 
 public class DefaultNavigatorPipelineBuilderTests
 {
+    private readonly INavigatorTracerFactory<DefaultNavigatorPipelineBuilder> _tracerFactory;
+
     public readonly INavigatorPipelineStep[] Steps =
     [
         new ShouldGoFifth(),
@@ -22,14 +25,21 @@ public class DefaultNavigatorPipelineBuilderTests
         new ShouldGoThird()
     ];
 
+    public DefaultNavigatorPipelineBuilderTests()
+    {
+        var tracer = Substitute.For<INavigatorTracer>();
+        _tracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorPipelineBuilder>>();
+        _tracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+    }
+
     [Fact]
     public async Task ShouldBuildResolutionPipelineInOrder()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
+        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
-        var pipeline = builder.BuildResolutionPipeline(context);
+        var pipeline = await builder.BuildResolutionPipeline(context);
 
         pipeline.OrderedSteps.Should().HaveCount(3);
 
@@ -41,14 +51,14 @@ public class DefaultNavigatorPipelineBuilderTests
     [Fact]
     public async Task ShouldBuildExecutionPipelineInOrder()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
+        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
 
         var executionContext = context.GetExecutionContexts().First();
 
-        var pipeline = builder.BuildExecutionPipeline(executionContext);
+        var pipeline = await builder.BuildExecutionPipeline(executionContext);
 
         pipeline.OrderedSteps.Should().HaveCount(3);
 
@@ -60,11 +70,11 @@ public class DefaultNavigatorPipelineBuilderTests
     [Fact]
     public async Task ShouldExecuteAllStepsInResolutionPipeline()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
+        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
-        var pipeline = builder.BuildResolutionPipeline(context);
+        var pipeline = await builder.BuildResolutionPipeline(context);
         
         await pipeline.InvokeAsync();
 
@@ -74,14 +84,14 @@ public class DefaultNavigatorPipelineBuilderTests
     [Fact]
     public async Task ShouldExecuteAllStepsInExecutionPipeline()
     {
-        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), Steps);
+        var builder = new DefaultNavigatorPipelineBuilder(Substitute.For<ILogger<DefaultNavigatorPipelineBuilder>>(), _tracerFactory, Steps);
 
         var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(new BotAction(Guid.NewGuid(), Substitute.For<BotActionInformation>(), () => true, () => Task.CompletedTask));
 
         var executionContext = context.GetExecutionContexts().First();
 
-        var pipeline = builder.BuildExecutionPipeline(executionContext);
+        var pipeline = await builder.BuildExecutionPipeline(executionContext);
         
         await pipeline.InvokeAsync();
         

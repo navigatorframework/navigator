@@ -45,7 +45,7 @@ public class DefaultNavigationStrategy : INavigatorStrategy
         
             var resolutionContext = new NavigatorActionResolutionContext(updateContext);
 
-            var resolutionPipeline = _pipelineBuilder.BuildResolutionPipeline(resolutionContext);
+            var resolutionPipeline = await _pipelineBuilder.BuildResolutionPipeline(resolutionContext);
 
             _logger.LogInformation("Executing resolution pipeline for update {UpdateId}", update.Id);
 
@@ -53,7 +53,7 @@ public class DefaultNavigationStrategy : INavigatorStrategy
 
             foreach (var executionContext in resolutionContext.GetExecutionContexts())
             {
-                var executionPipeline = _pipelineBuilder.BuildExecutionPipeline(executionContext);
+                var executionPipeline = await _pipelineBuilder.BuildExecutionPipeline(executionContext);
 
                 _logger.LogInformation("Executing execution pipeline for update {UpdateId} and action {ActionName}",
                     update.Id, executionContext.Action.Information.Name);
