@@ -11,6 +11,21 @@ public static class NavigatorTraceKeys
     public const string UpdateId = "navigator.update.id";
 
     /// <summary>
+    ///     The Telegram chat identifier extracted from the update.
+    /// </summary>
+    public const string UpdateChatId = "navigator.update.chat.id";
+
+    /// <summary>
+    ///     The Telegram user identifier extracted from the update.
+    /// </summary>
+    public const string UpdateUserId = "navigator.update.user.id";
+
+    /// <summary>
+    ///     The Telegram update type.
+    /// </summary>
+    public const string UpdateType = "navigator.update.type";
+
+    /// <summary>
     ///     The resolved update category.
     /// </summary>
     public const string UpdateCategory = "navigator.update.category";

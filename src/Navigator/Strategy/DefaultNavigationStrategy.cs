@@ -4,6 +4,7 @@ using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Strategies;
+using Navigator.Abstractions.Telegram;
 using Telegram.Bot.Types;
 
 namespace Navigator.Strategy;
@@ -40,8 +41,7 @@ public class DefaultNavigationStrategy : INavigatorStrategy
     public async Task Invoke(Update update, string identifier)
     {
         await using var tracer = _navigatorTracerFactory.Get(identifier);
-        
-        tracer.AddTag(NavigatorTraceKeys.UpdateId, $"{update.Id}");
+        AugmentTrace(tracer, update);
 
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
@@ -74,5 +74,24 @@ public class DefaultNavigationStrategy : INavigatorStrategy
         }
 
         _logger.LogInformation("Finished processing update {UpdateId}", update.Id);
+    }
+
+    private static void AugmentTrace(INavigatorTracer tracer, Update update)
+    {
+        tracer.AddTag(NavigatorTraceKeys.UpdateId, $"{update.Id}");
+
+        var chat = update.GetChatOrDefault();
+        if (chat is not null)
+        {
+            tracer.AddTag(NavigatorTraceKeys.UpdateChatId, $"{chat.Id}");
+        }
+
+        var user = update.GetUserOrDefault();
+        if (user is not null)
+        {
+            tracer.AddTag(NavigatorTraceKeys.UpdateUserId, $"{user.Id}");
+        }
+
+        tracer.AddTag(NavigatorTraceKeys.UpdateType, update.Type.ToString());
     }
 }
