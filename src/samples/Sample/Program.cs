@@ -3,7 +3,9 @@ using Incremental.Common.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator;
+using Navigator.Abstractions.Actions;
 using Navigator.Abstractions.Client;
+using Navigator.Abstractions.Introspection;
 using Navigator.Catalog.Factory.Extensions;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
@@ -34,8 +36,15 @@ var app = builder.Build();
 var bot = app.GetBot();
 
 // This action will be triggered if the user sends a message in the style of `/join <text>`.
-bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parameters) =>
+bot.OnCommand("join", async (INavigatorClient client, Chat chat, string[] parameters, INavigatorTracerFactory<BotAction>  factory) =>
 {
+    await using var tracer = factory.Get();
+    
+    foreach (var parameter in parameters)
+    {
+        tracer.AddTag("actions.join.parameters", parameter);
+    }
+    
     var result = string.Join(',', parameters);
 
     await client.SendMessage(chat, result);
