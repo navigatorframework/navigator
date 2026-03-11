@@ -45,6 +45,7 @@ internal class FilterByConditionInResolutionPipelineStep : IActionResolutionPipe
 
             if (await context.Actions[i].ExecuteCondition(arguments)) continue;
 
+            tracer.AddTag(NavigatorTraceKeys.ActionDiscarded, context.Actions[i].Information.Name);
             _logger.LogDebug("Discarding action {ActionName} because condition is not met", context.Actions[i].Information.Name);
 
             context.Actions.RemoveAt(i);

@@ -37,18 +37,23 @@ public class FilterExclusiveActionsPipelineStep : IActionResolutionPipelineStepA
         {
             if (context.Actions[0].Information.ExclusivityLevel == EExclusivityLevel.Global)
             {
+                foreach (var action in context.Actions.Skip(1))
+                {
+                    tracer.AddTag(NavigatorTraceKeys.ActionDiscarded, action.Information.Name);
+                }
+
                 context.Actions.RemoveRange(1, context.Actions.Count - 1);
             }
             else
             {
-                FilterByCategory(context);
+                FilterByCategory(context, tracer);
             }
         }
         
         await next();
     }
 
-    private void FilterByCategory(NavigatorActionResolutionContext context)
+    private void FilterByCategory(NavigatorActionResolutionContext context, INavigatorTracer tracer)
     {
         for (var i = context.Actions.Count - 1; i >= 0; i--)
         {
@@ -59,6 +64,7 @@ public class FilterExclusiveActionsPipelineStep : IActionResolutionPipelineStepA
                 "Discarding global-exclusive action {ActionName} because it is not the highest-priority action",
                 context.Actions[i].Information.Name);
 
+            tracer.AddTag(NavigatorTraceKeys.ActionDiscarded, context.Actions[i].Information.Name);
             context.Actions.RemoveAt(i);
         }
 
@@ -87,6 +93,7 @@ public class FilterExclusiveActionsPipelineStep : IActionResolutionPipelineStepA
                 "Discarding exclusive action {ActionName} because a higher-priority exclusive action matched in category {Category}",
                 context.Actions[i].Information.Name, context.Actions[i].Information.Category);
 
+            tracer.AddTag(NavigatorTraceKeys.ActionDiscarded, context.Actions[i].Information.Name);
             context.Actions.RemoveAt(i);
         }
     }

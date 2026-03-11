@@ -37,6 +37,11 @@ public class FilterByMultipleActionsPipelineStep : IActionResolutionPipelineStep
 
         if (context.Actions.Count > 1)
         {
+            foreach (var action in context.Actions.Skip(1))
+            {
+                tracer.AddTag(NavigatorTraceKeys.ActionDiscarded, action.Information.Name);
+            }
+
             context.Actions.RemoveRange(1, context.Actions.Count - 1);
 
             _logger.LogDebug("Discarding all actions except {ActionName} because multiple actions are not allowed",
