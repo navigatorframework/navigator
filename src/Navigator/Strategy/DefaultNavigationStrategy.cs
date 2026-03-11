@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Strategies;
@@ -14,21 +15,26 @@ public class DefaultNavigationStrategy : INavigatorStrategy
 {
     private readonly INavigatorPipelineBuilder _pipelineBuilder;
     private readonly INavigatorUpdateContextBuilder _contextBuilder;
+    private readonly INavigatorTracerFactory<DefaultNavigationStrategy> _navigatorTracerFactory;
     private readonly ILogger<DefaultNavigationStrategy> _logger;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultNavigationStrategy" /> class.
     /// </summary>
-    public DefaultNavigationStrategy(INavigatorPipelineBuilder pipelineBuilder, INavigatorUpdateContextBuilder contextBuilder, ILogger<DefaultNavigationStrategy> logger)
+    public DefaultNavigationStrategy(INavigatorPipelineBuilder pipelineBuilder, INavigatorUpdateContextBuilder contextBuilder, 
+        INavigatorTracerFactory<DefaultNavigationStrategy> navigatorTracerFactory, ILogger<DefaultNavigationStrategy> logger)
     {
         _pipelineBuilder = pipelineBuilder;
         _contextBuilder = contextBuilder;
+        _navigatorTracerFactory = navigatorTracerFactory;
         _logger = logger;
     }
 
     /// <inheritdoc />
     public async Task Invoke(Update update, string identifier)
     {
+        await using var tracer = _navigatorTracerFactory.Get(identifier);
+
         _logger.LogInformation("Processing update {UpdateId}", update.Id);
 
         var updateContext = await _contextBuilder.Build(update);

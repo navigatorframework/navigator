@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Catalog;
 using Navigator.Abstractions.Classifier;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Catalog.Factory;
@@ -14,22 +15,25 @@ public class DefaultActionResolutionMainStep : IActionResolutionMainStep
 {
     private readonly IBotActionCatalog _catalog;
     private readonly IUpdateClassifier _classifier;
+    private readonly INavigatorTracerFactory<DefaultActionResolutionMainStep> _tracerFactory;
     private readonly ILogger<DefaultActionResolutionMainStep> _logger;
-
+    
     /// <summary>
     ///     Initializes a new instance of the <see cref="DefaultActionResolutionMainStep" /> class.
     /// </summary>
-    public DefaultActionResolutionMainStep(BotActionCatalogFactory catalogFactory, ILogger<DefaultActionResolutionMainStep> logger,
-        IUpdateClassifier classifier)
+    public DefaultActionResolutionMainStep(BotActionCatalogFactory catalogFactory, IUpdateClassifier classifier, INavigatorTracerFactory<DefaultActionResolutionMainStep> tracerFactory, ILogger<DefaultActionResolutionMainStep> logger)
     {
         _catalog = catalogFactory.Retrieve();
-        _logger = logger;
         _classifier = classifier;
+        _tracerFactory = tracerFactory;
+        _logger = logger;
     }
 
     /// <inheritdoc />
     public async Task InvokeAsync(NavigatorActionResolutionContext context, PipelineStepHandlerDelegate next)
     {
+        await using var tracer = _tracerFactory.Get();
+        
         _logger.LogDebug("Resolving actions for update {UpdateId}", context.UpdateContext.Update.Id);
 
         _logger.LogDebug("Classifying update {UpdateId}", context.UpdateContext.Update.Id);
