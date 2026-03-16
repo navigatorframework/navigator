@@ -5,7 +5,7 @@ using System.Text.Json;
 using Navigator.Abstractions.Client;
 using Navigator.Abstractions.Introspection.Reader;
 using Navigator.Catalog.Factory;
-using Navigator.Catalog.Factory.Extensions;
+using Navigator.Abstractions.Catalog.Extensions;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 

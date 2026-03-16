@@ -1,7 +1,7 @@
 using Navigator.Abstractions.Actions.Builder;
-using Navigator.Actions.Builder.Extensions;
-using Navigator.Catalog.Factory;
-using Navigator.Catalog.Factory.Extensions;
+using Navigator.Abstractions.Actions.Builder.Extensions;
+using Navigator.Abstractions.Catalog;
+using Navigator.Abstractions.Catalog.Extensions;
 using Navigator.Extensions.Management.Actions;
 
 namespace Navigator.Extensions.Management;
@@ -16,7 +16,7 @@ public static class BotActionExtensions
     /// </summary>
     /// <param name="factory">The bot action catalog factory.</param>
     /// <returns>The factory for chaining.</returns>
-    public static BotActionCatalogFactory RegisterManagementCommands(this BotActionCatalogFactory factory)
+    public static IBotActionCatalogFactory RegisterManagementCommands(this IBotActionCatalogFactory factory)
     {
         factory.RegisterDebugCommand();
         return factory;
@@ -27,7 +27,7 @@ public static class BotActionExtensions
     /// </summary>
     /// <param name="factory">The bot action catalog factory.</param>
     /// <returns>The configured action builder for further customization.</returns>
-    private static IBotActionBuilder RegisterDebugCommand(this BotActionCatalogFactory factory)
+    private static IBotActionBuilder RegisterDebugCommand(this IBotActionCatalogFactory factory)
     {
         return factory.OnCommand("debug")
             .SetHandler(DebugCommandAction.HandleDebugCommand)
