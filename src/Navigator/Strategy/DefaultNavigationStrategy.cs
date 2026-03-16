@@ -86,6 +86,12 @@ public class DefaultNavigationStrategy : INavigatorStrategy
             tracer.AddTag(NavigatorTraceKeys.UpdateChatId, $"{chat.Id}");
         }
 
+        var messageId = update.GetMessageIdOrDefault();
+        if (messageId is not null)
+        {
+            tracer.AddTag(NavigatorTraceKeys.UpdateMessageId, $"{messageId}");
+        }
+
         var user = update.GetUserOrDefault();
         if (user is not null)
         {
