@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Strategies.Queued
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWithQueuedStrategy", "samples\SampleWithQueuedStrategy\SampleWithQueuedStrategy.csproj", "{8FE4B82D-66A3-4623-A764-271EC89D7BE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navigator.Extensions.Management", "Navigator.Extensions.Management\Navigator.Extensions.Management.csproj", "{B87129BE-661A-4C62-B9E6-283728649C7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,18 @@ Global
 		{8FE4B82D-66A3-4623-A764-271EC89D7BE7}.Release|x64.Build.0 = Release|Any CPU
 		{8FE4B82D-66A3-4623-A764-271EC89D7BE7}.Release|x86.ActiveCfg = Release|Any CPU
 		{8FE4B82D-66A3-4623-A764-271EC89D7BE7}.Release|x86.Build.0 = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|x64.Build.0 = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Debug|x86.Build.0 = Debug|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|x64.ActiveCfg = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|x64.Build.0 = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|x86.ActiveCfg = Release|Any CPU
+		{B87129BE-661A-4C62-B9E6-283728649C7B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,5 +211,6 @@ Global
 		{E653B820-730E-48B2-94F3-9F646E0B8AE7} = {9B37874F-AE18-4A39-A9EA-D62AEA30AD37}
 		{D98D2F6D-6CB2-4ED6-9E15-78743273E0DD} = {BCC6587D-76CC-E7EA-55F7-F7E84A0BA0BE}
 		{8FE4B82D-66A3-4623-A764-271EC89D7BE7} = {9B37874F-AE18-4A39-A9EA-D62AEA30AD37}
+		{B87129BE-661A-4C62-B9E6-283728649C7B} = {70E2AD2B-D5A5-4353-920B-5B3863061DCF}
 	EndGlobalSection
 EndGlobal
