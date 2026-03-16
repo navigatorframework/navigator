@@ -77,6 +77,21 @@ public class UpdateClassifier : IUpdateClassifier
                 MessageType.ChatBackgroundSet => new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatBackgroundSet)),
                 MessageType.PaidMedia => new UpdateCategory(nameof(MessageType), nameof(MessageType.PaidMedia)),
                 MessageType.RefundedPayment => new UpdateCategory(nameof(MessageType), nameof(MessageType.RefundedPayment)),
+                MessageType.Gift => new UpdateCategory(nameof(MessageType), nameof(MessageType.Gift)),
+                MessageType.UniqueGift => new UpdateCategory(nameof(MessageType), nameof(MessageType.UniqueGift)),
+                MessageType.PaidMessagePriceChanged => new UpdateCategory(nameof(MessageType), nameof(MessageType.PaidMessagePriceChanged)),
+                MessageType.Checklist => new UpdateCategory(nameof(MessageType), nameof(MessageType.Checklist)),
+                MessageType.ChecklistTasksDone => new UpdateCategory(nameof(MessageType), nameof(MessageType.ChecklistTasksDone)),
+                MessageType.ChecklistTasksAdded => new UpdateCategory(nameof(MessageType), nameof(MessageType.ChecklistTasksAdded)),
+                MessageType.DirectMessagePriceChanged => new UpdateCategory(nameof(MessageType), nameof(MessageType.DirectMessagePriceChanged)),
+                MessageType.SuggestedPostApproved => new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostApproved)),
+                MessageType.SuggestedPostApprovalFailed => new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostApprovalFailed)),
+                MessageType.SuggestedPostDeclined => new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostDeclined)),
+                MessageType.SuggestedPostPaid => new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostPaid)),
+                MessageType.SuggestedPostRefunded => new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostRefunded)),
+                MessageType.GiftUpgradeSent => new UpdateCategory(nameof(MessageType), nameof(MessageType.GiftUpgradeSent)),
+                MessageType.ChatOwnerLeft => new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatOwnerLeft)),
+                MessageType.ChatOwnerChanged => new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatOwnerChanged)),
                 _ => new UpdateCategory(nameof(MessageType), nameof(MessageType.Unknown))
             },
             UpdateType.InlineQuery => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.InlineQuery)),
@@ -100,6 +115,7 @@ public class UpdateClassifier : IUpdateClassifier
             UpdateType.BusinessMessage => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.BusinessMessage)),
             UpdateType.EditedBusinessMessage => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.EditedBusinessMessage)),
             UpdateType.DeletedBusinessMessages => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.DeletedBusinessMessages)),
+            UpdateType.PurchasedPaidMedia => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PurchasedPaidMedia)),
             _ => new UpdateCategory(nameof(UpdateType), nameof(UpdateType.Unknown))
         });
     }

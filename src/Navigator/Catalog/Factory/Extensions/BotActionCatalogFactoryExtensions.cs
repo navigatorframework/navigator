@@ -2079,4 +2079,454 @@ public static class BotActionCatalogFactoryExtensions
 
         return actionBuilder;
     }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="Update.PurchasedPaidMedia" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnPurchasedPaidMedia(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.PurchasedPaidMedia)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="Update.ChannelPost" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChannelPost(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(UpdateType), nameof(UpdateType.ChannelPost)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.Story" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnStory(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Story)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.Gift" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnGift(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Gift)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.UniqueGift" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnUniqueGift(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.UniqueGift)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.PaidMessagePriceChanged" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnPaidMessagePriceChanged(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.PaidMessagePriceChanged)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.Checklist" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChecklist(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.Checklist)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.ChecklistTasksDone" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChecklistTasksDone(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChecklistTasksDone)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.ChecklistTasksAdded" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChecklistTasksAdded(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChecklistTasksAdded)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.DirectMessagePriceChanged" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnDirectMessagePriceChanged(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.DirectMessagePriceChanged)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.SuggestedPostApproved" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnSuggestedPostApproved(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostApproved)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.SuggestedPostApprovalFailed" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnSuggestedPostApprovalFailed(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostApprovalFailed)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.SuggestedPostDeclined" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnSuggestedPostDeclined(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostDeclined)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.SuggestedPostPaid" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnSuggestedPostPaid(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostPaid)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.SuggestedPostRefunded" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnSuggestedPostRefunded(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.SuggestedPostRefunded)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.GiftUpgradeSent" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnGiftUpgradeSent(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.GiftUpgradeSent)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.ChatOwnerLeft" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChatOwnerLeft(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatOwnerLeft)));
+
+        return actionBuilder;
+    }
+
+    /// <summary>
+    ///     Configures a new bot action to respond to <see cref="MessageType.ChatOwnerChanged" /> events using the specified condition and handler
+    ///     delegates.
+    /// </summary>
+    /// <param name="factory">An instance of <see cref="BotActionCatalogFactory" /></param>
+    /// <param name="condition">
+    ///     A delegate representing the condition under which the handler should be invoked.
+    ///     Must return <see cref="bool" /> or <see cref="Task{TResult}" /> where TResult is <see cref="bool" />
+    /// </param>
+    /// <param name="handler">
+    ///     A delegate representing the action to take when the condition is met. Optional if it will be specified later using
+    ///     <see cref="BotActionBuilderExtensions.SetHandler" />.
+    /// </param>
+    /// <returns>
+    ///     A configured instance of <see cref="BotActionBuilder" /> that allows further customization of the bot action.
+    /// </returns>
+    public static BotActionBuilder OnChatOwnerChanged(this BotActionCatalogFactory factory, Delegate condition, Delegate? handler = default)
+    {
+        var actionBuilder = factory.OnUpdate(condition, handler);
+
+        actionBuilder.SetCategory(new UpdateCategory(nameof(MessageType), nameof(MessageType.ChatOwnerChanged)));
+
+        return actionBuilder;
+    }
 }
