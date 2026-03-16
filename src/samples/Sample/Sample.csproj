@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Navigator.Extensions.Cooldown\Navigator.Extensions.Cooldown.csproj" />
+        <ProjectReference Include="..\..\Navigator.Extensions.Management\Navigator.Extensions.Management.csproj" />
         <ProjectReference Include="..\..\Navigator\Navigator.csproj"/>
     </ItemGroup>
 </Project>
