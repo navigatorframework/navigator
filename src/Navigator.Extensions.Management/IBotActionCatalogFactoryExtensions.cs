@@ -9,7 +9,7 @@ namespace Navigator.Extensions.Management;
 /// <summary>
 ///     Extension methods for registering management commands.
 /// </summary>
-public static class BotActionExtensions
+public static class IBotActionCatalogFactoryExtensions
 {
     /// <summary>
     ///     Registers all management commands.
