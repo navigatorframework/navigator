@@ -27,10 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Catalog\Factory\Extensions\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Remove="Catalog\Factory\Extensions\BotActionCatalogFactoryExtensions.cs" />
     </ItemGroup>
 
