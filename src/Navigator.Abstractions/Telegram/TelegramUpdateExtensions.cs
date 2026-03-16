@@ -133,6 +133,26 @@ public static class TelegramUpdateExtensions
     }
 
     /// <summary>
+    ///     Safely extracts the message ID from various types of Telegram updates.
+    ///     Supports message-based updates including regular messages, edited messages, and channel posts.
+    /// </summary>
+    /// <param name="update">The Telegram update to extract the message ID from.</param>
+    /// <returns>The message ID if found, or <c>null</c> if the update type doesn't contain message information.</returns>
+    public static int? GetMessageIdOrDefault(this Update update)
+    {
+        return update.Type switch
+        {
+            UpdateType.Message => update.Message?.MessageId,
+            UpdateType.EditedMessage => update.EditedMessage?.MessageId,
+            UpdateType.ChannelPost => update.ChannelPost?.MessageId,
+            UpdateType.EditedChannelPost => update.EditedChannelPost?.MessageId,
+            UpdateType.BusinessMessage => update.BusinessMessage?.MessageId,
+            UpdateType.EditedBusinessMessage => update.EditedBusinessMessage?.MessageId,
+            _ => default
+        };
+    }
+
+    /// <summary>
     ///     Creates a Navigator <see cref="Conversation" /> entity from a Telegram update by extracting and converting
     ///     the user and chat information to Navigator's internal entity types.
     /// </summary>
