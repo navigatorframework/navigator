@@ -18,10 +18,11 @@ public class TraceFormatter : ITraceFormatter
         // Simple summary
         var allTraces = FlattenTraces(traces).ToList();
         var totalDuration = CalculateTotalDuration(allTraces);
-        var longestTrace = FindLongestTrace(allTraces);
+        var longestTrace = FindLongestTrace(traces.First().InnerTraces.Select(t => t.Trace).ToList());
         var hasErrors = allTraces.Any(t => t.Status == ENavigatorTraceStatus.Error);
         var hasWarnings = allTraces.Any(t => t.Status == ENavigatorTraceStatus.Warning);
         
+        result.AppendLine("```");
         result.AppendLine("🔍 **Debug Trace Summary**");
         result.AppendLine($"⏱️ Total Duration: {totalDuration:F0}ms");
         
