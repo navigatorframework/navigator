@@ -1,3 +1,5 @@
+using Navigator.Abstractions.Actions.Builder;
+using Navigator.Abstractions.Actions.Builder.Extensions;
 using Navigator.Abstractions.Client;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -31,7 +33,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the text as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the text as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendText(this BotActionBuilder builder, string text,
+    public static IBotActionBuilder SendText(this IBotActionBuilder builder, string text,
         ParseMode? parseMode = null, bool asReply = false, bool toReply = false)
     {
         builder.SetHandler(async (INavigatorClient client, Chat? chat, Message? message) =>
@@ -59,7 +61,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the photo as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the photo as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendPhoto(this BotActionBuilder builder, string photo,
+    public static IBotActionBuilder SendPhoto(this IBotActionBuilder builder, string photo,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -89,7 +91,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the video as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the video as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendVideo(this BotActionBuilder builder, string video,
+    public static IBotActionBuilder SendVideo(this IBotActionBuilder builder, string video,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -116,7 +118,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the sticker as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the sticker as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendSticker(this BotActionBuilder builder, string sticker,
+    public static IBotActionBuilder SendSticker(this IBotActionBuilder builder, string sticker,
         bool asReply = false, bool toReply = false)
     {
         builder.SetHandler(async (INavigatorClient client, Chat? chat, Message? message) =>
@@ -143,7 +145,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the audio file as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the audio file as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendAudio(this BotActionBuilder builder, string audio,
+    public static IBotActionBuilder SendAudio(this IBotActionBuilder builder, string audio,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
@@ -173,7 +175,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the animation as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the animation as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendAnimation(this BotActionBuilder builder, string animation,
+    public static IBotActionBuilder SendAnimation(this IBotActionBuilder builder, string animation,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -202,7 +204,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the document as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the document as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendDocument(this BotActionBuilder builder, string document,
+    public static IBotActionBuilder SendDocument(this IBotActionBuilder builder, string document,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
@@ -231,7 +233,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the voice message as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the voice message as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendVoice(this BotActionBuilder builder, string voice,
+    public static IBotActionBuilder SendVoice(this IBotActionBuilder builder, string voice,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
@@ -258,7 +260,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the dice as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the dice as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendDice(this BotActionBuilder builder,
+    public static IBotActionBuilder SendDice(this IBotActionBuilder builder,
         string? emoji = null, bool asReply = false, bool toReply = false)
     {
         builder.SetHandler(async (INavigatorClient client, Chat? chat, Message? message) =>
@@ -284,7 +286,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="asReply">If true, sends the location as a reply to the incoming message.</param>
     /// <param name="toReply">If true, sends the location as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
-    public static BotActionBuilder SendLocation(this BotActionBuilder builder,
+    public static IBotActionBuilder SendLocation(this IBotActionBuilder builder,
         double latitude, double longitude, bool asReply = false, bool toReply = false)
     {
         builder.SetHandler(async (INavigatorClient client, Chat? chat, Message? message) =>
@@ -315,7 +317,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random text as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="texts" /> is empty.</exception>
-    public static BotActionBuilder SendRandomText(this BotActionBuilder builder, IReadOnlyList<string> texts,
+    public static IBotActionBuilder SendRandomText(this IBotActionBuilder builder, IReadOnlyList<string> texts,
         ParseMode? parseMode = null, bool asReply = false, bool toReply = false)
     {
         if (texts.Count == 0) throw new ArgumentException("Collection must not be empty.", nameof(texts));
@@ -347,7 +349,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random photo as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="photos" /> is empty.</exception>
-    public static BotActionBuilder SendRandomPhoto(this BotActionBuilder builder, IReadOnlyList<string> photos,
+    public static IBotActionBuilder SendRandomPhoto(this IBotActionBuilder builder, IReadOnlyList<string> photos,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -381,7 +383,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random video as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="videos" /> is empty.</exception>
-    public static BotActionBuilder SendRandomVideo(this BotActionBuilder builder, IReadOnlyList<string> videos,
+    public static IBotActionBuilder SendRandomVideo(this IBotActionBuilder builder, IReadOnlyList<string> videos,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -412,7 +414,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random sticker as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="stickers" /> is empty.</exception>
-    public static BotActionBuilder SendRandomSticker(this BotActionBuilder builder, IReadOnlyList<string> stickers,
+    public static IBotActionBuilder SendRandomSticker(this IBotActionBuilder builder, IReadOnlyList<string> stickers,
         bool asReply = false, bool toReply = false)
     {
         if (stickers.Count == 0) throw new ArgumentException("Collection must not be empty.", nameof(stickers));
@@ -443,7 +445,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random audio file as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="audios" /> is empty.</exception>
-    public static BotActionBuilder SendRandomAudio(this BotActionBuilder builder, IReadOnlyList<string> audios,
+    public static IBotActionBuilder SendRandomAudio(this IBotActionBuilder builder, IReadOnlyList<string> audios,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
@@ -477,7 +479,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random animation as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="animations" /> is empty.</exception>
-    public static BotActionBuilder SendRandomAnimation(this BotActionBuilder builder, IReadOnlyList<string> animations,
+    public static IBotActionBuilder SendRandomAnimation(this IBotActionBuilder builder, IReadOnlyList<string> animations,
         string? caption = null, ParseMode? parseMode = null, bool hasSpoiler = false,
         bool asReply = false, bool toReply = false)
     {
@@ -510,7 +512,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random document as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="documents" /> is empty.</exception>
-    public static BotActionBuilder SendRandomDocument(this BotActionBuilder builder, IReadOnlyList<string> documents,
+    public static IBotActionBuilder SendRandomDocument(this IBotActionBuilder builder, IReadOnlyList<string> documents,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
@@ -543,7 +545,7 @@ public static class BotActionBuilderSendExtensions
     /// <param name="toReply">If true, sends the random voice message as a reply to the message being replied to.</param>
     /// <returns>The same <see cref="BotActionBuilder" /> instance for further chaining.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="voices" /> is empty.</exception>
-    public static BotActionBuilder SendRandomVoice(this BotActionBuilder builder, IReadOnlyList<string> voices,
+    public static IBotActionBuilder SendRandomVoice(this IBotActionBuilder builder, IReadOnlyList<string> voices,
         string? caption = null, ParseMode? parseMode = null,
         bool asReply = false, bool toReply = false)
     {
