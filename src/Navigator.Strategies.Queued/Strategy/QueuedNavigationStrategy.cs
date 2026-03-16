@@ -23,7 +23,7 @@ public sealed class QueuedNavigationStrategy : INavigatorStrategy
     }
 
     /// <inheritdoc />
-    public async Task Invoke(Update update)
+    public async Task Invoke(Update update, string identifier)
     {
         var queueWriter = _queueManager.GetQueueWriter(update.GetQueueKey());
 

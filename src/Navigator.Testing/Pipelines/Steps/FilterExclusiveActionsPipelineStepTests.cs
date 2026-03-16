@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Pipelines.Context;
 using Navigator.Pipelines.Steps;
 using NSubstitute;
@@ -11,8 +12,18 @@ namespace Navigator.Testing.Pipelines.Steps;
 
 public class FilterExclusiveActionsPipelineStepTests
 {
-    private readonly FilterExclusiveActionsPipelineStep _step = new(
-        Substitute.For<ILogger<FilterExclusiveActionsPipelineStep>>());
+    private readonly FilterExclusiveActionsPipelineStep _step;
+
+    public FilterExclusiveActionsPipelineStepTests()
+    {
+        var tracer = Substitute.For<INavigatorTracer>();
+        var tracerFactory = Substitute.For<INavigatorTracerFactory<FilterExclusiveActionsPipelineStep>>();
+        tracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+
+        _step = new FilterExclusiveActionsPipelineStep(
+            Substitute.For<ILogger<FilterExclusiveActionsPipelineStep>>(),
+            tracerFactory);
+    }
 
     private static BotAction MakeAction(string kind, string? subkind, EExclusivityLevel level)
     {
@@ -37,7 +48,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var second = MakeAction("Msg", "Text", EExclusivityLevel.Category);
         var third = MakeAction("Msg", "Text", EExclusivityLevel.None);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([global, second, third]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -53,7 +64,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var second = MakeAction("Msg", "Text", EExclusivityLevel.Category);
         var third = MakeAction("Msg", "Text", EExclusivityLevel.Category);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([first, second, third]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -70,7 +81,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var b1 = MakeAction("Msg", "Photo", EExclusivityLevel.Category);
         var b2 = MakeAction("Msg", "Photo", EExclusivityLevel.Category);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([a1, a2, b1, b2]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -87,7 +98,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var nonExclusive = MakeAction("Msg", "Text", EExclusivityLevel.None);
         var anotherExclusive = MakeAction("Msg", "Text", EExclusivityLevel.Category);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([exclusive, nonExclusive, anotherExclusive]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -105,7 +116,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var b = MakeAction("Msg", "Text", EExclusivityLevel.None);
         var c = MakeAction("Cmd", null, EExclusivityLevel.None);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([a, b, c]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -119,7 +130,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var first = MakeAction("Msg", "Text", EExclusivityLevel.Category);
         var globalLower = MakeAction("Msg", "Photo", EExclusivityLevel.Global);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.AddRange([first, globalLower]);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -133,7 +144,7 @@ public class FilterExclusiveActionsPipelineStepTests
     {
         var sole = MakeAction("Msg", "Text", EExclusivityLevel.Global);
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
         context.Actions.Add(sole);
 
         await _step.InvokeAsync(context, () => Task.CompletedTask);
@@ -147,7 +158,7 @@ public class FilterExclusiveActionsPipelineStepTests
     {
         var called = false;
 
-        var context = new NavigatorActionResolutionContext(new Update());
+        var context = new NavigatorActionResolutionContext(new NavigatorUpdateContext(new Update()));
 
         await _step.InvokeAsync(context, () =>
         {

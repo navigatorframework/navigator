@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Navigator.Abstractions.Actions.Arguments;
 using Navigator.Abstractions.Classifier;
 using Navigator.Abstractions.Client;
+using Navigator.Abstractions.Introspection;
+using Navigator.Abstractions.Introspection.Reader;
+using Navigator.Abstractions.Introspection.Sink;
 using Navigator.Abstractions.Pipelines.Builder;
 using Navigator.Abstractions.Pipelines.Steps;
 using Navigator.Abstractions.Strategies;
@@ -13,6 +16,8 @@ using Navigator.Client;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Hosted;
+using Navigator.Introspection;
+using Navigator.Introspection.Sink;
 using Navigator.Pipelines.Builder;
 using Navigator.Pipelines.Steps;
 using Navigator.Strategy;
@@ -42,6 +47,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUpdateClassifier, UpdateClassifier>();
 
         services.AddArgumentProvider();
+        services.AddIntrospection();
         
         services.AddNavigatorPipeline(navigatorConfiguration);
 
@@ -85,6 +91,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IArgumentResolver, TelegramUpdateArgumentResolver>();
     }
 
+    private static void AddIntrospection(this IServiceCollection services)
+    {
+        services.AddScoped<NavigatorTracerContext>();
+        services.AddScoped(typeof(INavigatorTracerFactory<>), typeof(NavigatorTracerFactory<>));
+        services.AddScoped<INavigatorTracerSink, MemoryCacheNavigatorTracerSink>();
+        services.AddScoped<INavigatorTraceReader, MemoryCacheNavigatorTracerSink>();
+    }
+
     private static void AddNavigatorPipeline(this IServiceCollection services, NavigatorConfiguration configuration)
     {
         services.AddScoped<INavigatorPipelineStep, DefaultActionResolutionMainStep>();
@@ -100,6 +114,9 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<INavigatorPipelineStep, FilterByConditionInResolutionPipelineStep>();
 
-        services.AddScoped<INavigatorPipelineBuilder, DefaultNavigatorPipelineBuilder>();
+        services.AddScoped<INavigatorResolutionPipelineBuilder, DefaultNavigatorResolutionPipelineBuilder>();
+        services.AddScoped<INavigatorExecutionPipelineBuilder, DefaultNavigatorExecutionPipelineBuilder>();
+        
+        services.AddScoped<INavigatorUpdateContextBuilder, DefaultNavigatorUpdateContextBuilder>();
     }
 }

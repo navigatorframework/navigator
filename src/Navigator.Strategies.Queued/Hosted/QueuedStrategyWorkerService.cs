@@ -87,7 +87,8 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
         {
             await using var scope = _scopeFactory.CreateAsyncScope();
             var strategy = scope.ServiceProvider.GetRequiredService<DefaultNavigationStrategy>();
-            await strategy.Invoke(update);
+            // TODO: use actual identifier
+            await strategy.Invoke(update, Guid.CreateVersion7().ToString());
         }
         catch (Exception e)
         {
