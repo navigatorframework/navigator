@@ -3,6 +3,7 @@ using Navigator.Abstractions.Actions.Builder.Extensions;
 using Navigator.Abstractions.Catalog;
 using Navigator.Abstractions.Catalog.Extensions;
 using Navigator.Extensions.Management.Actions;
+using Telegram.Bot.Types;
 
 namespace Navigator.Extensions.Management;
 
@@ -19,6 +20,7 @@ public static class IBotActionCatalogFactoryExtensions
     public static IBotActionCatalogFactory RegisterManagementCommands(this IBotActionCatalogFactory factory)
     {
         factory.RegisterDebugCommand();
+        factory.RegisterFullTraceCallback();
         return factory;
     }
     
@@ -31,6 +33,19 @@ public static class IBotActionCatalogFactoryExtensions
     {
         return factory.OnCommand("debug")
             .SetHandler(DebugCommandAction.HandleDebugCommand)
-            .WithName("Debug Command");
+            .WithName("Navigator.Management.Actions.Debug:Command");
+    }
+    
+    /// <summary>
+    ///     Registers the full trace callback handler.
+    /// </summary>
+    /// <param name="factory">The bot action catalog factory.</param>
+    /// <returns>The configured action builder for further customization.</returns>
+    private static IBotActionBuilder RegisterFullTraceCallback(this IBotActionCatalogFactory factory)
+    {
+        return factory.OnCallbackQuery(
+            (Update update) => update.CallbackQuery?.Data?.StartsWith("debug_full_trace_") is true)
+            .SetHandler(DebugCommandAction.HandleFullTraceCallback)
+            .WithName("Navigator.Management.Actions.Debug:FullTraceCallback");
     }
 }
