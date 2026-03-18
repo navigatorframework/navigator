@@ -12,39 +12,31 @@ namespace Navigator.Extensions.Management;
 /// </summary>
 public static class IBotActionCatalogFactoryExtensions
 {
-    /// <summary>
-    ///     Registers all management commands.
-    /// </summary>
     /// <param name="factory">The bot action catalog factory.</param>
-    /// <returns>The factory for chaining.</returns>
-    public static IBotActionCatalogFactory RegisterManagementCommands(this IBotActionCatalogFactory factory)
+    extension(IBotActionCatalogFactory factory)
     {
-        factory.RegisterDebugCommand();
-        factory.RegisterFullTraceCallback();
-        return factory;
+        /// <summary>
+        ///     Registers all management commands.
+        /// </summary>
+        /// <returns>The factory for chaining.</returns>
+        public IBotActionCatalogFactory RegisterManagementCommands()
+        {
+            factory.RegisterDebugCommand();
+            return factory;
+        }
     }
     
     /// <summary>
-    ///     Registers the debug management command.
+    ///     Registers the debug command and full trace callback.
     /// </summary>
-    /// <param name="factory">The bot action catalog factory.</param>
-    /// <returns>The configured action builder for further customization.</returns>
-    private static IBotActionBuilder RegisterDebugCommand(this IBotActionCatalogFactory factory)
+    /// <param name="factory"></param>
+    private static void RegisterDebugCommand(this IBotActionCatalogFactory factory)
     {
-        return factory.OnCommand("debug")
+        factory.OnCommand("debug")
             .SetHandler(DebugCommandAction.HandleDebugCommand)
             .WithName("Navigator.Management.Actions.Debug:Command");
-    }
-    
-    /// <summary>
-    ///     Registers the full trace callback handler.
-    /// </summary>
-    /// <param name="factory">The bot action catalog factory.</param>
-    /// <returns>The configured action builder for further customization.</returns>
-    private static IBotActionBuilder RegisterFullTraceCallback(this IBotActionCatalogFactory factory)
-    {
-        return factory.OnCallbackQuery(
-            (Update update) => update.CallbackQuery?.Data?.StartsWith("debug_full_trace_") is true)
+        
+        factory.OnCallbackQuery((Update update) => update.CallbackQuery?.Data?.StartsWith("debug_full_trace_") is true)
             .SetHandler(DebugCommandAction.HandleFullTraceCallback)
             .WithName("Navigator.Management.Actions.Debug:FullTraceCallback");
     }
