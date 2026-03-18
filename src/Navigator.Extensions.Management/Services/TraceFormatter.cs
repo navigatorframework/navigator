@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Introspection.Sink;
 using Navigator.Extensions.Management.Helpers;
@@ -56,6 +57,15 @@ public class TraceFormatter : ITraceFormatter
         result.AppendLine("</code></pre>");
         
         return result.ToString();
+    }
+
+    public string FormatTracesAsJson(IReadOnlyCollection<NavigatorTraceEntry> traces)
+    {
+        return JsonSerializer.Serialize(traces, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() }
+        });
     }
 
     private static IEnumerable<NavigatorTrace> FlattenTraces(IEnumerable<NavigatorTraceEntry> entries)
