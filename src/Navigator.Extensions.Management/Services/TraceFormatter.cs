@@ -13,21 +13,22 @@ public class TraceFormatter : ITraceFormatter
     public string FormatTraces(IReadOnlyCollection<NavigatorTraceEntry> traces)
     {
         if (!traces.Any())
-            return ManagementMessageHelper.Debug(
-                "Trace Summary", 
-                "No traces found for this message.");
+        {
+            return ManagementMessageHelper.Debug("Trace Summary", "No traces found for this message.");
+        }
 
         var result = new System.Text.StringBuilder();
         
         // Simple summary
         var allTraces = FlattenTraces(traces).ToList();
         var totalDuration = CalculateTotalDuration(allTraces);
-        var longestTrace = FindLongestTrace(traces.First().InnerTraces.Select(t => t.Trace).ToList());
+        var longestTrace = FindLongestTrace(allTraces);
         var hasErrors = allTraces.Any(t => t.Status == ENavigatorTraceStatus.Error);
         var hasWarnings = allTraces.Any(t => t.Status == ENavigatorTraceStatus.Warning);
         
         var summaryData = new Dictionary<string, string>
         {
+            ["Trace Count"] = $"{allTraces.Count}",
             ["Total Duration"] = $"{totalDuration:F0}ms"
         };
         
@@ -38,12 +39,29 @@ public class TraceFormatter : ITraceFormatter
                 : 0;
             summaryData["Longest"] = $"{longestTrace.SourceContext} ({duration:F0}ms)";
         }
+
+        var actionNames = allTraces
+            .SelectMany(t => t.Tags.TryGetValue(NavigatorTraceKeys.ActionName, out var names)
+                ? (IEnumerable<string>)names
+                : []);
+        
+        foreach (var action in actionNames)
+        {
+            summaryData["Actions Triggered"] = summaryData.TryGetValue("Actions Triggered", out var value) 
+                ? value + ", " + action 
+                : action;
+        }
         
         if (hasErrors)
-            summaryData["Status"] = "Contains errors";
+        {
+            var firstError = allTraces.First(t => t.Status == ENavigatorTraceStatus.Error);
+            var errorDetail = !string.IsNullOrWhiteSpace(firstError.StatusMessage) ? firstError.StatusMessage : firstError.SourceContext;
+            summaryData["Status"] = $"Error — {errorDetail}";
+        }
+        
         if (hasWarnings)
-            summaryData["Status"] = summaryData.ContainsKey("Status") 
-                ? "Contains errors and warnings" 
+            summaryData["Status"] = summaryData.TryGetValue("Status", out var value) 
+                ? value + " + warnings" 
                 : "Contains warnings";
 
         result.AppendLine(ManagementMessageHelper.Debug("Trace Summary", "Debug information retrieved."));
