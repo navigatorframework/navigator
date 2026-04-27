@@ -59,4 +59,9 @@ public static class NavigatorTraceKeys
     ///     The chat action sent before execution.
     /// </summary>
     public const string ExecutionChatAction = "navigator.execution.chat_action";
+
+    /// <summary>
+    ///     The Telegram api call.
+    /// </summary>
+    public const string TelegramApiCall = "navigator.telegram.api_call";
 }

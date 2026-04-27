@@ -32,9 +32,11 @@ public class NavigatorPipelineBuilderTests
 
         _resolutionTracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorResolutionPipelineBuilder>>();
         _resolutionTracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+        _resolutionTracerFactory.HasActiveTrace().Returns(false);
 
         _executionTracerFactory = Substitute.For<INavigatorTracerFactory<DefaultNavigatorExecutionPipelineBuilder>>();
         _executionTracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+        _executionTracerFactory.HasActiveTrace().Returns(false);
     }
 
     [Fact]

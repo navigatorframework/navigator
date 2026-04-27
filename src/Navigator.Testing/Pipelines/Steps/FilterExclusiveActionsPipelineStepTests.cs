@@ -19,6 +19,7 @@ public class FilterExclusiveActionsPipelineStepTests
         var tracer = Substitute.For<INavigatorTracer>();
         var tracerFactory = Substitute.For<INavigatorTracerFactory<FilterExclusiveActionsPipelineStep>>();
         tracerFactory.Get(Arg.Any<string?>()).Returns(tracer);
+        tracerFactory.HasActiveTrace().Returns(false);
 
         _step = new FilterExclusiveActionsPipelineStep(
             Substitute.For<ILogger<FilterExclusiveActionsPipelineStep>>(),
