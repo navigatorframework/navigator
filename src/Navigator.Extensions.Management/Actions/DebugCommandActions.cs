@@ -13,7 +13,7 @@ namespace Navigator.Extensions.Management.Actions;
 /// <summary>
 ///     Handles the /debug command for retrieving trace information.
 /// </summary>
-public static class DebugCommandAction
+public static class DebugCommandActions
 {
     /// <summary>
     ///     Handles the debug command by extracting message ID from reply context and retrieving traces.
@@ -34,7 +34,6 @@ public static class DebugCommandAction
 
         var formattedOutput = traceFormatter.FormatTraces(traces);
 
-        // Create inline keyboard with "Get Full Trace" button if traces exist
         var replyMarkup = traces.Count != 0 ? new InlineKeyboardMarkup([
             [
                 InlineKeyboardButton.WithCallbackData("📄 Get Full Trace", $"debug_full_trace_{chatId}_{messageId}")

@@ -33,11 +33,11 @@ public static class IBotActionCatalogFactoryExtensions
     private static void RegisterDebugCommand(this IBotActionCatalogFactory factory)
     {
         factory.OnCommand("debug")
-            .SetHandler(DebugCommandAction.HandleDebugCommand)
+            .SetHandler(DebugCommandActions.HandleDebugCommand)
             .WithName("Navigator.Management.Actions.Debug:Command");
         
         factory.OnCallbackQuery((Update update) => update.CallbackQuery?.Data?.StartsWith("debug_full_trace_") is true)
-            .SetHandler(DebugCommandAction.HandleFullTraceCallback)
+            .SetHandler(DebugCommandActions.HandleFullTraceCallback)
             .WithName("Navigator.Management.Actions.Debug:FullTraceCallback");
     }
 }
