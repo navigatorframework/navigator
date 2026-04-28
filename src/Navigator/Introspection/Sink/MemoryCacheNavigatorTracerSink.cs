@@ -93,9 +93,8 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
     }
 
     /// <inheritdoc />
-    public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveByChatAndMessage(long chatId, int messageId)
+    public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveByChatAndMessage(long chatId, int messageId, bool findRoot = false)
     {
-        // Get trace identifiers for the specific chat and message ID from the index
         if (!cache.TryGetValue($"navigator:message:{chatId}:{messageId}", out List<string>? messageTraceIds) || messageTraceIds is null)
             return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
 
@@ -103,7 +102,17 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
 
         foreach (var traceId in messageTraceIds)
         {
-            var traceEntry = BuildTree(traceId);
+            var currentTraceId = traceId;
+
+            if (findRoot)
+            {
+                while (cache.TryGetValue($"navigator:trace:{currentTraceId}", out NavigatorTrace? trace) && trace?.ParentIdentifier != null)
+                {
+                    currentTraceId = trace.ParentIdentifier;
+                }
+            }
+
+            var traceEntry = BuildTree(currentTraceId);
             if (traceEntry is not null)
             {
                 matchingTraces.Add(traceEntry);
