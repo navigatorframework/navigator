@@ -13,6 +13,7 @@
 *.userprefs
 
 appsettings.Local.json
+.agents/plans/
 
 # Build results
 [Dd]ebug/
