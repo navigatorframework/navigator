@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Navigator;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Catalog.Extensions;
 using Navigator.Abstractions.Client;
 using Navigator.Abstractions.Introspection;
-using Navigator.Catalog.Factory.Extensions;
 using Navigator.Configuration;
 using Navigator.Configuration.Options;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Cooldown.Extensions;
+using Navigator.Extensions.Management;
 using Sample;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -29,6 +30,7 @@ builder.Services.AddNavigator(configuration =>
     configuration.Options.EnableMultipleActionsUsage();
     
     configuration.WithExtension<CooldownExtension>();
+    configuration.WithExtension<ManagementExtension, ManagementOptions>(cfg => {});
 });
 
 var app = builder.Build();
@@ -58,6 +60,8 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, Chat chat, Mes
 
     await client.SendMessage(chat, text);
 }).WithCooldown(TimeSpan.FromSeconds(30));
+
+bot.RegisterManagementCommands();
 
 bot.RegisterBotExtensionExamples();
 bot.RegisterBotCommandPatternExamples();

@@ -1,21 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>true</ImplicitUsings>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Title>Navigator</Title>
+        <Title>Navigator.Extensions.Management</Title>
         <Authors>Lucas Maximiliano Marino</Authors>
-        <Description>A highly opinionated telegram bot framework for .NET</Description>
+        <Description>Easily manage your Navigator telegram bot with Navigator Management</Description>
         <PackageProjectUrl>https://github.com/navigatorframework/navigator</PackageProjectUrl>
         <RepositoryUrl>https://github.com/navigatorframework/navigator</RepositoryUrl>
         <PackageIconUrl>https://raw.githubusercontent.com/navigatorframework/navigator/master/assets/logo.png</PackageIconUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageTags>Telegram, Bot, Framework, Navigator</PackageTags>
+        <PackageTags>Telegram, Bot, Framework, Navigator, Management</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
-        <Copyright>Copyright © Lucas Maximiliano Marino 2025</Copyright>
+        <Copyright>Copyright © Lucas Maximiliano Marino 2026</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,11 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Catalog\Factory\Extensions\BotActionCatalogFactoryExtensions.cs" />
+        <ProjectReference Include="..\Navigator.Abstractions\Navigator.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

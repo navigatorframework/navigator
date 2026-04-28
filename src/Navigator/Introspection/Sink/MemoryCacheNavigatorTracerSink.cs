@@ -2,6 +2,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Navigator.Abstractions.Introspection;
 using Navigator.Abstractions.Introspection.Reader;
 using Navigator.Abstractions.Introspection.Sink;
+using static Navigator.Abstractions.Introspection.NavigatorTraceKeys;
 
 namespace Navigator.Introspection.Sink;
 
@@ -12,6 +13,20 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
     public Task Store(NavigatorTrace trace)
     {
         cache.Set($"navigator:trace:{trace.Identifier}", trace, Ttl);
+
+        // Index by chat ID and message ID if the trace has both tags
+        if (HasValidChatAndMessageTags(trace, out var chatId, out var messageId))
+        {
+            var messageIndex = cache.GetOrCreate(
+                $"navigator:message:{chatId}:{messageId}",
+                entry =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = Ttl;
+                    return new List<string>();
+                })!;
+
+            messageIndex.Add(trace.Identifier);
+        }
 
         if (trace.ParentIdentifier is not null)
         {
@@ -41,11 +56,28 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
         return Task.CompletedTask;
     }
 
+    private bool HasValidChatAndMessageTags(NavigatorTrace trace, out string? chatId, out string? messageId)
+    {
+        if (trace.Tags.TryGetValue(UpdateChatId, out var chatIds) && chatIds.Count != 0 &&
+            trace.Tags.TryGetValue(UpdateMessageId, out var messageIds) && messageIds.Count != 0)
+        {
+            chatId = chatIds.First();
+            messageId = messageIds.First();
+            return true;
+        }
+
+        chatId = null;
+        messageId = null;
+        return false;
+    }
+
+    /// <inheritdoc />
     public Task<NavigatorTraceEntry?> Retrieve(string identifier)
     {
         return Task.FromResult(BuildTree(identifier));
     }
 
+    /// <inheritdoc />
     public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveAll()
     {
         if (!cache.TryGetValue("navigator:roots", out List<string>? rootIds) || rootIds is null)
@@ -58,6 +90,36 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
             .ToList();
 
         return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(roots);
+    }
+
+    /// <inheritdoc />
+    public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveByChatAndMessage(long chatId, int messageId, bool findRoot = false)
+    {
+        if (!cache.TryGetValue($"navigator:message:{chatId}:{messageId}", out List<string>? messageTraceIds) || messageTraceIds is null)
+            return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
+
+        var matchingTraces = new List<NavigatorTraceEntry>();
+
+        foreach (var traceId in messageTraceIds)
+        {
+            var currentTraceId = traceId;
+
+            if (findRoot)
+            {
+                while (cache.TryGetValue($"navigator:trace:{currentTraceId}", out NavigatorTrace? trace) && trace?.ParentIdentifier != null)
+                {
+                    currentTraceId = trace.ParentIdentifier;
+                }
+            }
+
+            var traceEntry = BuildTree(currentTraceId);
+            if (traceEntry is not null)
+            {
+                matchingTraces.Add(traceEntry);
+            }
+        }
+
+        return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(matchingTraces);
     }
 
     private NavigatorTraceEntry? BuildTree(string identifier)

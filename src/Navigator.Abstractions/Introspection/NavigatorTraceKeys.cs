@@ -16,6 +16,11 @@ public static class NavigatorTraceKeys
     public const string UpdateChatId = "navigator.update.chat.id";
 
     /// <summary>
+    ///     The Telegram message identifier extracted from the update.
+    /// </summary>
+    public const string UpdateMessageId = "navigator.update.message.id";
+
+    /// <summary>
     ///     The Telegram user identifier extracted from the update.
     /// </summary>
     public const string UpdateUserId = "navigator.update.user.id";
@@ -54,4 +59,9 @@ public static class NavigatorTraceKeys
     ///     The chat action sent before execution.
     /// </summary>
     public const string ExecutionChatAction = "navigator.execution.chat_action";
+
+    /// <summary>
+    ///     The Telegram api call.
+    /// </summary>
+    public const string TelegramApiCall = "navigator.telegram.api_call";
 }

@@ -12,6 +12,8 @@ public class NavigatorTracerContext
         _logger = logger;
     }
 
+    public bool HasActiveTrace() => _identifiers.Count > 0;
+
     public string? PeekOrDefault() => _identifiers.TryPeek(out var identifier) ? identifier : null;
 
     public void Push(string identifier) => _identifiers.Push(identifier);

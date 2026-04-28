@@ -1,8 +1,9 @@
 using Microsoft.Extensions.Logging;
 using Navigator.Abstractions.Actions;
+using Navigator.Abstractions.Actions.Builder;
 using Navigator.Abstractions.Catalog;
+using Navigator.Abstractions.Actions.Builder.Extensions;
 using Navigator.Actions.Builder;
-using Navigator.Actions.Builder.Extensions;
 using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Catalog.Factory;
@@ -10,7 +11,7 @@ namespace Navigator.Catalog.Factory;
 /// <summary>
 ///     Factory for <see cref="BotActionCatalog" />.
 /// </summary>
-public class BotActionCatalogFactory
+public class BotActionCatalogFactory : IBotActionCatalogFactory
 {
     private readonly ILogger<BotActionCatalogFactory> _logger;
 
@@ -24,7 +25,7 @@ public class BotActionCatalogFactory
     }
 
     private List<BotActionBuilder> Actions { get; } = [];
-    private BotActionCatalog? Catalog { get; set; }
+    private IBotActionCatalog? Catalog { get; set; }
 
     /// <summary>
     ///     Adds a new <see cref="BotActionBuilder" /> to the catalog.
@@ -36,7 +37,8 @@ public class BotActionCatalogFactory
     /// <param name="handler">
     ///     A delegate representing the action to take when the condition is met.
     /// </param>
-    public BotActionBuilder OnUpdate(Delegate condition, Delegate? handler = default)
+    /// <returns>A configured <see cref="IBotActionBuilder" /> for further customization.</returns>
+    public IBotActionBuilder OnUpdate(Delegate condition, Delegate? handler = default)
     {
         var actionBuilder = new BotActionBuilder();
 
@@ -51,9 +53,9 @@ public class BotActionCatalogFactory
     }
 
     /// <summary>
-    ///     Retrieves the built <see cref="BotActionCatalog" />.
+    ///     Retrieves the built <see cref="IBotActionCatalog" />.
     /// </summary>
-    /// <returns>The built <see cref="BotActionCatalog" />.</returns>
+    /// <returns>The built <see cref="IBotActionCatalog" />.</returns>
     public IBotActionCatalog Retrieve()
     {
         if (Catalog is null) Build();

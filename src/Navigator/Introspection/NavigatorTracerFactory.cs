@@ -14,6 +14,8 @@ public class NavigatorTracerFactory<TCategoryName> : INavigatorTracerFactory<TCa
         _context = context;
     }
 
+    public bool HasActiveTrace() => _context.HasActiveTrace();
+
     public INavigatorTracer Get(string? identifier = null)
     {
         var lastKnownIdentifier = _context.PeekOrDefault();

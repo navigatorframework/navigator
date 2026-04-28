@@ -1,7 +1,8 @@
 using Navigator.Abstractions.Entities;
+using Navigator.Abstractions.Actions.Builder.Extensions;
 using Navigator.Actions.Builder.Extensions;
 using Navigator.Catalog.Factory;
-using Navigator.Catalog.Factory.Extensions;
+using Navigator.Abstractions.Catalog.Extensions;
 using Telegram.Bot.Types;
 
 namespace Sample;
