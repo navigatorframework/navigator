@@ -7,6 +7,7 @@ This directory contains guidance for AI-assisted development in Navigator. The d
 - `navigator-solution`: use for solution layout, project creation, project references, and validation workflow.
 - `navigator-architecture`: use for core framework behavior, request lifecycle, dependency injection, strategies, pipelines, argument resolution, and tracing.
 - `navigator-extension-authoring`: use for `Navigator.Extensions.*` packages, extension options, extension pipeline steps, builder APIs, tests, samples, packaging, and README updates.
+- `navigator-execplan`: use when planning a feature or substantial change with an ExecPlan governed by `.agents/PLANS.md`.
 
 ## Documentation Map
 
