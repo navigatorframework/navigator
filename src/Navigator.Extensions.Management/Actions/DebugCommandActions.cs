@@ -30,7 +30,7 @@ public static class DebugCommandActions
         var chatId = chat.Id;
         var messageId = message.ReplyToMessage.MessageId;
 
-        var traces = await traceReader.RetrieveByChatAndMessage(chatId, messageId);
+        var traces = await traceReader.RetrieveByChatAndMessage(chatId, messageId, findRoot: true);
 
         var formattedOutput = traceFormatter.FormatTraces(traces);
 
@@ -67,8 +67,8 @@ public static class DebugCommandActions
         await client.AnswerCallbackQuery(callbackQuery.Id, "Generating full trace...");
 
         // Retrieve traces
-        var traces = await traceReader.RetrieveByChatAndMessage(chatId, messageId);
-        
+        var traces = await traceReader.RetrieveByChatAndMessage(chatId, messageId, findRoot: true);
+
         if (!traces.Any())
         {
             await client.SendMessage(chat, "No traces found for this message.", replyParameters: callbackQuery.Message);
