@@ -44,8 +44,8 @@ public class TraceFormatter : ITraceFormatter
             .SelectMany(t => t.Tags.TryGetValue(NavigatorTraceKeys.ActionName, out var names)
                 ? (IEnumerable<string>)names
                 : []);
-        
-        foreach (var action in actionNames)
+
+        foreach (var action in actionNames.Distinct())
         {
             summaryData["Actions Triggered"] = summaryData.TryGetValue("Actions Triggered", out var value) 
                 ? value + ", " + action 
