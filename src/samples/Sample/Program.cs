@@ -12,6 +12,7 @@ using Navigator.Configuration.Options;
 using Navigator.Extensions.Cooldown;
 using Navigator.Extensions.Cooldown.Extensions;
 using Navigator.Extensions.Management;
+using Navigator.Extensions.Probabilities;
 using Sample;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -30,6 +31,7 @@ builder.Services.AddNavigator(configuration =>
     configuration.Options.EnableMultipleActionsUsage();
     
     configuration.WithExtension<CooldownExtension>();
+    configuration.WithExtension<ProbabilitiesExtension>();
     configuration.WithExtension<ManagementExtension, ManagementOptions>(cfg => {});
 });
 

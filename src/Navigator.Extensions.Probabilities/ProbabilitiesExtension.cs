@@ -15,6 +15,6 @@ public class ProbabilitiesExtension : INavigatorExtension
     /// <inheritdoc />
     public void Configure(IServiceCollection services, NavigatorOptions options)
     {
-        services.AddSingleton<INavigatorPipelineStep, FilterByProbabilitiesStep>();
+        services.AddScoped<INavigatorPipelineStep, FilterByProbabilitiesStep>();
     }
 }

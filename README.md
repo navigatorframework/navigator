@@ -199,6 +199,7 @@ Navigator ships several extension packages. Register them with `WithExtension<T>
 - **Navigator.Extensions.Cooldown** – configure per-action cooldowns.
 - **Navigator.Extensions.Probabilities** – configure the probability of an action being executed.
 - **Navigator.Extensions.Store** – persist `User`, `Chat`, and `Conversation` entities with Entity Framework Core.
+- **Navigator.Extensions.Management** – provides a `/debug` command for introspecting Navigator trace data.
 
 You can find them on NuGet by searching for `Navigator.Extensions.`.
 
@@ -234,6 +235,17 @@ bot.OnMessage((Update _) => true, async (INavigatorClient client, User user, Cha
 ```
 
 For a custom `DbContext`, use `options.ConfigureStore<TContext>(...)` and inject `INavigatorStore<TContext>`. See the [SampleWithCustomStore](src/samples/SampleWithCustomStore/Program.cs) for a full example.
+
+### Management
+
+```csharp
+configuration.WithExtension<ManagementExtension, ManagementOptions>(cfg => { });
+
+// Then on the bot catalog:
+bot.RegisterManagementCommands();
+```
+
+The Management extension registers a `/debug` command. When used as a reply to any message, it returns a summary of Navigator trace data for that message, including trace count, total duration, actions triggered, and any errors or warnings. A button is also provided to download the full trace as a JSON document.
 
 ## Strategies
 
