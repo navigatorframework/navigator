@@ -18,14 +18,13 @@ public class AIExtension : INavigatorExtension<AIOptions>
     /// <inheritdoc />
     public void Configure(IServiceCollection services, NavigatorOptions navigatorOptions, AIOptions extensionOptions)
     {
-        if (!services.Any(service => service.ServiceType == typeof(IDistributedCache)))
+        if (services.All(service => service.ServiceType != typeof(IDistributedCache)))
         {
             throw new InvalidOperationException(
                 "Navigator.Extensions.AI requires an IDistributedCache registration. Register one before calling WithExtension<AIExtension>(...).");
         }
 
         services.AddSingleton(extensionOptions);
-        services.AddTransient<AiRequestLoggingHandler>();
 
         RegisterHttpClient(services, extensionOptions.ChatCompletionProvider);
         RegisterHttpClient(services, extensionOptions.EmbeddingProvider);
@@ -73,14 +72,13 @@ public class AIExtension : INavigatorExtension<AIOptions>
         }
 
         services.AddHttpClient(provider.GetClientName(), (_, client) =>
-            {
-                client.BaseAddress = new Uri(provider.ApiUrl);
+        {
+            client.BaseAddress = new Uri(provider.ApiUrl);
 
-                if (!string.IsNullOrEmpty(provider.ApiKey))
-                {
-                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {provider.ApiKey}");
-                }
-            })
-            .AddHttpMessageHandler<AiRequestLoggingHandler>();
+            if (!string.IsNullOrEmpty(provider.ApiKey))
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {provider.ApiKey}");
+            }
+        });
     }
 }
