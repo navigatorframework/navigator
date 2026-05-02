@@ -26,6 +26,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Navigator\Navigator.csproj"/>
+        <ProjectReference Include="..\Navigator.Extensions.AI\Navigator.Extensions.AI.csproj"/>
     </ItemGroup>
 
 </Project>
