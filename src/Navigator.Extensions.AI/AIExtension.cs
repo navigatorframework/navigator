@@ -13,6 +13,9 @@ using Navigator.Extensions.AI.Steps;
 
 namespace Navigator.Extensions.AI;
 
+/// <summary>
+///     Registers AI-related services, resolvers, and pipeline steps for Navigator.
+/// </summary>
 public class AIExtension : INavigatorExtension<AIOptions>
 {
     /// <inheritdoc />

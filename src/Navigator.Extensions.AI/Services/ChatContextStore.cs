@@ -8,6 +8,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace Navigator.Extensions.AI.Services;
 
+/// <summary>
+///     Persists AI chat context in distributed cache storage.
+/// </summary>
 public class ChatContextStore : IChatContextStore
 {
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
@@ -17,6 +20,12 @@ public class ChatContextStore : IChatContextStore
     private readonly AIOptions _options;
     private readonly IChatContextMediaDownloader _mediaDownloader;
 
+    /// <summary>
+    ///     Initializes a new chat context store.
+    /// </summary>
+    /// <param name="cache">The distributed cache used for persistence.</param>
+    /// <param name="options">The configured AI extension options.</param>
+    /// <param name="mediaDownloader">The media downloader used for binary message content.</param>
     public ChatContextStore(IDistributedCache cache, AIOptions options, IChatContextMediaDownloader mediaDownloader)
     {
         _cache = cache;
@@ -24,6 +33,7 @@ public class ChatContextStore : IChatContextStore
         _mediaDownloader = mediaDownloader;
     }
 
+    /// <inheritdoc />
     public async Task AppendIncomingMessageAsync(Message message, CancellationToken cancellationToken = default)
     {
         var chatId = message.Chat?.Id;
@@ -53,6 +63,7 @@ public class ChatContextStore : IChatContextStore
         await _cache.SetAsync(GetCacheKey(chatId.Value), payload, cancellationToken);
     }
 
+    /// <inheritdoc />
     public async Task<ChatContext> GetForUpdateAsync(Update update, CancellationToken cancellationToken = default)
     {
         var chatId = update.GetChatOrDefault()?.Id;
@@ -61,6 +72,7 @@ public class ChatContextStore : IChatContextStore
             : await GetAsync(chatId.Value, cancellationToken);
     }
 
+    /// <inheritdoc />
     public ChatContext CreateEmptyContext() => new(_options.ChatContextLength);
 
     private async Task<ChatContext> GetAsync(long chatId, CancellationToken cancellationToken)

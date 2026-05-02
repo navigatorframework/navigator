@@ -2,6 +2,8 @@ using Navigator.Abstractions.Actions.Builder;
 
 namespace Navigator.Abstractions.Catalog;
 
+using BotActionBuilder = Navigator.Abstractions.Actions.Builder.IBotActionBuilder;
+
 /// <summary>
 ///     Factory for creating and managing bot action catalogs.
 /// </summary>

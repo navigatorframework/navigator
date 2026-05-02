@@ -6,6 +6,9 @@ using Navigator.Extensions.AI.Models;
 
 namespace Navigator.Extensions.AI.Services;
 
+/// <summary>
+///     Converts stored Navigator chat context into Semantic Kernel chat history objects.
+/// </summary>
 public class SemanticKernelChatContextParser : ISemanticKernelChatContextParser
 {
     private const string ImageFallbackText = "User sent an image.";
@@ -13,11 +16,16 @@ public class SemanticKernelChatContextParser : ISemanticKernelChatContextParser
 
     private readonly AIOptions _options;
 
+    /// <summary>
+    ///     Initializes a new parser instance.
+    /// </summary>
+    /// <param name="options">The configured AI options.</param>
     public SemanticKernelChatContextParser(AIOptions options)
     {
         _options = options;
     }
 
+    /// <inheritdoc />
     public ChatHistory Parse(ChatContext context)
     {
         var messages = context.Select(ParseMessage).ToList();

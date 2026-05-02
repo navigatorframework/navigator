@@ -21,6 +21,7 @@ public class NavigatorClient : TelegramBotClient, INavigatorClient
     /// Builds a <see cref="NavigatorClient"/>.
     /// </summary>
     /// <param name="options"><see cref="NavigatorOptions"/></param>
+    /// <param name="tracerFactory">The tracer factory used to instrument outgoing Telegram API calls.</param>
     /// <exception cref="ArgumentNullException">If telegram token is null</exception>
     public NavigatorClient(IOptions<NavigatorOptions> options, INavigatorTracerFactory<NavigatorClient> tracerFactory) 
         : base(options.Value.GetTelegramToken() ?? throw new ArgumentNullException())

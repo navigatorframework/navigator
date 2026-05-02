@@ -10,6 +10,11 @@ namespace Navigator.Extensions.Management.Services;
 /// </summary>
 public class TraceFormatter : ITraceFormatter
 {
+    /// <summary>
+    ///     Formats trace entries into a human-readable debug summary.
+    /// </summary>
+    /// <param name="traces">The trace entries to format.</param>
+    /// <returns>A formatted summary string.</returns>
     public string FormatTraces(IReadOnlyCollection<NavigatorTraceEntry> traces)
     {
         if (!traces.Any())
@@ -77,6 +82,11 @@ public class TraceFormatter : ITraceFormatter
         return result.ToString();
     }
 
+    /// <summary>
+    ///     Formats trace entries as indented JSON.
+    /// </summary>
+    /// <param name="traces">The trace entries to format.</param>
+    /// <returns>The formatted JSON payload.</returns>
     public string FormatTracesAsJson(IReadOnlyCollection<NavigatorTraceEntry> traces)
     {
         return JsonSerializer.Serialize(traces, new JsonSerializerOptions
