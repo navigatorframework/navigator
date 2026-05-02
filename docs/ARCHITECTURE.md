@@ -11,7 +11,7 @@ Navigator is a .NET Telegram bot framework. The solution lives under `src/` and 
 - `src/Navigator.Extensions.*`: optional extension packages.
 - `src/Navigator.Strategies.*`: optional strategy packages that replace update processing behavior.
 - `src/Navigator.Testing/`: xUnit tests for core and package behavior.
-- `src/samples/`: runnable examples for user-facing workflows.
+- `src/samples/`: sample applications and reference setups for user-facing workflows. Some of these are solution-backed runnable examples, while others are kept as sample directories outside `Navigator.sln`.
 
 Use `docs/EXTENSION-AUTHORING.md` for extension-specific work.
 

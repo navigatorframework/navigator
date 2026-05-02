@@ -21,7 +21,7 @@ Extension packages are usually independent NuGet packages. Match package metadat
 
 ## Project Shape
 
-Extension projects live under `src/Navigator.Extensions.<Name>/` and are added to `src/Navigator.sln`.
+Extension projects live under `src/Navigator.Extensions.<Name>/`, are added to `src/Navigator.sln`, and should be placed under the `Extensions` solution folder to match the existing package layout.
 
 Use `dotnet` commands from `src/` for project and solution operations:
 
@@ -37,7 +37,8 @@ Most extension projects should:
 - enable nullable reference types
 - generate XML documentation
 - include package metadata
-- include `../../README.md` as `PackageReadmeFile`
+- set `PackageReadmeFile` to `README.md`
+- pack `../../README.md` into the package root as `/README.md`
 - reference `Navigator.Abstractions`
 
 Only reference `Navigator` when the extension truly needs core implementation types. Prefer abstractions for package boundaries.
