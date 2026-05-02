@@ -6,7 +6,7 @@ This document describes the requirements for an execution plan ("ExecPlan"), a d
 
 When authoring an executable specification (ExecPlan), follow PLANS.md _to the letter_. If it is not in your context, refresh your memory by reading the entire PLANS.md file. Be thorough in reading (and re-reading) source material to produce an accurate specification. When creating a spec, start from the skeleton and flesh it out as you do your research.
 
-When implementing an executable specification (ExecPlan), do not prompt the user for "next steps"; simply proceed to the next milestone. Keep all sections up to date, add or split entries in the list at every stopping point to affirmatively state the progress made and next steps. Resolve ambiguities autonomously, and commit frequently.
+When implementing an executable specification (ExecPlan), do not prompt the user for "next steps"; simply proceed to the next milestone. Keep all sections up to date, add or split entries in the list at every stopping point to affirmatively state the progress made and next steps. Resolve ambiguities autonomously.
 
 When discussing an executable specification (ExecPlan), record decisions in a log in the spec for posterity; it should be unambiguously clear why any change to the specification was made. ExecPlans are living documents, and it should always be possible to restart from _only_ the ExecPlan and no other work.
 
@@ -40,7 +40,7 @@ Self-containment and plain language are paramount. If you introduce a phrase tha
 
 Avoid common failure modes. Do not rely on undefined jargon. Do not describe "the letter of a feature" so narrowly that the resulting code compiles but does nothing meaningful. Do not outsource key decisions to the reader. When ambiguity exists, resolve it in the plan itself and explain why you chose that path. Err on the side of over-explaining user-visible effects and under-specifying incidental implementation details.
 
-Anchor the plan with observable outcomes. State what the user can do after implementation, the commands to run, and the outputs they should see. Acceptance should be phrased as behavior a human can verify ("after starting the server, navigating to [http://localhost:8080/health](http://localhost:8080/health) returns HTTP 200 with body OK") rather than internal attributes ("added a HealthCheck struct"). If a change is internal, explain how its impact can still be demonstrated (for example, by running tests that fail before and pass after, and by showing a scenario that uses the new behavior).
+Anchor the plan with observable outcomes. State what the user can do after implementation, the commands to run, and the outputs they should see. Acceptance should be phrased as behavior a human can verify ("from `src/`, run `dotnet test --filter FilterExclusiveActionsPipelineStepTests` and observe that the new exclusivity scenario fails before the change and passes after") rather than internal attributes ("added a new pipeline step"). If a change is internal, explain how its impact can still be demonstrated (for example, by running tests that fail before and pass after, and by showing a scenario that uses the new behavior).
 
 Specify repository context explicitly. Name files with full repository-relative paths, name functions and modules precisely, and describe where new files should be created. If touching multiple areas, include a short orientation paragraph that explains how those parts fit together so a novice can navigate confidently. When running commands, show the working directory and exact command line. When outcomes depend on environment, state the assumptions and provide alternatives when reasonable.
 
@@ -76,7 +76,7 @@ Prefer additive code changes followed by subtractions that keep tests passing. P
 
     This ExecPlan is a living document. The sections `Progress`, `Surprises & Discoveries`, `Decision Log`, and `Outcomes & Retrospective` must be kept up to date as work proceeds.
 
-    If PLANS.md file is checked into the repo, reference the path to that file here from the repository root and note that this document must be maintained in accordance with PLANS.md.
+    Reference `.agents/PLANS.md` from the repository root here and note that this document must be maintained in accordance with it.
 
     ## Purpose / Big Picture
 
@@ -137,30 +137,27 @@ Prefer additive code changes followed by subtractions that keep tests passing. P
 
     ## Interfaces and Dependencies
 
-    Be prescriptive. Name the libraries, modules, and services to use and why. Specify the types, interfaces, and function signatures that must exist at the end of the milestone. Prefer stable names and paths such as `Entrylog.Modules.Core.Domain.Entities.Space` or `composables/useSpaces.ts`. E.g.:
+    Be prescriptive. Name the libraries, modules, and services to use and why. Specify the types, interfaces, and function signatures that must exist at the end of the milestone. Prefer stable Navigator paths such as `src/Navigator/ServiceCollectionExtensions.cs` or `src/Navigator.Extensions.Cooldown/CooldownExtension.cs`. E.g.:
 
-    Backend (C#) — In server/Entrylog.Modules.Core/Domain/Interactions/Commands/Spaces/CreateSpace.cs, define:
+    Extension package (C#) — In `src/Navigator.Extensions.Example/ExampleExtension.cs`, define:
 
-        public record CreateSpace(string Name, string Description) : ICommand<Result<Guid>>;
-
-        public class CreateSpaceHandler : IResultCommandHandler<CreateSpace, Result<Guid>>
+        public sealed class ExampleExtension : INavigatorExtension<ExampleOptions>
         {
-            public async Task<Result<Guid>> HandleAsync(CreateSpace command, CancellationToken ct)
+            public void Configure(IServiceCollection services, NavigatorOptions navigatorOptions, ExampleOptions extensionOptions)
             {
-                // implementation
+                services.AddScoped<INavigatorPipelineStep, ExamplePipelineStep>();
             }
         }
 
-    Frontend (Nuxt / Vue / TypeScript) — In client/composables/useSpaces.ts, define:
+    Tests (C#) — In `src/Navigator.Testing/Extensions/ExampleExtensionTests.cs`, add:
 
-        export function useSpaces() {
-          const spaces = ref<Space[]>([])
-
-          async function fetchSpaces(): Promise<void> {
-            // implementation
-          }
-
-          return { spaces, fetchSpaces }
+        public class ExampleExtensionTests
+        {
+            [Fact]
+            public async Task Example_extension_registers_its_pipeline_step()
+            {
+                // implementation
+            }
         }
 
 If you follow the guidance above, a single, stateless agent -- or a human novice -- can read your ExecPlan from top to bottom and produce a working, observable result. That is the bar: SELF-CONTAINED, SELF-SUFFICIENT, NOVICE-GUIDING, OUTCOME-FOCUSED.

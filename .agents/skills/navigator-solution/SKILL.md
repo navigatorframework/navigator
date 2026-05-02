@@ -22,7 +22,7 @@ The solution is organized under `src/`:
 - `Navigator.Extensions.*` contains extension packages.
 - `Navigator.Strategies.*` contains strategy packages.
 - `Navigator.Testing/` contains the test project.
-- `samples/` contains runnable sample applications.
+- `samples/` contains sample applications and reference setups. Only some sample directories are currently added to `Navigator.sln`.
 
 When adding new code, place it according to that structure:
 
@@ -31,6 +31,7 @@ When adding new code, place it according to that structure:
 - New strategy packages should follow `Navigator.Strategies.<Name>`.
 - New samples should live under `src/samples/<SampleName>/`.
 - Prefer extending `Navigator.Testing` for tests unless a separate test project is clearly justified.
+- Add new projects to the matching solution folder in `src/Navigator.sln` such as `Extensions`, `Strategies`, or `Samples`.
 
 ## Required CLI Workflow
 
@@ -41,12 +42,13 @@ Common commands:
 ```bash
 cd src
 dotnet new classlib -n Navigator.Extensions.Example
-dotnet new xunit -n Navigator.FeatureName.Tests
 dotnet new web -n SampleWithExample -o samples/SampleWithExample
 dotnet sln Navigator.sln add Navigator.Extensions.Example/Navigator.Extensions.Example.csproj
 dotnet sln Navigator.sln add samples/SampleWithExample/SampleWithExample.csproj
 dotnet add samples/SampleWithExample/SampleWithExample.csproj reference Navigator/Navigator.csproj
 ```
+
+Prefer adding tests to `Navigator.Testing` instead of creating a new test project. Only create a separate test project when there is a concrete need that `Navigator.Testing` cannot cover cleanly.
 
 Use CLI commands for these operations:
 
