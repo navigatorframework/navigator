@@ -1,11 +1,21 @@
 using Navigator.Abstractions.Introspection;
 namespace Navigator.Introspection;
 
+/// <summary>
+///     Default <see cref="INavigatorTracer" /> implementation for runtime tracing.
+/// </summary>
 public class NavigatorTracer : INavigatorTracer
 {
     private readonly CommitNavigatorTrace _commitTrace;
     private readonly NavigatorTrace _trace;
 
+    /// <summary>
+    ///     Initializes a new tracer instance.
+    /// </summary>
+    /// <param name="commitTrace">The callback used to persist the completed trace.</param>
+    /// <param name="identifier">The optional trace identifier.</param>
+    /// <param name="parentIdentifier">The optional parent trace identifier.</param>
+    /// <param name="sourceContext">The logical source context for the trace.</param>
     public NavigatorTracer(CommitNavigatorTrace commitTrace, string? identifier, string? parentIdentifier, string sourceContext)
     {
         _commitTrace = commitTrace;
@@ -42,7 +52,4 @@ public class NavigatorTracer : INavigatorTracer
         
         await _commitTrace(_trace);
     }
-    
-    
-
 }

@@ -44,4 +44,7 @@ public static class EndpointRouteBuilderExtensions
     }
 }
 
+/// <summary>
+///     Marker type used for webhook endpoint logging.
+/// </summary>
 public class NavigatorEndpointReceiver;

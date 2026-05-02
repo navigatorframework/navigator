@@ -12,6 +12,8 @@ using Telegram.Bot.Types.Payments;
 
 namespace Navigator.Abstractions.Catalog.Extensions;
 
+using BotActionBuilder = Navigator.Abstractions.Actions.Builder.IBotActionBuilder;
+
 /// <summary>
 ///     These extensions provide a convenient way to create bot actions to respond to different types of updates.
 ///     Each extension method takes a condition and handler delegate for the bot action. The condition is a delegate that determines whether
