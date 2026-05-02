@@ -1,6 +1,6 @@
 # Agent Guide
 
-This directory contains guidance for AI-assisted development in Navigator. The documentation in `docs/` is the source of truth; skills are short task-specific workflows that point agents to the right files.
+This directory contains guidance for AI-assisted development in Navigator. The documentation in `docs/` plus the repository `README.md` are the main reference material; skills are short task-specific workflows that point agents to the right files.
 
 ## Skills
 
@@ -13,12 +13,13 @@ This directory contains guidance for AI-assisted development in Navigator. The d
 
 - `docs/ARCHITECTURE.md`: runtime architecture and internal flow.
 - `docs/EXTENSION-AUTHORING.md`: how to create and maintain extension packages.
+- `README.md`: public API, setup, and user-facing examples.
 - `.agents/PLANS.md`: requirements for long-running executable plans.
 
 ## Default Agent Workflow
 
 1. Read the relevant skill.
-2. Read the documentation linked by that skill.
+2. Read the documentation linked by that skill and the relevant README examples for the touched API surface.
 3. Inspect the nearest existing implementation before editing.
 4. Keep README examples aligned with user-facing API or behavior changes.
 5. Run strict validation from `src/` before finishing:
