@@ -95,8 +95,13 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<NavigatorTracerContext>();
         services.AddScoped(typeof(INavigatorTracerFactory<>), typeof(NavigatorTracerFactory<>));
-        services.AddScoped<INavigatorTracerSink, MemoryCacheNavigatorTracerSink>();
-        services.AddScoped<INavigatorTraceReader, MemoryCacheNavigatorTracerSink>();
+
+        // A single instance backs both the sink and the reader: traces are committed by
+        // concurrent update-processing flows and read back by /debug, so all index access
+        // must be serialized through the same instance's lock.
+        services.AddSingleton<MemoryCacheNavigatorTracerSink>();
+        services.AddSingleton<INavigatorTracerSink>(provider => provider.GetRequiredService<MemoryCacheNavigatorTracerSink>());
+        services.AddSingleton<INavigatorTraceReader>(provider => provider.GetRequiredService<MemoryCacheNavigatorTracerSink>());
     }
 
     private static void AddNavigatorPipeline(this IServiceCollection services, NavigatorConfiguration configuration)

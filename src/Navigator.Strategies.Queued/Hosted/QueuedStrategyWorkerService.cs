@@ -4,7 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Navigator.Strategies.Queued.Queues;
 using Navigator.Strategy;
-using Telegram.Bot.Types;
 
 namespace Navigator.Strategies.Queued.Hosted;
 
@@ -52,7 +51,7 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
                 }
 
                 _logger.LogDebug("Starting worker for queue {QueueKey}", queueKey);
-                
+
                 var queue = _queueManager.GetQueueReader(queueKey);
                 if (queue is not null)
                 {
@@ -66,13 +65,13 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
         }
     }
 
-    private async Task RunWorkerAsync(string queueKey, ChannelReader<Update> queueReader, CancellationToken cancellationToken)
+    private async Task RunWorkerAsync(string queueKey, ChannelReader<QueuedUpdate> queueReader, CancellationToken cancellationToken)
     {
         try
         {
-            await foreach (var update in queueReader.ReadAllAsync(cancellationToken))
+            await foreach (var queuedUpdate in queueReader.ReadAllAsync(cancellationToken))
             {
-                await ProcessUpdateAsync(update);
+                await ProcessUpdateAsync(queuedUpdate);
             }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
@@ -81,18 +80,17 @@ public sealed class QueuedStrategyWorkerService : BackgroundService
         }
     }
 
-    private async Task ProcessUpdateAsync(Update update)
+    private async Task ProcessUpdateAsync(QueuedUpdate queuedUpdate)
     {
         try
         {
             await using var scope = _scopeFactory.CreateAsyncScope();
             var strategy = scope.ServiceProvider.GetRequiredService<DefaultNavigationStrategy>();
-            // TODO: use actual identifier
-            await strategy.Invoke(update, Guid.CreateVersion7().ToString());
+            await strategy.Invoke(queuedUpdate.Update, queuedUpdate.Identifier);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error processing update {UpdateId}", update.Id);
+            _logger.LogError(e, "Error processing update {UpdateId}", queuedUpdate.Update.Id);
         }
     }
 }

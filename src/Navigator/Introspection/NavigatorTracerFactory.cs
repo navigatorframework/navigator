@@ -19,19 +19,22 @@ public class NavigatorTracerFactory<TCategoryName> : INavigatorTracerFactory<TCa
     public INavigatorTracer Get(string? identifier = null)
     {
         var lastKnownIdentifier = _context.PeekOrDefault();
-        
-        async ValueTask CommitTrace(NavigatorTrace trace)
+
+        // Deliberately NOT an async method: the pop must run synchronously in the
+        // disposing caller's execution context so the async-local identifier stack
+        // is updated for the code that follows the tracer's disposal. An async
+        // method would pop a copied context and the change would be lost.
+        ValueTask CommitTrace(NavigatorTrace trace)
         {
             _context.Pop(trace.Identifier);
-            await _sink.Store(trace);
+            return new ValueTask(_sink.Store(trace));
         }
-        
+
         var tracer = new NavigatorTracer(CommitTrace, identifier, lastKnownIdentifier, GetCategoryName());
-        
+
         _context.Push(tracer.Identifier);
 
         return tracer;
-
     }
     
     private static string GetCategoryName() => typeof(TCategoryName).FullName ?? "_Unknown";

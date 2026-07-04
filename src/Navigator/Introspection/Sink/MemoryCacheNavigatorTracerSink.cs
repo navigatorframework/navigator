@@ -6,51 +6,68 @@ using static Navigator.Abstractions.Introspection.NavigatorTraceKeys;
 
 namespace Navigator.Introspection.Sink;
 
+/// <summary>
+///     Stores traces and their indexes in an <see cref="IMemoryCache" />.
+///     Registered as a singleton: traces are committed concurrently by parallel update
+///     processing flows (e.g. queued strategy workers), and read back by <c>/debug</c>
+///     while other updates are still being processed, so every access to the shared
+///     index lists is serialized through a single lock.
+/// </summary>
 public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTracerSink, INavigatorTraceReader
 {
     private static readonly TimeSpan Ttl = TimeSpan.FromHours(1);
 
+    private readonly Lock _lock = new();
+
+    /// <inheritdoc />
     public Task Store(NavigatorTrace trace)
     {
-        cache.Set($"navigator:trace:{trace.Identifier}", trace, Ttl);
-
-        // Index by chat ID and message ID if the trace has both tags
-        if (HasValidChatAndMessageTags(trace, out var chatId, out var messageId))
+        lock (_lock)
         {
-            var messageIndex = cache.GetOrCreate(
-                $"navigator:message:{chatId}:{messageId}",
-                entry =>
-                {
-                    entry.AbsoluteExpirationRelativeToNow = Ttl;
-                    return new List<string>();
-                })!;
+            cache.Set($"navigator:trace:{trace.Identifier}", trace, Ttl);
 
-            messageIndex.Add(trace.Identifier);
-        }
+            // Index by chat ID and message ID if the trace has both tags
+            if (HasValidChatAndMessageTags(trace, out var chatId, out var messageId))
+            {
+                var messageIndex = cache.GetOrCreate(
+                    $"navigator:message:{chatId}:{messageId}",
+                    entry =>
+                    {
+                        entry.AbsoluteExpirationRelativeToNow = Ttl;
+                        return new List<string>();
+                    })!;
 
-        if (trace.ParentIdentifier is not null)
-        {
-            var children = cache.GetOrCreate(
-                $"navigator:children:{trace.ParentIdentifier}",
-                entry =>
-                {
-                    entry.AbsoluteExpirationRelativeToNow = Ttl;
-                    return new List<string>();
-                })!;
+                messageIndex.Add(trace.Identifier);
+            }
 
-            children.Add(trace.Identifier);
-        }
-        else
-        {
-            var roots = cache.GetOrCreate(
-                "navigator:roots",
-                entry =>
-                {
-                    entry.Priority = CacheItemPriority.NeverRemove;
-                    return new List<string>();
-                })!;
+            if (trace.ParentIdentifier is not null)
+            {
+                var children = cache.GetOrCreate(
+                    $"navigator:children:{trace.ParentIdentifier}",
+                    entry =>
+                    {
+                        entry.AbsoluteExpirationRelativeToNow = Ttl;
+                        return new List<string>();
+                    })!;
 
-            roots.Add(trace.Identifier);
+                children.Add(trace.Identifier);
+            }
+            else
+            {
+                var roots = cache.GetOrCreate(
+                    "navigator:roots",
+                    entry =>
+                    {
+                        entry.Priority = CacheItemPriority.NeverRemove;
+                        return new List<string>();
+                    })!;
+
+                // The roots entry never expires, but the traces it points to do:
+                // drop identifiers whose trace is gone so the list stays bounded.
+                roots.RemoveAll(identifier => !cache.TryGetValue($"navigator:trace:{identifier}", out _));
+
+                roots.Add(trace.Identifier);
+            }
         }
 
         return Task.CompletedTask;
@@ -74,52 +91,61 @@ public class MemoryCacheNavigatorTracerSink(IMemoryCache cache) : INavigatorTrac
     /// <inheritdoc />
     public Task<NavigatorTraceEntry?> Retrieve(string identifier)
     {
-        return Task.FromResult(BuildTree(identifier));
+        lock (_lock)
+        {
+            return Task.FromResult(BuildTree(identifier));
+        }
     }
 
     /// <inheritdoc />
     public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveAll()
     {
-        if (!cache.TryGetValue("navigator:roots", out List<string>? rootIds) || rootIds is null)
-            return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
+        lock (_lock)
+        {
+            if (!cache.TryGetValue("navigator:roots", out List<string>? rootIds) || rootIds is null)
+                return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
 
-        var roots = rootIds
-            .Select(BuildTree)
-            .Where(e => e is not null)
-            .Cast<NavigatorTraceEntry>()
-            .ToList();
+            var roots = rootIds
+                .Select(BuildTree)
+                .Where(e => e is not null)
+                .Cast<NavigatorTraceEntry>()
+                .ToList();
 
-        return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(roots);
+            return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(roots);
+        }
     }
 
     /// <inheritdoc />
     public Task<IReadOnlyCollection<NavigatorTraceEntry>> RetrieveByChatAndMessage(long chatId, int messageId, bool findRoot = false)
     {
-        if (!cache.TryGetValue($"navigator:message:{chatId}:{messageId}", out List<string>? messageTraceIds) || messageTraceIds is null)
-            return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
-
-        var matchingTraces = new List<NavigatorTraceEntry>();
-
-        foreach (var traceId in messageTraceIds)
+        lock (_lock)
         {
-            var currentTraceId = traceId;
+            if (!cache.TryGetValue($"navigator:message:{chatId}:{messageId}", out List<string>? messageTraceIds) || messageTraceIds is null)
+                return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>([]);
 
-            if (findRoot)
+            var matchingTraces = new List<NavigatorTraceEntry>();
+
+            foreach (var traceId in messageTraceIds)
             {
-                while (cache.TryGetValue($"navigator:trace:{currentTraceId}", out NavigatorTrace? trace) && trace?.ParentIdentifier != null)
+                var currentTraceId = traceId;
+
+                if (findRoot)
                 {
-                    currentTraceId = trace.ParentIdentifier;
+                    while (cache.TryGetValue($"navigator:trace:{currentTraceId}", out NavigatorTrace? trace) && trace?.ParentIdentifier != null)
+                    {
+                        currentTraceId = trace.ParentIdentifier;
+                    }
+                }
+
+                var traceEntry = BuildTree(currentTraceId);
+                if (traceEntry is not null)
+                {
+                    matchingTraces.Add(traceEntry);
                 }
             }
 
-            var traceEntry = BuildTree(currentTraceId);
-            if (traceEntry is not null)
-            {
-                matchingTraces.Add(traceEntry);
-            }
+            return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(matchingTraces);
         }
-
-        return Task.FromResult<IReadOnlyCollection<NavigatorTraceEntry>>(matchingTraces);
     }
 
     private NavigatorTraceEntry? BuildTree(string identifier)
