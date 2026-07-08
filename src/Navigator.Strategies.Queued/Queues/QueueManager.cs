@@ -2,7 +2,6 @@ using System.Collections.Concurrent;
 using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Telegram.Bot.Types;
 
 namespace Navigator.Strategies.Queued.Queues;
 
@@ -28,7 +27,7 @@ public sealed partial class QueueManager : IQueueManager
         _newQueues = Channel.CreateUnbounded<string>(
             new UnboundedChannelOptions
             {
-                SingleReader = true, 
+                SingleReader = true,
                 SingleWriter = false
             });
         _options = options.Value;
@@ -36,10 +35,10 @@ public sealed partial class QueueManager : IQueueManager
     }
 
     /// <inheritdoc />
-    public ChannelWriter<Update> GetQueueWriter(string queueKey)
+    public ChannelWriter<QueuedUpdate> GetQueueWriter(string queueKey)
     {
         var queue = _queues.GetOrAdd(queueKey, QueueValueFactory);
-        
+
         return queue.Channel.Writer;
 
         UpdateQueue QueueValueFactory(string _)
@@ -50,26 +49,26 @@ public sealed partial class QueueManager : IQueueManager
     }
 
     /// <inheritdoc />
-    public ChannelReader<Update>? GetQueueReader(string queueKey)
+    public ChannelReader<QueuedUpdate>? GetQueueReader(string queueKey)
     {
         var queue = _queues.GetValueOrDefault(queueKey);
-        
+
         return queue?.Channel.Reader;
     }
 
     /// <inheritdoc />
     public ChannelReader<string> NewQueuesReader => _newQueues.Reader;
 
-    private Channel<Update> CreateChannel(string queueKey)
+    private Channel<QueuedUpdate> CreateChannel(string queueKey)
     {
         var channel = _options.MaxMessagesPerQueue > 0
-            ? Channel.CreateBounded<Update>(new BoundedChannelOptions(_options.MaxMessagesPerQueue)
+            ? Channel.CreateBounded<QueuedUpdate>(new BoundedChannelOptions(_options.MaxMessagesPerQueue)
             {
                 FullMode = BoundedChannelFullMode.Wait,
                 SingleReader = true,
                 SingleWriter = false
             })
-            : Channel.CreateUnbounded<Update>(new UnboundedChannelOptions
+            : Channel.CreateUnbounded<QueuedUpdate>(new UnboundedChannelOptions
             {
                 SingleReader = true,
                 SingleWriter = false
@@ -81,7 +80,7 @@ public sealed partial class QueueManager : IQueueManager
         {
             LogFailedToWriteToNewQueuesChannelForKey(queueKey);
         }
-        
+
         return channel;
     }
 

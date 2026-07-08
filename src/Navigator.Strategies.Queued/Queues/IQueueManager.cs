@@ -1,5 +1,4 @@
 using System.Threading.Channels;
-using Telegram.Bot.Types;
 
 namespace Navigator.Strategies.Queued.Queues;
 
@@ -13,16 +12,16 @@ public interface IQueueManager
     ///     Returns the writer for the queue with the given key.
     /// </summary>
     /// <param name="queueKey">The partition key identifying which queue to use.</param>
-    /// <returns>A <see cref="ChannelWriter{Update}" /> for the queue.</returns>
-    ChannelWriter<Update> GetQueueWriter(string queueKey);
-    
+    /// <returns>A <see cref="ChannelWriter{QueuedUpdate}" /> for the queue.</returns>
+    ChannelWriter<QueuedUpdate> GetQueueWriter(string queueKey);
+
     /// <summary>
     ///     Returns the reader for the queue with the given key.
     /// </summary>
     /// <param name="queueKey">The partition key identifying which queue to use.</param>
-    /// <returns>A <see cref="ChannelReader{Update}" /> for the queue, or <c>null</c> if the queue does not exist.</returns>
-    ChannelReader<Update>? GetQueueReader(string queueKey);
-    
+    /// <returns>A <see cref="ChannelReader{QueuedUpdate}" /> for the queue, or <c>null</c> if the queue does not exist.</returns>
+    ChannelReader<QueuedUpdate>? GetQueueReader(string queueKey);
+
     /// <summary>
     ///     Returns a reader for the control channel that emits newly created queues for worker orchestration.
     /// </summary>

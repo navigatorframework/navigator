@@ -1,5 +1,4 @@
 using System.Threading.Channels;
-using Telegram.Bot.Types;
 
 namespace Navigator.Strategies.Queued.Queues;
 
@@ -13,7 +12,7 @@ public sealed class UpdateQueue
     /// </summary>
     /// <param name="key">The partition key for this queue.</param>
     /// <param name="channel">The channel that holds pending updates.</param>
-    public UpdateQueue(string key, Channel<Update> channel)
+    public UpdateQueue(string key, Channel<QueuedUpdate> channel)
     {
         Key = key;
         Channel = channel;
@@ -27,5 +26,5 @@ public sealed class UpdateQueue
     /// <summary>
     ///     The channel that holds pending updates for this partition.
     /// </summary>
-    public Channel<Update> Channel { get; }
+    public Channel<QueuedUpdate> Channel { get; }
 }

@@ -36,11 +36,16 @@ public class NavigatorTracer : INavigatorTracer
     }
 
     /// <inheritdoc />
-    public async ValueTask DisposeAsync()
+    /// <remarks>
+    ///     Deliberately NOT an async method: the commit delegate pops the async-local
+    ///     identifier stack, which must happen synchronously in the disposing caller's
+    ///     execution context to be visible to the code that follows.
+    /// </remarks>
+    public ValueTask DisposeAsync()
     {
         _trace.EndTime = TimeProvider.System.GetUtcNow();
-        
-        await _commitTrace(_trace);
+
+        return _commitTrace(_trace);
     }
     
     

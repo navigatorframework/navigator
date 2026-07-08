@@ -27,6 +27,6 @@ public sealed class QueuedNavigationStrategy : INavigatorStrategy
     {
         var queueWriter = _queueManager.GetQueueWriter(update.GetQueueKey());
 
-        await queueWriter.WriteAsync(update);
+        await queueWriter.WriteAsync(new QueuedUpdate(update, identifier));
     }
 }
